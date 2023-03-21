@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alert Komponen Baru</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Tambah Komponen Baru</h2>
+
+<!-- Trigger/Open The Modal -->
+<button class="tambah-button" id="myBtn">Tambah Komponen Baru</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal-baru">
+
+  <!-- Modal content -->
+  <div class="modal-content-baru">
+    <span class="close">&times;</span>
+    <p class="baru-tulisan1">Tambah Komponen Baru</p>
+
+    <div class="bungkus-utama-komponen">
+    <!-- komponen -->
+    <div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/igungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Instagram</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan sosial media instagram</p>
+</div>
+<div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/twitungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Twitter</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan sosial media Twitter</p>
+</div>
+<!-- komponen -->
+</div>
+<div class="bungkus-utama-komponen">
+    <!-- komponen -->
+    <div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/ytungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Youtube</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan sosial media youtube</p>
+</div>
+<div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/fbungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Facebook</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan sosial media facebook</p>
+</div>
+<!-- komponen -->
+</div>
+<div class="bungkus-utama-komponen">
+    <!-- komponen -->
+    <div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/ttungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Tiktok</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan sosial media tiktok</p>
+</div>
+<div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/glungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Gambar</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan Gambar</p>
+</div>
+<!-- komponen -->
+</div>
+<div class="bungkus-utama-komponen">
+    <!-- komponen -->
+    <div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/linkungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Tautan</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan tautan</p>
+</div>
+<div class="komponen1">
+    <div class="bungkus-komponen1">
+        <img src="img/grsungu.png" alt="" class="gambar-komponen1">
+        <p class="tulisan-komponen">Deskripsi</p>
+    </div>
+    <p class="baru-tulisan2">Komponen untuk menambahkan deskripsi</p>
+</div>
+<!-- komponen -->
+</div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

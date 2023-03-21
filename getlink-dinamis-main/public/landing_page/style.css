@@ -1,0 +1,64 @@
+html {
+    scroll-behavior: smooth;
+  }
+#short{
+    height: 50px;
+    border-radius: 5px;
+    width: 70%;
+}
+#short-eror{
+    background-color: red;
+    display: none;
+}
+#reload{
+    display:none;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+    margin-top:0;
+    color:white;
+    background-color: #1a2473;
+}
+#buton_short{
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+    margin-top:0;
+    color:white;
+    background-color: #1a2473;
+}
+#copy{
+    display: none;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+    margin-top:0;
+    color:white;
+    background-color: #6b75e6;
+}
+#buton_short:hover{
+    background-color: #6b75e6;
+    color: black;
+    transition: 1s;
+}
+.login:hover{
+    background-color: #6b75e6;
+    color:white;
+}
+.signin{
+    height: 500px;
+    color:white;
+}
+a.signin:hover{
+    background-color: #1a2473;
+    color: white;
+}
+.logins,.nav-item {
+    display: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .logins,.nav-item {
+      display: block;
+    }
+  }
