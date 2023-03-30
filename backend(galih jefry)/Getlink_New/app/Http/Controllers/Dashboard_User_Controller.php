@@ -27,7 +27,7 @@ class Dashboard_User_Controller extends Controller
             'kategori' => $kategori
         ]);
     }
-    
+
     public function create_microsite()
     {
         return view('Dashboard_User.pages4');
@@ -118,7 +118,7 @@ class Dashboard_User_Controller extends Controller
         // ], 200);
         $microsite = new microsite();
         $user = User::where('id', Auth::user()->id)->first();
-        
+
         $template = template::findOrFail($request->id_template);
 
         $microsite->id_user = $user->id;
@@ -129,32 +129,32 @@ class Dashboard_User_Controller extends Controller
         $microsite->id_komponen = $template->id_komponen;
         $microsite->save();
 
-        $okk = explode(',', $template->id_komponen);  
+        $okk = explode(',', $template->id_komponen);
 
-        foreach($okk as $ok => $o) {
+        foreach ($okk as $ok => $o) {
             $komponen = komponen::findOrFail(intval($o));
 
             $micro_detail = new microsite_detail();
             $micro_detail->id_komponen = $o;
             $micro_detail->id_template = $request->id_template;
-            $micro_detail->id_microsite= $microsite->id;
+            $micro_detail->id_microsite = $microsite->id;
             $micro_detail->order = ($ok + 1);
             $micro_detail->status = 'on';
             $micro_detail->title = $komponen->name;
             $micro_detail->icon = $komponen->icon;
             $micro_detail->save();
 
-            if($o === '9') {
+            if ($o === '9') {
                 $konten = new konten();
                 $konten->id_microsite = $microsite->id;
                 $konten->id_microsite_detail = $micro_detail->id;
-                $konten->value = ""; 
+                $konten->value = "";
                 $konten->image = "boren.png";
                 $konten->save();
             }
         }
 
-        
+
         $user->jumlah_microsite += 1;
         $user->update();
         return response()->json([
@@ -177,32 +177,40 @@ class Dashboard_User_Controller extends Controller
         // dd($lastSegment);
 
         //live previeu
-        $data = microsite::findOrFail($lastSegment); 
+        $data = microsite::findOrFail($lastSegment);
 
         $id_komponen_array = explode(',', $data->id_komponen);
         $komponen = array();
-        foreach($id_komponen_array as $key => $row){
+        foreach ($id_komponen_array as $key => $row) {
             $komponens = komponen::find($row);
-            if($komponens){
+            if ($komponens) {
                 $komponen[$key]['id'] = $komponens->id;
                 $komponen[$key]['code'] = $komponens->code;
             }
-
         }
 
         $konten = konten::where('id_microsite', $lastSegment)->get();
 
         $template = template::findOrFail($data->id_template);
-        if($konten)
-        {
+        if ($konten) {
             $konten = $konten;
-        }
-        else {
+        } else {
             $konten = [];
         }
 
         //drag and drop
         $drag = microsite_detail::where('id_microsite', $lastSegment)->orderBy('order', 'ASC')->get();
-        return view('Dashboard_user.pages5', ['data' => $komponen, 'background' => $template, 'konten' => $konten, 'drag'=>$drag]);
+        return view('Dashboard_user.pages5', ['data' => $komponen, 'background' => $template, 'konten' => $konten, 'drag' => $drag]);
+    }
+
+    public function delete($id)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        $item = microsite::findOrFail($id); //mencari data item dengan ID yang diberikan
+
+        $item->delete(); //menghapus item
+        $user->jumlah_microsite -= 1;
+        $user->update();
+        return redirect()->back()->with('success', 'Data berhasil dihapus.'); //redirect kembali ke halaman sebelumnya dengan pesan sukses
     }
 }

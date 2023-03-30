@@ -41,7 +41,7 @@
                     </div>
                 @endforeach --}}
                 @foreach ($my_microsite as $index => $item)
-                    <div class="anim content-isi-regu">
+                    <div class="anim content-isi-regu search-microsite" data-nama="{{ strtolower($item->name) }}">
                         <div class="content-kiri-regu">
                             <div class="content-box"></div>
                             <div class="box-text">
@@ -111,7 +111,7 @@
                 <div class="del-bungkus-hapusbutton">
                     <button id="delbal{{ $index }}" class="del-batal-button"
                         onclick="closeDelModal({{ $index }})">Batal</button>
-                    <form action="" method="post">
+                    <form action="{{ route('microsite.delete', $item->id) }}" method="post">
                       @csrf
                       @method('DELETE')
                       <button id="btnTrash{{ $index }}" class="del-hapus-button"
@@ -172,6 +172,29 @@
 </script> --}}
 
 <script>
+    // mendapatkan elemen input dan konten mikrosite
+    const inputCari = document.getElementById('cari');
+    const kontenMikrosite = document.querySelectorAll('.search-microsite');
+  
+    // menambahkan event input pada elemen input
+    inputCari.addEventListener('input', function() {
+      const kataKunci = inputCari.value.trim().toLowerCase(); // mendapatkan kata kunci pencarian
+  
+      // loop untuk memfilter konten mikrosite berdasarkan kata kunci
+      kontenMikrosite.forEach(function(el) {
+        const namaMikrosite = el.getAttribute('data-nama');
+        const cocok = namaMikrosite.includes(kataKunci);
+  
+        if (cocok) {
+          el.style.display = 'flex';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+<script>
   function copyToClipboard(link) {
       const input = document.createElement('textarea');
       input.value = 'localhost:8000/'+link;
@@ -179,7 +202,21 @@
       input.select();
       document.execCommand('copy');
       document.body.removeChild(input);
-      alert('Link telah disalin ke clipboard!');
+      if(document.body.removeChild){
+        swal.fire({
+                          icon:'success',
+                          title:'Berhasil',
+                          text:'Berhasil Copy Link',
+                          timer:'900',
+                        });
+      }else{
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Terjadi kesalahan!',
+})
+      }
+    //   alert('Link telah disalin ke clipboard!');
   }
 </script>
 

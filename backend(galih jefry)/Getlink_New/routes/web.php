@@ -53,6 +53,7 @@ Route::middleware(['authuser'])->group(function () {
 
     Route::post('buatmicrosite/nambah_microsite', [Dashboard_User_Controller::class, 'nambah_microsite'])->name('nambah_microsite');
     Route::get('rubah_microsite/{id_kategori}/{id_template}', [Dashboard_User_Controller::class, 'edit_microsite']);
+    Route::delete('/microsite/{id}', [Dashboard_User_Controller::class, 'delete'])->name('microsite.delete');
 });
 
 Route::middleware(['authadmin'])->group(function () {
