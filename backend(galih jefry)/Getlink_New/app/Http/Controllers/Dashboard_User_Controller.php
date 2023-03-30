@@ -178,6 +178,7 @@ class Dashboard_User_Controller extends Controller
 
         //live previeu
         $data = microsite::findOrFail($lastSegment);
+        // dd($data->id);
 
         $id_komponen_array = explode(',', $data->id_komponen);
         $komponen = array();
@@ -198,9 +199,10 @@ class Dashboard_User_Controller extends Controller
             $konten = [];
         }
 
+        
         //drag and drop
         $drag = microsite_detail::where('id_microsite', $lastSegment)->orderBy('order', 'ASC')->get();
-        return view('Dashboard_user.pages5', ['data' => $komponen, 'background' => $template, 'konten' => $konten, 'drag' => $drag]);
+        return view('Dashboard_user.pages5', ['data' => $komponen, 'background' => $template, 'konten' => $konten, 'drag' => $drag, 'microsite' => $data]);
     }
 
     public function delete($id)

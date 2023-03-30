@@ -69,7 +69,7 @@
               @csrf
               <input type="email" id="fname" name="email" placeholder="Masukan Email" />
               <input type="password" id="lname" name="password" placeholder="Masukan Password" />
-              <a href="">Forgot Password?</a>
+              <a href="{{ route('password.request') }}">Forgot Password?</a>
               <button type="submit" value="Submit">Login</button>
               <a style="margin-left: 275px; color: rgb(129, 128, 125)">atau</a>
               <button class="button-outline" style="margin-top: 2%" value="Submit"><i class="fa-brands fa-google"></i> Sign In With Google</button>

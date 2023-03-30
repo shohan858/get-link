@@ -3,7 +3,10 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CollabController;
 use App\Http\Controllers\Dashboard_User_Controller;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MicrositeController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +34,8 @@ Route::group(['prefix' => 'getlink.id'], function () {
     Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 });
 
+Route::get('microsite/{link}', [MicrositeController::class, 'index'])->name('microsite');
+
 // Login And Register
 Route::get('/sesi', [SessionController::class, 'index']);
 Route::post('/sesi/login', [SessionController::class, 'login']);
@@ -52,7 +57,8 @@ Route::middleware(['authuser'])->group(function () {
     Route::get('buat_microsite/{id_kategori}/{id_template}', [Dashboard_User_Controller::class, 'create_microsite']);
 
     Route::post('buatmicrosite/nambah_microsite', [Dashboard_User_Controller::class, 'nambah_microsite'])->name('nambah_microsite');
-    Route::get('rubah_microsite/{id_kategori}/{id_template}', [Dashboard_User_Controller::class, 'edit_microsite']);
+    // Route::get('rubah_microsite/{id_kategori}/{id_template}', [Dashboard_User_Controller::class, 'edit_microsite']);
+    Route::get('rubah_microsite/{id_kategori}/{id_template}/{id_microsite}', [Dashboard_User_Controller::class, 'edit_microsite']);
     Route::delete('/microsite/{id}', [Dashboard_User_Controller::class, 'delete'])->name('microsite.delete');
 });
 
@@ -80,3 +86,15 @@ Route::middleware(['authadmin'])->group(function () {
     Route::delete('/kategori/{id}', [AdminController::class, 'destroy'])->name('hapus_kategori');
     Route::resource('/collab', CollabController::class);
 });
+
+
+
+Route::get('forgot-password', 'ForgotPasswordController@showForgotPasswordForm')->name('password.request');
+Route::post('forgot-password', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('reset-password/{token}', 'ResetPasswordController@showResetPasswordForm')->name('password.reset');
+Route::post('reset-password', 'ResetPasswordController@resetPassword')->name('password.update');
+
+Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');

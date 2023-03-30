@@ -89,7 +89,7 @@
                                         <img class="card-img" src="{{ asset('gambar/' . $item->image) }}"
                                             alt="gambar {{ $item->name }}" />
                                         <div class="pages3-container">
-                                            <h4 class="pages3-tulis">{{ $item->nama }}</h4>
+                                            <h4 class="pages3-tulis">{{ $item->title }}</h4>
                                         </div>
                                     </button>
                                 @endforeach

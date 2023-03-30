@@ -46,7 +46,7 @@
                             <div class="content-box"></div>
                             <div class="box-text">
                                 <p class="nama-microsite">{{ $item->name }}</p>
-                                <a class="link-microsite">{{ env('APP_URL') }}/{{ $item->link }}</a>
+                                <a class="link-microsite">{{ env('APP_URL') }}/microsite/{{ $item->link }}</a>
                                 <p class="pb-microsite"></p>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
 <script>
   function copyToClipboard(link) {
       const input = document.createElement('textarea');
-      input.value = 'localhost:8000/'+link;
+      input.value = '{{ env('APP_URL') }}/microsite/' + link;
       document.body.appendChild(input);
       input.select();
       document.execCommand('copy');
