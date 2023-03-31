@@ -1,0 +1,485 @@
+body {
+    margin: 0;
+}
+
+div::-webkit-scrollbar {
+    display: none;
+}
+
+button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+
+.adContent {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+/* Sidebar */
+
+aside {
+    width: 25%;
+    margin: 22px 0 22px 22px;
+}
+
+.adIs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.adAside {
+    width: 97%;
+    height: 882px;
+    border-radius: 50px 50px 50px 50px;
+}
+
+.adTop {
+    width: 100%;
+    height: 151px;
+    background: #ffffff;
+    border: 3px solid #8f96ec;
+    border-radius: 10px 50px 0px 0px;
+    margin-bottom: -63px;
+}
+
+.adImg {
+    width: 70%;
+    margin-top: 19px;
+    margin-left: 20px;
+}
+
+.adBot {
+    margin-top: 0;
+    width: 100%;
+    height: 882px;
+    border: 3px solid #8f96ec;
+    background: #8f96ec;
+    border-radius: 0px 50px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* overflow: auto; */
+}
+
+.adComp {
+    width: 90%;
+    height: 65px;
+    margin-top: 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.drop_bung {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    display: block;
+}
+
+.adComp_drop {
+    width: 100%;
+    height: 65px;
+    margin-top: 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+}
+
+.drop_hov {
+    background: rgba(26, 36, 116, 0.3);
+    border-radius: 15px;
+}
+
+.adComp:hover,
+.adComp_drop:hover {
+    background: rgba(26, 36, 116, 0.3);
+}
+
+.nav_icon {
+    color: #ffffff;
+}
+
+.nav_arrow-2 {
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.comp_ins {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.nav_p {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+    margin-left: 16px;
+    text-align: left;
+}
+
+.lp_content {
+    background: #5b68ce;
+    width: 17%;
+    height: 412px;
+    margin-top: 8px;
+    border-radius: 15px;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.ac_content {
+    width: 17%;
+    height: 137px;
+    margin-top: 2px;
+    background: #5b68ce;
+    border-radius: 15px;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.lp_content a,
+.ac_content a {
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+}
+
+.lp_content a:hover,
+.ac_content a:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.lp_show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lp_isi,
+.ac_isi {
+    width: 90%;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: rgba(0, 0, 0, 0.3); */
+    border-radius: 15px;
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+}
+
+.is_hov {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+}
+
+/* End Sidebar */
+
+/* Navbar */
+
+.adNav {
+    display: flex;
+    width: 95%;
+    margin-top: 70px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+.adKinav {
+    width: 50%;
+}
+
+.navH1 {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+    color: #1a2474;
+    margin: 0;
+}
+
+.navP {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    color: #a5a5a5;
+    margin: 0;
+}
+
+.adKanav {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navName {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    margin-right: 10px;
+    color: #1a2474;
+}
+
+.adnavimg {
+    border-radius: 100px;
+}
+
+/* End navbar */
+
+/* Dashboard */
+
+.adDash {
+    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.adCard1 {
+    width: 90%;
+    height: 120px;
+    background: #6973ed;
+    box-shadow: 0px 4px 4px rgba(211, 128, 128, 0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-left: 10px solid #93feae;
+}
+
+.cardKan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.adTeCu1 {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 0;
+    color: #93feae;
+}
+
+.card_icon {
+    font-size: 3vw;
+    color: #93feae;
+}
+
+.adCard2 {
+    width: 90%;
+    height: 120px;
+    background: #6973ed;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-left: 10px solid #fe9393;
+}
+
+.adTeCu2 {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 0;
+    color: #fe9393;
+}
+
+.card_iconUser {
+    font-size: 3vw;
+    color: #fe9393;
+}
+
+.adCard3 {
+    width: 90%;
+    height: 120px;
+    background: #6973ed;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-left: 10px solid #93e4fe;
+}
+
+.adTeCu3 {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 0;
+    color: #93e4fe;
+}
+
+.card_iconMS {
+    font-size: 3vw;
+    color: #93feae;
+}
+
+.adCard4 {
+    width: 90%;
+    height: 120px;
+    background: #6973ed;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-left: 10px solid #fef393;
+}
+
+.adTeCu4 {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 0;
+    color: #fef393;
+}
+
+.card_iconB {
+    font-size: 3vw;
+    color: #fef393;
+}
+
+.adTeCa {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 0;
+    color: #ffffff;
+}
+
+/* End Dashboard */
+
+/* Responsive */
+
+@media screen and (max-width: 992px) {
+    .adDash {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    aside {
+        width: 30%;
+    }
+
+    /* .nav_p {
+        font-size: 14px;
+    } */
+}
+
+@media screen and (max-width: 870px) {
+    .lp_content,
+    .ac_content {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    aside {
+        width: 20%;
+        margin: 22px 0 22px 12px;
+    }
+
+    .adImg {
+        display: none;
+    }
+
+    .nav_p {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    aside {
+        margin: 22px 0 22px 8px;
+    }
+
+    .adTop {
+        display: none;
+    }
+
+    .adDash {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .adCard1 {
+        width: 60%;
+        margin-left: 20px;
+    }
+    .adCard2 {
+        width: 60%;
+        margin-left: 20px;
+    }
+    .adCard3 {
+        width: 60%;
+        margin-left: 20px;
+    }
+    .adCard4 {
+        width: 60%;
+        margin-left: 20px;
+    }
+
+    .navH1 {
+        font-size: 25px;
+    }
+
+    .navP {
+        font-size: 13px;
+    }
+
+    .navName {
+        font-size: 13px;
+    }
+
+    .card_icon, .card_iconB, .card_iconMS, .card_iconUser {
+        font-size: 7vw;
+    }
+}
+
+/* End responsive */
