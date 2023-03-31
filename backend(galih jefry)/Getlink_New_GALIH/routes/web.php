@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard_User_Controller;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MicrositeController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,8 @@ Route::controller(GoogleController::class)->group(function() {
 });
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::get('microsite/{link}', [MicrositeController::class, 'index'])->name('microsite');
 
 Route::post('generate-shorten-link', [HomeController::class, 'store'])->name('generate.shorten.link.post');
 // Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');

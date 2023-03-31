@@ -5,7 +5,7 @@
             <div class="lang-content hidden">
                 <div class="page2-btnprev">
                     <button class="pages5-tambah-prew">
-                        preview ...
+                        preview     ...
                         {{-- <img src="{{ asset('assets/img/Group 68 (1).png') }}" alt="" /> --}}
                         <i class="fa-solid fa-mobile-screen"></i>
                     </button>
@@ -33,14 +33,14 @@
 
                                 <div class="pages4-form1">
                                     <input class="pages4-input" type="text" id="nama" name="name"
-                                        placeholder="Nama Microsite" required />
+                                        placeholder="Nama Microsite" />
                                 </div>
                                 <div class="pages4-form2">
                                     <div class="pages4-button1">
                                         <a class="pages4-button1text" href="#">getlink/</a>
                                     </div>
                                     <input class="pages4-input" type="text" id="tautan" name="link"
-                                        placeholder="Tautan Microsite" required />
+                                        placeholder="Tautan Microsite" />
                                 </div>
                         </div>
                         <div class="pages4-lamnjut">
@@ -53,252 +53,252 @@
                     <div id="prew2" class="anim hidden pages4-kanan">
                         <div class="kanan-bungkus">
 
-                            <center>
-                                <div id="div" class="template0" style="display: block">
-                                    <div class="pages2-gambar2">
-                                        <img src="{{ asset('assets/img/webdesin.png') }}" alt="" width="100%" />
-                                        <h2 class="pages2-preview">Preview Template</h2>
-                                    </div>
-                                </div>
-                                <div id="div1" class="template1" style="display: none">
-                                    <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
-                                        class="gambar1" />
-                                    <h4 class="tulisan1">Quli Khutsi Azzumi</h4>
-                                    <div class="bungkusbunderan">
-                                        <div class="elipsetemplate1">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/ig.png') }}" alt=""
-                                                class="ikon" />
-                                        </div>
-                                        <div class="elipsetemplate1">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/twit.png') }}" alt=""
-                                                class="ikon1" />
-                                        </div>
-                                        <div class="elipsetemplate1">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/fb.png') }}" alt=""
-                                                class="ikon" />
-                                        </div>
-                                        <div class="elipsetemplate1">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/yt.png') }}" alt=""
-                                                class="ikon1" />
-                                        </div>
-                                        <div class="elipsetemplate1">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/tiktod.png') }}" alt=""
-                                                class="ikon" />
+                                <center>
+                                    <div id="div" class="template0" style="display: block">
+                                        <div class="pages2-gambar2">
+                                            <img src="{{ asset('assets/img/webdesin.png') }}" alt="" width="100%" />
+                                            <h2 class="pages2-preview">Preview Template</h2>
                                         </div>
                                     </div>
-                                    <div class="template1-kolom">
-                                        <img src="{{ asset('assets/preview-template/img/ytred.png') }}" alt=""
-                                            style="margin-top: 18%" />
-                                    </div>
-                                    <div class="template1-kolom2"></div>
-                                    <div class="tulisan2">
-                                        <p>Saya, Qulbi Khutsi Azzumi</p>
-                                    </div>
-                                    <div class="tulisan3">
-                                        <p>
-                                            Lorem ipsum is placeholder text commonly used in the
-                                            graphic, print, and publishing industries for
-                                            previewing layouts and visual mockups.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div id="div2" class="template2" style="display: none">
-                                    <!-- <img src="assets/preview-template/img/garis2.png" alt="" class="gariss" /> -->
-                                    <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
-                                        class="gambar1" />
-                                    <h4 class="tulisan1">PDI PERJUANGAN</h4>
-                                    <div class="bungkusbunderan">
-                                        <div class="elipsetemplate2">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/ig.png') }}" alt=""
-                                                class="ikon" />
+                                    <div id="div1" class="template1" style="display: none">
+                                        <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
+                                            class="gambar1" />
+                                        <h4 class="tulisan1">Quli Khutsi Azzumi</h4>
+                                        <div class="bungkusbunderan">
+                                            <div class="elipsetemplate1">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/ig.png') }}" alt=""
+                                                    class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate1">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/twit.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate1">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/fb.png') }}" alt=""
+                                                    class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate1">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/yt.png') }}" alt=""
+                                                    class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate1">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
                                         </div>
-                                        <div class="elipsetemplate2">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/twit.png') }}" alt=""
-                                                class="ikon1" />
+                                        <div class="template1-kolom">
+                                            <img src="{{ asset('assets/preview-template/img/ytred.png') }}" alt=""
+                                                style="margin-top: 18%" />
                                         </div>
-                                        <div class="elipsetemplate2">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/fb.png') }}" alt=""
-                                                class="ikon" />
+                                        <div class="template1-kolom2"></div>
+                                        <div class="tulisan2">
+                                            <p>Saya, Qulbi Khutsi Azzumi</p>
                                         </div>
-                                        <div class="elipsetemplate2">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/yt.png') }}" alt=""
-                                                class="ikon1" />
-                                        </div>
-                                        <div class="elipsetemplate2">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
-                                                alt="" class="ikon" />
-                                        </div>
-                                    </div>
-                                    <div class="template2-tulisan2">
-                                        <p>Visi</p>
-                                    </div>
-                                    <div class="template2-tulisan3">
-                                        <p>
-                                            Lorem ipsum is placeholder text commonly used in the
-                                            graphic
-                                        </p>
-                                    </div>
-                                    <div class="template2-tulisan2">
-                                        <p>Misi</p>
-                                    </div>
-                                    <div class="template2-tulisan3">
-                                        <p>
-                                            1. Lorem ipsum is placeholder text <br />
-                                            2. Lorem ipsum is placeholder text <br />
-                                            3. Lorem ipsum is placeholder text
-                                        </p>
-                                    </div>
-                                    <div class="template2-kolom">
-                                        <img src="{{ asset('assets/preview-template/img/ytred.png') }}" alt=""
-                                            style="margin-top: 18%" />
-                                    </div>
-                                </div>
-                                <div id="div3" class="template3" style="display: none">
-                                    <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
-                                        class="gambar1" />
-                                    <h4 class="tulisan1">Quli Khutsi Azzumi</h4>
-                                    <div class="tulisan3">
-                                        <p>
-                                            Lorem ipsum is placeholder text commonly used in the
-                                            graphic, print, and publishing industries for
-                                            previewing layouts and visual mockups.
-                                        </p>
-                                    </div>
-                                    <div class="template1-kolom">
-                                        <img src="{{ asset('assets/preview-template/img/ytred.png') }}" alt=""
-                                            style="margin-top: 18%" />
-                                    </div>
-                                    <div class="bungkusbunderan2">
-                                        <div class="elipsetemplate3">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/ig.png') }}" alt=""
-                                                class="ikon" />
-                                        </div>
-                                        <div class="elipsetemplate3">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/twit.png') }}" alt=""
-                                                class="ikon1" />
-                                        </div>
-                                        <div class="elipsetemplate3">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/fb.png') }}" alt=""
-                                                class="ikon" />
-                                        </div>
-                                        <div class="elipsetemplate3">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/yt.png') }}" alt=""
-                                                class="ikon1" />
-                                        </div>
-                                        <div class="elipsetemplate3">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
-                                                alt="" class="ikon" />
+                                        <div class="tulisan3">
+                                            <p>
+                                                Lorem ipsum is placeholder text commonly used in the
+                                                graphic, print, and publishing industries for
+                                                previewing layouts and visual mockups.
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="div4" class="template4" style="display: none">
-                                    <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
-                                        class="gambar1" />
-                                    <h4 class="template4-tulisan1">Quli Khutsi Azzumi</h4>
-                                    <p class="template4-tulisan2">CEO</p>
-                                    <div class="bungkusbunderan">
-                                        <div class="elipsetemplate4">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/ig.png') }}" alt=""
-                                                class="ikon" />
+                                    <div id="div2" class="template2" style="display: none">
+                                        <!-- <img src="assets/preview-template/img/garis2.png" alt="" class="gariss" /> -->
+                                        <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
+                                            class="gambar1" />
+                                        <h4 class="tulisan1">PDI PERJUANGAN</h4>
+                                        <div class="bungkusbunderan">
+                                            <div class="elipsetemplate2">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/ig.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate2">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/twit.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate2">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/fb.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate2">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/yt.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate2">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
                                         </div>
-                                        <div class="elipsetemplate4">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/twit.png') }}" alt=""
-                                                class="ikon1" />
+                                        <div class="template2-tulisan2">
+                                            <p>Visi</p>
                                         </div>
-                                        <div class="elipsetemplate4">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/fb.png') }}" alt=""
-                                                class="ikon" />
+                                        <div class="template2-tulisan3">
+                                            <p>
+                                                Lorem ipsum is placeholder text commonly used in the
+                                                graphic
+                                            </p>
                                         </div>
-                                        <div class="elipsetemplate4">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/yt.png') }}" alt=""
-                                                class="ikon1" />
+                                        <div class="template2-tulisan2">
+                                            <p>Misi</p>
                                         </div>
-                                        <div class="elipsetemplate4">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
-                                                alt="" class="ikon" />
+                                        <div class="template2-tulisan3">
+                                            <p>
+                                                1. Lorem ipsum is placeholder text <br />
+                                                2. Lorem ipsum is placeholder text <br />
+                                                3. Lorem ipsum is placeholder text
+                                            </p>
                                         </div>
-                                    </div>
-                                    <div class="template4-tulisan3">
-                                        <p>Saya, Qulbi Khutsi Azzumi</p>
-                                    </div>
-                                    <div class="template4-tulisan4">
-                                        <p>
-                                            Lorem ipsum is placeholder text commonly used in the
-                                            graphic, print, and publishing industries for
-                                            previewing layouts and visual mockups.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div id="div5" class="template5" style="display: none">
-                                    <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
-                                        class="gambar1" />
-                                    <h4 class="template5-tulisan1">Quli Khutsi Azzumi</h4>
-                                    <div class="bungkusbunderan5">
-                                        <div class="elipsetemplate5">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/ig.png') }}" alt=""
-                                                class="ikon" />
-                                        </div>
-                                        <div class="elipsetemplate5">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/twit.png') }}" alt=""
-                                                class="ikon1" />
-                                        </div>
-                                        <div class="elipsetemplate5">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/fb.png') }}" alt=""
-                                                class="ikon" />
-                                        </div>
-                                        <div class="elipsetemplate5">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/yt.png') }}" alt=""
-                                                class="ikon1" />
-                                        </div>
-                                        <div class="elipsetemplate5">
-                                            <p class="sembarang">p</p>
-                                            <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
-                                                alt="" class="ikon" />
+                                        <div class="template2-kolom">
+                                            <img src="{{ asset('assets/preview-template/img/ytred.png') }}"
+                                                alt="" style="margin-top: 18%" />
                                         </div>
                                     </div>
-                                    <div class="template5-tulisan4">
-                                        <p>
-                                            Lorem ipsum is placeholder text commonly used in the
-                                            graphic.
-                                        </p>
+                                    <div id="div3" class="template3" style="display: none">
+                                        <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
+                                            class="gambar1" />
+                                        <h4 class="tulisan1">Quli Khutsi Azzumi</h4>
+                                        <div class="tulisan3">
+                                            <p>
+                                                Lorem ipsum is placeholder text commonly used in the
+                                                graphic, print, and publishing industries for
+                                                previewing layouts and visual mockups.
+                                            </p>
+                                        </div>
+                                        <div class="template1-kolom">
+                                            <img src="{{ asset('assets/preview-template/img/ytred.png') }}"
+                                                alt="" style="margin-top: 18%" />
+                                        </div>
+                                        <div class="bungkusbunderan2">
+                                            <div class="elipsetemplate3">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/ig.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate3">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/twit.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate3">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/fb.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate3">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/yt.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate3">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="template5-kolom"></div>
-                                    <div class="template5-bungkuskolom">
-                                        <div class="template5-kolom2"></div>
-                                        <div class="template5-kolom2"></div>
-                                        <div class="template5-kolom2"></div>
+                                    <div id="div4" class="template4" style="display: none">
+                                        <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
+                                            class="gambar1" />
+                                        <h4 class="template4-tulisan1">Quli Khutsi Azzumi</h4>
+                                        <p class="template4-tulisan2">CEO</p>
+                                        <div class="bungkusbunderan">
+                                            <div class="elipsetemplate4">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/ig.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate4">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/twit.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate4">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/fb.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate4">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/yt.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate4">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                        </div>
+                                        <div class="template4-tulisan3">
+                                            <p>Saya, Qulbi Khutsi Azzumi</p>
+                                        </div>
+                                        <div class="template4-tulisan4">
+                                            <p>
+                                                Lorem ipsum is placeholder text commonly used in the
+                                                graphic, print, and publishing industries for
+                                                previewing layouts and visual mockups.
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="template5-bungkuskolom">
-                                        <div class="template5-kolom2"></div>
-                                        <div class="template5-kolom2"></div>
-                                        <div class="template5-kolom2"></div>
+                                    <div id="div5" class="template5" style="display: none">
+                                        <img src="{{ asset('assets/preview-template/img/rai.png') }}" alt=""
+                                            class="gambar1" />
+                                        <h4 class="template5-tulisan1">Quli Khutsi Azzumi</h4>
+                                        <div class="bungkusbunderan5">
+                                            <div class="elipsetemplate5">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/ig.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate5">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/twit.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate5">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/fb.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                            <div class="elipsetemplate5">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/yt.png') }}"
+                                                    alt="" class="ikon1" />
+                                            </div>
+                                            <div class="elipsetemplate5">
+                                                <p class="sembarang">p</p>
+                                                <img src="{{ asset('assets/preview-template/img/tiktod.png') }}"
+                                                    alt="" class="ikon" />
+                                            </div>
+                                        </div>
+                                        <div class="template5-tulisan4">
+                                            <p>
+                                                Lorem ipsum is placeholder text commonly used in the
+                                                graphic.
+                                            </p>
+                                        </div>
+                                        <div class="template5-kolom"></div>
+                                        <div class="template5-bungkuskolom">
+                                            <div class="template5-kolom2"></div>
+                                            <div class="template5-kolom2"></div>
+                                            <div class="template5-kolom2"></div>
+                                        </div>
+                                        <div class="template5-bungkuskolom">
+                                            <div class="template5-kolom2"></div>
+                                            <div class="template5-kolom2"></div>
+                                            <div class="template5-kolom2"></div>
+                                        </div>
                                     </div>
-                                </div>
-                            </center>
+                                </center>
 
                         </div>
                     </div>
@@ -318,6 +318,7 @@
             buttonPrew.classList.add("preew");
         });
     </script>
+
 @endsection
 @push('scripts')
     <script>
@@ -329,17 +330,6 @@
                 var formData = new FormData($('#form-micro')[0]);
                 formData.append('id_template', Param2);
                 formData.append('id_kategori', Param1);
-
-                // Validasi form
-                if (!$('#nama').val()) {
-                    alert('Silahkan masukkan nama microsite');
-                    return false;
-                }
-                if (!$('#tautan').val()) {
-                    alert('Silahkan masukkan Link microsite');
-                    return false;
-                }
-
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('nambah_microsite') }}',
@@ -351,9 +341,10 @@
                     contentType: false,
                     data: formData,
                     success: function(response) {
-                        var url = "{{ url('rubah_microsite/:id_kategori/:id_template') }}";
+                        var url = "{{ url('rubah_microsite/:id_kategori/:id_template/:id_microsite') }}";
                         url = url.replace(':id_template', Param2);
                         url = url.replace(':id_kategori', Param1);
+                        url = url.replace(':id_microsite', response.data.id);
                         window.location.href = url;
                     }
                 });

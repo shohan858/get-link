@@ -46,14 +46,14 @@
                             <div class="content-box"></div>
                             <div class="box-text">
                                 <p class="nama-microsite">{{ $item->name }}</p>
-                                <a class="link-microsite">{{ env('APP_URL') }}/{{ $item->link }}</a>
+                                <a class="link-microsite">{{ env('APP_URL') }}/microsite/{{ $item->link }}</a>
                                 <p class="pb-microsite"></p>
                             </div>
                         </div>
                         <div class="content-kanan">
                           <button class="content-crud" onclick="copyToClipboard('{{ $item->link }}')">
                             <img src="{{ asset('assets/img/Vector (3).svg') }}" alt="" />
-                            Copy
+                            Bagikan
                         </button>
                             <a href="pages5.html" class="content-crud">
                                 <img src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" />
@@ -197,7 +197,7 @@
 <script>
   function copyToClipboard(link) {
       const input = document.createElement('textarea');
-      input.value = 'localhost:8000/'+link;
+      input.value = '{{ env('APP_URL') }}/microsite/' + link;
       document.body.appendChild(input);
       input.select();
       document.execCommand('copy');

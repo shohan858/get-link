@@ -8,6 +8,8 @@ use App\Models\microsite;
 use App\Models\template;
 use Illuminate\Http\Request;
 
+use function Termwind\style;
+
 class MicrositeController extends Controller
 {
     public function index($link) {
@@ -33,6 +35,8 @@ class MicrositeController extends Controller
         else {
             $konten = [];
         }
+
+        // dd($template->background);
 
         return view('microsite.index', ['data' => $komponen, 'background' => $template, 'konten' => $konten]);
     }
