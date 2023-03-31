@@ -15,9 +15,9 @@
 
 <center>
                 @if($background->type_background == 'color')
-                  <div class="template4" style="background-color: {{ $background->background }}">
+                  <div class="show_microsite" style="background-color: {{ $background->background }}">
                 @else
-                  <div class="template4" style="background-image: url('{{ asset('gambar/'.$background->background) }}')">
+                  <div class="show_microsite" style="background-image: url('{{ asset('gambar/'.$background->background) }}')">
                 @endif
                     <?php $non_bungkus = ''; ?>
                     <?php $kolom2 = ''; ?>

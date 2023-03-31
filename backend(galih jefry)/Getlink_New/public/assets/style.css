@@ -1542,6 +1542,15 @@ background-color: #ffffff;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.show_microsite {
+  width: 80%;
+  height: 669px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .template4-tulisan1 {
   margin-top: 2%;
   width: 219px;
