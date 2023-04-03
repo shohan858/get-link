@@ -4,7 +4,7 @@
         <div class="content">
             <div class="pages1-content hidden">
                 <div class="anim regu-content-top">
-                    @if (Auth::user()->jumlah_microsite == Auth::user()->batas_microsite)
+                    @if ($count_microsite == Auth::user()->batas_microsite)
                         <button class="content-tambah" title="Anda Sudah mencapai Max, Upgrade Untuk Menambah " style="cursor:no-drop" disabled> tambah microsite </button>
                     @else
                         <a class="content-tambah" href="/page2"> tambah microsite </a>
@@ -12,7 +12,7 @@
                     <input type="text" name="cari" id="cari" class="content-cari" placeholder="Cari microsite" />
                 </div>
                 <div class="tenggah">
-                    <p class="st">{{ Auth::user()->jumlah_microsite }}/{{ Auth::user()->batas_microsite }}</p>
+                    <p class="st">{{ $count_microsite }}/{{ Auth::user()->batas_microsite }}</p>
                 </div>
                 {{-- @foreach ($my_microsite as $item)
                     <div class="anim content-isi-regu">

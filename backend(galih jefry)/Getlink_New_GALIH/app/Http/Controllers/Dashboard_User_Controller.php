@@ -31,7 +31,8 @@ class Dashboard_User_Controller extends Controller
 
     public function create_microsite()
     {
-        return view('Dashboard_User.pages4');
+        $data = User::find(Auth::user()->id);
+        return view('Dashboard_User.pages4')->with('data', $data);
     }
 
     public function kirim_id_kategori(Request $request)
@@ -65,15 +66,17 @@ class Dashboard_User_Controller extends Controller
     public function regular()
     {
         $my_microsite = microsite::where('id_user', Auth::user()->id)->get();
+        $count_microsite = User::find(Auth::user()->id)->jumlah_microsite;
         return view('Dashboard_User.regular')->with([
-            'my_microsite' => $my_microsite
+            'my_microsite' => $my_microsite,
+            'count_microsite' => $count_microsite
         ]);
     }
 
     public function langganan()
     {
         $data = paketModel::all();
-        return view('Dashboard_User.langganan', ['data' => $data]);
+        return view('Dashboard_User.langganan')->with('data', $data);
     }
 
     public function nambah_microsite(Request $request)
@@ -166,14 +169,6 @@ class Dashboard_User_Controller extends Controller
     }
 
     public function edit_microsite()
-    // {
-    //     $lastSegment = collect(request()->segments())->last();
-    //     // dd($lastSegment);
-    //     $data = template::findOrFail($lastSegment);   
-    //     // dd($data);
-    //     $background = template::all();
-    //     return view('Dashboard_user.pages5')->with('data', $data);
-    // }
     {
         $lastSegment = collect(request()->segments())->last();
         // dd($lastSegment);

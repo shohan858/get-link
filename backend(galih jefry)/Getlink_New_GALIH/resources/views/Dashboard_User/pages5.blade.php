@@ -1039,9 +1039,7 @@
                         </div>
                     </div>
                     <div id="prew2" class="anim pages5-kanan hidden">
-
-                        <a href="/microsite/{{ $microsite->link }}" class="pages5-preview">Microsite/{{ $microsite->link }}</a><br />
-
+                        <a href class="pages5-preview">getlink/tautan microsite</a><br />
                         <div class="kanan-bungkus">
                             <center>
                                 @if($background->type_background == 'color')
