@@ -22,6 +22,8 @@
 
 <body>
 
+
+
     <!-- NavBar -->
 
     <nav class="navbar bg-body-tertiary shadow">
@@ -40,11 +42,13 @@
                 {{ __('Log Out') }}
         </x-dropdown-link>
     </form> --}}
+  
+      
                 <a href="/logout" class="btn btn-outline-primary ms-auto rounded-pill me-5 btn-large"
-                    style="width: 20%">logout</a>
+                    style="width: 10%">logout</a>
             @else
                 <a href="/sesi" class="btn btn-outline-primary ms-auto rounded-pill me-5 btn-large" type="button"
-                    style="width: 20%">Login</a>
+                    style="width: 10%">Login</a>
             @endif
         </div>
     </nav>
@@ -100,6 +104,11 @@
                     </div>
                 </div>
             </form>
+            
+  @if (request()->is('/getlink'))
+  Admin / <b>dashboard</b>
+ @endif
+ {{-- dadas --}}
         </div>
         <div class="hero_kanan">
             <img class="__hero_lingkaran" src="{{ asset('assets_landing_page/img/Ellipse 1.png') }} " alt="eclipse">

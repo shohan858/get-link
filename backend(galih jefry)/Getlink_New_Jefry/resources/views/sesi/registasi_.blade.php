@@ -1,56 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Halaman Registrasi</title>
-    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <script src=""></script>
-</head>
-<body>
-  {{-- @include('komponen.pesan') --}}
-  {{-- @include('sweetalert::alert') --}}
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-md-8 col-lg-7 col-xl-6">
-        <img src="https://img.freepik.com/free-vector/programer-learning-programming-languages-by-computer-laptop-website-tutorial-channel-online-education-class-vector-illustration-software-development-programming-languages-learning_1150-55428.jpg?size=626&ext=jpg&ga=GA1.1.20717073.1659496127&semt=sph"
-          class="img-fluid" alt="Phone image">
-      </div>
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form  action="/register/create" method="POST">
-          @csrf
-          {{-- Username --}}
-          <div class="form-outline mb-4">
-            <input type="text" name="name" id="form1Example13" class="form-control form-control-lg" />
-            <label class="form-label" for="form1Example13">Nama User</label>
-          </div>
-          {{-- End Username --}}
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <input type="email" name="email" id="form1Example13" class="form-control form-control-lg" />
-            <label class="form-label" for="form1Example13">Alamat Email</label>
-          </div>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <input type="password" name="password" id="form1Example23" class="form-control form-control-lg" />
-            <label class="form-label" for="form1Example23">Kata Sandi</label>
-          </div>
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
 
-          <div class="d-flex justify-content-around align-items-center mb-4">
-          </div>
+    <!-- My Style -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
-          <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Daftar</button>
-          <p class="small fw-bold mt-2 pt-1 mb-0">Sudah Punya Akun ? 
-                    <a href="/sesi" class="link-danger">Masuk</a></p>
-        </form>
+    <!-- Fonts Google -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet" />
+
+    <title>Register</title>
+
+    <style type="text/css">
+      .form-check-label:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="back">
+      <div class="backRight"></div>
+      <div class="backLeft">
+        <img class="image1" src="{{ asset('assets_sesi/images/Diet.png') }}" alt="image not found" />
+        <img class="image2" src="{{ asset('assets_sesi/images/group.png') }}" alt="image not found" />
       </div>
     </div>
-  </div>
-</section>
-    
-</body>
+
+    <div id="slideBox">
+      <div class="topLayer">
+        <div class="left">
+          <div class="content">
+            <h2>Sign Up</h2>
+            <form method="post" onsubmit="return false;">
+              <div class="form-group">
+                <input type="text" placeholder="username" />
+              </div>
+              <div class="form-group"></div>
+              <div class="form-group"></div>
+              <div class="form-group"></div>
+            </form>
+            <button id="goLeft" class="off">Login</button>
+            <button>Sign up</button>
+          </div>
+        </div>
+        <div class="right">
+          <div class="content">
+            <img class="logos" src="{{ asset('assets_sesi/images/logos.png') }}" alt="" />
+            <h4 style="margin-top: 5px">Buat Akun Anda</h4>
+            <p>Silahkan Buat Akun Anda Agar Bisa Masuk</p>
+
+            <form  action="/register/create" method="POST">
+              @csrf
+              <input type="text" id="fname" name="name" placeholder="Masukan Nama" />
+              <input type="email" id="lname" name="email" placeholder="Masukan Email" />
+              <input type="password" id="lname" name="password" placeholder="Masukan Password" />
+              <input type="password" id="lname" name="confirmpassword" placeholder="Masukan Password Confirmation" />
+              <button type="submit" value="Submit">Register</button>
+            </form>
+            <div class="uhBot">
+              <h6 class="botP">Already exists have an account?</h6><a href="/sesi">Login</a>
+            </div>
+            <!-- <div class="uhuy">
+              <p class="">Already exists have an account?</p><a href="">Login</a>
+            </div> -->
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Inspiration from: http://ertekinn.com/loginsignup/-->
+    <script src="js/bootstrap.js"></script>
+
+    <!-- Popper JavaScript -->
+    <script src="js/popper.min.js"></script>
+
+    <script>
+      // Mengambil elemen checkbox dan teks "Ingat Sandi"
+      const checkbox = document.getElementById("remember");
+      const rememberText = document.querySelector(".form-check-label");
+
+      // Menambahkan event listener pada teks "Ingat Sandi"
+      rememberText.addEventListener("click", () => {
+        checkbox.checked = !checkbox.checked; // Membalikkan nilai status checkbox
+      });
+    </script>
+  </body>
 </html>

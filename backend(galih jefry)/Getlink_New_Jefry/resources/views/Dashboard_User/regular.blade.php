@@ -5,9 +5,9 @@
             <div class="pages1-content hidden">
                 <div class="anim regu-content-top">
                     @if ($count_microsite == Auth::user()->batas_microsite)
-                        <button class="content-tambah" title="Anda Sudah mencapai Max, Upgrade Untuk Menambah " style="cursor:no-drop" disabled> tambah microsite </button>
+                        <button class="content-tambah" title="Anda Sudah mencapai Max, Upgrade Untuk Menambah " style="cursor:no-drop" disabled> Tambah Microsite </button>
                     @else
-                        <a class="content-tambah" href="/page2"> tambah microsite </a>
+                        <a class="content-tambah" href="/page2"> Tambah Microsite </a>
                     @endif
                     <input type="text" name="cari" id="cari" class="content-cari" placeholder="Cari microsite" />
                 </div>
@@ -43,7 +43,7 @@
                 @foreach ($my_microsite as $index => $item)
                     <div class="anim content-isi-regu search-microsite" data-nama="{{ strtolower($item->name) }}">
                         <div class="content-kiri-regu">
-                            <div class="content-box"></div>
+                            <div class="content-box"><img src="{{ url('gambar/'.$item->icon) }}" alt=""></div>
                             <div class="box-text">
                                 <p class="nama-microsite">{{ $item->name }}</p>
                                 <a class="link-microsite">{{ env('APP_URL') }}/microsite/{{ $item->link }}</a>
@@ -52,8 +52,9 @@
                         </div>
                         <div class="content-kanan">
                           <button class="content-crud" onclick="copyToClipboard('{{ $item->link }}')">
-                            <img src="{{ asset('assets/img/Vector (3).svg') }}" alt="" />
-                            Bagikan
+                            {{-- <img src="{{ asset('assets/img/Vector (3).svg') }}" alt="" /> --}}
+                            <i class="fas fa-copy"></i>
+                            Salin Link
                         </button>
                             <a href="pages5.html" class="content-crud">
                                 <img src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" />

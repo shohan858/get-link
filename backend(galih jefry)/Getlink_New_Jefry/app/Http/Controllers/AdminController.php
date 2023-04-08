@@ -8,11 +8,15 @@ use App\Models\kategori;
 use App\Models\komponen;
 use App\Models\microsite;
 use App\Models\paketModel;
+use App\Models\shortlink;
 use App\Models\template;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+// use Yajra\DataTables\Facades\DataTables;
+use Datatables;
+use Yajra\DataTables\Contracts\DataTable;
 
 use function GuzzleHttp\Promise\all;
 
@@ -20,62 +24,93 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        // return view('admin.index');
+        return View('admin.admin_pages.dashboard');
     }
 
-    public function layout()
+    public function halaman_utama()
     {
-        return view('admin.layout');
+        // return view('admin.layout');
+        return view('admin.admin_pages.halaman_utama');
     }
 
-    public function judul1()
+    public function get_link()
     {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $no = 1;
-        return view("admin.landing_page.judul1")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        // return view("admin.landing_page.judul1")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        return view('admin.admin_pages.edit_landingPage.get_link')->with([
+            'data_getlink' => $data,
+            'data3' => $data3,
+        ]);
     }
     public function sponsor()
     {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $no = 1;
-        return view("admin.landing_page.sponsor")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        // return view("admin.landing_page.sponsor")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        return view('admin.admin_pages.edit_landingPage.sponsor')->with([
+            'data_getlink' => $data,
+            'data3' => $data3,
+            'no' => $no
+        ]);
     }
-    public function judul2()
+    public function short_link()
     {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $no = 1;
-        return view("admin.landing_page.judul2")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        // return view("admin.landing_page.judul2")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        return view('admin.admin_pages.edit_landingPage.short_link')->with([
+            'data_getlink' => $data,
+            'data3' => $data3,
+        ]);
     }
-    public function judul3()
+    public function microsite1()
     {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $no = 1;
-        return view("admin.landing_page.judul3")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        // return view("admin.landing_page.judul3")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        return view('admin.admin_pages.edit_landingPage.microsite1')->with([
+            'data_getlink' => $data,
+            'data3' => $data3,
+        ]);
     }
-    public function judul4()
+    public function microsite2()
     {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $no = 1;
-        return view("admin.landing_page.judul4")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        // return view("admin.landing_page.judul4")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        return view('admin.admin_pages.edit_landingPage.microsite2')->with([
+            'data_getlink' => $data,
+            'data3' => $data3,
+        ]);
     }
-    public function judul5()
+    public function cms()
     {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $no = 1;
-        return view("admin.landing_page.judul5")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        // return view("admin.landing_page.judul5")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        return view('admin.admin_pages.edit_landingPage.cms')->with([
+            'data_getlink' => $data,
+            'data3' => $data3,
+        ]);
     }
     public function keunggulan()
     {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $no = 1;
-        return view("admin.landing_page.keunggulan")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        // return view("admin.landing_page.keunggulan")->with("data_getlink", $data)->with('no', $no)->with('n', $no)->with('data3', $data3)->with('no_image', $no);
+        return view('admin.admin_pages.edit_landingPage.keunggulan_website')->with([
+            'data_getlink' => $data,
+            'data3' => $data3,
+        ]);
     }
 
     public function update_landing_page(Request $request, $id)
@@ -110,11 +145,14 @@ class AdminController extends Controller
             'message' => 'success',
             'data' => $microsite,
         ], 200);
+        return DataTable::of($microsite)->make();
+    // return DataTables::of($microsite)->make();
     }
 
     public function table_microsite()
     {
-        return view('admin.microsite.index');
+        // return view('admin.microsite.index');
+        return view('admin.admin_pages.microsite');
     }
 
     public function getdata_akun()
@@ -128,7 +166,8 @@ class AdminController extends Controller
 
     public function table_akun()
     {
-        return view('admin.akun.index');
+        // return view('admin.akun.index');
+        return view('admin.admin_pages.account.acc');
     }
 
     public function getdata_kategori()
@@ -138,11 +177,13 @@ class AdminController extends Controller
             'message' => 'success',
             'data' => $kategori,
         ], 200);
+        return DataTable::of($kategori)->make();
     }
 
     public function table_kategori()
     {
-        return view('admin.kategori.index');
+        return view('admin.admin_pages.kategori');
+        // return view('admin.kategori.index');
     }
 
     public function getdata_template()
@@ -184,34 +225,40 @@ class AdminController extends Controller
 
     public function paket_microsite()
     {
-        return view("admin.transaksi.index");
+        return view('admin.admin_pages.paket');
+        // return view("admin.transaksi.index");
     }
 
     public function table_template()
     {
         $komponen = komponen::all();
         $kategori = kategori::all();
-        return view('admin.template.index')->with([
-            'komponen' => $komponen,
-            'kategori' => $kategori,
-        ]);
+        // return view('admin.template.index')->with([
+        //     'komponen' => $komponen,
+        //     'kategori' => $kategori,
+        // ]);
+        return view('admin.admin_pages.template')->with([
+                'komponen' => $komponen,
+                'kategori' => $kategori,
+            ]);
     }
 
     public function tambah_kategori(Request $request)
     {
-        // dd($request);
+            // dd($request->icon);
         // $this->validate($request, [
-        //     'name' => 'required',
-        //     'color' => 'required',
-        //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-        // ]);
-
-        $kategori = new kategori();
-        $kategori->name = $request->input('name');
-        $kategori->color = $request->input('color');
-        // dd($kategori->name);
-
-        if ($request->hasFile('icon')) {
+            //     'name' => 'required',
+            //     'color' => 'required',
+            //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            // ]);
+            
+            $kategori = new kategori();
+            $kategori->name = $request->input('name');
+            $kategori->color = $request->input('color');
+            // dd($kategori->name);
+            
+            if ($request->hasFile('icon')) {
+            // dd($request->name);
             $file = $request->file('icon');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $destinationPath = public_path('/gambar');
@@ -358,5 +405,33 @@ class AdminController extends Controller
         $template->update();
 
         return redirect('/table_template')->with('success', 'Data berhasil diupdate.');
+    }
+
+    public function edit_paket($id)
+    {
+        $paket = paketModel::where('id',$id)->first();
+        return view('admin.transaksi.edit')->with([
+            'paket' => $paket
+        ]);
+    }
+
+    public function update_paket(Request $request, $id)
+    {
+        $data = paketModel::findOrFail($id);
+        $data->name = $request->name;
+        $data->type = $request->type;
+        $data->harga = $request->harga;
+        $data->slot = $request->slot;
+        $data->update();
+
+        return redirect('/paket_microsite');
+    }
+
+    public function preview(){
+        $data = getlink::all();
+        $data3 = CollabModel::all();
+        $shortenLinks = shortlink::latest()->get();
+        $no = 1;
+        return view('admin.preview.index', compact('shortenLinks'))->with('data_getlink', $data)->with('no', $no)->with('data3', $data3);
     }
 }

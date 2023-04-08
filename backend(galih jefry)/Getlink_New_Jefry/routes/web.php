@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Landing Page GetLink
-Route::get('/short/{code}',[HomeController::class,'shortenLink'])->name('shorten.link'); 
+Route::get('/short/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 Route::group(['prefix' => 'getlink.id'], function () {
     Route::get('{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 });
@@ -38,7 +38,7 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkE
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-Route::controller(GoogleController::class)->group(function() {
+Route::controller(GoogleController::class)->group(function () {
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback');
 });
@@ -84,33 +84,47 @@ Route::middleware(['authuser'])->group(function () {
 
 Route::middleware(['authadmin'])->group(function () {
     Route::get('/admin_get', [AdminController::class, 'index'])->name('admin');
-    Route::get('/layout', [AdminController::class, 'layout'])->name('layout');
-    Route::get('/judul1', [AdminController::class, 'judul1'])->name('judul1');
-    Route::get('/judul2', [AdminController::class, 'judul2'])->name('judul2');
-    Route::get('/judul3', [AdminController::class, 'judul3'])->name('judul3');
-    Route::get('/judul4', [AdminController::class, 'judul4'])->name('judul4');
-    Route::get('/judul5', [AdminController::class, 'judul5'])->name('judul5');
-    Route::get('/sponsor', [AdminController::class, 'sponsor'])->name('sponsor');
-    Route::get('/keunggulan', [AdminController::class, 'keunggulan'])->name('keunggulan');
+    // Route::get('/layout', [AdminController::class, 'layout'])->name('layout');
+    Route::get('/halaman_utama', [AdminController::class, 'halaman_utama']);
+    // Route::get('/judul1', [AdminController::class, 'judul1'])->name('judul1');
+    // Route::get('/judul2', [AdminController::class, 'judul2'])->name('judul2');
+    // Route::get('/judul3', [AdminController::class, 'judul3'])->name('judul3');
+    // Route::get('/judul4', [AdminController::class, 'judul4'])->name('judul4');
+    // Route::get('/judul5', [AdminController::class, 'judul5'])->name('judul5');
+    // Route::get('/sponsor', [AdminController::class, 'sponsor'])->name('sponsor');
+    // Route::get('/keunggulan', [AdminController::class, 'keunggulan'])->name('keunggulan');
+
+    Route::get('/get_link', [AdminController::class, 'get_link']);
+    Route::get('/sponsor', [AdminController::class, 'sponsor']);
+    Route::get('/short_link', [AdminController::class, 'short_link']);
+    Route::get('/microsite1', [AdminController::class, 'microsite1']);
+    Route::get('/microsite2', [AdminController::class, 'microsite2']);
+    Route::get('/cms', [AdminController::class, 'cms']);
+    Route::get('/keunggulan', [AdminController::class, 'keunggulan']);
+
     Route::post('update_landing_page/{id}', [AdminController::class, 'update_landing_page']);
     Route::get('getdata/microsite', [AdminController::class, 'getdata'])->name('getdatamicrosite');
     Route::get('/microsite', [AdminController::class, 'table_microsite'])->name('table_microsite');
     Route::get('/getdata/akun', [AdminController::class, 'getdata_akun'])->name('getdata_akun');
     Route::get('/account', [AdminController::class, 'table_akun'])->name('table_akun');
     Route::get('/getdata/kategori', [AdminController::class, 'getdata_kategori'])->name('getdata_kategori');
-    Route::get('/table/kategori', [AdminController::class, 'table_kategori'])->name('table_kategori');
+    Route::get('/kategori', [AdminController::class, 'table_kategori'])->name('table_kategori');
     Route::get('/getdata/template', [AdminController::class, 'getdata_template'])->name('getdata_template');
-    Route::get('/table_template', [AdminController::class, 'table_template'])->name('table_template');
+    Route::get('/template', [AdminController::class, 'table_template'])->name('table_template');
     Route::post('/kategori/tambah', [AdminController::class, 'tambah_kategori'])->name('tambah_kategori');
     // Route::get('/kategori/{id}', [AdminController::class, 'hapus_kategori'])->name('hapus_kategori');
     Route::delete('/kategori/{id}', [AdminController::class, 'destroy'])->name('hapus_kategori');
     Route::get('/get_paket_microsite', [AdminController::class, 'get_paket_microsite'])->name('get_paket_microsite');
-    Route::post('/delete_paket_microsite/{id}', [AdminController::class, 'delete_paket_microsite'])->name('delete_paket_microsite');
+    Route::delete('/delete_paket_microsite/{id}', [AdminController::class, 'delete_paket_microsite'])->name('delete_paket_microsite');
     Route::post('/tambah_paket_microsite', [AdminController::class, 'tambah_paket_microsite'])->name('tambah_paket_microsite');
-    Route::get('/paket_microsite', [AdminController::class, 'paket_microsite'])->name('paket_microsite');
+    Route::get('/paket', [AdminController::class, 'paket_microsite'])->name('paket_microsite');
     Route::resource('/collab', CollabController::class);
     Route::post('/template/tambah', [AdminController::class, 'tambah_template'])->name('tambah_template');
     Route::delete('/template/{id}', [AdminController::class, 'destroy_template'])->name('hapus_template');
     Route::get('/edit_template/{id}', [AdminController::class, 'edit_template'])->name('edit_template');
     Route::put('/update_template/{id}', [AdminController::class, 'update_template'])->name('update_template');
+    Route::get('/edit_paket/{id}', [AdminController::class, 'edit_paket'])->name('edit_paket');
+    Route::put('/update_paket/{id}', [AdminController::class, 'update_paket'])->name('update_paket');
+
+    Route::get('/preview/{halaman}', [AdminController::class, 'preview'])->name('preview');
 });

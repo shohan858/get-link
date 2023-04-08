@@ -67,9 +67,11 @@ class Dashboard_User_Controller extends Controller
     {
         $my_microsite = microsite::where('id_user', Auth::user()->id)->get();
         $count_microsite = User::find(Auth::user()->id)->jumlah_microsite;
+        // $template = template::where('id', $my_microsite->id_template)->get();
         return view('Dashboard_User.regular')->with([
             'my_microsite' => $my_microsite,
-            'count_microsite' => $count_microsite
+            'count_microsite' => $count_microsite,
+            // 'template' => $template,
         ]);
     }
 
