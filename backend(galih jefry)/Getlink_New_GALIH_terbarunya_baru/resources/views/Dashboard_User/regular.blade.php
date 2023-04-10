@@ -5,7 +5,8 @@
             <div class="pages1-content hidden">
                 <div class="anim regu-content-top">
                     @if (Auth::user()->jumlah_microsite === $limit_microsite)
-                        <button class="content-tambah" title="Anda Sudah mencapai Max, Upgrade Untuk Menambah " style="cursor:no-drop" disabled> Tambah Microsite </button>
+                        <button class="content-tambah" title="Anda Sudah mencapai Max, Upgrade Untuk Menambah "
+                            style="cursor:no-drop" disabled> Tambah Microsite </button>
                     @else
                         <a class="content-tambah" href="/buat_microsite"> Tambah Microsite </a>
                     @endif
@@ -17,7 +18,7 @@
                 @foreach ($my_microsite as $index => $item)
                     <div class="anim content-isi-regu search-microsite" data-nama="{{ strtolower($item->name) }}">
                         <div class="content-kiri-regu">
-                            <div class="content-box"><img src="{{ url('gambar/'.$item->icon) }}" alt=""></div>
+                            <div class="content-box"><img src="{{ url('gambar/' . $item->icon) }}" alt=""></div>
                             <div class="box-text">
                                 <p class="nama-microsite">{{ $item->name }}</p>
                                 <a class="link-microsite">{{ env('APP_URL') }}/microsite/{{ $item->link }}</a>
@@ -25,12 +26,13 @@
                             </div>
                         </div>
                         <div class="content-kanan">
-                          <button class="content-crud" onclick="copyToClipboard('{{ $item->link }}')">
-                            {{-- <img src="{{ asset('assets/img/Vector (3).svg') }}" alt="" /> --}}
-                            <i class="fas fa-copy"></i>
-                            Salin Link
-                        </button>
-                            <a href="pages5.html" class="content-crud">
+                            <button class="content-crud" onclick="copyToClipboard('{{ $item->link }}')">
+                                {{-- <img src="{{ asset('assets/img/Vector (3).svg') }}" alt="" /> --}}
+                                <i class="fas fa-copy"></i>
+                                Salin Link
+                            </button>
+                            <a href="rubah_microsite/{{ $item->id_kategori }}/{{ $item->id_template }}/{{ $item->id }}"
+                                class="content-crud">
                                 <img src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" />
                                 Edit
                             </a>
@@ -87,66 +89,65 @@
                     <button id="delbal{{ $index }}" class="del-batal-button"
                         onclick="closeDelModal({{ $index }})">Batal</button>
                     <form action="{{ route('microsite.delete', $item->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button id="btnTrash{{ $index }}" class="del-hapus-button"
-                        onclick="deleteItem({{ $index }})" type="submit">Hapus</button>
+                        @csrf
+                        @method('DELETE')
+                        <button id="btnTrash{{ $index }}" class="del-hapus-button"
+                            onclick="deleteItem({{ $index }})" type="submit">Hapus</button>
                     </form>
                 </div>
             </div>
         </div>
     @endforeach
-@endsection
-@push('scripts')
 
-<script>
-    // mendapatkan elemen input dan konten mikrosite
-    const inputCari = document.getElementById('cari');
-    const kontenMikrosite = document.querySelectorAll('.search-microsite');
-  
-    // menambahkan event input pada elemen input
-    inputCari.addEventListener('input', function() {
-      const kataKunci = inputCari.value.trim().toLowerCase(); // mendapatkan kata kunci pencarian
-  
-      // loop untuk memfilter konten mikrosite berdasarkan kata kunci
-      kontenMikrosite.forEach(function(el) {
-        const namaMikrosite = el.getAttribute('data-nama');
-        const cocok = namaMikrosite.includes(kataKunci);
-  
-        if (cocok) {
-          el.style.display = 'flex';
-        } else {
-          el.style.display = 'none';
+
+    <script>
+        // mendapatkan elemen input dan konten mikrosite
+        const inputCari = document.getElementById('cari');
+        const kontenMikrosite = document.querySelectorAll('.search-microsite');
+
+        // menambahkan event input pada elemen input
+        inputCari.addEventListener('input', function() {
+            const kataKunci = inputCari.value.trim().toLowerCase(); // mendapatkan kata kunci pencarian
+
+            // loop untuk memfilter konten mikrosite berdasarkan kata kunci
+            kontenMikrosite.forEach(function(el) {
+                const namaMikrosite = el.getAttribute('data-nama');
+                const cocok = namaMikrosite.includes(kataKunci);
+
+                if (cocok) {
+                    el.style.display = 'flex';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function copyToClipboard(link) {
+            const input = document.createElement('textarea');
+            input.value = '{{ env('APP_URL') }}/microsite/' + link;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            if (document.body.removeChild) {
+                swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Berhasil Copy Link',
+                    timer: '900',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Terjadi kesalahan!',
+                })
+            }
+            //   alert('Link telah disalin ke clipboard!');
         }
-      });
-    });
-  </script>
-
-<script>
-  function copyToClipboard(link) {
-      const input = document.createElement('textarea');
-      input.value = '{{ env('APP_URL') }}/microsite/' + link;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      if(document.body.removeChild){
-        swal.fire({
-                          icon:'success',
-                          title:'Berhasil',
-                          text:'Berhasil Copy Link',
-                          timer:'900',
-                        });
-      }else{
-        Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Terjadi kesalahan!',
-})
-      }
-    //   alert('Link telah disalin ke clipboard!');
-  }
-</script>
+    </script>
 
     <script>
         function openDelModal(index) {
@@ -173,4 +174,4 @@
             });
         })
     </script>
-@endpush
+@endsection

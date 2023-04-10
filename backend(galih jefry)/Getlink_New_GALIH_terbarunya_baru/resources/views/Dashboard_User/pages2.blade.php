@@ -102,43 +102,55 @@
     })
   });
 
-  // Mendapatkan semua element button
-  const btnColor = document.querySelectorAll(".btn-kategori");
+   // Mendapatkan semua element button
+   const btnColor = document.querySelectorAll(".btn-kategori");
 
-  let activeBtn = null; // menyimpan button yang sedang aktif (ditekan)
+let activeBtn = null; // menyimpan button yang sedang aktif (ditekan)
+let inactiveColor = ""; // menyimpan warna border button yang tidak aktif
 
-  // Loop pada setiap button dan menambahkan event listener
-  btnColor.forEach(button => {
-    const color = button.getAttribute("data-color");
+// Loop pada setiap button dan menambahkan event listener
+btnColor.forEach(button => {
+  const color = button.getAttribute("data-color");
 
-    button.addEventListener("mouseover", function() {
-      if (button !== activeBtn) { // jika button tidak sedang aktif (ditekan)
-        button.style.backgroundColor = color;
-        button.style.border = `2px solid ${color}`;
-      }
-    });
-
-    button.addEventListener("mouseout", function() {
-      if (button !== activeBtn) { // jika button tidak sedang aktif (ditekan)
-        button.style.backgroundColor = "";
-        button.style.border = `2px solid ${color}`;
-      }
-    });
-
-    button.addEventListener("click", function() {
-      if (button !== activeBtn) { // jika button tidak sedang aktif (ditekan)
-        if (activeBtn !== null) { // jika ada button yang sedang aktif sebelumnya
-          activeBtn.style.backgroundColor = "";
-          activeBtn.style.border = `2px solid ${color}`;
-
-        }
-        activeBtn =
-          button; // mengatur button yang sedang aktif menjadi button yang baru ditekan
-      } else {
-        activeBtn =
-          null; // jika button yang sedang aktif diklik kembali, button menjadi tidak aktif
-      }
-    });
+  button.addEventListener("mouseover", function() {
+    if (button !== activeBtn) { // jika button tidak sedang aktif (ditekan)
+      button.style.color = "white";
+      button.style.backgroundColor = color;
+      button.style.border = `2px solid ${color}`;
+    }
   });
+
+  button.addEventListener("mouseout", function() {
+    if (button !== activeBtn) { // jika button tidak sedang aktif (ditekan)
+      button.style.color = color;
+      button.style.backgroundColor = "";
+      button.style.border = `2px solid ${color}`;
+    }
+  });
+
+  button.addEventListener("click", function() {
+    if (button !== activeBtn) { // jika button tidak sedang aktif (ditekan)
+      if (activeBtn !== null) { // jika ada button yang sedang aktif sebelumnya
+        inactiveColor = activeBtn.getAttribute("data-color"); // simpan warna dari button tidak aktif sebelumnya
+    activeBtn.style.backgroundColor = "";
+    activeBtn.style.border = `2px solid ${inactiveColor}`;
+    activeBtn.style.color = inactiveColor;
+      }
+      activeBtn =
+        button; // mengatur button yang sedang aktif menjadi button yang baru ditekan
+        // inactiveColor = color;
+        button.style.color = "white";
+  button.style.backgroundColor = color;
+  button.style.border = `2px solid ${color}`;
+    } else {
+      activeBtn =
+        null; // jika button yang sedang aktif diklik kembali, button menjadi tidak aktif
+        button.style.color = color; 
+        button.style.color = color; 
+  button.style.backgroundColor = "";
+  button.style.border = `2px solid ${color}`;
+    }
+  });
+});
 </script>
 @endsection
