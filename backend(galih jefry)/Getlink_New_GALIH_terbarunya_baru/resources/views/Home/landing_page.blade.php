@@ -775,7 +775,7 @@
           },
           success: function(response) {
 
-            $('#input_link').val("{{ env('APP_URL') }}" + "/short/" + response.short_link);
+            $('#input_link').val("{{ env('APP_URL') }}" + "/" + response.short_link);
             showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1800);
             // Menampilkan tombol copy dan refresh
             if (buttonImage.src.includes("Refresh.png")) {

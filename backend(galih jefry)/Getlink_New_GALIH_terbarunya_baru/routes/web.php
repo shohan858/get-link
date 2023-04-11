@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Landing Page GetLink
-Route::get('/short/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
+Route   ::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 Route::group(['prefix' => 'getlink.id'], function () {
     Route::get('{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 });
