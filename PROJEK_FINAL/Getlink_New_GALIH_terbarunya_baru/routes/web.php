@@ -92,6 +92,8 @@ Route::middleware(['authuser'])->group(function () {
     ROute::get('/shortlink_create', [Dashboard_User_Controller::class, 'shortlinks_create']);
     Route::put('/shortlinks_update/{id}', [Dashboard_User_Controller::class, 'shortlinks_update']);
     Route::delete('/shortlink_delete/{id}', [Dashboard_User_Controller::class, 'shortlinks_delete']);
+
+    Route::post('preview_template', [Dashboard_User_Controller::class, 'preview_template'])->name('preview_template');
 });
 
 Route::middleware(['authadmin'])->group(function () {

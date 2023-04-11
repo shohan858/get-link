@@ -60,7 +60,18 @@ class Dashboard_User_Controller extends Controller
 
     public function page4()
     {
-        return view('Dashboard_User.pages4');
+        $lastSegment = collect(request()->segments())->last();
+        $template = template::findOrFail($lastSegment);
+        $array = explode(",", $template->id_komponen);
+
+        $komponen = array();
+        foreach ($array as $key => $row) {
+            $komponens = komponen::find($row);
+            $komponen[$key]['id'] = $komponens->id;
+            $komponen[$key]['code'] = $komponens->code;
+        }
+
+        return view('Dashboard_User.pages4', ['komponen' => $komponen, 'background' => $template]);
     }
 
     public function page5()
@@ -489,5 +500,33 @@ class Dashboard_User_Controller extends Controller
         $data = shortlink::find($id);
         $data->delete();
         return redirect()->back();
+    }
+
+    public function preview_template(Request $request) 
+    {
+        $template = template::findOrFail($request->id);
+
+        $array = explode(",", $template->id_komponen);
+
+        $komponen = array();
+        foreach ($array as $key => $row) {
+            $komponens = komponen::find($row);
+            $komponen[$key]['id'] = $komponens->id;
+            $komponen[$key]['code'] = $komponens->code;
+        }
+
+        $value = array();
+        foreach ($array as $key => $row) {
+            $values = komponen::find($row);
+            $value[$key]['value'] = $values->code;
+        }
+
+
+        return response()->json([
+            'message' => 'success',
+            'data' => $komponen,
+            'background' => $template,
+            'value' => $value
+        ], 200);
     }
 }
