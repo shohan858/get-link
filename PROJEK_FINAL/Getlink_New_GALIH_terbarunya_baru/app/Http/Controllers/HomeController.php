@@ -45,7 +45,7 @@ class HomeController extends Controller
         $shortLink = ShortLink::where('code', $code)->firstOrFail();
         if($shortLink){
             return redirect($shortLink->link);
-        }else{
+        }else{  
             return redirect('404 Not Found');
         }
     }
