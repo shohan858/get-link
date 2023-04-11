@@ -93,7 +93,6 @@
                         link: link,
                     },
                     success: function(response) {
-
                         $('#input_link').val("{{ env('APP_URL') }}" + "/g" + response.short_link);
                         showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1800);
                         // Menampilkan tombol copy dan refresh
