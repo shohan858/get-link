@@ -27,10 +27,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Landing Page GetLink
-Route::get('/short/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
-Route::group(['prefix' => 'getlink.id'], function () {
-    Route::get('{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
-});
 
 Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
@@ -42,15 +38,13 @@ Route::controller(GoogleController::class)->group(function () {
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback');
 });
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('microsite/{link}', [MicrositeController::class, 'index'])->name('microsite');
-
+Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 Route::post('generate-shorten-link', [HomeController::class, 'store'])->name('generate.shorten.link.post');
-// Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 Route::group(['prefix' => 'getlink.id'], function () {
-    Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
+    Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 });
 
 // Login And Register
@@ -64,6 +58,8 @@ Route::middleware(['authuser'])->group(function () {
     // Dashboard User
     Route::get('/dashboard_user', [Dashboard_User_Controller::class, 'dashboard'])->name('dashboard_user');
     Route::get('/buat_microsite', [Dashboard_User_Controller::class, 'page2'])->name('page2');
+    Route::get('/buat_tautan', [Dashboard_User_Controller::class, 'buat_tautan'])->name('buat_tautan');
+    Route::get('/selesai_tautan', [Dashboard_User_Controller::class, 'selesai_tautan'])->name('selesai_tautan');
     Route::get('/buat_microsite/{id}', [Dashboard_User_Controller::class, 'page3'])->name('page3');
     Route::get('/buat_microsite/{id}/{id_template}', [Dashboard_User_Controller::class, 'page4'])->name('page4');
     Route::get('/page5', [Dashboard_User_Controller::class, 'page5'])->name('page5');

@@ -665,10 +665,11 @@ background-color: #ffffff;
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 35px;
     line-height: 23px;
     color: #6b75e6;
     margin-bottom: 18px;
+    font-weight: bold;
 }
 
 .bt_tp {

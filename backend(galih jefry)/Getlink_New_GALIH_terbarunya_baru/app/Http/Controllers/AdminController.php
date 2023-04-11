@@ -146,7 +146,7 @@ class AdminController extends Controller
             'data' => $microsite,
         ], 200);
         return DataTable::of($microsite)->make();
-    // return DataTables::of($microsite)->make();
+        // return DataTables::of($microsite)->make();
     }
 
     public function table_microsite()
@@ -238,33 +238,33 @@ class AdminController extends Controller
         //     'kategori' => $kategori,
         // ]);
         return view('admin.admin_pages.template')->with([
-                'komponen' => $komponen,
-                'kategori' => $kategori,
-            ]);
+            'komponen' => $komponen,
+            'kategori' => $kategori,
+        ]);
     }
 
     public function tambah_kategori(Request $request)
     {
-            // dd($request->icon);
+        // dd($request->icon);
         // $this->validate($request, [
-            //     'name' => 'required',
-            //     'color' => 'required',
-            //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            // ]);
-            
-            $kategori = new kategori();
-            $kategori->name = $request->input('name');
-            $kategori->color = $request->input('color');
-            // dd($kategori->name);
-            
-            if ($request->hasFile('icon')) {
+        //     'name' => 'required',
+        //     'color' => 'required',
+        //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        // ]);
+
+        $kategori = new kategori();
+        $kategori->name = $request->input('name');
+        $kategori->color = $request->input('color');
+        // dd($kategori->name);
+
+        if ($request->hasFile('icon')) {
             // dd($request->name);
             $file = $request->file('icon');
-            
+
             $fileName = Carbon::now()->timestamp . '.' . $file->extension();
             $file->storeAs('/microsite/kategori/', $fileName);
             $kategori->icon = $fileName;
-            }
+        }
 
         $kategori->save();
 
@@ -409,7 +409,7 @@ class AdminController extends Controller
 
     public function edit_paket($id)
     {
-        $paket = paketModel::where('id',$id)->first();
+        $paket = paketModel::where('id', $id)->first();
         return view('admin.transaksi.edit')->with([
             'paket' => $paket
         ]);
@@ -427,7 +427,8 @@ class AdminController extends Controller
         return redirect('/paket_microsite');
     }
 
-    public function preview(){
+    public function preview()
+    {
         $data = getlink::all();
         $data3 = CollabModel::all();
         $shortenLinks = shortlink::latest()->get();
@@ -435,7 +436,8 @@ class AdminController extends Controller
         return view('admin.preview.index', compact('shortenLinks'))->with('data_getlink', $data)->with('no', $no)->with('data3', $data3);
     }
 
-    public function budget() {
+    public function budget()
+    {
         return View('admin.admin_pages.budget');
     }
 }

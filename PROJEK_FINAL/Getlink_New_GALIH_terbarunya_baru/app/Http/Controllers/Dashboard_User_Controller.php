@@ -25,7 +25,10 @@ class Dashboard_User_Controller extends Controller
     {
         return view('Dashboard_User.dashboard');
     }
-
+    public function buat_tautan()
+    {
+        return view('Dashboard_User.buat_tautan');
+    }
     public function page2()
     {
         $kategori = kategori::all();
