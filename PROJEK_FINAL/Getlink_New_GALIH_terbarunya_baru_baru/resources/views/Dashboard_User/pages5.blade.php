@@ -556,7 +556,9 @@
                     },
                     success: function(response) {
                         console.log(response);
-                        location.reload();
+                        document.querySelector('#CompoModal').style.display = 'none';
+                        $('#pgKr').load(window.location.href + ' #pgKr');
+                        $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.statusText);
@@ -922,6 +924,7 @@
                         success: function(response) {
                             console.log(response);
                             delmodal.hide();
+                            $('#pgKr').load(window.location.href + ' #pgKr');
                             $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
                         },
                         error: function(xhr, status, error) {
