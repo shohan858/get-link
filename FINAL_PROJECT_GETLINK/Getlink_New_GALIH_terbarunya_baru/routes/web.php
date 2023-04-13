@@ -29,9 +29,10 @@ use Illuminate\Support\Facades\Route;
 // Landing Page GetLink
 ROute::get('testing', [Dashboard_User_Controller::class, 'testing']);
 
-Route::get('/short/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
+Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
+Route::post('generate-shorten-link', [HomeController::class, 'store'])->name('generate.shorten.link.post');
 Route::group(['prefix' => 'getlink.id'], function () {
-    Route::get('{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
+    Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 });
 
 Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -48,13 +49,6 @@ Route::controller(GoogleController::class)->group(function () {
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('microsite/{link}', [MicrositeController::class, 'index'])->name('microsite');
-
-Route::post('generate-shorten-link', [HomeController::class, 'store'])->name('generate.shorten.link.post');
-// Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
-Route::group(['prefix' => 'getlink.id'], function () {
-    Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
-});
-
 // Login And Register
 Route::get('/sesi', [SessionController::class, 'index'])->name('sesi');
 Route::post('/sesi/login', [SessionController::class, 'login']);

@@ -94,7 +94,7 @@
                     },
                     success: function(response) {
                         $('#input_link').val("{{ env('APP_URL') }}" + "/g" + response.short_link);
-                        showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1800);
+                        showAlert('success', 'Tautan Berhasil Dipendekan', 'Silahkan Pilih Copy Atau Refresh', 1800);
                         // Menampilkan tombol copy dan refresh
                         if (buttonImage.src.includes("Refresh.png")) {
                             buttonImage.src = "{{ asset('assets_landing_page/img/Add-Link.png') }} ";
@@ -143,7 +143,7 @@
                         });
                     },
                     error: function() {
-                        showAlert('error', 'Ooops!', 'Terjadi Kesalahan Saat Memperpendek Link', 1800);
+                        showAlert('error', 'Link Tidak Valid!', 'Silahkan Masukan Link Atau Url Yang Valid!', 1800);
                     }
                 });
             } else {
