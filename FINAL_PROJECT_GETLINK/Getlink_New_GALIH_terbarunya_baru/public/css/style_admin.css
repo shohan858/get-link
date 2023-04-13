@@ -1337,7 +1337,7 @@ input[type="file"]:focus + .custom-file-upload {
     flex-direction: column;
 }
 
-.iframe{
+.iframe {
     background-color: #fefefe;
     margin-top: 18vh;
     border: 1px solid #888;
@@ -1549,19 +1549,6 @@ input[type="file"]:focus + .custom-file-upload {
 
 /* End responsive */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .bungkus {
     width: 100%;
     height: max-content;
@@ -1593,13 +1580,13 @@ input[type="file"]:focus + .custom-file-upload {
 
 .deskripsi {
     width: 450px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 18px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .ba_iframe {
@@ -1635,12 +1622,12 @@ input[type="file"]:focus + .custom-file-upload {
 }
 
 .title-template {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
-    color: #FFFFFF;
+    color: #ffffff;
     text-align: center;
 }
 
@@ -1724,20 +1711,6 @@ input[type="file"]:focus + .custom-file-upload {
         height: 155px;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* .aniLeft {
     opacity: 0;
@@ -2287,82 +2260,78 @@ input[type="file"]:focus + .custom-file-upload {
 }
 
 @media screen and (max-width: 992px) {
+    .lang-content {
+        margin-left: 22%;
+    }
 
-.lang-content {
-    margin-left: 22%;
-}
-
-.pages5-tambah-komponen {
+    .pages5-tambah-komponen {
         width: 65%;
     }
 
-.pages5-komponen-2 {
+    .pages5-komponen-2 {
         height: auto;
     }
 
-.pages5-isi {
+    .pages5-isi {
         font-size: 12px;
         margin-left: 1px;
     }
 
-.pages5-komponen-2 {
+    .pages5-komponen-2 {
         height: auto;
     }
 
-.pages5-preview {
+    .pages5-preview {
         width: 63%;
     }
 
-.modal-compo-barua {
+    .modal-compo-barua {
         width: 60%;
     }
-
 }
 
 @media screen and (max-width: 900px) {
-
-.del-conmo {
+    .del-conmo {
         width: 60%;
         height: 30vh;
     }
 
-.del-hapus-tulisan1 {
+    .del-hapus-tulisan1 {
         font-size: 16px;
     }
 
-.del-bungkus-hapusbutton {
+    .del-bungkus-hapusbutton {
         margin-left: 60%;
         margin-top: 10%;
     }
 
-.del-batal-button {
+    .del-batal-button {
         margin-bottom: 2%;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .lang-content {
+        margin-left: 2px;
+    }
 
-.lang-content {
-    margin-left: 2px;
-}
-
-.pages5-tambah-prew {
+    .pages5-tambah-prew {
         display: flex;
         align-items: center;
         justify-content: flex-end;
     }
 
-.pages5-tambah-prew:hover {
+    .pages5-tambah-prew:hover {
         left: 0;
         background-color: #6b75e6;
         color: #ffffff;
     }
 
-.pages5-bagi {
+    .pages5-bagi {
         flex-direction: column;
     }
 
-.pages5-kiri {
+    .pages5-kiri {
         height: auto;
         width: 100%;
         left: 0;
@@ -2373,40 +2342,38 @@ input[type="file"]:focus + .custom-file-upload {
         left: -100%;
     }
 
-.komponen-kkiri {
+    .komponen-kkiri {
         width: 90%;
     }
 
-.pages5-kanan {
+    .pages5-kanan {
         position: absolute;
         width: 100%;
         left: -200%;
         transition: left 0.5s ease-in-out;
     }
 
-.pages5-kanan.pages5Prew {
+    .pages5-kanan.pages5Prew {
         left: 0;
     }
 
-.pages5-kanan {
+    .pages5-kanan {
         width: 90%;
         height: auto;
     }
-
 }
 
 @media screen and (max-width: 600px) {
+    .content {
+        height: 50vh;
+    }
 
-.content {
-    height: 50vh;
-}
+    .lang-content {
+        margin-top: 10px;
+        margin-left: 2px;
+    }
 
-.lang-content {
-    margin-top: 10px;
-    margin-left: 2px;
-}
-
-.pages5-bagi {
+    .pages5-bagi {
         flex-direction: column;
     }
 
@@ -2415,18 +2382,17 @@ input[type="file"]:focus + .custom-file-upload {
         height: auto;
     }
 
-.modal-atas {
+    .modal-atas {
         height: 12%;
     }
 
-.comp-text {
+    .comp-text {
         font-size: 15px;
     }
 
-.modal-bawah {
+    .modal-bawah {
         grid-template-columns: repeat(1, 1fr);
     }
-
 }
 
 @media screen and (max-width: 500px) {
@@ -2436,117 +2402,116 @@ input[type="file"]:focus + .custom-file-upload {
     }
 }
 
-
 // wahda
 
 .bungkus {
-     width: 100%;
-     height: max-content;
-     background-repeat: no-repeat;
-     background-size: cover;
-     background-position: top left;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     padding: 2% 2% 2% 2%;
-     box-sizing: border-box;
-     /* position: fixed;
+    width: 100%;
+    height: max-content;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2% 2% 2% 2%;
+    box-sizing: border-box;
+    /* position: fixed;
     top: -200px;
     left: 0;
     right: 0;
     bottom: 0; */
-     overflow: auto;
- }
+    overflow: auto;
+}
 
- .bungkus .bungkus-anak:first-child {
-     margin-top: 60px;
- }
+.bungkus .bungkus-anak:first-child {
+    margin-top: 60px;
+}
 
- /* .bungkus .bungkus-anak:last-child {
+/* .bungkus .bungkus-anak:last-child {
     margin-bottom: 60px;
 } */
 
- .bungkus-anak-gmb {
-     display: grid;
-     grid-template-columns: repeat(3, 1fr);
-     width: 450px;
- }
+.bungkus-anak-gmb {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 450px;
+}
 
- .bungkus-anak p {
-     text-align: center;
- }
+.bungkus-anak p {
+    text-align: center;
+}
 
- .deskripsi {
-     width: 450px;
-     font-family: 'Roboto', sans-serif;
-     font-style: normal;
-     font-weight: 700;
-     font-size: 18px;
-     line-height: 18px;
-     text-align: center;
-     color: #FFFFFF;
- }
+.deskripsi {
+    width: 450px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #ffffff;
+}
 
- .ba_iframe {
-     width: 450px;
-     height: 220px;
-     border-radius: 15px;
- }
+.ba_iframe {
+    width: 450px;
+    height: 220px;
+    border-radius: 15px;
+}
 
- .bungkus .bungkus-anak {
-     width: 100%;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     margin: 7px 0 10px 0;
-     flex-wrap: wrap;
-     box-sizing: border-box;
- }
+.bungkus .bungkus-anak {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 7px 0 10px 0;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
 
- .konten-template {
-     width: 20%;
-     margin: 10px;
- }
+.konten-template {
+    width: 20%;
+    margin: 10px;
+}
 
- .konten-template img {
-     width: 100%;
-     border-radius: 15px;
- }
+.konten-template img {
+    width: 100%;
+    border-radius: 15px;
+}
 
- .icon-template {
-     border-radius: 50%;
-     width: 130px;
-     height: 130px;
- }
+.icon-template {
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+}
 
- .title-template {
-     font-family: 'Roboto', sans-serif;
-     font-style: normal;
-     font-weight: 700;
-     font-size: 24px;
-     line-height: 28px;
-     color: #FFFFFF;
-     text-align: center;
- }
+.title-template {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #ffffff;
+    text-align: center;
+}
 
- .medsos-template {
-     display: inline-flex;
-     justify-content: center;
-     align-items: center;
-     width: 60px;
-     height: 60px;
-     border-radius: 50%;
-     margin: 0 10px;
-     background-color: #ccc;
- }
+.medsos-template {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 10px;
+    background-color: #ccc;
+}
 
- .medsos-template img {
-     max-width: 100%;
-     max-height: 100%;
- }
+.medsos-template img {
+    max-width: 100%;
+    max-height: 100%;
+}
 
- /* @media (max-width: 1296px) {
+/* @media (max-width: 1296px) {
     .bungkus {
         padding: 30% 5%;
         margin-top: 100px;
@@ -2599,7 +2564,7 @@ input[type="file"]:focus + .custom-file-upload {
     }
 } */
 
- /* @media (max-width: 583px) {
+/* @media (max-width: 583px) {
     .bungkus {
         margin-top: 30%;
     }
@@ -2614,13 +2579,13 @@ input[type="file"]:focus + .custom-file-upload {
     }
 } */
 
- /* @media (max-width: 745px) {
+/* @media (max-width: 745px) {
     .bungkus {
         margin-top: -100px;
     }
 } */
 
- /* @media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .bungkus {
         padding: 40% 5%;
     }
@@ -2655,7 +2620,7 @@ input[type="file"]:focus + .custom-file-upload {
     }
 } */
 
- /* @media screen and (min-width: 1400px) {
+/* @media screen and (min-width: 1400px) {
      .bungkus {
          height: 200vh;
      }
@@ -2665,59 +2630,62 @@ input[type="file"]:focus + .custom-file-upload {
      }
  } */
 
- @media screen and (max-width: 600px) {
-     .konten-template {
-         width: 25%;
-         margin: 10px;
-     }
- }
+@media screen and (max-width: 600px) {
+    .konten-template {
+        width: 25%;
+        margin: 10px;
+    }
+}
 
- @media screen and (max-width: 550px) {
-     .icon-template {
-         width: 100px;
-         height: 100px;
-     }
+@media screen and (max-width: 550px) {
+    .icon-template {
+        width: 100px;
+        height: 100px;
+    }
 
-     .title-template {
-         font-size: 22px;
-     }
+    .title-template {
+        font-size: 22px;
+    }
 
-     .medsos-template {
-         width: 50px;
-         height: 50px;
-     }
+    .medsos-template {
+        width: 50px;
+        height: 50px;
+    }
 
-     .deskripsi {
-         width: 350px;
-         font-size: 15px;
-     }
+    .deskripsi {
+        width: 350px;
+        font-size: 15px;
+    }
 
-     .ba_iframe {
-         width: 350px;
-         height: 155px;
-     }
- }
+    .ba_iframe {
+        width: 350px;
+        height: 155px;
+    }
+}
 
- @media screen and (max-width: 390px) {
-     .medsos-template {
-         width: 40px;
-         height: 40px;
-     }
+@media screen and (max-width: 390px) {
+    .medsos-template {
+        width: 40px;
+        height: 40px;
+    }
 
-     .medsos-template img {
-         max-width: 70%;
-         max-height: 70%;
-     }
+    .medsos-template img {
+        max-width: 70%;
+        max-height: 70%;
+    }
 
-     .deskripsi {
-         width: 300px;
-         font-size: 15px;
-     }
+    .deskripsi {
+        width: 300px;
+        font-size: 15px;
+    }
 
-     .ba_iframe {
-         width: 300px;
-         height: 155px;
+    .ba_iframe {
+        width: 300px;
+        height: 155px;
+    }
+}
 
-     }
- }
-
+.div3Dotact {
+    display: block;
+    z-index: 10;
+}

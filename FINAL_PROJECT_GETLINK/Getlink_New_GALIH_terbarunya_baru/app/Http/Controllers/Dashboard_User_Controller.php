@@ -246,9 +246,9 @@ class Dashboard_User_Controller extends Controller
 
         $penentu = microsite_detail::where('id_microsite', $lastSegment)->where('id_komponen', 11)->get();
         if ($penentu) {
-            $tambah_komponen = komponen::where('id', '<>', 11)->get();
+            $tambah_komponen = komponen::whereNotIn('id', [11, 12])->get();
         } else {
-            $tambah_komponen = komponen::all();
+            $tambah_komponen = komponen::where('id', '<>', 12)->get();
         }
         //button tambah komponen
 

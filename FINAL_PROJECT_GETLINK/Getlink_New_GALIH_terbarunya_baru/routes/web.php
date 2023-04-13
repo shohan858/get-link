@@ -134,6 +134,11 @@ Route::middleware(['authadmin'])->group(function () {
     Route::get('/edit_paket/{id}', [AdminController::class, 'edit_paket'])->name('edit_paket');
     Route::put('/update_paket/{id}', [AdminController::class, 'update_paket'])->name('update_paket');
     Route::get('/admin/preview_template/{id}', [AdminController::class, 'preview_template'])->name('admin.preview_template');
+    Route::post('admin/update_template_admin/{id}', [AdminController::class, 'update_template_admin'])->name('update_template_admin');
+    Route::post('admin/update_status_template/{id}', [AdminController::class, 'update_status_template'])->name('update_status_template');
+    Route::post('admin/hapus_komponen_template/{id}', [AdminController::class, 'hapus_komponen_template'])->name('hapus_komponen_template');
+    Route::post('admin/tambah_komponen_template/{id}', [AdminController::class, 'tambah_komponen_template'])->name('tambah_komponen_template');
+    Route::post('admin/update_background_template/{id}', [AdminController::class, 'update_background_template'])->name('update_background_template');
 
     Route::get('/preview/{halaman}', [AdminController::class, 'preview'])->name('preview');
 });

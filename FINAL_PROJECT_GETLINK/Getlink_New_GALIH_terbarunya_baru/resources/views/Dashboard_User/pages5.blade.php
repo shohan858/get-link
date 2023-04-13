@@ -80,22 +80,22 @@
                                     </div>
                                     <div class="pages5-richa"></div>
                                 </div>
-                            </div>
-
-                            <div id="DelComModal{{$key}}" data-id_komponen="{{$item['id']}}" class="del-com-modal navAni">
-                                <!-- Modal content -->
-                                <div class="del-conmo">
-                                    <span class="del-close">&times;</span>
-                                    <p class="del-hapus-tulisan1">Konfirmasi Hapus</p>
-                                    <p class="del-hapus-tulisan2">
-                                        Apakah anda yakin ingin menghapus komponen ini
-                                    </p>
-                                    <div class="del-bungkus-hapusbutton">
-                                        <button id="delbal{{$key}}" class="del-batal-button">Batal</button>
-                                        <button id="btnTrash{{$key}}" class="del-hapus-button">Hapus</button>
+                                <div id="DelComModal{{$key}}" data-id_komponen="{{$item['id']}}" class="del-com-modal navAni">
+                                    <!-- Modal content -->
+                                    <div class="del-conmo">
+                                        <span class="del-close">&times;</span>
+                                        <p class="del-hapus-tulisan1">Konfirmasi Hapus</p>
+                                        <p class="del-hapus-tulisan2">
+                                            Apakah anda yakin ingin menghapus komponen ini
+                                        </p>
+                                        <div class="del-bungkus-hapusbutton">
+                                            <button id="delbal{{$key}}" class="del-batal-button">Batal</button>
+                                            <button id="btnTrash{{$key}}" class="del-hapus-button">Hapus</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
 
 
                             @endforeach
@@ -250,7 +250,7 @@
                     contentType: false,
                     success: function(response) {
                         console.log(response);
-                        // window.location.href = "{{ route('regular') }}";
+                        window.location.href = "{{ route('regular') }}";
                     },
                     error: function(xhr) {
                         console.log(xhr.responseText);
@@ -583,6 +583,7 @@
 
                 upButton.addEventListener("click", () => {
                     const prevSibling = child.previousElementSibling;
+                    console.log(prevSibling);
                     if (prevSibling) {
                         parent.insertBefore(child, prevSibling);
                     }
@@ -591,6 +592,7 @@
 
                 downButton.addEventListener("click", () => {
                     const nextSibling = child.nextElementSibling;
+                    console.log(nextSibling);
                     if (nextSibling) {
                         parent.insertBefore(nextSibling, child);
                     } else {
@@ -684,6 +686,7 @@
             currentElement = null;
         });
     });
+
 
     var Commodal = document.getElementById("CompoModal");
 

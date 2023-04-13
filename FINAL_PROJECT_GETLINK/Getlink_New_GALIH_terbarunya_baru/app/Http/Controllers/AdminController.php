@@ -343,34 +343,41 @@ class AdminController extends Controller
     public function edit_template($id)
     {
         $microkon_kode = '';
-        $microdet = template::findOrFail($id);
-        $array = explode(',', $microdet->id_komponen);
-        $status = explode(',', $microdet->status_komponen);
+        $microdet = template::findOrFail(intval($id));
+        $array = explode(',', rtrim($microdet->id_komponen, ','));
+        $status = explode(',', rtrim($microdet->status_komponen, ','));
         $komponen = array();
 
         foreach ($array as $key => $row) {
-            $komponen_oke = komponen::findOrFail($row);
-            if($row === 9) {
-                $microkon_kode = '';
-                for($i = 1; $i <= $microdet->value_konten_detail; $i++) {
-                    $microkon_kode .= '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template">
-                    <img class="img-template" src="microsite/konten/okk.jpg" alt="">
-                    </a>';
+            $komponen_oke = komponen::find($row);
+
+            if($status[$key] === 'on') {
+
+                if($row === '9') {
+                    $microkon_kode = '';
+                    for($i = 1; $i <= intval($microdet->value_konten_detail); $i++) {
+                        $microkon_kode .= '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template">
+                        <img class="img-template" src="microsite/konten/okk.jpg" alt="">
+                        </a>';
+                    }
+                    $komponen_code = '<div class="bungkus-anak" id="bungkus-template-konten">' . $microkon_kode . '</div>';
+                    $komponen[$key]['id'] = 9;
+                    $komponen[$key]['code'] = $komponen_code;
                 }
-                $microkon_code = '<div class="bungkus-anak" id="bungkus-template-konten">' . $microkon_kode . '</div>';
-                $komponen[$key]['id'] = 9;
-                $komponen[$key]['code'] = $microkon_code;
-            }
-            else {
-                $komponen[$key]['id'] = $komponen_oke->id;
-                $komponen[$key]['code'] = $komponen_oke->code;
+                elseif ($komponen_oke === null) {
+                }
+                else {
+                    $komponen[$key]['id'] = $komponen_oke->id;
+                    $komponen[$key]['code'] = $komponen_oke->code;
+                }
+
             }
         }
 
         if (in_array('9', $array)) {
-            $tambah_komponen = komponen::where('id', '<>', 11)->get();
+            $tambah_komponen = komponen::whereNotIn('id', [11, 12])->get();
         } else {
-            $tambah_komponen = komponen::all();
+            $tambah_komponen = komponen::where('id', '<>', 12)->get();
         }
         //button tambah komponen
 
@@ -384,7 +391,7 @@ class AdminController extends Controller
             $dragss[$key]['id'] = $key;
             $dragss[$key]['order'] = $key;
             $dragss[$key]['id_komponen'] = $array[$key];
-            $dragss[$key]['title'] = $komponen_oke->title;
+            $dragss[$key]['title'] = $komponen_oke->name;
         }
         return view('admin.template.edit', ['data' => $komponen, 'background' => $microdet, 'drag' => $dragss, 'tambah_komponen' => $tambah_komponen]);
     }
@@ -463,21 +470,21 @@ class AdminController extends Controller
     {
         $template = template::findOrFail($id);
 
-        $array = explode(',', $template->id_komponen);;
+        $array = explode(',', rtrim($template->id_komponen, ','));
         $komponen = array();
 
         foreach ($array as $key => $row) {
             $komponen_oke = komponen::findOrFail($row);
-            if($row === 9) {
+            if($row === '9') {
                 $microkon_kode = '';
-                for($i = 1; $i <= $template->value_konten_detail; $i++) {
+                for($i = 1; $i <= intval($template->value_konten_detail); $i++) {
                     $microkon_kode .= '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template">
                     <img class="img-template" src="microsite/konten/okk.jpg" alt="">
                     </a>';
                 }
-                $microkon_code = '<div class="bungkus-anak" id="bungkus-template-konten">' . $microkon_kode . '</div>';
+                $komponen_code = '<div class="bungkus-anak" id="bungkus-template-konten">' . $microkon_kode . '</div>';
                 $komponen[$key]['id'] = 9;
-                $komponen[$key]['code'] = $microkon_code;
+                $komponen[$key]['code'] = $komponen_code;
             }
             else {
                 $komponen[$key]['id'] = $komponen_oke->id;
@@ -487,4 +494,108 @@ class AdminController extends Controller
 
         return view('admin.template.preview', ['data' => $komponen, 'background' => $template]);
     }
+
+    public function update_template_admin($id, Request $request) 
+    {
+        $string = '';
+        foreach($request->komponen as $row) 
+        {
+            $string .= $row . ',';
+        }
+        $template = template::findOrFail($id);
+        $template->id_komponen = $string;
+        $template->save();
+
+        return response()->json([
+            'message' => 'success',
+        ], 200);
+    }
+    
+    public function update_status_template($id, Request $request)
+    {
+        $template = template::findOrFail($id);
+        $array = explode(',', $template->status_komponen);
+        $array[$request->id] = $request->status;
+        $string = implode(",", $array);
+        $template->status_komponen = $string;
+        $template->save();
+
+        return response()->json([
+            'message' => 'success',
+        ], 200);
+    }
+
+    public function hapus_komponen_template($id, Request $request)
+    {
+        $template = template::findOrFail($id);
+        $array1 = explode(',', $template->id_komponen);
+        $array = explode(',', $template->status_komponen);
+        if($array1[$request->id] === '9') 
+        {
+            $template->value_konten_detail = 0;
+        }
+        unset($array1[$request->id]);
+        unset($array[$request->id]);
+        $string = implode(",", $array);
+        $string1 = implode(",", $array1);
+        $template->id_komponen = $string1;
+        $template->status_komponen = $string;
+        $template->save();
+
+        return response()->json([
+            'message' => 'success',
+        ], 200);
+    }
+
+    public function tambah_komponen_template($id, Request $request)
+    {
+        $template = template::findOrFail($id);
+        $array = explode(',', $template->id_komponen);
+        
+        if($request->id === '9')
+        {
+            if (in_array("9", $array))
+            {
+                $template->value_konten_detail = $template->value_konten_detail + 1;
+            } else {
+                $template->id_komponen = $template->id_komponen . $request->id . ',';
+                $template->status_komponen = $template->status_komponen . 'on' . ',';
+            }
+        }
+        else
+        {
+            $template->id_komponen = $template->id_komponen . $request->id . ',';
+            $template->status_komponen = $template->status_komponen . 'on' . ',';
+        }
+
+        $template->save();
+
+        return response()->json([
+            'message' => 'success',
+        ], 200);
+    }
+
+    public function update_background_template($id, Request $request)
+    {
+        $microsite = template::findOrFail($id);
+
+        if ($request->hasFile('background')) {
+            $file = $request->file('background');
+
+            $filenm = Carbon::now()->timestamp . '.' . $file->extension();
+            $file->storeAs('microsite/background/', $filenm);
+            $microsite->background = $filenm;
+            $microsite->type_background = 'image';
+        } else {
+            $microsite->background = $request->background;
+            $microsite->type_background = 'color';
+        }
+
+        $microsite->save();
+
+        return response()->json([
+            'message' => 'success',
+        ], 200);
+    }
+
 }
