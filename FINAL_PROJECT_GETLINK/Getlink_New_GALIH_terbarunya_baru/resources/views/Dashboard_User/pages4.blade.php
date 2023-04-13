@@ -36,7 +36,7 @@
                             </div>
                             <div class="pages4-form2">
                                 <div class="pages4-button1">
-                                    <a class="pages4-button1text" href="#">getlink.id/</a>
+                                    <a class="pages4-button1text" href="#">getlink/</a>
                                 </div>
                                 <input class="pages4-input" type="text" id="tautan" name="link" placeholder="Tautan Microsite" />
                             </div>
@@ -70,156 +70,39 @@
         buttonPrew.classList.add("preew");
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-
-$(document).ready(function() {
-    $(document).on('click', '#buat-micro', function() {
-        var urlParams = window.location.pathname.split('/');
-        var Param1 = urlParams[urlParams.length - 2];
-        var Param2 = urlParams[urlParams.length - 1];
-        var formData = new FormData($('#form-micro')[0]);
-        formData.append('id_template', Param2);
-        formData.append('id_kategori', Param1);
-
-         // Validasi form
-         if ($('#nama').val() == '' || $('#tautan').val() == '') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Peringatan',
-                text: 'Silakan isi semua field terlebih dahulu.'
-            });
-            return false;
-        }
-
-        // Kirim permintaan AJAX ke server untuk memeriksa apakah link sudah ada di database
-        $.ajax({
-            type: 'POST',
-            url: "{{ url('cek_link_unik') }}",
-            dataType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            processData: false,
-            contentType: false,
-            data: formData,
-            success: function(response) {
-                if (response.status === 'success') {
-                    // Link unik, submit form
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ url('buatmicrosite/nambah_microsite') }}",
-                        dataType: 'json',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        processData: false,
-                        contentType: false,
-                        data: formData,
-                        success: function(response) {
-                            var url = "{{ url('rubah_microsite/:id_kategori/:id_template/:id_microsite') }}";
-                            url = url.replace(':id_template', Param2);
-                            url = url.replace(':id_kategori', Param1);
-                            url = url.replace(':id_microsite', response.data.id);
-                            window.location.href = url;
-                        }
-                    });
-                } else {
-                    // Link sudah ada di database, tampilkan pesan error
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Link sudah digunakan!'
-                    });
+    $(document).ready(function() {
+        $(document).on('click', '#buat-micro', function() {
+            var urlParams = window.location.pathname.split('/');
+            var Param1 = urlParams[urlParams.length - 2];
+            var Param2 = urlParams[urlParams.length - 1];
+            var formData = new FormData($('#form-micro')[0]);
+            formData.append('id_template', Param2);
+            formData.append('id_kategori', Param1);
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('buatmicrosite/nambah_microsite') }}",
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(response) {
+                    var url = "{{ url('rubah_microsite/:id_kategori/:id_template/:id_microsite') }}";
+                    url = url.replace(':id_template', Param2);
+                    url = url.replace(':id_kategori', Param1);
+                    url = url.replace(':id_microsite', response.data.id);
+                    window.location.href = url;
                 }
-            }
+            });
         });
-    });
-});
-
-
-
-//     $(document).ready(function() {
-//     $(document).on('click', '#buat-micro', function() {
-//         var urlParams = window.location.pathname.split('/');
-//         var Param1 = urlParams[urlParams.length - 2];
-//         var Param2 = urlParams[urlParams.length - 1];
-//         var formData = new FormData($('#form-micro')[0]);
-//         formData.append('id_template', Param2);
-//         formData.append('id_kategori', Param1);
-//         var name = $("#nama").val();
-//         var link = $("#tautan").val();
-//         if(name == '' || link == ''){
-//             Swal.fire({
-//                 icon: 'warning',
-//                 title: 'Peringatan',
-//                 text: 'Silakan isi semua field terlebih dahulu.'
-//             });
-//             return false;
-//         } else {
-//             $.ajax({
-//                 type: 'POST',
-//                 url: "{{ url('buatmicrosite/nambah_microsite') }}",
-//                 dataType: 'json',
-//                 headers: {
-//                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//                 },
-//                 processData: false,
-//                 contentType: false,
-//                 data: formData,
-//                 success: function(response) {
-//                     var url = "{{ url('rubah_microsite/:id_kategori/:id_template/:id_microsite') }}";
-//                     url = url.replace(':id_template', Param2);
-//                     url = url.replace(':id_kategori', Param1);
-//                     url = url.replace(':id_microsite', response.data.id);
-//                     window.location.href = url;
-//                 },
-//                 error: function(jqXHR, textStatus, errorThrown) {
-//                 Swal.fire({
-//                     icon: 'error',
-//                     title: 'Oops...',
-//                     text: 'Terjadi kesalahan!'
-//                 });
-//             }
-//             });
-//         }
-//     });
-// })
-
-
-
-
-
-    // $(document).ready(function() {
-    //     $(document).on('click', '#buat-micro', function() {
-    //         var urlParams = window.location.pathname.split('/');
-    //         var Param1 = urlParams[urlParams.length - 2];
-    //         var Param2 = urlParams[urlParams.length - 1];
-    //         var formData = new FormData($('#form-micro')[0]);
-    //         formData.append('id_template', Param2);
-    //         formData.append('id_kategori', Param1);
-    //         $.ajax({
-    //             type: 'POST',
-    //             url: "{{ url('buatmicrosite/nambah_microsite') }}",
-    //             dataType: 'json',
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             },
-    //             processData: false,
-    //             contentType: false,
-    //             data: formData,
-    //             success: function(response) {
-    //                 var url = "{{ url('rubah_microsite/:id_kategori/:id_template/:id_microsite') }}";
-    //                 url = url.replace(':id_template', Param2);
-    //                 url = url.replace(':id_kategori', Param1);
-    //                 url = url.replace(':id_microsite', response.data.id);
-    //                 window.location.href = url;
-    //             }
-    //         });
-    //     });
-    // })
+    })
 </script>
 <script>
+
     function generateHTML() {
         // Mengambil data JSON dari variabel data
         var data = @json($komponen);

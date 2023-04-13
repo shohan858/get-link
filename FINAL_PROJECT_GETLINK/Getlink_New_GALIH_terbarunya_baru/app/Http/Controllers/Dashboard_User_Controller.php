@@ -92,24 +92,24 @@ class Dashboard_User_Controller extends Controller
         $count_microsite = decrypt(User::find(Auth::user()->id)->jumlah_microsite);
         $limit_microsite = decrypt(User::find(Auth::user()->id)->batas_microsite);
 
-        if($my_microsite){
+        if ($my_microsite) {
             $transaksi = transaksi::where('status', 'PAID')->where('flag', 0)->get();
             $tambah = $transaksi->sum('slot');
-            if($tambah > 0) {
+            if ($tambah > 0) {
                 $user = User::find(Auth::user()->id);
                 $batas = intval(decrypt($user->batas_microsite));
                 $user->batas_microsite = encrypt($batas += $tambah);
                 $jumlah = intval(decrypt($limit_microsite));
                 $limit_microsite = encrypt($jumlah += $tambah);
                 $user->save();
-                
-                foreach($transaksi as $trx) {
+
+                foreach ($transaksi as $trx) {
                     $trx->flag = 1;
                     $trx->save();
                 }
             }
         }
-        
+
         return view('Dashboard_User.regular')->with([
             'my_microsite' => $my_microsite,
             'count_microsite' => $count_microsite,
@@ -206,12 +206,9 @@ class Dashboard_User_Controller extends Controller
         $template = microsite::findOrFail($lastSegment);
 
         $penentu = microsite_detail::where('id_microsite', $lastSegment)->where('id_komponen', 11)->get();
-        if($penentu) 
-        {
+        if ($penentu) {
             $tambah_komponen = komponen::where('id', '<>', 11)->get();
-        }
-        else 
-        {
+        } else {
             $tambah_komponen = komponen::all();
         }
         //button tambah komponen
@@ -246,9 +243,10 @@ class Dashboard_User_Controller extends Controller
         return redirect()->back()->with('success', 'Data berhasil dihapus.'); //redirect kembali ke halaman sebelumnya dengan pesan sukses
     }
 
-    public function tambah_slot_microsite($id) {
+    public function tambah_slot_microsite($id)
+    {
         $paket = paketModel::find($id);
-        $secret_key = 'Basic '.config('xendit.key_auth');
+        $secret_key = 'Basic ' . config('xendit.key_auth');
         $external_id = Str::random(10);
         $data_request = Http::withHeaders([
             'Authorization' => $secret_key
@@ -271,7 +269,7 @@ class Dashboard_User_Controller extends Controller
         $transaksi->status = $response->status;
         $transaksi->save();
         $user_id->save();
-        
+
         return redirect($response->invoice_url);
     }
 
@@ -375,7 +373,7 @@ class Dashboard_User_Controller extends Controller
             $url = $request->input('value'); // URL Youtube yang ingin diparsing
             $url_parts = parse_url($url); // Mem-parse URL menjadi komponen-komponennya
             parse_str($url_parts['query'], $query); // Mem-parse query string menjadi variabel PHP
-            
+
             $video_id = isset($query['v']) ? $query['v'] : null; // Mendapatkan nilai parameter 'v' jika ada
             if ($video_id) {
                 $video_parts = explode('/', $video_id);
@@ -484,54 +482,60 @@ class Dashboard_User_Controller extends Controller
         ], 200);
     }
 
-    public function shortlinks() {
+    public function shortlinks()
+    {
         $check = User::find(Auth::user()->id);
-        if($check->batas_microsite > 3){
+        if ($check->batas_microsite > 3) {
             $data = shortlink::all();
-        }else{
+        } else {
             $data = shortlink::latest()->take(10)->get();
         }
         return view('dashboard_user.short_link')->with('data', $data);
     }
 
-    public function shortlinks_create() {
+    public function shortlinks_create()
+    {
         return view('dashboard_user.shortlinks_create');
     }
 
-    public function shortlinks_edit($id) {
+    public function shortlinks_edit($id)
+    {
         $data = shortlink::find($id);
         return view('dashboard_user.shortlinks_edit')->with('data', $data);
     }
 
-    public function shortlinks_update(Request $requests ,$id) {
+    public function shortlinks_update(Request $requests, $id)
+    {
         $data = shortlink::find($id);
         $data->link = $requests->link;
         $data->update();
         return redirect()->back();
     }
 
-    public function shortlinks_delete($id) {
+    public function shortlinks_delete($id)
+    {
         $data = shortlink::find($id);
         $data->delete();
         return redirect()->back();
     }
 
-    public function testing() {
+    public function testing()
+    {
         $userAgent = request()->server('HTTP_USER_AGENT');
 
         $test3 = new visitorModel();
         $browser_name = ['Chrome', 'Edg', 'Firefox'];
 
-        foreach($browser_name as $browser){
+        foreach ($browser_name as $browser) {
             $abcde = visitorModel::where('id_microsite', 75)
-            ->where('ip_address', request()->ip())
-            ->where('date', now()->toDateString())
-            ->where('browser', $browser)
-            ->get();
+                ->where('ip_address', request()->ip())
+                ->where('date', now()->toDateString())
+                ->where('browser', $browser)
+                ->get();
 
             print_r($browser);
 
-            if($abcde->isEmpty()){
+            if ($abcde->isEmpty()) {
                 if (stripos($userAgent, 'firefox') !== false) {
                     $test3->browser = 'firefox';
                 } elseif (stripos($userAgent, 'Edg') !== false) {
@@ -549,27 +553,27 @@ class Dashboard_User_Controller extends Controller
             }
         }
 
-        if($abcde->isEmpty()){
+        if ($abcde->isEmpty()) {
             if (stripos($userAgent, 'firefox') !== false) {
                 $test3->browser = 'firefox';
-             } elseif (stripos($userAgent, 'Edg') !== false) {
-                 $test3->browser = 'Edg';
-             } elseif (stripos($userAgent, 'Chrome') !== false) {
-                 $test3->browser = 'Chrome';
-             } else {
-                 $test3->browser = 'other';
-             }
-             $test3->id_microsite = 75;
-             $test3->ip_address = request()->ip();
-             $test3->date = date('Y-m-d');
-             $test3->save();
+            } elseif (stripos($userAgent, 'Edg') !== false) {
+                $test3->browser = 'Edg';
+            } elseif (stripos($userAgent, 'Chrome') !== false) {
+                $test3->browser = 'Chrome';
+            } else {
+                $test3->browser = 'other';
+            }
+            $test3->id_microsite = 75;
+            $test3->ip_address = request()->ip();
+            $test3->date = date('Y-m-d');
+            $test3->save();
         }
 
         // print_r($userAgent . "<br>" . $abcde->browser);
-        foreach($abcde as $ab){
-            if((!strpos($userAgent, $ab->browser)) || (!strpos($userAgent, 'Chrome'))){
+        foreach ($abcde as $ab) {
+            if ((!strpos($userAgent, $ab->browser)) || (!strpos($userAgent, 'Chrome'))) {
                 if (stripos($userAgent, 'firefox') !== false) {
-                   $test3->browser = 'firefox';
+                    $test3->browser = 'firefox';
                 } elseif (stripos($userAgent, 'Edg') !== false) {
                     $test3->browser = 'Edg';
                 } elseif (stripos($userAgent, 'Chrome') !== false) {
@@ -583,7 +587,7 @@ class Dashboard_User_Controller extends Controller
                 $test3->date = date('Y-m-d');
                 $test3->save();
                 dd('sudah bikin baru!');
-            }else{
+            } else {
                 print_r($ab->browser . "    " . $userAgent . "<br>");
                 dd(strpos($userAgent, $ab->browser));
                 dd('anda sudah visitor');
@@ -591,7 +595,7 @@ class Dashboard_User_Controller extends Controller
         }
     }
 
-    public function microsite_screenshot_cover(Request $request) 
+    public function microsite_screenshot_cover(Request $request)
     {
         $microsite = microsite::findOrFail($request->id);
 
@@ -605,6 +609,34 @@ class Dashboard_User_Controller extends Controller
 
         return response()->json([
             'message' => 'success',
+        ], 200);
+    }
+
+    public function preview_template(Request $request) 
+    {
+        $template = template::findOrFail($request->id);
+
+        $array = explode(",", $template->id_komponen);
+
+        $komponen = array();
+        foreach ($array as $key => $row) {
+            $komponens = komponen::find($row);
+            $komponen[$key]['id'] = $komponens->id;
+            $komponen[$key]['code'] = $komponens->code;
+        }
+
+        $value = array();
+        foreach ($array as $key => $row) {
+            $values = komponen::find($row);
+            $value[$key]['value'] = $values->code;
+        }
+
+
+        return response()->json([
+            'message' => 'success',
+            'data' => $komponen,
+            'background' => $template,
+            'value' => $value
         ], 200);
     }
 }
