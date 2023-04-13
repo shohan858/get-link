@@ -1,5 +1,7 @@
 @extends('layout.Dashboard_user.base')
 @section('konten')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 <main>
     <div class="content">
         <div class="lang-content hidden">
@@ -73,8 +75,8 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div id="dropdown-content-{{$key}}" class="pages5-komponen-inside-text1" >
-                                    <div class="pages5-input-file" data-id="{{$item->id}}" style="border:1px solid black;border-radius:0">
+                                <div id="dropdown-content-{{$key}}" class="pages5-komponen-inside-text1">
+                                    <div class="pages5-input-file" data-id="{{$item->id}}">
 
                                         {!! $item->code_input !!}
                                     </div>
@@ -122,21 +124,19 @@
                             <div class="pages5-lamnjut">
                                 <a href="/page4" class="pages5-lanjutkan">
                                     < Kembali</a>
-                                        <a href="/regular">
-                                            <button id="btnSudah" class="pages5-lanjutkan">
-                                                Selesai
-                                                <svg class="finish" width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M18.875 2.29169L6.37499 14.7917L0.645828 9.06252L2.11458 7.59377L6.37499 11.8438L17.4062 0.822937L18.875 2.29169Z" fill="#524799" />
-                                                </svg>
-                                            </button>
-                                        </a>
+                                        <button data-url="{{route('microsite', ['link' => $background->link])}}" id="btnSudah" class="pages5-lanjutkan">
+                                            Selesai
+                                            <svg class="finish" width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M18.875 2.29169L6.37499 14.7917L0.645828 9.06252L2.11458 7.59377L6.37499 11.8438L17.4062 0.822937L18.875 2.29169Z" fill="#524799" />
+                                            </svg>
+                                        </button>
                             </div>
                         </div>
 
                     </div>
                     <div id="prew2" class="anim pages5-kanan hidden">
                         <a href class="pages5-preview">getlink/tautan microsite</a><br />
-                        <div id="kanan-bungkus" class="kanan-bungkus">
+                        <div id="kanan-bungkus" style="background-color: transparent" class="kanan-bungkus">
 
                             @if($background->type_background == 'color')
                             <div class="bungkus" style='background: {{ $background->background }}'>
@@ -176,7 +176,7 @@
         <div class="modal-bawah">
             @foreach($tambah_komponen as $key => $tk)
             <button class="comp-card btnKomponen sudahPilih" data-id="{{$tk->id}}" id="btnkomponen{{$key + 1}}">
-                <i class="fa-solid {{$tk->icon}}" style="font-size:20px;color: #524799;margin-right:10px"></i>
+                <i class="fa-solid {{$tk->icon}}" style="color: #524799;"></i>
                 <div class="comp-teks">
                     <p class="head-name">
                         {{$tk->name}}
@@ -191,6 +191,46 @@
         <input type="hidden" id="komponenLoop" value="{{$tambah_komponen->count()}}">
     </div>
 </div>
+
+<script>
+    $(document).on('click', '#btnSudah', function(){
+
+        var element = document.getElementById("kanan-bungkus");
+        html2canvas(element, { 
+            width: 500,
+            height: 500
+        }).then(function(canvas) {
+            canvas.toBlob(function(blob) {
+                var url = window.location.href;
+                var url_parts = url.split('/');
+                var last_part = url_parts[url_parts.length - 1];
+                var form_data = new FormData();
+                form_data.append('screenshot', blob); // ubah data URI menjadi blob
+                form_data.append('id', last_part);
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('microsite_screenshot_cover')}}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: form_data,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response);
+                        // window.location.href = "{{ route('regular') }}";
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+    });
+</script>
 
 <script>
     function refreshTemplate(data) {
@@ -383,6 +423,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
 
 <script>
+
     var dropify = $('.dropify').dropify();
 
     dropify.on('change', function() {
@@ -460,70 +501,6 @@
                 }
             }
         });
-    });
-</script>
-
-<script>
-    var data = @json($value);
-    $(document).ready(function() {
-        console.log(data)
-        if ($('#title').length) {
-            var judulBaru = data[1];
-            $('h4#title').each(function(index) {
-                // Menambahkan nomor urut pada id
-                $(this).attr('id', 'title-' + (index));
-                $(this).text(judulBaru[index]);
-            });
-        }
-        if ($('#deskripsi').length) {
-            var judulBaru = data[3];
-            $('p#deskripsi').each(function(index) {
-                // Menambahkan nomor urut pada id
-                $(this).attr('id', 'deskripsi-' + (index));
-                $(this).text(judulBaru[index]);
-            });
-        }
-        if ($('#image').length) {
-            var gambarBaru = data[0];
-            $('img#image').each(function(index) {
-                $(this).attr('id', 'image-' + (index));
-                $(this).attr('src', 'http://localhost:8000/microsite/icon/' + gambarBaru[index]);
-            });
-        }
-        if ($('.bungkus-anak .medsos-template').length) {
-            var linkBaru = data[2][0].split(',');
-            $('.bungkus-anak .medsos-template').each(function(index) {
-                if (index == 0) {
-                    $(this).attr('href', 'https://www.instagram.com/' + linkBaru[index]);
-                } else if (index == 1) {
-                    $(this).attr('href', 'https://www.twitter.com/' + linkBaru[index]);
-                } else if (index == 2) {
-                    $(this).attr('href', 'https://www.facebook.com/' + linkBaru[index]);
-                } else if (index == 3) {
-                    $(this).attr('href', 'https://www.youtube.com/' + linkBaru[index]);
-                } else if (index == 4) {
-                    $(this).attr('href', 'https://www.tiktok.com/' + linkBaru[index]);
-                }
-            });
-        }
-        if ($('.bungkus-anak .konten-template').length) {
-            var kontenBaru = data[4];
-            for (var i = 0; i < kontenBaru.length; i++) {
-                // Memecah string di item ke-i berdasarkan koma
-                var splitItem = kontenBaru[i].split(',');
-
-                var img = document.getElementsByClassName('img-template')[i];
-
-                // Mengganti nilai atribut src pada elemen img
-                img.src = 'http://localhost:8000/microsite/konten/' + splitItem[0];
-
-                // Mengambil elemen HTML a
-                var a = document.getElementsByClassName('konten-template')[i];
-
-                // Mengganti nilai atribut href pada elemen a
-                a.href = splitItem[1];
-            }
-        }
     });
 </script>
 
@@ -840,30 +817,15 @@
             btnSwitch.on("click", createToggleListener(comp, icon));
 
 
-            // const divAc = $("#div3Dot" + i);
-            // const acDiv = $("#btnDrop3Dot" + i);
-
-            // // Tambahkan event listener ke button dengan fungsi event listener yang telah dibuat
-            // acDiv.on("click", (function(div) {
-            //     return function() {
-            //         div.toggleClass("div3Dotact");
-            //     };
-            // })(divAc));
-
             const divAc = $("#div3Dot" + i);
-const acDiv = $("#btnDrop3Dot" + i);
+            const acDiv = $("#btnDrop3Dot" + i);
 
-// Tambahkan event listener ke button dengan fungsi event listener yang telah dibuat
-acDiv.on("click", (function(div) {
-  return function() {
-    // Hilangkan kelas div3Dotact dari semua elemen dengan kelas tersebut
-    $(".div3Dotact").not(div).removeClass("div3Dotact");
-    // Tambahkan atau hapus kelas div3Dotact pada elemen yang diklik
-    div.toggleClass("div3Dotact");
-  };
-})(divAc));
-
-
+            // Tambahkan event listener ke button dengan fungsi event listener yang telah dibuat
+            acDiv.on("click", (function(div) {
+                return function() {
+                    div.toggleClass("div3Dotact");
+                };
+            })(divAc));
 
             (function(index) {
                 var delmodal = $("#DelComModal" + index);

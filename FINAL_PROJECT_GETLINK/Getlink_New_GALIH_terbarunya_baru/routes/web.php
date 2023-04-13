@@ -91,6 +91,7 @@ Route::middleware(['authuser'])->group(function () {
     Route::post('update_image_microsite', [Dashboard_User_Controller::class, 'update_image_microsite'])->name('update_image_microsite');
     Route::post('update_background_microsite', [Dashboard_User_Controller::class, 'update_background_microsite'])->name('update_background_microsite');
     Route::post('update_konten_microsite', [Dashboard_User_Controller::class, 'update_konten_microsite'])->name('update_konten_microsite');
+    Route::post('microsite_screenshot_cover', [Dashboard_User_Controller::class, 'microsite_screenshot_cover'])->name('microsite_screenshot_cover');
     
     Route::get('/tambah_slot_microsite/{id}', [Dashboard_User_Controller::class, 'tambah_slot_microsite']);
     Route::get('/shortlink', [Dashboard_User_Controller::class, 'shortlinks']);
