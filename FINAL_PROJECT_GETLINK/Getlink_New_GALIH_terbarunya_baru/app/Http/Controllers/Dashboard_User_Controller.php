@@ -7,6 +7,7 @@ use App\Models\komponen;
 use App\Models\konten;
 use App\Models\microsite;
 use App\Models\microsite_detail;
+use App\Models\microsite_detail_konten;
 use App\Models\paketModel;
 use App\Models\shortlink;
 use App\Models\template;
@@ -166,6 +167,8 @@ class Dashboard_User_Controller extends Controller
 
         $okk = explode(',', $template->id_komponen);
 
+        $konten_detail = '';
+
         foreach ($okk as $ok => $o) {
             $komponen = komponen::findOrFail(intval($o));
 
@@ -179,8 +182,31 @@ class Dashboard_User_Controller extends Controller
             $micro_detail->title = $komponen->name;
             $micro_detail->icon = $komponen->icon;
             $micro_detail->code_input = $komponen->code_input;
-            $micro_detail->value = $komponen->value;
+            $micro_detail->value = 'test';
+
             $micro_detail->save();
+
+            $micro_details = microsite_detail::findOrFail($micro_detail->id);
+
+            if ($o === '9') {
+                for ($i = 1; $i <= $template->value_konten_detail; $i++) {
+                    $konten = new microsite_detail_konten();
+                    $konten->id_microsite = $microsite->id;
+                    $konten->id_microsite_detail = $micro_details->id;
+                    $konten->value = 'https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4';
+                    $konten->image = 'okk.jpg';
+                    $konten->code = '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template"><img class="img-template" src="microsite/konten/okk.jpg" alt=""></a>';
+                    $konten->code_input = '<input class="component-input-style" name="linkkonten[]" type="text" /> <br>
+                    <input class="component-input-style" name="imagekonten[]" type="file" /> <br>';
+                    $konten->save();
+                    $konten_detail = $konten_detail . strval($konten->id) . ',';
+                }
+                $micro_details->value = $konten_detail;
+            } else {
+                $micro_details->value = $komponen->value;
+            }
+
+            $micro_details->save();
         }
 
         $jumlah = intval(decrypt(User::find(Auth::user()->id)->jumlah_microsite));
@@ -195,12 +221,25 @@ class Dashboard_User_Controller extends Controller
     public function edit_microsite()
     {
         $lastSegment = collect(request()->segments())->last();
+        $microkon_kode = '';
         $microdet = microsite_detail::where('id_microsite', $lastSegment)->where('status', 'on')->orderBy('order', 'ASC')->get();
         $komponen = array();
+
         foreach ($microdet as $key => $row) {
-            $komponen[$key]['id'] = $row->id_komponen;
-            $komponen[$key]['code'] = $row->code;
-            $komponen[$key]['icon'] = $row->icon;
+            if($row->id_komponen === 9) {
+                $microkon_kode = '';
+                $microkon = microsite_detail_konten::where('id_microsite', $lastSegment)->get();
+                foreach($microkon as $row) {
+                    $microkon_kode .= $row->code;
+                }
+                $microkon_code = '<div class="bungkus-anak" id="bungkus-template-konten">' . $microkon_kode . '</div>';
+                $komponen[$key]['id'] = 9;
+                $komponen[$key]['code'] = $microkon_code;
+            }
+            else {
+                $komponen[$key]['id'] = $row->id_komponen;
+                $komponen[$key]['code'] = $row->code;
+            }
         }
 
         $template = microsite::findOrFail($lastSegment);
@@ -228,7 +267,29 @@ class Dashboard_User_Controller extends Controller
 
         //drag and drop
         $drag = microsite_detail::where('id_microsite', $lastSegment)->orderBy('order', 'ASC')->get();
-        return view('Dashboard_user.pages5', ['value' => $value, 'data' => $komponen, 'background' => $template, 'drag' => $drag, 'tambah_komponen' => $tambah_komponen]);
+
+        $dragss = [];
+
+        foreach ($drag as $key => $row) {
+            $dragss[$key]['status'] = $row->status;
+            $dragss[$key]['id'] = $row->id;
+            $dragss[$key]['order'] = $row->order;
+            $dragss[$key]['id_komponen'] = $row->id_komponen;
+            $dragss[$key]['title'] = $row->title;
+            if($row->id_komponen === 9) {
+                $microkon_kode = '';
+                $microkon = microsite_detail_konten::where('id_microsite', $lastSegment)->get();
+                foreach($microkon as $row1) {
+                    $microkon_kode .= str_replace('class="component-input-style"', 'class="component-input-style" data-id_microkon="' . $row1->id . '"', $row1->code_input);
+                    $microkon_kode .= '<button class="hapusssss" data-id="'. $row1->id .'">Hapus</button>';
+                }
+                $dragss[$key]['code_input'] = $microkon_kode;
+            }
+            else {
+                $dragss[$key]['code_input'] = $row->code_input;
+            }
+        }
+        return view('Dashboard_user.pages5', ['value' => $value, 'data' => $komponen, 'background' => $template, 'drag' => $dragss, 'tambah_komponen' => $tambah_komponen]);
     }
 
     public function delete($id)
@@ -312,18 +373,55 @@ class Dashboard_User_Controller extends Controller
         $komponen = komponen::findOrFail($request->id);
         $microsite = microsite::findOrFail($request->id_microsite);
 
-        $new_microdet = new microsite_detail();
-        $new_microdet->order = $microdet->max('order') + 1;
-        $new_microdet->status = "on";
-        $new_microdet->title = $komponen->name;
-        $new_microdet->icon = $komponen->icon;
-        $new_microdet->id_komponen = $komponen->id;
-        $new_microdet->code_input = $komponen->code_input;
-        $new_microdet->id_template = $microsite->id_template;
-        $new_microdet->id_microsite = $microsite->id;
-        $new_microdet->value = $komponen->value;
-        $new_microdet->code = $komponen->code;
-        $new_microdet->save();
+        $id_microdet = microsite_detail::where('id_microsite', $microsite->id)->where('id_komponen', 9)->first();
+
+        if($id_microdet) 
+        {
+            if($komponen->id === 9)
+            {
+                $microkon = new microsite_detail_konten();
+                $microkon->id_microsite = $microsite->id;
+                $microkon->id_microsite_detail = $id_microdet->id;
+                $microkon->value = 'https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4';
+                $microkon->image = 'okk.jpg';
+                $microkon->code = '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template"><img class="img-template" src="microsite/konten/okk.jpg" alt=""></a>';
+                $microkon->code_input = '<input class="component-input-style" name="linkkonten[]" type="text" /> <br>
+                <input class="component-input-style" name="imagekonten[]" type="file" /> <br>';
+                $microkon->save();
+    
+                $micros = microsite_detail::findOrFail($id_microdet->id);
+                $micros->value = $micros->value . $microkon->id . ',';
+                $micros->save();
+            } else {
+                $new_microdet = new microsite_detail();
+                $new_microdet->order = $microdet->max('order') + 1;
+                $new_microdet->status = "on";
+                $new_microdet->title = $komponen->name;
+                $new_microdet->icon = $komponen->icon;
+                $new_microdet->id_komponen = $komponen->id;
+                $new_microdet->code_input = $komponen->code_input;
+                $new_microdet->id_template = $microsite->id_template;
+                $new_microdet->id_microsite = $microsite->id;
+                $new_microdet->value = $komponen->value;
+                $new_microdet->code = $komponen->code;
+                $new_microdet->save();
+            }
+        }
+        else
+        {
+            $new_microdet = new microsite_detail();
+            $new_microdet->order = $microdet->max('order') + 1;
+            $new_microdet->status = "on";
+            $new_microdet->title = $komponen->name;
+            $new_microdet->icon = $komponen->icon;
+            $new_microdet->id_komponen = $komponen->id;
+            $new_microdet->code_input = $komponen->code_input;
+            $new_microdet->id_template = $microsite->id_template;
+            $new_microdet->id_microsite = $microsite->id;
+            $new_microdet->value = '';
+            $new_microdet->code = $komponen->code;
+            $new_microdet->save();
+        }
 
         return response()->json([
             'message' => 'success',
@@ -438,48 +536,31 @@ class Dashboard_User_Controller extends Controller
 
     public function update_konten_microsite(Request $request)
     {
-        $microsite = microsite_detail::findOrFail($request->id);
-        $array = explode(',', $microsite->value);
+    
+        $microsite = microsite_detail_konten::findOrFail($request->id_microkon);
 
         if ($request->hasFile('konten')) {
-            // Mengambil file dari permintaan
+
             $file = $request->file('konten');
 
             $filenm = Carbon::now()->timestamp . '.' . $file->extension();
             $file->storeAs('microsite/konten/', $filenm);
+            $microsite->code = preg_replace('/\b' . preg_quote($microsite->image) . '\b/i', $filenm, $microsite->code);
 
-            $array[0] = $filenm;
-
-            $processedString = implode(',', $array);
-
-            $microsite->value = $processedString;
+            $microsite->image = $filenm;
         } else {
 
-            $array[1] = $request->konten;
+            $microsite->code = preg_replace('~\b' . preg_quote($microsite->value) . '\b~i', $request->konten, $microsite->code);
 
-            $processedString = implode(',', $array);
-
-            $microsite->value = $processedString;
+            $microsite->value = $request->konten;
         }
 
         $microsite->save();
 
-        $value_microsite = microsite_detail::where('id_microsite', $microsite->id_microsite)->where('status', 'on')->orderBy('id_komponen', 'ASC')->get();
-
-        $titlemappingisi = microsite_detail::all();
-
-        $titleMapping = $titlemappingisi->pluck('title')->unique()->values()->all();
-
-        $value = array_fill(0, count($titleMapping), array());
-        foreach ($value_microsite as $row) {
-            $index = array_search($row->title, $titleMapping);
-            $value[$index][] = $row->value;
-        }
-
         return response()->json([
             'message' => 'success',
-            'data' => $value
         ], 200);
+    
     }
 
     public function shortlinks()
@@ -593,6 +674,10 @@ class Dashboard_User_Controller extends Controller
                 dd('anda sudah visitor');
             }
         }
+
+        return response()->json([
+            'message' => 'success',
+        ], 200);
     }
 
     public function microsite_screenshot_cover(Request $request)
@@ -637,6 +722,22 @@ class Dashboard_User_Controller extends Controller
             'data' => $komponen,
             'background' => $template,
             'value' => $value
+        ], 200);
+    }
+
+    
+    public function hapus_konten_anak_microsite(Request $request) 
+    {
+        $microkon = microsite_detail_konten::findOrFail($request->id_microkon);
+        $microkon->delete();
+
+        $id = strval($microkon->id) . ',';
+        $microdet = microsite_detail::findOrFail($microkon->id_microsite_detail);
+        $microdet->name = str_replace($id, "", $microdet->value);
+        $microdet->save();
+
+        return response()->json([
+            'message' => 'success',
         ], 200);
     }
 }

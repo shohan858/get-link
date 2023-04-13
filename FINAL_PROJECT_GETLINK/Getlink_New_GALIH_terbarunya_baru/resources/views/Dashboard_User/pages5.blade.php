@@ -21,25 +21,25 @@
                     </div>
 
                     <div id="pgKr" class="komponen-kkiri">
-                        @foreach($drag as $key => $item)
-                        @if($item->status === "off")
-                        <div id="pages5Kom{{$key}}" draggable="true" data-id="{{$item->id}}" data-status="{{$item->status}}" data-order="{{$item->order}}" data-komponen="{{$item->id_komponen}}" class="pages5-komponen-2" style="opacity: 0.5">
+                    @foreach($drag as $key => $item)
+                        @if($item['status'] === "off")
+                        <div id="pages5Kom{{$key}}" draggable="true" data-id="{{$item['id']}}" data-status="{{$item['status']}}" data-order="{{$item['order']}}" data-komponen="{{$item['id_komponen']}}" class="pages5-komponen-2" style="opacity: 0.5">
                             @else
-                            <div id="pages5Kom{{$key}}" draggable="true" data-id="{{$item->id}}" data-status="{{$item->status}}" data-order="{{$item->order}}" data-komponen="{{$item->id_komponen}}" class="pages5-komponen-2">
+                            <div id="pages5Kom{{$key}}" draggable="true" data-id="{{$item['id']}}" data-status="{{$item['status']}}" data-order="{{$item['order']}}" data-komponen="{{$item['id_komponen']}}" class="pages5-komponen-2">
                                 @endif
                                 <div class="pages5-komponen-text">
                                     <div class="pages5-komponen-text-kiri">
                                         <button class="btn-drag">
                                             <img class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}" alt="" />
                                         </button>
-                                        <i class="fa-solid {{$item['icon']}}" style="margin-left: 10px"></i>
+                                        <i class="fa-regular fa-user" style="margin-left: 10px"></i>
                                         <p class="pages5-isi">{{$item['title']}}</p>
                                     </div>
                                     <div class="pages5-komponen-text-kanan">
                                         <button id="btnSwitch{{$key}}" class="btn-switch">
                                             {{-- <img class="pages5-isi" src="{{ asset('assets/img/Group 68 (1).png') }}"
                                             alt="" /> --}}
-                                            @if($item->status === "off")
+                                            @if($item['status'] === "off")
                                             <i id="icon{{$key}}" class="fa-solid fa-eye-slash" style="color: red"></i>
                                             @else
                                             <i id="icon{{$key}}" class="fa-solid fa-eye"></i>
@@ -50,9 +50,6 @@
                                         </button>
                                         <div class="drop-3dot">
                                             <button id="btnDrop3Dot{{$key}}" class="btn-3dot">
-                                                {{-- <img class="pages5-isi"
-                                                    src="{{ asset('assets/img/🦆 icon _more vert_.png') }}"
-                                                alt="" /> --}}
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                             </button>
                                             <div id="div3Dot{{$key}}" class="div3Dot-drop">
@@ -76,15 +73,16 @@
                                     </div>
                                 </div>
                                 <div id="dropdown-content-{{$key}}" class="pages5-komponen-inside-text1">
-                                    <div class="pages5-input-file" data-id="{{$item->id}}">
+                                    <div class="pages5-input-file" data-id="{{$item['id']}}">
+        
+                                        {!! $item['code_input'] !!}
 
-                                        {!! $item->code_input !!}
                                     </div>
                                     <div class="pages5-richa"></div>
                                 </div>
                             </div>
 
-                            <div id="DelComModal{{$key}}" data-id_komponen="{{$item->id}}" class="del-com-modal navAni">
+                            <div id="DelComModal{{$key}}" data-id_komponen="{{$item['id']}}" class="del-com-modal navAni">
                                 <!-- Modal content -->
                                 <div class="del-conmo">
                                     <span class="del-close">&times;</span>
@@ -115,7 +113,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="loop" value="{{$drag->count()}}">
+                            <input type="hidden" id="loop" value="{{count($drag)}}">
 
                         </div>
 
@@ -138,25 +136,21 @@
                         <a href class="pages5-preview">getlink/tautan microsite</a><br />
                         <div id="kanan-bungkus" style="background-color: transparent" class="kanan-bungkus">
 
-                            @if($background->type_background == 'color')
+                        @if($background->type_background == 'color')
                             <div class="bungkus" style='background: {{ $background->background }}'>
                                 @else
                                 <div class="bungkus" style="background-image: url('{{ asset('microsite/background/'.$background->background) }}')">
                                     @endif
                                     <?php $non_bungkus = ''; ?>
-                                    <?php $kolom2 = ''; ?>
-                                    @foreach($data as $i)
-                                    <?php $code = $i['code']; ?>
-                                    <?php $html = str_replace('src="microsite/medsos', 'src="' . asset('microsite/medsos/'), $i['code']); ?>
-                                    @if($i['id'] === 9)
-                                    <?php $kolom2 .= str_replace('src="microsite/konten', 'src="' . asset('microsite/konten/'), $i['code']);?>
-                                    @else
-                                    <?php $non_bungkus .= $html; ?>
-                                    @endif
+                                    @foreach($data as $d)
+                                        <?php
+                                            // mengganti string "src=" pada folder "microsite/konten/"
+                                            $html = str_replace('src="microsite/konten', 'src="' . asset('microsite/konten/'), $d['code']);
+                                            // mengganti string "src=" pada folder "microsite/medsos/"
+                                            $html = str_replace('src="microsite/medsos', 'src="' . asset('microsite/medsos/'), $html);
+                                            $non_bungkus .= $html;
+                                        ?>
                                     @endforeach
-                                    <?php if (!empty($kolom2)) : ?>
-                                        <?php $non_bungkus .= '<div class="bungkus-anak" id="bungkus-template-konten">' . $kolom2 . '</div>'; ?>
-                                    <?php endif; ?>
                                     {!! $non_bungkus !!}
                                 </div>
 
@@ -191,6 +185,42 @@
         <input type="hidden" id="komponenLoop" value="{{$tambah_komponen->count()}}">
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    $(document).on('click', '.hapusssss', function() {
+        Swal.fire({
+            icon:'question',
+            title: 'Apakah Anda Yakin Menghapus Konten Ini??',
+            showDenyButton: true,
+            confirmButtonText: 'Iya',
+            denyButtonText: 'Batal',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{route('hapus_konten_anak_microsite')}}",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "_token": "{{csrf_token()}}",
+                        "id_microkon": $(this).data('id')
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        $('#pgKr').load(window.location.href + ' #pgKr');
+                        $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                    }
+                })
+            }else{
+                swal.fire({
+                    icon: 'info',
+                    title : 'Aksi dibatalkan',
+                    timer: 800,
+                });
+            }
+        });
+    });
+</script>
 
 <script>
     $(document).on('click', '#btnSudah', function(){
@@ -233,79 +263,11 @@
 </script>
 
 <script>
-    function refreshTemplate(data) {
-        try {
-            $(document).ready(function() {
-                console.log(data)
-                if ($('#title').length) {
-                    var judulBaru = data[1];
-                    $('h4#title').each(function(index) {
-                        // Menambahkan nomor urut pada id
-                        $(this).attr('id', 'title-' + (index));
-                        $(this).text(judulBaru[index]);
-                    });
-                }
-                if ($('#deskripsi').length) {
-                    var judulBaru = data[3];
-                    $('p#deskripsi').each(function(index) {
-                        // Menambahkan nomor urut pada id
-                        $(this).attr('id', 'deskripsi-' + (index));
-                        $(this).text(judulBaru[index]);
-                    });
-                }
-                if ($('#image').length) {
-                    var gambarBaru = data[0];
-                    $('img#image').each(function(index) {
-                        $(this).attr('id', 'image-' + (index));
-                        $(this).attr('src', 'http://localhost:8000/microsite/icon/' + gambarBaru[index]);
-                    });
-                }
-                if ($('.bungkus-anak .medsos-template').length) {
-                    var linkBaru = data[2][0].split(',');
-                    $('.bungkus-anak .medsos-template').each(function(index) {
-                        if (index == 0) {
-                            $(this).attr('href', 'https://www.instagram.com/' + linkBaru[index]);
-                        } else if (index == 1) {
-                            $(this).attr('href', 'https://www.twitter.com/' + linkBaru[index]);
-                        } else if (index == 2) {
-                            $(this).attr('href', 'https://www.facebook.com/' + linkBaru[index]);
-                        } else if (index == 3) {
-                            $(this).attr('href', 'https://www.youtube.com/' + linkBaru[index]);
-                        } else if (index == 4) {
-                            $(this).attr('href', 'https://www.tiktok.com/' + linkBaru[index]);
-                        }
-                    });
-                }
-                if ($('.bungkus-anak .konten-template').length) {
-                    var kontenBaru = data[4];
-                    for (var i = 0; i < kontenBaru.length; i++) {
-                        // Memecah string di item ke-i berdasarkan koma
-                        var splitItem = kontenBaru[i].split(',');
-
-                        var img = document.getElementsByClassName('img-template')[i];
-
-                        // Mengganti nilai atribut src pada elemen img
-                        img.src = 'http://localhost:8000/microsite/konten/' + splitItem[0];
-
-                        // Mengambil elemen HTML a
-                        var a = document.getElementsByClassName('konten-template')[i];
-
-                        // Mengganti nilai atribut href pada elemen a
-                        a.href = splitItem[1];
-                    }
-                }
-            });
-        } catch (e) {
-            console.log('Error parsing JSON', e);
-        }
-    }
-</script>
-
-<script>
     $(document).ready(function() {
         $("input[name='linkkonten[]'], input[name='imagekonten[]']").on('change', function() {
             var konten = '';
             var lastParam = $(this).closest('.pages5-input-file').data('id');
+            var id_microkon = $(this).data('id_microkon');
             var formData = new FormData();
 
             // Cek apakah input background color tidak kosong
@@ -321,6 +283,7 @@
 
             formData.append('konten', konten);
             formData.append('id', lastParam);
+            formData.append('id_microkon', id_microkon);
 
             // Kirim data menggunakan ajax
             $.ajax({
@@ -333,7 +296,7 @@
                 },
                 data: formData,
                 success: function(response) {
-                    refreshTemplate(response.data);
+                    $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
                 },
                 error: function(xhr, status, error) {
                     console.log(error);
