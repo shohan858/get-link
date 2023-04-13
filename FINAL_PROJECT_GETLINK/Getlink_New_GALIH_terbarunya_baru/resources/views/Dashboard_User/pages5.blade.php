@@ -452,18 +452,11 @@
     $(document).ready(function() {
         $('input[name^="icon"], input[name^="descripsi"], input[name^="instagram"], input[name^="link"], input[name^="twitter"], input[name^="tiktok"], input[name^="youtube"], input[name^="facebook"]').on('keyup', handleInputChange);
 
-        $('#summernote').summernote({
+        $('.summernote').summernote({
             callbacks: {
                 onChange: function(contents, $editable) {
-                    handleInputChange.call($('#summernote')[0]);
-                }
-            }
-        });
-
-        $('#summernote3').summernote({
-            callbacks: {
-                onChange: function(contents, $editable) {
-                    handleInputChange.call($('#summernote3')[0]);
+                    var index = $('.summernote').index($(this));
+                    handleInputChange.call($('.summernote')[index]);
                 }
             }
         });
@@ -617,43 +610,7 @@
 
 <script>
     $(document).ready(function() {
-        $("#summernote").summernote({
-            focus: true,
-
-            toolbar: [
-                ["style", ["bold", "italic", "underline", "clear"]],
-                ["font", ["fontsize", "forecolor"]],
-                ["color", ["backcolor"]],
-                ["para", ["ul", "ol", "paragraph"]],
-                ["height", ["height"]],
-                ["insert", ["link"]],
-                ["view", ["fullscreen", "codeview", "help"]],
-            ],
-            disablePicture: true,
-            disableVideo: true,
-        });
-    });
-
-    $(document).ready(function() {
-        $("#summernote2").summernote({
-            focus: true,
-
-            toolbar: [
-                ["style", ["bold", "italic", "underline", "clear"]],
-                ["font", ["fontsize", "forecolor"]],
-                ["color", ["backcolor"]],
-                ["para", ["ul", "ol", "paragraph"]],
-                ["height", ["height"]],
-                ["insert", ["link"]],
-                ["view", ["fullscreen", "codeview", "help"]],
-            ],
-            disablePicture: true,
-            disableVideo: true,
-        });
-    });
-
-    $(document).ready(function() {
-        $("#summernote3").summernote({
+        $(".summernote").summernote({
             focus: true,
 
             toolbar: [

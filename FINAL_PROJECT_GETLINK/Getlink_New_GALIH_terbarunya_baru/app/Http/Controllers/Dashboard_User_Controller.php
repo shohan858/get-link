@@ -334,7 +334,7 @@ class Dashboard_User_Controller extends Controller
 
     public function update_value_microsite(Request $request)
     {
-        dd($request);
+
         $microdet = microsite_detail::findOrFail($request->id);
         if ($request->name === 'instagram[]') {
             $input_array = explode(",", $microdet->value);
@@ -549,8 +549,6 @@ class Dashboard_User_Controller extends Controller
             }
         }
 
-        dd($abcde . "final");
-
 
 
 
@@ -597,86 +595,5 @@ class Dashboard_User_Controller extends Controller
                 dd('anda sudah visitor');
             }
         }
-
-        dd('testing');
-
-
-
-
-
-
-
-
-
-            // if($abcde == null){
-            //     if (stripos($userAgent, 'firefox') !== false) {
-            //         $test3->browser = 'firefox';
-            //     } elseif (stripos($userAgent, 'edg') !== false) {
-            //         $test3->browser = 'edg';
-            //     } elseif (stripos($userAgent, 'chrome') !== false) {
-            //         $test3->browser = 'chrome';
-            //     } else {
-            //         $test3->browser = 'other';
-            //     }
-            //     $test3->id_microsite = 75;
-            //     $test3->ip_address = request()->ip();
-            //     $test3->date = date('Y-m-d');
-            //     $test3->save();
-            //     dd('bikin dulu bos!');
-            // }else{
-            //     foreach($abcde as $ab){
-            //         if(stripos($userAgent, $ab) === false){
-            //             dd('create jika browser nya tidak ada' . $userAgent);
-            //             //fungsi untuk membuat jika browser nya tidak ada
-            //             if (stripos($userAgent, 'firefox') !== false) {
-            //                 $test3->browser = 'firefox';
-            //             } elseif (stripos($userAgent, 'edg') !== false) {
-            //                 $test3->browser = 'edg';
-            //             } elseif (stripos($userAgent, 'chrome') !== false) {
-            //                 $test3->browser = 'chrome';
-            //             } else {
-            //                 $test3->browser = 'other';
-            //             }
-            //             $test3->id_microsite = 75;
-            //             $test3->ip_address = request()->ip();
-            //             $test3->date = date('Y-m-d');
-            //             $test3->save();
-            //         }else{
-            //             dd('ada');
-
-            //             if (stripos($userAgent, 'firefox') !== false) {
-            //                 $test3->browser = 'firefox';
-            //             } elseif (stripos($userAgent, 'edg') !== false) {
-            //                 $test3->browser = 'edg';
-            //             } elseif (stripos($userAgent, 'chrome') !== false) {
-            //                 $test3->browser = 'chrome';
-            //             } else {
-            //                 $test3->browser = 'other';
-            //             }
-            //             $test3->id_microsite = 75;
-            //             $test3->ip_address = request()->ip();
-            //             $test3->date = date('Y-m-d');
-            //             $test3->save();
-            //             dd('browser nya ada bos!' . $userAgent);
-            //         }
-            //     }
-            // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
