@@ -52,7 +52,7 @@ class Dashboard_User_Controller extends Controller
     public function page3(Request $request)
     {
         $lastSegment = collect(request()->segments())->last();
-        $template = template::where('id_kategori', $lastSegment)->get();
+        $template = template::where('id_kategori', $lastSegment)->where('status','on')->get();
         return view('Dashboard_User.pages3')->with([
             'template' => $template
         ]);
@@ -81,7 +81,7 @@ class Dashboard_User_Controller extends Controller
 
     public function regular()
     {
-        $my_microsite = microsite::where('id_user', Auth::user()->id)->get();
+        $my_microsite = microsite::where('id_user', Auth::user()->id)->orderByDesc('created_at')->paginate(5);
         $count_microsite = User::find(Auth::user()->id)->jumlah_microsite;
         $limit_microsite = User::find(Auth::user()->id)->batas_microsite;
         $secret_key = 'Basic ' . config('xendit.key_auth');

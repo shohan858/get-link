@@ -115,7 +115,7 @@ class AdminController extends Controller
 
     public function update_landing_page(Request $request, $id)
     {
-        // dd($request);
+        // dd($request->image_landing);
         // $alert = alert()->info('Gagal Edit','Title Belum Di Isi');
         $request->validate([
             // 'image_landing' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -128,7 +128,7 @@ class AdminController extends Controller
         $file = $request->hasFile('image_landing');
         if ($file) {
             $name_image = Carbon::now()->timestamp . '.' . $request->image_landing->extension();
-            $request->image_landing->storeAs($name_image);
+            $request->image_landing->move(public_path('gambar'), $name_image);
             $getlink->image = $name_image;
         }
 
@@ -197,7 +197,7 @@ class AdminController extends Controller
 
     public function getdata_template()
     {
-        $template = template::select('id', 'id_kategori', 'id_komponen', 'image', 'title', 'background', 'type_background')->get();
+        $template = template::select('id', 'id_kategori', 'id_komponen', 'image', 'title', 'background', 'type_background','status')->get();
         return response()->json([
             'message' => 'success',
             'data' => $template,
@@ -308,7 +308,9 @@ class AdminController extends Controller
         $template->title = $request->input('title');
         $template->id_kategori = $request->input('id_kategori');
         $template->type_background = $request->input('type_background');
-        $template->id_komponen = implode(",", $id_komponen);
+        // $template->id_komponen = implode(",", $id_komponen);
+        $template->id_komponen = "1,2,8,9,10,11";
+        $template->status = "pending";
 
         // dd($template->id_komponen);
         if ($request->hasFile('image')) {
@@ -354,6 +356,23 @@ class AdminController extends Controller
         return redirect()->back('')->with('sukses', 'Kategori berhasil dihapus.');
     }
 
+    public function lihat_template($id)
+    {
+        $template = template::where('id', $id)->first();
+        $kategori = kategori::all();
+        $komponen = komponen::all();
+        $data_kategori = kategori::where('id', $template->id_kategori)->first();
+        // $data_komponen = komponen::where('id',$template->id_komponen)->first();
+        // dd($template['id_komponen']);
+        return view('admin.admin_pages.detail')->with([
+            'template' => $template,
+            'kategori' => $kategori,
+            'komponen' => $komponen,
+            'data_kategori' => $data_kategori,
+            // 'data_komponen'=>$data_komponen,
+        ]);
+    }
+
     public function edit_template($id)
     {
         $template = template::where('id', $id)->first();
@@ -362,7 +381,7 @@ class AdminController extends Controller
         $data_kategori = kategori::where('id', $template->id_kategori)->first();
         // $data_komponen = komponen::where('id',$template->id_komponen)->first();
         // dd($template['id_komponen']);
-        return view('admin.template.edit')->with([
+        return view('admin.admin_pages.edit')->with([
             'template' => $template,
             'kategori' => $kategori,
             'komponen' => $komponen,
