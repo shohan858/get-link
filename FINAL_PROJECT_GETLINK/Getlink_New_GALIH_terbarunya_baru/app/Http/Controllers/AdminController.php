@@ -7,6 +7,8 @@ use App\Models\getlink;
 use App\Models\kategori;
 use App\Models\komponen;
 use App\Models\microsite;
+use App\Models\microsite_detail;
+use App\Models\microsite_detail_konten;
 use App\Models\paketModel;
 use App\Models\shortlink;
 use App\Models\template;
@@ -242,10 +244,7 @@ class AdminController extends Controller
     {
         $komponen = komponen::all();
         $kategori = kategori::all();
-        // return view('admin.template.index')->with([
-        //     'komponen' => $komponen,
-        //     'kategori' => $kategori,
-        // ]);
+
         return view('admin.admin_pages.template')->with([
                 'komponen' => $komponen,
                 'kategori' => $kategori,
@@ -254,12 +253,6 @@ class AdminController extends Controller
 
     public function tambah_kategori(Request $request)
     {
-            // dd($request->icon);
-        // $this->validate($request, [
-            //     'name' => 'required',
-            //     'color' => 'required',
-            //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            // ]);
             
             $kategori = new kategori();
             $kategori->name = $request->input('name');
@@ -296,13 +289,6 @@ class AdminController extends Controller
     {
         // dd($request);
         $id_komponen = $request->input('id_komponen', []);
-
-        // dd($request);
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'color' => 'required',
-        //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-        // ]);
 
         $template = new template();
         $template->title = $request->input('title');
@@ -356,32 +342,57 @@ class AdminController extends Controller
 
     public function edit_template($id)
     {
-        $template = template::where('id', $id)->first();
-        $kategori = kategori::all();
-        $komponen = komponen::all();
-        $data_kategori = kategori::where('id', $template->id_kategori)->first();
-        // $data_komponen = komponen::where('id',$template->id_komponen)->first();
-        // dd($template['id_komponen']);
-        return view('admin.template.edit')->with([
-            'template' => $template,
-            'kategori' => $kategori,
-            'komponen' => $komponen,
-            'data_kategori' => $data_kategori,
-            // 'data_komponen'=>$data_komponen,
-        ]);
+        $microkon_kode = '';
+        $microdet = template::findOrFail($id);
+        $array = explode(',', $microdet->id_komponen);
+        $status = explode(',', $microdet->status_komponen);
+        $komponen = array();
+
+        foreach ($array as $key => $row) {
+            $komponen_oke = komponen::findOrFail($row);
+            if($row === 9) {
+                $microkon_kode = '';
+                for($i = 1; $i <= $microdet->value_konten_detail; $i++) {
+                    $microkon_kode .= '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template">
+                    <img class="img-template" src="microsite/konten/okk.jpg" alt="">
+                    </a>';
+                }
+                $microkon_code = '<div class="bungkus-anak" id="bungkus-template-konten">' . $microkon_kode . '</div>';
+                $komponen[$key]['id'] = 9;
+                $komponen[$key]['code'] = $microkon_code;
+            }
+            else {
+                $komponen[$key]['id'] = $komponen_oke->id;
+                $komponen[$key]['code'] = $komponen_oke->code;
+            }
+        }
+
+        if (in_array('9', $array)) {
+            $tambah_komponen = komponen::where('id', '<>', 11)->get();
+        } else {
+            $tambah_komponen = komponen::all();
+        }
+        //button tambah komponen
+
+        //drag and drop
+
+        $dragss = [];
+
+        foreach ($array as $key => $row) {
+            $komponen_oke = komponen::findOrFail($row);
+            $dragss[$key]['status'] = $status[$key];
+            $dragss[$key]['id'] = $key;
+            $dragss[$key]['order'] = $key;
+            $dragss[$key]['id_komponen'] = $array[$key];
+            $dragss[$key]['title'] = $komponen_oke->title;
+        }
+        return view('admin.template.edit', ['data' => $komponen, 'background' => $microdet, 'drag' => $dragss, 'tambah_komponen' => $tambah_komponen]);
     }
 
     public function update_template(Request $request, $id)
     {
         // dd($id);
         $id_komponen = $request->input('id_komponen', []);
-
-        // dd($request);
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'color' => 'required',
-        //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-        // ]);
 
         $template = template::findOrFail($id);
         // dd($template->id);
@@ -446,5 +457,34 @@ class AdminController extends Controller
 
     public function budget() {
         return View('admin.admin_pages.budget');
+    }
+
+    public function preview_template($id) 
+    {
+        $template = template::findOrFail($id);
+
+        $array = explode(',', $template->id_komponen);;
+        $komponen = array();
+
+        foreach ($array as $key => $row) {
+            $komponen_oke = komponen::findOrFail($row);
+            if($row === 9) {
+                $microkon_kode = '';
+                for($i = 1; $i <= $template->value_konten_detail; $i++) {
+                    $microkon_kode .= '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template">
+                    <img class="img-template" src="microsite/konten/okk.jpg" alt="">
+                    </a>';
+                }
+                $microkon_code = '<div class="bungkus-anak" id="bungkus-template-konten">' . $microkon_kode . '</div>';
+                $komponen[$key]['id'] = 9;
+                $komponen[$key]['code'] = $microkon_code;
+            }
+            else {
+                $komponen[$key]['id'] = $komponen_oke->id;
+                $komponen[$key]['code'] = $komponen_oke->code;
+            }
+        }
+
+        return view('admin.template.preview', ['data' => $komponen, 'background' => $template]);
     }
 }

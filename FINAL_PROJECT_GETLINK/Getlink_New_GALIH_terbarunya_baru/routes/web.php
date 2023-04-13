@@ -133,6 +133,7 @@ Route::middleware(['authadmin'])->group(function () {
     Route::put('/update_template/{id}', [AdminController::class, 'update_template'])->name('update_template');
     Route::get('/edit_paket/{id}', [AdminController::class, 'edit_paket'])->name('edit_paket');
     Route::put('/update_paket/{id}', [AdminController::class, 'update_paket'])->name('update_paket');
+    Route::get('/admin/preview_template/{id}', [AdminController::class, 'preview_template'])->name('admin.preview_template');
 
     Route::get('/preview/{halaman}', [AdminController::class, 'preview'])->name('preview');
 });

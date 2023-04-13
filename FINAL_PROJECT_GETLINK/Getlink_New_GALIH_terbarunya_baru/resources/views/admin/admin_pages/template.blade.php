@@ -82,8 +82,10 @@
                             return '<button class="katHap" data-id="' + data +
                                 '" data-nama="' + full.title +
                                 '" onclick="deleteKategori(this)"><i class="fa-solid fa-trash" style="color:#fff;cursor: pointer;"></i></button>' 
-                                // +
-                                // '<a href="/edit_template/'+data+'" class="btn btn-warning btn-sm mx-1">Update</a>';
+                                +
+                                '<a href="/edit_template/'+data+'" class="btn btn-warning btn-sm mx-1"><i class="fa-solid fa-pencil"></i></a>'
+                                +
+                                '<a href="/admin/preview_template/'+data+'" class="btn btn-warning btn-sm mx-1"><i class="fa-regular fa-eye"></i></a>';
                         }
                     },
                 ]
