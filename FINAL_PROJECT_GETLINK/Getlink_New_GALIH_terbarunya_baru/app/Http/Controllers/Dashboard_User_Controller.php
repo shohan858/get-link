@@ -549,12 +549,6 @@ class Dashboard_User_Controller extends Controller
             }
         }
 
-
-
-
-        
-    
-
         if($abcde->isEmpty()){
             if (stripos($userAgent, 'firefox') !== false) {
                 $test3->browser = 'firefox';
@@ -595,5 +589,22 @@ class Dashboard_User_Controller extends Controller
                 dd('anda sudah visitor');
             }
         }
+    }
+
+    public function microsite_screenshot_cover(Request $request) 
+    {
+        $microsite = microsite::findOrFail($request->id);
+
+        $file = $request->file('screenshot');
+
+        $filenm = Carbon::now()->timestamp . '.' . $file->extension();
+        $file->storeAs('microsite/cover/', $filenm);
+
+        $microsite->cover = $filenm;
+        $microsite->save();
+
+        return response()->json([
+            'message' => 'success',
+        ], 200);
     }
 }
