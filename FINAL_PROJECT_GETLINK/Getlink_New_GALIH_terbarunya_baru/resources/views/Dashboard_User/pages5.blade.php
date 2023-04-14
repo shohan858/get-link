@@ -102,12 +102,12 @@
                             <div id="pages5Kom" draggable="true" class="pages5-komponen-2">
                                 <div class="pages5-komponen-text">
                                     <div class="pages5-komponen-text-kiri" style="margin-left: 30px">
-                                        <p class="pages5-isi">fjdvfdegvb</p>
+                                        <p class="pages5-isi">Background </p>
                                         <label for="typecolor">color</label>
                                         <input type="radio" name="type" value="color" id="typecolor">
                                         <label for="typeimage">image</label>
                                         <input type="radio" name="type" value="image" id="typeimage">
-                                        <input type="text" style="display: none" name="backgroundcolor" id="backgroundcolor">
+                                        <input type="color" style="display: none" name="backgroundcolor" id="backgroundcolor">
                                         <input type="file" style="display: none" name="backgroundimage" id="backgroundimage">
                                     </div>
                                 </div>
@@ -120,8 +120,10 @@
 
                         <div class="pages5-bungkusjajan">
                             <div class="pages5-lamnjut">
+                                @if($background->cover === null)
                                 <a href="/page4" class="pages5-lanjutkan">
                                     < Kembali</a>
+                                @endif
                                         <button data-url="{{route('microsite', ['link' => $background->link])}}" id="btnSudah" class="pages5-lanjutkan">
                                             Selesai
                                             <svg class="finish" width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,6 +187,16 @@
         <input type="hidden" id="komponenLoop" value="{{$tambah_komponen->count()}}">
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.summernote').each(function() {
+            $(this).summernote('code', $(this).attr('data-value'));
+
+            $(this).prev('textarea').data('value', $(this).summernote('code'));
+        });
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
@@ -426,10 +438,15 @@
     function handleInputChange() {
         if ($(this).hasClass('summernote')) {
             var inputValue = $(this).summernote('code');
+            var parentID = $(this).parent().data('id');
+        } else if ($(this).hasClass('note-editable')) {
+            var $noteEditable = $(this).closest('.note-editable');
+            var inputValue = $noteEditable.text();
+            var parentID = $(this).parent().parent().parent().data('id');
         } else {
             var inputValue = $(this).val();
+            var parentID = $(this).parent().data('id');
         }
-        var parentID = $(this).parent().data('id');
         var inputName = $(this).attr('name')
         clearTimeout(delayTimer);
         delayTimer = setTimeout(function() {
@@ -455,6 +472,8 @@
 
     $(document).ready(function() {
         $('input[name^="icon"], input[name^="descripsi"], input[name^="instagram"], input[name^="link"], input[name^="twitter"], input[name^="tiktok"], input[name^="youtube"], input[name^="facebook"]').on('keyup', handleInputChange);
+
+        $('.note-editable').on('input', handleInputChange);
 
         $('.summernote').summernote({
             callbacks: {

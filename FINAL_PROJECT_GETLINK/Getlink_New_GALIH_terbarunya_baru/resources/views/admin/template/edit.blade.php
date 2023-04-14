@@ -93,7 +93,7 @@
                                         <input type="radio" name="type" value="color" id="typecolor">
                                         <label for="typeimage">image</label>
                                         <input type="radio" name="type" value="image" id="typeimage">
-                                        <input type="text" style="display: none" name="backgroundcolor" id="backgroundcolor">
+                                        <input type="color" style="display: none" name="backgroundcolor" id="backgroundcolor">
                                         <input type="file" style="display: none" name="backgroundimage" id="backgroundimage">
                                     </div>
                                 </div>

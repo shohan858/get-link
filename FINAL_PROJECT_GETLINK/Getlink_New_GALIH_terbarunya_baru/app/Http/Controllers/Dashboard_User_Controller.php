@@ -385,7 +385,7 @@ class Dashboard_User_Controller extends Controller
                 $microkon->value = 'https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4';
                 $microkon->image = 'okk.jpg';
                 $microkon->code = '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template"><img class="img-template" src="microsite/konten/okk.jpg" alt=""></a>';
-                $microkon->code_input = '<input class="component-input-style" name="linkkonten[]" type="text" /> <br>
+                $microkon->code_input = '<input class="component-input-style" value="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" name="linkkonten[]" type="text" /> <br>
                 <input class="component-input-style" name="imagekonten[]" type="file" /> <br>';
                 $microkon->save();
     
@@ -430,11 +430,11 @@ class Dashboard_User_Controller extends Controller
 
     public function update_value_microsite(Request $request)
     {
-
         $microdet = microsite_detail::findOrFail($request->id);
         if ($request->name === 'instagram[]') {
             $input_array = explode(",", $microdet->value);
             $microdet->code = preg_replace('/\b' . preg_quote($input_array[0]) . '\b/i', $request->value, $microdet->code);
+            $microdet->code_input = preg_replace('/\b' . preg_quote($input_array[0]) . '\b/i', $request->value, $microdet->code_input);
             $input_array[0] = $request->value; // mengganti elemen index ke-1 dengan nilai baru
             $new_string = implode(",", $input_array); // men
             $microdet->value = $new_string;
@@ -442,6 +442,7 @@ class Dashboard_User_Controller extends Controller
         } elseif ($request->name === 'twitter[]') {
             $input_array = explode(",", $microdet->value);
             $microdet->code = preg_replace('/\b' . preg_quote($input_array[1]) . '\b/i', $request->value, $microdet->code);
+            $microdet->code_input = preg_replace('/\b' . preg_quote($input_array[1]) . '\b/i', $request->value, $microdet->code_input);
             $input_array[1] = $request->value; // mengganti elemen index ke-1 dengan nilai baru
             $new_string = implode(",", $input_array); // men
             $microdet->value = $new_string;
@@ -449,6 +450,7 @@ class Dashboard_User_Controller extends Controller
         } elseif ($request->name === 'facebook[]') {
             $input_array = explode(",", $microdet->value);
             $microdet->code = preg_replace('/\b' . preg_quote($input_array[2]) . '\b/i', $request->value, $microdet->code);
+            $microdet->code_input = preg_replace('/\b' . preg_quote($input_array[2]) . '\b/i', $request->value, $microdet->code_input);
             $input_array[2] = $request->value; // mengganti elemen index ke-1 dengan nilai baru
             $new_string = implode(",", $input_array); // men
             $microdet->value = $new_string;
@@ -456,6 +458,7 @@ class Dashboard_User_Controller extends Controller
         } elseif ($request->name === 'youtube[]') {
             $input_array = explode(",", $microdet->value);
             $microdet->code = preg_replace('/\b' . preg_quote($input_array[3]) . '\b/i', $request->value, $microdet->code);
+            $microdet->code_input = preg_replace('/\b' . preg_quote($input_array[3]) . '\b/i', $request->value, $microdet->code_input);
             $input_array[3] = $request->value; // mengganti elemen index ke-1 dengan nilai baru
             $new_string = implode(",", $input_array); // men
             $microdet->value = $new_string;
@@ -463,6 +466,7 @@ class Dashboard_User_Controller extends Controller
         } elseif ($request->name === 'tiktok[]') {
             $input_array = explode(",", $microdet->value);
             $microdet->code = preg_replace('/\b' . preg_quote($input_array[4]) . '\b/i', $request->value, $microdet->code);
+            $microdet->code_input = preg_replace('/\b' . preg_quote($input_array[4]) . '\b/i', $request->value, $microdet->code_input);
             $input_array[4] = $request->value; // mengganti elemen index ke-1 dengan nilai baru
             $new_string = implode(",", $input_array); // men
             $microdet->value = $new_string;
@@ -477,6 +481,7 @@ class Dashboard_User_Controller extends Controller
                 $video_parts = explode('/', $video_id);
                 $last_part = end($video_parts);
                 $microdet->code = preg_replace('/\b' . preg_quote($microdet->value) . '\b/i', $last_part, $microdet->code);
+                $microdet->code_input = preg_replace('/\b' . preg_quote($microdet->value) . '\b/i', $last_part, $microdet->code_input);
                 $microdet->value = $last_part;
                 $microdet->save();
             } else {
@@ -485,6 +490,7 @@ class Dashboard_User_Controller extends Controller
             }
         } else {
             $microdet->code = preg_replace('/\b' . preg_quote($microdet->value) . '\b/i', $request->value, $microdet->code);
+            $microdet->code_input = preg_replace('/\b' . preg_quote($microdet->value) . '\b/i', $request->value, $microdet->code_input);
             $microdet->value = $request->value;
             $microdet->save();
         }
@@ -501,6 +507,7 @@ class Dashboard_User_Controller extends Controller
         $request->file->storeAs('microsite/icon/', $filenm);
 
         $microdet->code = preg_replace('/\b' . preg_quote($microdet->value) . '\b/i', $filenm, $microdet->code);
+        $microdet->code_input = preg_replace('/\b' . preg_quote($microdet->value) . '\b/i', $filenm, $microdet->code_input);
 
         $microdet->value = $filenm;
         $microdet->save();
@@ -546,11 +553,13 @@ class Dashboard_User_Controller extends Controller
             $filenm = Carbon::now()->timestamp . '.' . $file->extension();
             $file->storeAs('microsite/konten/', $filenm);
             $microsite->code = preg_replace('/\b' . preg_quote($microsite->image) . '\b/i', $filenm, $microsite->code);
+            $microsite->code_input = preg_replace('/\b' . preg_quote($microsite->image) . '\b/i', $filenm, $microsite->code_input);
 
             $microsite->image = $filenm;
         } else {
 
             $microsite->code = preg_replace('~\b' . preg_quote($microsite->value) . '\b~i', $request->konten, $microsite->code);
+            $microsite->code_input = preg_replace('~\b' . preg_quote($microsite->value) . '\b~i', $request->konten, $microsite->code_input);
 
             $microsite->value = $request->konten;
         }
