@@ -41,12 +41,10 @@ body {
     height: auto;
     left: 0px;
     top: 0px;
-    background: linear-gradient(
-        270deg,
-        #7869d6 0%,
-        #7869d6 0.01%,
-        #beabe2 83.06%
-    );
+    background: linear-gradient(270deg,
+            #7869d6 0%,
+            #7869d6 0.01%,
+            #beabe2 83.06%);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -178,7 +176,7 @@ a {
     align-items: center;
     justify-content: center;
     border: 2px solid #6b75e6;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 
 .dropdowncontent a {
@@ -229,14 +227,17 @@ a {
 .ddaa-content {
     margin-left: 24%;
 }
+
 .profil-content {
     margin-left: 24%;
     width: 100%;
 }
+
 .sl-content {
     margin-left: 24%;
     width: 100%;
 }
+
 .lang-content {
     display: flex;
     flex-direction: column;
@@ -384,6 +385,7 @@ background-color: #ffffff;
     align-items: center;
     justify-content: space-between;
 }
+
 .content-isi-regu {
     width: 100%;
     margin-bottom: 20px;
@@ -394,6 +396,7 @@ background-color: #ffffff;
     align-items: center;
     justify-content: space-between;
 }
+
 .dashboard-content-isi {
     width: 100%;
     height: auto;
@@ -402,6 +405,7 @@ background-color: #ffffff;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .profil-content-isi {
     width: 100%;
     height: 100vh;
@@ -409,6 +413,7 @@ background-color: #ffffff;
     display: flex;
     justify-content: space-between;
 }
+
 .sl-content-isi {
     width: 100%;
     height: 100vh;
@@ -489,6 +494,8 @@ background-color: #ffffff;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
+    overflow: auto;
+    height: 100vh;
 }
 
 .sl_bt {
@@ -679,6 +686,7 @@ background-color: #ffffff;
     border-radius: 10px;
     margin-bottom: 15px;
 }
+
 .bt_tpC {
     width: 60%;
     height: 42px;
@@ -690,6 +698,7 @@ background-color: #ffffff;
     align-items: center;
     justify-content: space-between;
 }
+
 .bt_tpIC {
     width: 90%;
     height: 40px;
@@ -913,6 +922,7 @@ background-color: #ffffff;
 
     color: #a5a5a5;
 }
+
 .langganan-h1 {
     font-family: "Roboto", sans-serif;
     font-style: normal;
@@ -934,6 +944,7 @@ background-color: #ffffff;
 
     color: #a5a5a5;
 }
+
 .langganan-p {
     font-family: "Roboto", sans-serif;
     font-style: normal;
@@ -995,6 +1006,7 @@ background-color: #ffffff;
     cursor: pointer;
     margin-bottom: 30px;
 }
+
 .dashboard-berlanggangan:hover,
 .dashboard-berlanggangan:hover .tp-top path {
     background-color: #ffffff;
@@ -1011,6 +1023,7 @@ background-color: #ffffff;
     /* display: flex; */
     /* justify-content: flex-start; */
 }
+
 .langganan-card {
     width: 100%;
     display: grid;
@@ -1136,12 +1149,14 @@ background-color: #ffffff;
     align-items: center;
     justify-content: space-evenly;
 }
+
 .dashboard-bawah {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
+
 .langganan-kiri {
     width: 100%;
     height: auto;
@@ -1356,6 +1371,7 @@ background-color: #ffffff;
     background: #39b5e0;
     color: #ffffff;
 }
+
 .pages2-button2 {
     width: 220px;
     height: 35px;
@@ -1472,15 +1488,19 @@ background-color: #ffffff;
 .spesSvg1 path {
     fill: #ffffff;
 }
+
 .spesSvg2 path {
     fill: #ffffff;
 }
+
 .spesSvg3 path {
     fill: #ffffff;
 }
+
 .spesSvg4 path {
     fill: #ffffff;
 }
+
 .spesSvg5 path {
     fill: #ffffff;
 }
@@ -1498,18 +1518,21 @@ background-color: #ffffff;
     color: #ffffff;
     fill: #ffffff;
 }
+
 .pages2-button3:hover,
 .pages2-button3:hover .market path {
     background: #ff78f0;
     color: #ffffff;
     fill: #ffffff;
 }
+
 .pages2-button4:hover,
 .pages2-button4:hover .umk path {
     background: #f5ea5a;
     color: #ffffff;
     fill: #ffffff;
 }
+
 .pages2-button5:hover,
 .pages2-button5:hover .cv path {
     background: #6b75e6;
@@ -1591,6 +1614,7 @@ background-color: #ffffff;
         sans-serif;
     color: #6b75e6;
 }
+
 .page3-tulisan1 {
     margin-left: 10px;
     margin-top: 0;
@@ -1600,6 +1624,7 @@ background-color: #ffffff;
         sans-serif;
     color: #a5a5a5;
 }
+
 .pages3-jenis {
     margin-left: 10px;
     margin-top: 1px;
@@ -1609,6 +1634,7 @@ background-color: #ffffff;
         sans-serif;
     color: #655dbb;
 }
+
 .pages3-tema {
     margin-left: 10px;
     margin-top: 1px;
@@ -1624,6 +1650,7 @@ background-color: #ffffff;
     width: 50%;
     border-right: 3px solid #e6e6e6;
 }
+
 .pages3-kanan {
     margin-top: 20%;
     height: 450px;
@@ -1635,6 +1662,7 @@ background-color: #ffffff;
     margin-left: 2%;
     margin-right: 2%;
 }
+
 .pages3-preview-template {
     width: 100%;
     height: 100vh;
@@ -1677,6 +1705,7 @@ background-color: #ffffff;
     color: #524799;
     cursor: pointer;
 }
+
 .pages5-lanjutkan {
     margin-right: 5%;
     width: 100px;
@@ -1704,6 +1733,7 @@ background-color: #ffffff;
     background: #524799;
     color: #ffffff;
 }
+
 .pages5-lanjutkan:hover,
 .pages5-lanjutkan:hover .finish path {
     background: #524799;
@@ -1715,11 +1745,13 @@ background-color: #ffffff;
     display: flex;
     justify-content: space-between;
 }
+
 .pages5-lamnjut {
     margin-right: 5%;
     display: flex;
     justify-content: space-between;
 }
+
 .pages3-preview {
     margin-left: 28%;
     margin-top: 0;
@@ -1734,15 +1766,19 @@ background-color: #ffffff;
 .spec1 {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .spec2 {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .spec3 {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .spec4 {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .spec5 {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -1757,8 +1793,10 @@ background-color: #ffffff;
     height: auto;
     padding: 0px;
     cursor: pointer;
-    border-radius: 5px; /* 5px rounded corners */
+    border-radius: 5px;
+    /* 5px rounded corners */
 }
+
 .pages3-card2 {
     width: 100%;
     cursor: pointer;
@@ -1769,8 +1807,10 @@ background-color: #ffffff;
     align-items: center;
     height: auto;
     padding: 0px;
-    border-radius: 5px; /* 5px rounded corners */
+    border-radius: 5px;
+    /* 5px rounded corners */
 }
+
 .pages3-card3 {
     width: 100%;
     cursor: pointer;
@@ -1781,8 +1821,10 @@ background-color: #ffffff;
     align-items: center;
     height: auto;
     padding: 0px;
-    border-radius: 5px; /* 5px rounded corners */
+    border-radius: 5px;
+    /* 5px rounded corners */
 }
+
 .pages3-card4 {
     width: 100%;
     cursor: pointer;
@@ -1793,8 +1835,10 @@ background-color: #ffffff;
     align-items: center;
     height: auto;
     padding: 0px;
-    border-radius: 5px; /* 5px rounded corners */
+    border-radius: 5px;
+    /* 5px rounded corners */
 }
+
 .pages3-card5 {
     width: 100%;
     cursor: pointer;
@@ -1805,8 +1849,10 @@ background-color: #ffffff;
     align-items: center;
     height: auto;
     padding: 0px;
-    border-radius: 5px; /* 5px rounded corners */
+    border-radius: 5px;
+    /* 5px rounded corners */
 }
+
 /* Add rounded corners to the top left and the top right corner of the image */
 
 .card-img {
@@ -1818,6 +1864,7 @@ background-color: #ffffff;
 .pages3-container {
     height: auto;
 }
+
 .pages3-tulis {
     color: #a5a5a5;
     margin-top: 10px;
@@ -1877,6 +1924,7 @@ background-color: #ffffff;
     background: #e6e6e6;
     border-radius: 10px;
 }
+
 .elipsetemplate1 {
     margin-left: 4%;
     width: 48px;
@@ -1887,12 +1935,15 @@ background-color: #ffffff;
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .sembarang {
     display: none;
 }
+
 .gambar1 {
     margin-top: 10%;
 }
+
 .tulisan1 {
     margin-top: 2%;
     width: 219px;
@@ -1910,17 +1961,21 @@ background-color: #ffffff;
 
     color: #ffffff;
 }
+
 .bungkusbunderan {
     margin-left: 12%;
     align-items: center;
     display: flex;
 }
+
 .ikon {
     margin-top: 25%;
 }
+
 .ikon1 {
     margin-top: 32%;
 }
+
 .template1-kolom {
     margin-top: 20%;
     width: auto;
@@ -1932,6 +1987,7 @@ background-color: #ffffff;
     background: rgba(255, 255, 255, 0.35);
     border-radius: 15px;
 }
+
 .template1-kolom2 {
     margin-top: 2%;
     width: auto;
@@ -1942,6 +1998,7 @@ background-color: #ffffff;
     background: rgba(255, 255, 255, 0.35);
     border-radius: 15px;
 }
+
 .tulisan2 {
     margin-top: 1%;
     width: 78%;
@@ -1960,6 +2017,7 @@ background-color: #ffffff;
 
     color: #ffffff;
 }
+
 .tulisan3 {
     margin-top: 1%;
     width: 70%;
@@ -1989,6 +2047,7 @@ background-color: #ffffff;
     height: 669px;
     border-radius: 10px;
 }
+
 .elipsetemplate2 {
     margin-left: 4%;
     width: 48px;
@@ -1999,6 +2058,7 @@ background-color: #ffffff;
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .gariss {
     position: absolute;
     border-radius: 10px;
@@ -2009,6 +2069,7 @@ background-color: #ffffff;
     left: 244px;
     top: -44px;
 }
+
 .template2-tulisan2 {
     margin-left: 5%;
     text-align: left;
@@ -2027,6 +2088,7 @@ background-color: #ffffff;
 
     color: #ffffff;
 }
+
 .template2-tulisan3 {
     margin-top: -15px;
     margin-left: 5%;
@@ -2046,6 +2108,7 @@ background-color: #ffffff;
 
     color: #ffffff;
 }
+
 .template2-kolom {
     margin-top: 8%;
     width: auto;
@@ -2069,6 +2132,7 @@ background-color: #ffffff;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .elipsetemplate3 {
     margin-left: 4%;
     width: 48px;
@@ -2079,6 +2143,7 @@ background-color: #ffffff;
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .bungkusbunderan2 {
     margin-top: 10%;
     margin-left: 12%;
@@ -2098,6 +2163,7 @@ background-color: #ffffff;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .template4-tulisan1 {
     margin-top: 2%;
     width: 219px;
@@ -2115,6 +2181,7 @@ background-color: #ffffff;
 
     color: #434343;
 }
+
 .template4-tulisan2 {
     margin-top: -25px;
     width: 31px;
@@ -2132,6 +2199,7 @@ background-color: #ffffff;
 
     color: #434343;
 }
+
 .elipsetemplate4 {
     margin-top: 2%;
     margin-left: 4%;
@@ -2143,6 +2211,7 @@ background-color: #ffffff;
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .template4-tulisan3 {
     margin-top: 5%;
     width: 78%;
@@ -2161,6 +2230,7 @@ background-color: #ffffff;
 
     color: #434343;
 }
+
 .template4-tulisan4 {
     margin-top: 1%;
     width: 70%;
@@ -2192,12 +2262,14 @@ background-color: #ffffff;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .bungkusbunderan5 {
     margin-top: -14px;
     margin-left: 12%;
     align-items: center;
     display: flex;
 }
+
 .elipsetemplate5 {
     margin-left: 4%;
     width: 48px;
@@ -2208,6 +2280,7 @@ background-color: #ffffff;
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .template5-tulisan1 {
     margin-top: 2%;
     width: 219px;
@@ -2225,6 +2298,7 @@ background-color: #ffffff;
 
     color: #ffffff;
 }
+
 .template5-tulisan4 {
     margin-top: 1%;
     width: 70%;
@@ -2243,6 +2317,7 @@ background-color: #ffffff;
 
     color: #ffffff;
 }
+
 .template5-kolom {
     width: auto;
     height: 74px;
@@ -2252,12 +2327,14 @@ background-color: #ffffff;
     background: #ffffff;
     border-radius: 15px;
 }
+
 .template5-bungkuskolom {
     align-items: center;
     justify-content: center;
     margin-top: 8%;
     display: flex;
 }
+
 .template5-kolom2 {
     margin-right: 4%;
     margin-left: 4%;
@@ -2282,6 +2359,7 @@ background-color: #ffffff;
     color: gray;
     width: auto;
 }
+
 .pages5-bungkusjajan {
     margin-top: 50px;
     display: flex;
@@ -2296,6 +2374,7 @@ background-color: #ffffff;
     align-items: center;
     justify-content: space-between;
 }
+
 .pageskabehgaris {
     margin-left: 2%;
     margin-bottom: 4%;
@@ -2303,9 +2382,11 @@ background-color: #ffffff;
     height: 1%;
     width: 12%;
 }
+
 .sembarang {
     display: none;
 }
+
 .gariskabeh {
     display: flex;
 }
@@ -2323,6 +2404,7 @@ background-color: #ffffff;
         sans-serif;
     color: #6b75e6;
 }
+
 .page4-tulisan1 {
     margin-top: 0;
     font-weight: 300;
@@ -2331,6 +2413,7 @@ background-color: #ffffff;
         sans-serif;
     color: #a5a5a5;
 }
+
 .pages4-jenis {
     margin-top: 1px;
     margin-bottom: 10px;
@@ -2340,6 +2423,7 @@ background-color: #ffffff;
         sans-serif;
     color: #655dbb;
 }
+
 .pages4-tema {
     margin-top: 1px;
     margin-bottom: 20px;
@@ -2349,11 +2433,13 @@ background-color: #ffffff;
         sans-serif;
     color: #655dbb;
 }
+
 .pages4-kiri {
     height: auto;
     width: 50%;
     border-right: 3px solid #e6e6e6;
 }
+
 .pages4-kanan {
     display: flex;
     align-items: center;
@@ -2405,6 +2491,7 @@ background-color: #ffffff;
     display: flex;
     justify-content: flex-end;
 }
+
 .pages4-preview {
     margin-left: 28%;
     margin-top: 0;
@@ -2431,6 +2518,7 @@ background-color: #ffffff;
     line-height: 23px;
     color: rgba(107, 117, 230, 0.33);
 }
+
 .pages4-form2 {
     width: 85%;
     height: 40px;
@@ -2448,6 +2536,7 @@ background-color: #ffffff;
     line-height: 23px;
     color: rgba(107, 117, 230, 0.33);
 }
+
 .pages4-input {
     border: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -2464,6 +2553,7 @@ background-color: #ffffff;
     outline: none;
     border: none;
 }
+
 .pages4-input {
     border: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -2480,6 +2570,7 @@ background-color: #ffffff;
     outline: none;
     border: none;
 }
+
 .pages4-input {
     border: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -2495,6 +2586,7 @@ background-color: #ffffff;
     height: 20px;
     border: none;
 }
+
 .pages4-button1 {
     width: 20%;
     height: 85%;
@@ -2504,6 +2596,7 @@ background-color: #ffffff;
     background: #524799;
     border-radius: 20px;
 }
+
 .pages4-button1text {
     text-decoration: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -2521,9 +2614,11 @@ background-color: #ffffff;
     height: 1%;
     width: 12%;
 }
+
 .sembarang {
     display: none;
 }
+
 .gariskabeh {
     display: flex;
 }
@@ -2547,6 +2642,7 @@ background-color: #ffffff;
 .asideLang.tampilLang {
     left: 0;
 }
+
 .pages5-aside {
     position: absolute;
     width: 20%;
@@ -2562,6 +2658,7 @@ background-color: #ffffff;
 .pages5-aside.pages5-tampil {
     left: 0;
 }
+
 .pages4-aside {
     position: absolute;
     width: 17%;
@@ -2577,6 +2674,7 @@ background-color: #ffffff;
 .pages4-aside.pages5-tampil {
     left: 0;
 }
+
 .pages3-aside {
     position: absolute;
     width: 17%;
@@ -2665,6 +2763,7 @@ background-color: #ffffff;
     height: 80px;
     position: relative;
 }
+
 .page2-btnprev {
     width: 100%;
     height: 50px;
@@ -2685,6 +2784,7 @@ background-color: #ffffff;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 }
+
 .prew-tampil {
     width: 20%;
     height: 45px;
@@ -2761,6 +2861,7 @@ background-color: #ffffff;
 
     color: #6b75e6;
 }
+
 .hapus-tulisan2 {
     width: 60%;
     height: 28%;
@@ -2777,6 +2878,7 @@ background-color: #ffffff;
 
     color: #a5a5a5;
 }
+
 .batal-button {
     margin-right: 5%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -2797,15 +2899,18 @@ background-color: #ffffff;
     border-radius: 5px;
     border-color: #f4f4f4;
 }
+
 .bungkus-hapusbutton {
     display: flex;
     margin-left: 80%;
 }
+
 @media (max-width: 900px) {
     .bungkus-hapusbutton {
         margin-left: 60%;
         flex-direction: column;
     }
+
     .batal-button {
         margin-bottom: 2%;
     }
@@ -2816,6 +2921,7 @@ background-color: #ffffff;
         flex-direction: column;
     }
 }
+
 .hppink {
     margin-left: 10%;
     width: 75%;
@@ -3052,6 +3158,7 @@ flex-direction: column; */
     display: none;
     z-index: 1;
 }
+
 .pages5-komponen-inside-0 {
     width: 100%;
     border: 0.5px solid #303030;
@@ -3109,6 +3216,7 @@ flex-direction: column; */
     cursor: pointer;
     background: #ffffff;
 }
+
 .btn-drop {
     height: 50px;
     cursor: pointer;
@@ -3311,6 +3419,7 @@ flex-direction: column; */
 .dp-tampil-1 {
     display: block;
 }
+
 .dp-tampil-2 {
     display: block;
 }
@@ -3391,9 +3500,11 @@ flex-direction: column; */
     .ddaa-content {
         margin-left: 22%;
     }
+
     .profil-content {
         margin-left: 22%;
     }
+
     .sl-content {
         margin-left: 22%;
     }
@@ -3515,13 +3626,15 @@ flex-direction: column; */
     .ddaa-content {
         margin-left: 2%;
     }
+
     .profil-content {
         margin-left: 10%;
         margin-right: 10%;
     }
+
     .sl-content {
         margin-left: 2%;
-        margin-right: 2%;
+        /* margin-right: 2%; */
     }
 
     .sl_tl {
@@ -3725,6 +3838,7 @@ flex-direction: column; */
     .pages5-kiri.pages5kirPrew {
         left: -100%;
     }
+
     .pages2-kiri {
         height: auto;
         width: 100%;
@@ -3773,6 +3887,7 @@ flex-direction: column; */
     .pages5-kanan.pages5Prew {
         left: 0;
     }
+
     .pages2-kanan {
         position: absolute;
         margin: 20px 0 0 0;
@@ -3796,6 +3911,7 @@ flex-direction: column; */
     .pages3-kanan.pages5Prew {
         left: 0;
     }
+
     .pages4-kanan {
         width: 95%;
         margin-top: 20px;
@@ -3811,6 +3927,7 @@ flex-direction: column; */
     .komponen-kkiri {
         width: 90%;
     }
+
     .asideLang {
         width: 50%;
     }
@@ -3874,6 +3991,7 @@ flex-direction: column; */
     .aside {
         width: 50%;
     }
+
     .asideLang {
         width: 50%;
     }
@@ -3889,6 +4007,7 @@ flex-direction: column; */
     .dashboard-content-isi {
         margin-top: 10px;
     }
+
     .profil-content-isi {
         margin-top: 10px;
         height: fit-content;
@@ -3903,6 +4022,7 @@ flex-direction: column; */
         height: fit-content;
         width: 70%;
     }
+
     .profil_kiri {
         width: 95%;
         margin-top: 50px;
@@ -4005,6 +4125,7 @@ flex-direction: column; */
     .pages2-kiri {
         top: 100px;
     }
+
     .pages2-kanan {
         top: 100px;
     }
@@ -4172,17 +4293,26 @@ button {
 }
 
 .modal-compo {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -4209,6 +4339,7 @@ button {
     text-decoration: none;
     cursor: pointer;
 }
+
 .tambah-button {
     color: white;
     width: 10%;
@@ -4219,6 +4350,7 @@ button {
     border-radius: 5px;
     border-color: #524799;
 }
+
 .compo-tulisan1 {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
@@ -4231,6 +4363,7 @@ button {
 
     color: #524799;
 }
+
 .baru-tulisan2 {
     margin-top: -2%;
     width: 175px;
@@ -4268,21 +4401,26 @@ button {
 
     color: #524799;
 }
+
 .gambar-komponen1 {
     width: 15px;
     height: 15px;
 }
+
 .komponen1 {
     margin-right: 30%;
     margin-top: 8%;
 }
+
 .bungkus-compo {
     margin-top: -5%;
     display: flex;
 }
+
 .komponen1:hover {
     background-color: #f7f7f7;
 }
+
 @media (max-width: 900px) {
     .bungkus-compo {
         flex-direction: column;
@@ -4299,17 +4437,26 @@ button {
 }
 
 .del-com-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -4335,6 +4482,7 @@ button {
     text-decoration: none;
     cursor: pointer;
 }
+
 .del-hapus-button {
     color: white;
     width: 79px;
@@ -4346,6 +4494,7 @@ button {
     border-radius: 5px;
     border-color: #524799;
 }
+
 .del-hapus-tulisan1 {
     width: 186px;
     height: 17px;
@@ -4362,6 +4511,7 @@ button {
 
     color: #6b75e6;
 }
+
 .del-hapus-tulisan2 {
     width: 60%;
     height: 28%;
@@ -4378,6 +4528,7 @@ button {
 
     color: #a5a5a5;
 }
+
 .del-batal-button {
     margin-right: 5%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -4398,22 +4549,27 @@ button {
     border-radius: 5px;
     border-color: #f4f4f4;
 }
+
 .del-bungkus-hapusbutton {
     display: flex;
     margin-left: 50%;
 }
+
 @media (max-width: 900px) {
     .del-conmo {
         width: 60%;
         height: 30vh;
     }
+
     .del-bungkus-hapusbutton {
         margin-left: 60%;
         margin-top: 10%;
     }
+
     .del-hapus-tulisan1 {
         font-size: 16px;
     }
+
     .del-batal-button {
         margin-bottom: 2%;
     }
@@ -4427,17 +4583,26 @@ button {
 }
 
 .fin-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -4452,17 +4617,26 @@ button {
 /* The Close Button */
 
 .selesai {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -4488,6 +4662,7 @@ button {
     text-decoration: none;
     cursor: pointer;
 }
+
 .selesai-tulisan2 {
     margin-left: 10%;
     margin-top: 0;
@@ -4506,6 +4681,7 @@ button {
 
     color: #a5a5a5;
 }
+
 .selesai-button {
     margin-left: 40%;
     width: 20%;
@@ -4517,11 +4693,13 @@ button {
     border: 2px solid #524799;
     border-radius: 20px;
 }
+
 @media (max-width: 900px) {
     .selesai-tulisan2 {
         flex-direction: column;
     }
 }
+
 .hppink {
     margin-left: 10%;
     width: 75%;

@@ -88,7 +88,7 @@ Route::middleware(['authuser'])->group(function () {
     Route::post('microsite_screenshot_cover', [Dashboard_User_Controller::class, 'microsite_screenshot_cover'])->name('microsite_screenshot_cover');
     Route::post('hapus_konten_anak_microsite', [Dashboard_User_Controller::class, 'hapus_konten_anak_microsite'])->name('hapus_konten_anak_microsite');
     Route::post('preview_template', [Dashboard_User_Controller::class, 'preview_template'])->name('preview_template');
-    
+
     Route::get('/tambah_slot_microsite/{id}', [Dashboard_User_Controller::class, 'tambah_slot_microsite']);
     Route::get('/shortlink', [Dashboard_User_Controller::class, 'shortlinks']);
     Route::get('/shortlink/{id}', [Dashboard_User_Controller::class, 'shortlinks_edit']);
