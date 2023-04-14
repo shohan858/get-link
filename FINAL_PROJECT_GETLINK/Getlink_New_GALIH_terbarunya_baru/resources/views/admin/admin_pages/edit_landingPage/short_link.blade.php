@@ -1,5 +1,4 @@
 @extends('admin.layout.base')
-
 @section('admin_konten')
 @foreach ($data_getlink as $item)
 @if ($item->id == 2)
