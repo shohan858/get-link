@@ -491,9 +491,9 @@ background-color: #ffffff;
     width: 96%;
     display: flex;
     margin-top: 20px;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     overflow: auto;
     height: 100vh;
 }
