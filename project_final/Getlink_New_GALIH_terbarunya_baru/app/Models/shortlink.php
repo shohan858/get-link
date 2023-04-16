@@ -9,5 +9,10 @@ class shortlink extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['code','link'];
+    protected $fillable = ['code','link','id_user'];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }
+

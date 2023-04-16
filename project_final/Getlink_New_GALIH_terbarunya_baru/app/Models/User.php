@@ -10,8 +10,12 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    
+
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Nama tabel pada database
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +26,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    // Daftar atribut yang dihiraukan (guarded)
+    protected $guarded = [
+        'id', 'remember_token',
+    ];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,4 +48,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function shortlinks()
+    {
+        return $this->hasMany(Shortlink::class);
+    }
 }

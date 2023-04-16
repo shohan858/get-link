@@ -522,14 +522,24 @@ class Dashboard_User_Controller extends Controller
         ], 200);
     }
 
-    public function shortlinks() {
-        $check = User::find(Auth::user()->id);
-        if($check->batas_microsite > 3){
-            $data = shortlink::all();
-        }else{
-            $data = shortlink::latest()->take(10)->get();
+    public function shortlinks()
+    {
+        // Mendapatkan pengguna yang sudah login
+        $user = Auth::user();
+    
+        // Memeriksa apakah pengguna ada
+        if ($user) {
+            // Mendapatkan ID pengguna yang sudah login
+            $userId = $user->id;
+    
+            // Mengambil shortlink milik pengguna tersebut berdasarkan ID pengguna
+            $data = Shortlink::where('id_user', $userId)->latest()->take(10)->get();
+    
+            return view('dashboard_user.short_link')->with('data', $data);
+        } else {
+            // Jika pengguna belum login, tampilkan pesan atau tindakan lain sesuai kebutuhan Anda
+            return view('auth.login');
         }
-        return view('dashboard_user.short_link')->with('data', $data);
     }
 
     public function shortlinks_create() {
