@@ -48,7 +48,7 @@ class HomeController extends Controller
         // Menyimpan data shortlink
         $shortlink->save();
 
-        $shortenLink = config('app.url') . '/' . $shortlink->code;
+        $shortenLink = $shortlink->code;
 
         // Mengembalikan response dengan shortlink yang sudah dibuat
         return response()->json(['short_link' => $shortenLink]);

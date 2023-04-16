@@ -398,10 +398,11 @@
             <span class="close">&times;</span>
         </div>
 
-        <form class="sl_form">
+        <form id="form_link" method="POST" action="{{ route('generate.shorten.link.post') }}" class="sl_form">
+        @csrf
             {{-- <label class="sl_label" for="nama">Nama</label> --}}
-            <input class="sl_text" type="text" id="inputSL" name="sl" placeholder="Tautan panjang">
-            <button id="Sl_kirim" class="btn_msSL" type="submit">Submit</button>
+            <input class="sl_text" type="text" id="input_link" name="sl" placeholder="Tautan panjang">
+            <button id="button_link" class="btn_msSL" type="submit">Submit</button>
         </form>
 
     </div>
@@ -424,9 +425,156 @@
     </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    const jsonAPI = "Backend_Copy.postman_collection.json";
+
+fetch(jsonAPI)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(obj) {
+        console.log(obj);
+    })
+    .catch(function(error) {
+        console.error('Someting went wrong');
+        console.error(error);
+    })
+
+const endPoint = "{{ asset('') }} assets_landing_page"
+const buttonImage = document.getElementById("image_link");
+const submitButton = document.getElementById("button_link");
+
+
+var newButton = document.createElement("button");
+newButton.id = "button_copy";
+newButton.type = "button";
+
+var img = document.createElement("img");
+img.id = "image_copy";
+onclick = "copy_clip()"
+img.src = "{{ asset('assets_landing_page/img/copy.png') }} ";
+
+newButton.appendChild(img);
+document.body.appendChild(newButton);
+
+const copyButton = document.getElementById("button_copy");
+
+    // Close modal saat tombol close diklik
+    const closeBtn = document.getElementsByClassName("close")[0];
+    closeBtn.addEventListener("click", () => {
+        modalSl.style.display = "none";
+    });
+function validateLink(link) {
+    var pattern = /^https?:\/\/[^\s/$.?#].[^\s]*$/i;
+    return pattern.test(link);
+}
+
+submitButton.addEventListener("click", function(e) {
+    e.preventDefault();
+    const inputElement = document.getElementById("input_link");
+    const link = inputElement.value.trim();
+
+    if (validateLink(link)) {
+        // Mengirimkan data ke server menggunakan AJAX
+        var url_shortener = "{{ route('generate.shorten.link.post') }}";
+        $.ajax({
+            type: 'POST',
+            url: url_shortener,
+            data: {
+                _token: '{{ csrf_token() }}',
+                link: link,
+            },
+            success: function(response) {
+
+                $('#input_link').val("{{ env('APP_URL') }}" + "/g" + response.short_link);
+                showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1800);
+                // Menampilkan tombol copy dan refresh
+                if (buttonImage.src.includes("Refresh.png")) {
+                    buttonImage.src = "{{ asset('assets_landing_page/img/Add-Link.png') }} ";
+                    newButton.parentNode.removeChild(newButton);
+                    submitButton.style.marginLeft = "10px";
+                    inputElement.value = "";
+                    let timerInterval
+                    Swal.fire({
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            console.log('I was closed by the timer')
+                        }
+                    })
+                } else {
+                    buttonImage.src = "{{ asset('assets_landing_page/img/Refresh.png  ') }} ";
+                    submitButton.style.marginLeft = "20px";
+                    inputElement.parentNode.insertBefore(newButton, inputElement.nextSibling);
+                }
+
+                // Mengubah nilai atribut href dan text dari tombol copy
+                // copyButton.href = $('#input_link').val();
+                // copyButton.textContent = $('#input_link').val();
+
+                // Menambahkan event listener pada tombol copy
+                copyButton.addEventListener("click", function() {
+                    // document.getElementById("input_link").val().select();
+                    // document.execCommand("copy");
+                    const inputElement = document.getElementById("input_link");
+                    inputElement.select();
+                    document.execCommand("copy");
+                    // alert("berhasil copy!");
+                    showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
+                });
+            },
+            error: function() {
+                showAlert('error', 'Ooops!', 'Terjadi Kesalahan Saat Memperpendek Link', 1800);
+            }
+        });
+    } else {
+        showAlert('error', 'Ooops!', 'Link Tidak Valid!', 1800);
+        return;
+    }
+});
+
+function showAlert(icon, title, text, timer) {
+    swal.fire({
+        icon: icon,
+        title: title,
+        text: text,
+        timer: timer,
+    });
+
+}
+
+window.onscroll = function() {
+    scrollFunction()
+};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// Kembali ke atas halaman ketika pengguna mengklik tombol "To Top"
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+// ==========================================================================================
     // modal hapus short link
     function openDelModal() {
         var delmodal = document.getElementById("DelComModal");
@@ -460,11 +608,6 @@
         localStorage.setItem("sl", inputSL.value);
     });
 
-    // Close modal saat tombol close diklik
-    const closeBtn = document.getElementsByClassName("close")[0];
-    closeBtn.addEventListener("click", () => {
-        modalSl.style.display = "none";
-    });
 
     window.addEventListener("click", function(event) {
         if (event.target == modalSl) {
@@ -553,7 +696,7 @@
         document.body.removeChild(textarea);
 
         // Berikan pesan bahwa teks telah disalin
-        alert("Teks telah disalin: " + copyText.textContent);
+        showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
     }
 </script>
 @endsection 
