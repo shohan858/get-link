@@ -44,7 +44,7 @@
                     <div class="pages3-bungkusjajan">
                         <h4 class="pages3-namo">3. Pilih Nama Microsite</h4>
                         <div class="pages3-lamnjut">
-                            <a href="/page2" class="pages3-lanjutkan">
+                            <a href="/buat_microsite" class="pages3-lanjutkan">
                                 <i class="fa-solid fa-chevron-left"></i>
                                 Kembali
                             </a>

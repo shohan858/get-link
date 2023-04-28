@@ -8,9 +8,7 @@
                         <div class="langganan-teks">
                             <p class="langganan-h1">Paket Microsite</p>
                             <p class="langganan-p">
-                                Lorem ipsum is placeholder text commonly used in the graphic,
-                                print, and publishing industries for previewing layouts and
-                                visual mockups. br
+                             Dengan membeli paket microsite,anda akan mendapatkan tambahan slot Microsite
                             </p>
                         </div>
                         <div class="bungkus-Ccard">
@@ -24,13 +22,13 @@
                                                 <p class="p1-h1">{{ $item->name }}</p>
                                                 <p class="p1-r">Rp. {{ $item->harga }}</p>
                                                 <p class="p1-des">
-                                                    Dalam {{ $item->name }} anda akan mendapatkan jumlah slot
-                                                    {{ $item->slot }}
-                                                    dengan harga terjangkau
+                                                     {{ $item->name }} anda akan mendapatkan {{ $item->slot }} slot
+                                                    
+                                                   
                                                 </p>
                                                 <div class="langganan-bottom">
                                                     <a target="_blank" class="p1-lang" href="tambah_slot_microsite/{{ $item->id }}">
-                                                        Langganan Sekarang
+                                                        beli sekarang
                                                     </a>
                                                 </div>
                                                 <div id="paket-container"></div>

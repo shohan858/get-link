@@ -66,7 +66,7 @@
             <div class="logtopKir">
                 <img class="logSimKir" src="{{ asset('assets_sesi/images/logos.png') }}" alt="">
                 <h3 class="logGreetKir">Buat Akun anda</h3>
-                <p class="logTextKir">Silahkan buat akun anda agar bisa masuk </p>
+                <p class="logTextKir">Buat Akun untuk mengakses semua fitur kami </p>
             </div>
             <div class="regformKir">
                 <form action="/register/create" method="POST" style="width: 100%">
@@ -80,7 +80,7 @@
                         placeholder="Masukan Password Confirmation" />
                     <i class="far fa-eye toggle-password2" id="toggleConfirmPassword"></i>
                     <button class="btnLogin" type="submit" value="Submit">Registrasi</button><br>
-                    <p class="tegs">Already exists have an account? <a class="regs" href="/sesi"><b>Login</b></a>
+                    <p class="tegs">Anda sudah mempunyai akun? <a class="regs" href="/sesi"><b>Login</b></a>
                     </p>
                 </form>
             </div>

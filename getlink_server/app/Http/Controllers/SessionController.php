@@ -70,7 +70,7 @@ class SessionController extends Controller
 
         User::create($data);
 
-        return redirect('/sesi')->with('success','Berhasil Registasi');
+        return redirect('/dashboard_user')->with('success','Berhasil Registasi');
     }
     
     function logout(){

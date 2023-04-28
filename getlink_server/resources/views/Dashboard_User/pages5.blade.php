@@ -127,7 +127,7 @@
                         <div class="pages5-bungkusjajan">
                             <div class="pages5-lamnjut">
                                 @if($background->cover === null)
-                                <a href="/page4" class="pages5-lanjutkan">
+                                <a href="/regular" class="pages5-lanjutkan">
                                     < Kembali</a>
                                 @endif
                                         <button data-url="{{route('microsite', ['link' => $background->link])}}" id="btnSudah" class="pages5-lanjutkan">

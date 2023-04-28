@@ -74,7 +74,7 @@
                         Sign in with google
                       </button>
                     </a>
-                    <p class="tegs">Dont have an account?? <a class="regs" href="/register"><b>Register</b></a></p>
+                    <p class="tegs">Anda belum mempunyai akun? <a class="regs" href="/register"><b>Register</b></a></p>
                 </form>
             </div>
         </div>
