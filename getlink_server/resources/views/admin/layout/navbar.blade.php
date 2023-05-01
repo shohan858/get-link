@@ -2,8 +2,13 @@
     <div class="adKanav">
         <div class="tpNav">
             <button id="PorfAct" class="proNav">
-                <p class="navName">Admin</p>
-                <img class="adnavimg" src="{{ asset('assets/img/Ellipse 2.png') }}" alt="">
+                <p class="navName">{{ Auth::User()->name }}</p>
+                {{-- <img class="adnavimg" src="{{ asset('assets/img/Ellipse 2.png') }}" alt=""> --}}
+                @if (Auth::user()->img == null)
+                        <img src="{{ asset('assets/img/av.png') }}" alt="" class="adnavimg">
+                    @else
+                        <img src="{{ asset('gambar') . "/" .Auth::user()->img }}" alt="" class="adnavimg">
+                    @endif
             </button>
             <div id="dropAct" class="adPronav">
                 <a href="profile/edit/{{ Auth::user()->id }}" class="toProf" style=" border-bottom: 1px solid #524799; border-radius: 10px 10px 0 0">

@@ -38,12 +38,13 @@
   text-decoration: none;
   cursor: pointer;
 }
-
+.swal2-container {
+  z-index: 99999;
+}
 </style>
     <div class="button-kanan">
         <button class="button1" onclick="add_paket()" id="add_kategori" style="cursor: pointer;margin:1% 1% 3% 2.5%"><i
                 class="fa-solid fa-plus"></i> Tambah Paket</button>
-        {{-- <button class="button2" id="myBtn"><i class="fa-regular fa-eye"></i> Preview</button> --}}
     </div>
     <div class="adMicro">
         <table id="users-table" class="table table-striped table-bordered" style=" width: 100%;">
@@ -60,28 +61,17 @@
         </table>
     </div>
 
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
-    {{-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> --}}
     <script src="{{asset('DataTables/datatables.min.js')}}"></script>
     <script src="{{ asset('DataTables/datatables.js') }}"></script>
     <script>
         $(function() {
             $('#users-table').DataTable({
-                // searchClass: 'my-custom-search-class',
-                // table
-                // .search(inputValue)
-                // .draw();
-
-                // $('#myTable_filter input[type="search"]').addClass('my-custom-search-class');
-
-                // processing: true,
-                // serverSide: true,
                 ajax: "{{ route('get_paket_microsite') }}",
-                columns: [{
-                    data: 'id',
-                        orderable: false, // Menonaktifkan pengurutan untuk kolom ini
+                columns: [
+                    {
+                        data: 'id',
+                        orderable: false,
                         render: function(data, type, row, meta) {
-                            // Mengembalikan nomor urut berdasarkan nomor indeks
                             return meta.row + 1;
                         },
                     },
@@ -114,45 +104,8 @@
             });
         });
     </script>
-    <script>
-        function editPaket(id) {
-          // Ambil data kategori berdasarkan id dari server
-          $.ajax({
-            url: "{{ url('paket') }}/" + id,
-            type: 'GET',
-            dataType: 'json',
-            success: function(result) {
-                // alert(id)
-              // Tampilkan modal edit kategori
-              var url = "{{ url('paket/edit') }}/" + id;
-            //   alert(url)
-            document.getElementById("formEditPaket").action = url;
-              $('#edit-paket-id').val(result.id);
-              $('#edit-paket-name').val(result.name);
-              $('#edit-paket-tipe').val(result.type);
-              $('#edit-paket-harga').val(result.harga);
-              $('#edit-paket-jumlah').val(result.slot);
-              
-              if (result.type === 'microsite') {
-                // alert(id)
-                $('#tipe-microsite').prop('checked', true);
-            }else if (result.type === 'cms') {
-                $('#tipe-cms').prop('checked', true);
-            }else if (result.type === 'shortlink') {
-                $('#tipe-shortlink').prop('checked', true);
-            } 
-              $('#edit-paket-modal').css('display', 'flex');
-            },
-            error: function(xhr, status, error) {
-              console.log(error);
-            }
-          });
-        }
 
-        function closeEdit() {
-        $('#edit-paket-modal').css('display', 'none');
-        }
-    </script>
+
 
     {{-- Modal Edit_paket --}}
     <div id="edit-paket-modal" class="modal">
@@ -163,7 +116,7 @@
             </div>
             <div class="modal-body-paket">
                 <form id="formEditPaket" method="POST" action=""
-                enctype="multipart/form-data" style="margin: 15px">
+                enctype="multipart/form-data" style="margin: 15px" onsubmit="validateFormEdit()">
                 @csrf
                 @method('put')
                 <input type="number" hidden name="id" id="edit-paket-id">
@@ -212,7 +165,7 @@
                 <span onclick="closeaddpaket()" class="close">&times;</span>
             </div>
             <div class="modal-body-paket">
-                <form id="formTambahKategori" method="POST" action="{{ route('tambah_paket_microsite') }}"
+                <form id="tambah_paket" onsubmit="return validateForm()" method="POST" action="{{ route('tambah_paket_microsite') }}"
                 enctype="multipart/form-data" style="margin: 15px">
                 @csrf
                     <div class="collab">
@@ -252,6 +205,189 @@
     </div>
 
     <script>
+        function validateForm() {
+            var nama = document.forms["tambah_paket"]["name"].value;
+            var tipe = document.forms["tambah_paket"]["type"].value;
+            var harga_paket = document.forms["tambah_paket"]["harga"].value;
+            var slot_paket = document.forms["tambah_paket"]["slot"].value;
+
+            if (nama == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Nama Paket harus diisi",
+                });
+                return false;
+            }
+
+            if (tipe == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Type harus diisi",
+                });
+                return false;
+            }
+
+            if (harga_paket == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Harga Paket harus diisi",
+                });
+                return false;
+            } else if (harga_paket < 1000) {
+
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Harga Tidak Boleh Kurang Dari 1000 Rupiah",
+                });
+                return false;
+            }
+
+            if (slot_paket == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Jumlah Slot Paket harus diisi",
+                });
+                return false;
+            } else if (slot_paket < 1) {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Slot Tidak Boleh Kurang Dari 1",
+                });
+                return false;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil Tambah Paket "+name,
+                });
+            return true;
+        }
+
+        function validateFormEdit() {
+            var editnama = document.forms["formEditPaket"]["name"].value;
+            var edittipe = document.forms["formEditPaket"]["type"].value;
+            var editharga_paket = document.forms["formEditPaket"]["harga"].value;
+            var editslot_paket = document.forms["formEditPaket"]["slot"].value;
+
+            if (editnama == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Nama Paket harus diisi",
+                });
+                return false;
+            }
+
+            if (edittipe == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Type harus diisi",
+                });
+                return false;
+            }
+
+            if (editharga_paket == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Harga Paket harus diisi",
+                });
+                return false;
+            } else if (editharga_paket < 1000) {
+
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Harga Tidak Boleh Kurang Dari 1000 Rupiah",
+                });
+                return false;
+            }
+
+            if (editslot_paket == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Jumlah Slot Paket harus diisi",
+                });
+                return false;
+            } else if (editslot_paket < 1) {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Slot Tidak Boleh Kurang Dari 1",
+                });
+                return false;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil Edit Paket "+name,
+                });
+            return true;
+            
+        }
+    </script>
+
+<script>
+    function editPaket(id) {  
+      // Ambil data kategori berdasarkan id dari server
+      $.ajax({
+        url: "{{ url('paket') }}/" + id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(result) {
+            // alert(id)
+          // Tampilkan modal edit kategori
+          var url = "{{ url('paket/edit') }}/" + id;
+        //   alert(url)
+        document.getElementById("formEditPaket").action = url;
+          $('#edit-paket-id').val(result.id);
+          $('#edit-paket-name').val(result.name);
+          $('#edit-paket-tipe').val(result.type);
+          $('#edit-paket-harga').val(result.harga);
+          $('#edit-paket-jumlah').val(result.slot);
+          
+          if (result.type === 'microsite') {
+            // alert(id)
+            $('#tipe-microsite').prop('checked', true);
+        }else if (result.type === 'cms') {
+            $('#tipe-cms').prop('checked', true);
+        }else if (result.type === 'shortlink') {
+            $('#tipe-shortlink').prop('checked', true);
+        } 
+          $('#edit-paket-modal').css('display', 'flex');
+        // Validasi form
+        $('#formEditPaket').submit(function(event) {
+    event.preventDefault();
+    if (validateFormEdit()) {
+      this.submit();
+    }
+  });
+       
+        },
+
+        
+        error: function(xhr, status, error) {
+          console.log(error);
+        }
+      });
+    }
+
+    function closeEdit() {
+    $('#edit-paket-modal').css('display', 'none');
+    }
+</script>
+
+    <script>
         function add_paket() {
             var add_paket = document.getElementById("add_modal_paket");
             add_paket.style.display = "flex";
@@ -285,7 +421,11 @@
                     error: function(xhr, status, error) {
                         // alert(xhr.responseText);
                         $('#users-table').DataTable().ajax.reload();
-
+                        Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil Hapus Template "+nama,
+                });
                     }
                 });
             }

@@ -141,7 +141,7 @@
 
                     </div>
                     <div id="prew2" class="anim pages5-kanan hidden">
-                        <a href="http://getlink.id/microsite/{{$background->link}}" class="pages5-preview">getlink/tautan microsite</a><br />
+                        <a href="{{ env('APP_URL') }}/-{{$background->link}}" class="pages5-preview">{{ env('APP_URL') }}/{{ $background->link }}</a><br />
                         <div class="pages3-kanan-bung" id="pages3-kanan-bung">
                         <div id="kanan-bungkus" style="background-color: transparent" class="kanan-bungkus">
 

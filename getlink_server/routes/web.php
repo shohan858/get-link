@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 // Landing Page GetLink
 Route::get('testing', [Dashboard_User_Controller::class, 'testing']);
 
-Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
+Route::get('/~{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 Route::group(['prefix' => 'getlink.id'], function () {
     Route::get('{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 });
@@ -48,7 +48,7 @@ Route::controller(GoogleController::class)->group(function () {
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('microsite/{link}', [MicrositeController::class, 'index'])->name('microsite');
+Route::get('/-{link}', [MicrositeController::class, 'index'])->name('microsite');
 
 Route::post('generate-shorten-link', [HomeController::class, 'store'])->name('generate.shorten.link.post');
 // Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');

@@ -242,7 +242,7 @@ class AdminController extends Controller
         // dd($request);
         // $alert = alert()->info('Gagal Edit','Title Belum Di Isi');
         $request->validate([
-            // 'image_landing' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_landing' => 'mimes:jpeg,png,jpg,gif,svg',
             'title' => 'required',
             // 'subtitle' => 'required|string|max:255'
         ]);
@@ -252,7 +252,7 @@ class AdminController extends Controller
         $file = $request->hasFile('image_landing');
         if ($file) {
             $name_image = Carbon::now()->timestamp . '.' . $request->image_landing->extension();
-            $request->image_landing->storeAs($name_image);
+            $request->image_landing->move(public_path('gambar'), $name_image);
             $getlink->image = $name_image;
         }
 
@@ -416,6 +416,12 @@ class AdminController extends Controller
     public function updateKategori(Request $request, $id)
 {
 
+    $this->validate($request, [
+        'name' => 'required',
+        'color' => 'required',
+        'icon' => 'image|mimes:jpeg,png,jpg,svg',
+    ]);
+
     $kategori = kategori::find($id);
     
     if(!$kategori) {
@@ -444,11 +450,11 @@ class AdminController extends Controller
     public function tambah_kategori(Request $request)
     {
             // dd($request->icon);
-        // $this->validate($request, [
-            //     'name' => 'required',
-            //     'color' => 'required',
-            //     'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            // ]);
+        $this->validate($request, [
+                'name' => 'required',
+                'color' => 'required',
+                'icon' => 'required|image|mimes:jpeg,png,jpg,svg',
+            ]);
             
             $kategori = new kategori();
             $kategori->name = $request->input('name');
@@ -483,6 +489,12 @@ class AdminController extends Controller
 
     public function tambah_template(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'id_kategori' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg',
+        ]);
+
         // dd($request);
         $id_komponen = '';
         $status_komponen = '';

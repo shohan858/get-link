@@ -46,7 +46,7 @@
                             <div class="content-box"><img src="{{ url('microsite/cover/' . $item->cover) }}" alt=""></div>
                             <div class="box-text">
                                 <p class="nama-microsite">{{ $item->name }}</p>
-                                <a class="link-microsite">{{ env('APP_URL') }}/microsite/{{ $item->link }}</a>
+                                <a class="link-microsite">{{ env('APP_URL') }}/-{{ $item->link }}</a>
                                 <p class="pb-microsite"></p>
                             </div>
                         </div>
@@ -71,34 +71,6 @@
                 @endif
 
                 {{ $my_microsite->links('pagination::bootstrap-4') }}
-                <!-- Perulangan foreach -->
-
-                {{-- <div class="anim content-isi-regu">
-                    <div class="content-kiri-regu">
-                        <div class="content-box"></div>
-                        <div class="box-text">
-                            <p class="nama-microsite"></p>
-                            <a class="link-microsite"></a>
-                            <p class="pb-microsite"></p>
-                        </div>
-                    </div>
-                    <div class="content-kanan">
-                        <button class="content-crud">
-                            <img src="{{ asset('assets/img/Vector (3).svg') }}" alt="" />
-                            Bagikan
-                        </button>
-                        <a href="pages5.html" class="content-crud">
-                            <img src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" />
-                            Edit
-                        </a>
-                        <button class="content-crud">
-                            <img src="{{ asset('assets/img/Vector (2).svg') }}" alt="" />
-                            Hapus
-                        </button>
-                    </div>
-                </div> --}}
-
-                <!-- End Perulangan -->
 
             </div>
             @include('layout.Dashboard_User.footer')
@@ -153,7 +125,7 @@
     <script>
         function copyToClipboard(link) {
             const input = document.createElement('textarea');
-            input.value = '{{ env('APP_URL') }}/microsite/' + link;
+            input.value = '{{ env('APP_URL') }}/-' + link;
             document.body.appendChild(input);
             input.select();
             document.execCommand('copy');

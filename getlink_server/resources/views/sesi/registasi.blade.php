@@ -69,16 +69,17 @@
                 <p class="logTextKir">Silahkan buat akun anda agar bisa masuk </p>
             </div>
             <div class="regformKir">
-                <form action="/register/create" method="POST" style="width: 100%">
+                <form id="login-form" action="/register/create" method="POST" style="width: 100%">
                     @csrf
                     <input class="formTe" type="text" id="fname" name="name" placeholder="Masukan Nama" />
-                    <input class="formEM" type="email" name="email" placeholder="Masukkan email">
+                    <input class="formEM" type="email" id="femail" name="email" placeholder="Masukkan email">
                     <input class="formPass" type="password" name="password" id="lname"
-                        placeholder="Masukkan password">
+                        placeholder="Masukkan password" onkeyup="checkPassword()">
                     <i class="far fa-eye toggle-password" id="togglePassword"></i>
-                    <input class="formCP" type="password" id="lname2" name="confirmpassword"
+                    <div id="password-error" style="color:red"></div>
+                    <input class="formCP" id="fcon" type="password" id="lname2" name="confirmpassword"
                         placeholder="Masukan Password Confirmation" />
-                    <i class="far fa-eye toggle-password2" id="toggleConfirmPassword"></i>
+                    {{-- <i class="far fa-eye toggle-password2" id="toggleConfirmPassword"></i> --}}
                     <button class="btnLogin" type="submit" value="Submit">Registrasi</button><br>
                     <p class="tegs">Already exists have an account? <a class="regs" href="/sesi"><b>Login</b></a>
                     </p>
@@ -86,6 +87,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("lname").value;
+            var passwordError = document.getElementById("password-error");
+
+            if (password.length < 8) {
+                passwordError.innerHTML = "Password minimal harus 8 karakter";
+            } else {
+                passwordError.innerHTML = "";
+            }
+        }
+    </script>
 
     <!--Inspiration from: http://ertekinn.com/loginsignup/-->
     <script src="js/bootstrap.js"></script>
@@ -103,6 +117,69 @@
             checkbox.checked = !checkbox.checked; // Membalikkan nilai status checkbox
         });
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#login-form').submit(function(e) {
+                e.preventDefault();
+                var name = $('#fname').val();
+                var password = $('#lname').val();
+                var email = $('#femail').val();
+                var con = $('#fcon').val();
+
+                if (!name || !password || !email || !con) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Harap untuk mengisi semua masukan!',
+                    });
+                } else if (password.length < 8) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Password minimal 8 karakter',
+                    });
+                } else {
+                    $.ajax({
+                        url: $(this).attr('action'),
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                // Redirect to the specified URL
+                                window.location.href = response.redirect;
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: response.message,
+                                });
+                            } else {
+                                // Show an error message
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: response.message,
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            // Show an error message
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Registrasi Gagal! Email Sudah Di Gunakan.',
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
     <script>
         const togglePassword = document.querySelector('#togglePassword');
         const password = document.querySelector('#lname');
@@ -121,24 +198,24 @@
             }
         });
 
-        const toggleConfirmPassword = document.querySelector('#toggleConfirmPassword');
-        const confirmPassword = document.querySelector('#lname2');
+        // const toggleConfirmPassword = document.querySelector('#toggleConfirmPassword');
+        // const confirmPassword = document.querySelector('#lname2');
 
-        toggleConfirmPassword.addEventListener('click', function(e) {
-            // toggle the type attribute
-            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-            confirmPassword.setAttribute('type', type);
+        // toggleConfirmPassword.addEventListener('click', function(e) {
+        //     // toggle the type attribute
+        //     const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        //     confirmPassword.setAttribute('type', type);
 
-            // toggle the eye slash icon
-            this.classList.toggle('fa-eye-slash');
+        //     // toggle the eye slash icon
+        //     this.classList.toggle('fa-eye-slash');
 
-            // add or remove class to the eye icon based on the password visibility
-            if (type === 'password') {
-                this.classList.remove('hide-password');
-            } else {
-                this.classList.add('hide-password');
-            }
-        });
+        //     // add or remove class to the eye icon based on the password visibility
+        //     if (type === 'password') {
+        //         this.classList.remove('hide-password');
+        //     } else {
+        //         this.classList.add('hide-password');
+        //     }
+        // });
     </script>
 </body>
 

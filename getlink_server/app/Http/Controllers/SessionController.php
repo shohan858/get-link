@@ -26,15 +26,14 @@ class SessionController extends Controller
             'password'=>$request->password
         ];
 
-        if(Auth::attempt($infologin)){
-            if(Auth::User()->role === 'admin'){
-                return redirect('/admin_get');
+        if (Auth::attempt($infologin)) {
+            if (Auth::User()->role === 'admin') {
+                return response()->json(['success' => true, 'redirect' => '/admin_get']);
+            } elseif (Auth::User()->role === 'user') {
+                return response()->json(['success' => true, 'redirect' => '/dashboard_user' , 'message' => 'Berhasil Login']);
             }
-            elseif(Auth::User()->role === 'user'){
-                return redirect('/dashboard_user');
-            }
-        }else{
-            return redirect('sesi');
+        } else {
+            return response()->json(['success' => false, 'message' => 'Password Atau Email Salah']);
         }
     }
 
@@ -59,18 +58,21 @@ class SessionController extends Controller
             'password.min' => 'Password Minimal 8 karakter',
         ]);
 
-        
 
-        $data = [
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password)
-            
-        ];
+        if ($request->password == $request->confirmpassword) {
+            $data = [
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password)
+                
+            ];
+        } else {
+            return response()->json(['success' => false, 'message' => 'Konfirmasi Password Tidak Sama dengan Password']);
+        }
 
         User::create($data);
 
-        return redirect('/sesi')->with('success','Berhasil Registasi');
+        return response()->json(['success' => true, 'redirect' => '/sesi' , 'message' => 'Berhasil Registasi']);
     }
     
     function logout(){

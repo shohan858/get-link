@@ -1,20 +1,19 @@
 @extends('admin.layout.base')
 
 @section('admin_konten')
-<style>
-    .dropify-wrapper {
-    height: 100px;
-}
-.dropify-infos-message {
-    font-size: 12px;
-}
+    <style>
+        .dropify-wrapper {
+            height: 100px;
+        }
 
-
-
-</style>
+        .dropify-infos-message {
+            font-size: 12px;
+        }
+    </style>
     <div class="adSpon">
         <div class="button-kanan">
-            <button id="" onclick="add_sponsor()" class="button1"><i class="fa-solid fa-plus"></i> Tambah Collaboration</button>
+            <button id="" onclick="add_sponsor()" class="button1"><i class="fa-solid fa-plus"></i> Tambah
+                Collaboration</button>
             <button id="myBtn" onclick="preview()" class="button2"><i class="fa-regular fa-eye"></i> Preview</button>
         </div>
         <table class="data">
@@ -24,14 +23,16 @@
                 <th>aksi</th>
             </tr>
             @foreach ($data3 as $index => $item)
-            <tr>
-                <td>{{ $no++ }}</td>
-                <td><img src="{{ url('gambar').'/'.$item->image }}" alt="not found" width="10%" height="10%"></td>
-                <td>
-                    <button class="buttonA" onclick="edit_sponsor({{ $index }})" id="spon_btn"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="buttonB" onclick="del_sponsor({{ $index }})" type="submit" id="btn-hapus"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ $no++ }}</td>
+                    <td><img src="{{ url('gambar') . '/' . $item->image }}" alt="not found" width="10%" height="10%"></td>
+                    <td>
+                        <button class="buttonA" onclick="edit_sponsor({{ $index }})" id="spon_btn"><i
+                                class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="buttonB" onclick="del_sponsor({{ $index }})" type="submit" id="btn-hapus"><i
+                                class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
             @endforeach
             {{-- <tr>
                 <td colspan="3">
@@ -55,14 +56,14 @@
     </div>
 
     {{-- Modal --}}
-     {{-- Modal --}}
-     <div id="iframe" class="modal">
-        <div class="modal_preview" style="height: 10%"> 
+    {{-- Modal --}}
+    <div id="iframe" class="modal">
+        <div class="modal_preview" style="height: 10%">
             <div class="modal-header">
                 <p class="headP">Preview</p>
                 <span onclick="close_preview()" class="close">&times;</span>
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
                 <iframe src="/preview/sponsor" height="200%" width="100%" frameborder="0"></iframe>
             </div>
         </div>
@@ -76,7 +77,7 @@
                 <span onclick="closeaddsponsor()" class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <form action="collab" style="margin: 15px" method="POST" enctype="multipart/form-data">
+                <form action="collab" id="tambah_col" style="margin: 15px" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="collab">
                         <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label>
@@ -103,83 +104,189 @@
     </div>
 
     @foreach ($data3 as $index => $item)
-    {{-- Modal Hapus --}}
-    <div id="hapus{{ $index }}" class="modal">
-        <div class="modal-content" style="">
-            <div class="modal-header">
-                <p class="headP">Konfirmasi Hapus</p>
-                <span class="close" onclick="closedelsponsor({{ $index }})">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form action="{{ '/collab/'.$item->id }}" method="POST" style="margin: 15px">
-                    @csrf
-                    @method('DELETE')
-                    <div class="p">
-                        <p class="confirm-hapus">Apakah Anda Yakin Ingin Menghapus Collaboration Ini ?</p>
-                    </div>
-                    <div class="submit" style="">
-                        <div class="btn-batal">
-                            <button type="button" onclick="closedelsponsor({{ $index }})" class="button_close btn-close">Batal</button>
+        {{-- Modal Hapus --}}
+        <div id="hapus{{ $index }}" class="modal">
+            <div class="modal-content" style="">
+                <div class="modal-header">
+                    <p class="headP">Konfirmasi Hapus</p>
+                    <span class="close" onclick="closedelsponsor({{ $index }})">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ '/collab/' . $item->id }}" method="POST" style="margin: 15px">
+                        @csrf
+                        @method('DELETE')
+                        <div class="p">
+                            <p class="confirm-hapus">Apakah Anda Yakin Ingin Menghapus Collaboration Ini ?</p>
                         </div>
-                        <div class="btn-simpan">
-                            <button type="submit" class="button2">Hapus</button>
+                        <div class="submit" style="">
+                            <div class="btn-batal">
+                                <button type="button" onclick="closedelsponsor({{ $index }})"
+                                    class="button_close btn-close">Batal</button>
+                            </div>
+                            <div class="btn-simpan">
+                                <button type="submit" class="button2">Hapus</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     @endforeach
     @foreach ($data3 as $index => $item)
         {{-- Modal edit --}}
-    <div id="edit{{ $index }}" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p class="headP">Edit Data</p>
-                <span class="close" onclick="closeeditsponsor({{ $index }})">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form action="{{ '/collab/'.$item->id }}" method="POST" id="spon_edit" style="margin: 15px" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <label for="" class="label-gambar">Masukkan Gambar</label>
-                    <div class="botImg" style="margin-top:0;border:none">
-                        {{-- <input type="file" hidden="hidden" name="foto" id="spon_file{{ $index }}">
+        <div id="edit{{ $index }}" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="headP">Edit Data</p>
+                    <span class="close" onclick="closeeditsponsor({{ $index }})">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ '/collab/' . $item->id }}" method="POST" id="spon_edit" style="margin: 15px"
+                        enctype="multipart/form-data" onsubmit="return validateForm()">
+                        @csrf
+                        @method('PUT')
+                        <label for="" class="label-gambar">Masukkan Gambar</label>
+                        <div class="botImg" style="margin-top:0;border:none">
+                            {{-- <input type="file" hidden="hidden" name="foto" id="spon_file{{ $index }}">
                         <span id="spon_custmMsg{{ $index }}" class="customMsg">No file chosen, yet.</span>
                         <button style="cursor: pointer" type="button" onclick="add_image()" id="spon_upBtn{{ $index }}" class="btn-gam">Select your
                             file</button> --}}
-                        {{-- <input type="file" name="foto" id=""> --}}
-                        <input type="file" name="foto" class="dropify" id="sl_file">
-                    </div>
-                    <div class="submit" style="margin-top:10%">
-                        <div class="btn-batal">
-                            <button type="button" onclick="closeeditsponsor({{ $index }})" class="button_close btn-close">Batal</button>
+                            {{-- <input type="file" name="foto" id=""> --}}
+                            <input type="file" name="foto" class="dropify" id="sl_file" required>
                         </div>
-                        <div class="btn-simpan">
-                            <button type="submit" class="button2">Update</button>
+                        <div class="submit" style="margin-top:10%">
+                            <div class="btn-batal">
+                                <button type="button" onclick="closeeditsponsor({{ $index }})"
+                                    class="button_close btn-close">Batal</button>
+                            </div>
+                            <div class="btn-simpan">
+                                <button type="submit" class="button2">Update</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     @endforeach
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+
     <script>
         var dropify = $('.dropify').dropify();
-    
-    dropify.on('change', function() {
-        var input = this;
-        var parentID = $(this).closest('[data-id]').data('id');
-        var formData = new FormData();
-        formData.append('file', input.files[0]); // Ambil file yang dipilih
-        formData.append('id', parentID);
-    
-        updateImage(formData, $(this));
-    });
-    </script>    
-    <script>
 
+        dropify.on('change', function() {
+            var input = this;
+            var parentID = $(this).closest('[data-id]').data('id');
+            var formData = new FormData();
+            formData.append('file', input.files[0]); // Ambil file yang dipilih
+            formData.append('id', parentID);
+
+            updateImage(formData, $(this));
+        });
+    </script>
+    
+
+    <script>
+        $(document).ready(function() {
+            $("#tambah_col").submit(function(e) {
+                var image_landing = $("input[name='foto']").val();
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+                if (image_landing == "") {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Foto Harus Diisi',
+                    });
+                } else if (image_landing && !allowedExtensions.exec(image_landing)) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Foto Harus Berextensi JPG,JPEG,PNG,SVG',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Berhasil Menambahkan Sponsor',
+                    });
+                }
+            });
+        });
+    </script>
+
+{{-- <script>
+    function validateForm() {
+    var fileInput = document.getElementById('sl_file');
+    var filePath = fileInput.value;
+
+    console.log(filePath);
+    // cek apakah file telah dipilih
+    if (filePath === '') {
+        swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Silakan pilih file terlebih dahulu!',
+        });
+        return false;
+    }
+
+    // cek apakah ekstensi file valid
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Ekstensi file yang diizinkan adalah .jpg/.jpeg/.png/.gif!',
+        });
+        fileInput.value = '';
+        return false;
+    }
+
+    return true;
+}
+
+</script> --}}
+
+
+    <script>
+        $('#spon_edit').submit(function (event) {
+    event.preventDefault();
+
+    $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            if (data.success) {
+                // Tutup modal
+                $('#edit').modal('hide');
+                // Refresh halaman
+                swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Berhasil Edit Data',
+                });
+                location.reload();
+            } else {
+                swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: data.errors.foto[0],
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+           
+        }
+    });
+});
+
+    </script>
+
+    <script>
         var sponBtn = document.getElementById("spon_btn");
         var sponEdit = document.getElementById("spon_edit");
 
@@ -188,9 +295,9 @@
         // });
 
 
-        var spon_filebtn = document.getElementById("spon_file"+index);
-        var spon_customtxt = document.getElementById("spon_custmMsg"+index);
-        var spon_upbtn = document.getElementById("spon_upBtn"+index);
+        var spon_filebtn = document.getElementById("spon_file" + index);
+        var spon_customtxt = document.getElementById("spon_custmMsg" + index);
+        var spon_upbtn = document.getElementById("spon_upBtn" + index);
 
         spon_upbtn.addEventListener("click", function() {
             spon_filebtn.click();
@@ -218,7 +325,7 @@
             Sl_filebtn.click();
         });
 
-        Sl_customtxt.addEventListener("click", function(){
+        Sl_customtxt.addEventListener("click", function() {
             Sl_filebtn.click();
         })
 

@@ -74,10 +74,18 @@ class CollabController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // alert()->error('Gagal','Gambar Harus Di Isi');
-        $request->validate([
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif'
-        ]); 
+        // $request->validate([
+        //     'foto' => 'required|image|mimes:jpeg,png,jpg,gif'
+        // ]); 
+        
+        $validatedData = $request->validate([
+            'foto' => 'required|image|max:2048',
+        ], [
+            'foto.required' => 'Foto harus diisi.',
+            'foto.image' => 'Foto harus berupa gambar.',
+            'foto.max' => 'Foto tidak boleh lebih dari 2MB.',
+        ]);
+
         $data = [
             'image' => $request->foto
         ];
@@ -92,16 +100,20 @@ class CollabController extends Controller
             $data_foto = CollabModel::where('id',$id)->first();
             File::delete(public_path('gambar') . '/' . $data_foto->image);
 
-            // $data = [
-            //     'foto' => $foto_nama
-            // ];
-
             $data['image'] = $foto_nama;
         }
 
         CollabModel::where('id', $id)->update($data);
-        // alert()->success('Berhasil', 'Kamu Berhasil Update Data');
-        return redirect('/sponsor');
+        // return redirect('/sponsor');
+       
+    
+        // Simpan data
+    
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Data berhasil diubah'
+        // ]);
+        return back();
     }
 
     /**
