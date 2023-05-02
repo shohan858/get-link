@@ -69,7 +69,7 @@ class Dashboard_User_Controller extends Controller
         array_pop($data_tahun_ini); // hapus elemen terakhir dari array
         array_pop($data_tahun_kemarin); // hapus elemen terakhir dari array
         array_pop($data_tahun_kemarin2); // hapus elemen terakhir dari array
-
+        $shortlink_count= User::where('shortlink_count',Auth::user()->shortlink_count)->get();
         $count_microsite = decrypt(User::find(Auth::user()->id)->jumlah_microsite);
         $limit_microsite = decrypt(User::find(Auth::user()->id)->batas_microsite);
         return view('Dashboard_User.dashboard')->with([
@@ -77,7 +77,8 @@ class Dashboard_User_Controller extends Controller
             'limit_microsite' => $limit_microsite, 
             'data_tahun_ini' =>  $data_tahun_ini,
             'data_tahun_kemarin' => $data_tahun_kemarin,
-            'data_tahun_kemarin2' => $data_tahun_kemarin2
+            'data_tahun_kemarin2' => $data_tahun_kemarin2,
+            'shortlink_count'=> $shortlink_count
         ]);
     }
 

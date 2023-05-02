@@ -38,11 +38,13 @@
                                 <p class="pengunjung-p">
                                     {{ $count_microsite }}/{{ $limit_microsite }} Microsite</p>
                             </div>
+                            
                             <div class="dashboard-sl">
-                                <img src="assets/img/Vector.png" alt="" class="img_dc">
+                                <img src="assets/img/Vector.png" alt="" class="img_dc" style="margin-top: 20%;">
                                 <p class="pengunjung-1">Short Link</p>
-                                <p class="pengunjung-p">0 shortLink</p>
+                                <p class="pengunjung-p">{{Auth::user()->shortlink_count}} ShortLink</p>
                             </div>
+                            
                         </div>
                         <div class="chartDash">
 
@@ -78,11 +80,11 @@
                                 <p class="pengunjung-p">
                                     {{ Auth::user()->jumlah_microsite }}/{{ Auth::user()->batas_microsite }} Microsite</p>
                             </div>
-                            <div class="dashboard-sl">
+                            <!-- <div class="dashboard-sl">
                                 <img src="assets/img/Vector.png" alt="" class="img_dc">
                                 <p class="pengunjung-1">Short Link</p>
                                 <p class="pengunjung-p">0 shortLink</p>
-                            </div>
+                            </div> -->
                         </div> --}}
                     </div>
                 </div>

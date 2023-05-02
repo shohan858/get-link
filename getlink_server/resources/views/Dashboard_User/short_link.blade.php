@@ -331,7 +331,7 @@
 
                             <div class="aksi-wrapper">
 
-                                <button onclick="copyText()" style="margin-right:5px; margin-bottom: 3px;" class="copy-btn">
+                                <button onclick="copyText('{{ config('app.url').'/g'.$row->code }}')" style="margin-right:5px; margin-bottom: 3px;" class="copy-btn">
                                     <i class="fa-regular fa-copy" style="color:#fff;"></i>
                                 </button>
 
@@ -680,26 +680,23 @@
         modalSlEdit.style.display = "flex";
     }
 
-    function copyText() {
-        // Dapatkan teks dari elemen dengan ID "copy-text"
-        var copyText = document.getElementById("copy-text");
+    function copyText(text) {
+    // Buat elemen textarea baru untuk menampung teks yang akan disalin
+    var textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
 
-        // Buat elemen textarea baru untuk menampung teks yang akan disalin
-        var textarea = document.createElement("textarea");
-        textarea.value = copyText.textContent;
-        document.body.appendChild(textarea);
+    // Pilih teks dalam elemen textarea
+    textarea.select();
 
-        // Pilih teks dalam elemen textarea
-        textarea.select();
+    // Salin teks yang telah dipilih ke clipboard
+    document.execCommand("copy");
 
-        // Salin teks yang telah dipilih ke clipboard
-        document.execCommand("copy");
+    // Hapus elemen textarea
+    document.body.removeChild(textarea);
 
-        // Hapus elemen textarea
-        document.body.removeChild(textarea);
-
-        // Berikan pesan bahwa teks telah disalin       
-        showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
-    }
+    // Berikan pesan bahwa teks telah disalin       
+    showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
+  }
 </script>
 @endsection
