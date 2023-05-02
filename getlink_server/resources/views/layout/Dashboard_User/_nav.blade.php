@@ -42,7 +42,7 @@
             <div class="profil_div">
                 <button id="prov_btn" class="profil_nav">
                     @if (Auth::user()->img == null)
-                        <img src="{{ asset('assets/img/Ellipse 63.png') }}" alt="" class="img_nav">
+                        <img src="{{ asset('assets/img/av.png') }}" alt="" class="img_nav">
                     @else
                         <img src="{{ asset('gambar') . "/" .Auth::user()->img }}" alt="" class="img_nav">
                     @endif

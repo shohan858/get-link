@@ -650,8 +650,12 @@ class Dashboard_User_Controller extends Controller
     
             // Mengambil shortlink milik pengguna tersebut berdasarkan ID pengguna
             $data = Shortlink::where('id_user', $userId)->latest()->take(10)->get();
+            $count = shortlink::where('id_user', $userId)->count();
     
-            return view('Dashboard_User.short_link')->with('data', $data);
+            return view('Dashboard_User.short_link')->with([
+                'data' => $data,
+                'count' => $count,
+            ]);
         } else {
             // Jika pengguna belum login, tampilkan pesan atau tindakan lain sesuai kebutuhan Anda
             return view('auth.login');

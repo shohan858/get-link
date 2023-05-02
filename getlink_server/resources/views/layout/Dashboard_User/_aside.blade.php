@@ -11,7 +11,7 @@
             </button>
             <div class="dropdowncontent">
                 <a class="drop-top drop_a" href="/regular">Microsite regular</a>
-                <a class="drop-bottom drop_a" href="/langganan">Microsite langganan</a>
+                <a class="drop-bottom drop_a" href="/langganan">Paket Microsite</a>
             </div>
         </div>
         <!-- </a> -->

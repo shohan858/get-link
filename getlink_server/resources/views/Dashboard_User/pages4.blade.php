@@ -144,6 +144,11 @@ $(document).ready(function() {
                             url = url.replace(':id_kategori', Param1);
                             url = url.replace(':id_microsite', response.data.id);
                             window.location.href = url;
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Microsite Berhasil DI Buat, Silahkan Edit Microsite Sesuai Keinginan Kamu'
+                        });
                         }
                     });
                 } else {

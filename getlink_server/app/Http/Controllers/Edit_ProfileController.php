@@ -25,7 +25,8 @@ class Edit_ProfileController extends Controller
 
         $request->validate([
             'username' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'gambar' => 'mimes:jpg,jpeg,png,svg',
         ], [
             'username.required' => 'nama tidak boleh kosong!',
             'email.required' => 'email tidak boleh kosong!'

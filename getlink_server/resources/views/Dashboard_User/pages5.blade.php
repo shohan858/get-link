@@ -127,7 +127,7 @@
                         <div class="pages5-bungkusjajan">
                             <div class="pages5-lamnjut">
                                 @if($background->cover === null)
-                                <a href="/page4" class="pages5-lanjutkan">
+                                <a href="/regular" class="pages5-lanjutkan">
                                     < Kembali</a>
                                 @endif
                                         <button data-url="{{route('microsite', ['link' => $background->link])}}" id="btnSudah" class="pages5-lanjutkan">
@@ -141,7 +141,7 @@
 
                     </div>
                     <div id="prew2" class="anim pages5-kanan hidden">
-                        <a href="http://getlink.id/microsite/{{$background->link}}" class="pages5-preview">getlink/tautan microsite</a><br />
+                        <a href="{{ env('APP_URL') }}/-{{$background->link}}" class="pages5-preview">{{ env('APP_URL') }}/{{ $background->link }}</a><br />
                         <div class="pages3-kanan-bung" id="pages3-kanan-bung">
                         <div id="kanan-bungkus" style="background-color: transparent" class="kanan-bungkus">
 

@@ -78,6 +78,37 @@
     });
     </script>
     <script>
+        $(document).ready(function(){
+            $("#mic2_edit").submit(function(e){
+                var title = $("input[name='title']").val();
+                var subtitle = $("input[name='subtitle']").val();
+                var image_landing = $("input[name='image_landing']").val();
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+                if(title == "" || subtitle == "") {
+                    e.preventDefault();
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Title dan Sub Title Harus Diisi',
+                    });
+                } else if (image_landing && !allowedExtensions.exec(image_landing)) {
+                    e.preventDefault();
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Foto Harus Berextensi JPG,JPEG,PNG,SVG',
+                    });
+                }else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Berhasil Edit Data',
+                    });
+                }
+            });
+        });
+        </script>
+    <script>
         
         var mic2Btn = document.getElementById("mic2_btn");
         var mic2Edit = document.getElementById("mic2_edit");

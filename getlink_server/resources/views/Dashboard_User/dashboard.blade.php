@@ -116,7 +116,7 @@
                 'November', 'Desember'
             ],
             datasets: [{
-                label: 'Total pengunjung',
+                label: 'Total pengunjung microsite',
                 data: data_tahun_ini,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',

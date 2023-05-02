@@ -59,7 +59,7 @@
                 <th>Keunggulan</th>
                 <th>Edit</th>
             </tr>
-            @foreach ($data_getlink as $item)
+            @foreach ($data_getlink as $index => $item)
             @if ($item->id == 6 || $item->id == 7 || $item->id == 8)
             <tr>
                 <td>{{ $no++ }}</td>
@@ -68,10 +68,10 @@
                     {{-- <button class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button> --}}
                     <div class="editkeung">
                         <form action="update_landing_page/{{ $item->id }}" method="POST"
-                            enctype="multipart/form-data" class="editkeung">
+                            enctype="multipart/form-data" id="edit_keung" class="editkeung">
                             @csrf
                             <input type="text" name="title"
-                            value="{{ $item->title }}" class="inputKeung" placeholder="Penggunaan yang mudah">
+                            value="{{ $item->title }}" id="judul" class="inputKeung" placeholder="{{ $item->title }}">
                             <button type="submit" style="cursor: pointer" class="ref"><i class="fa-solid fa-rotate"></i></button>
                         </form>
                     </div>
@@ -94,6 +94,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#cms_edit").submit(function(e){
+                var title = $("input[name='title']").val();
+                var subtitle = $("input[name='subtitle']").val();
+                var image_landing = $("input[name='image_landing']").val();
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+                if(title == "" || subtitle == "") {
+                    e.preventDefault();
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Title dan Sub Title Harus Diisi',
+                    });
+                } else if (image_landing && !allowedExtensions.exec(image_landing)) {
+                    e.preventDefault();
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Foto Harus Berextensi JPG,JPEG,PNG,SVG',
+                    });
+                }else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Berhasil Edit Data',
+                    });
+                }
+            });
+        });
+        </script>
+
 
     <script>
         var cmsBtn = document.getElementById("cms_btn");

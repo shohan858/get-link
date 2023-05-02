@@ -48,7 +48,7 @@ Route::controller(GoogleController::class)->group(function () {
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('microsite/{link}', [MicrositeController::class, 'index'])->name('microsite');
+Route::get('/-{link}', [MicrositeController::class, 'index'])->name('microsite');
 
 Route::post('generate-shorten-link', [HomeController::class, 'store'])->name('generate.shorten.link.post');
 // Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');

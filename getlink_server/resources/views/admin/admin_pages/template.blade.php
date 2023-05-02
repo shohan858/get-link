@@ -140,7 +140,7 @@
             var id = $(button).data('id');
             var nama = $(button).data('nama');
 
-            if (confirm("Apakah Anda yakin ingin menghapus kategori " + nama + "?")) {
+            if (confirm("Apakah Anda yakin ingin menghapus Template " + nama + "?")) {
                 $.ajax({
                     url: "{{ url('template') }}/" + id,
                     type: 'DELETE',
@@ -158,7 +158,7 @@
                         swal.fire({
                             icon: 'success',
                             title: 'Berhasil',
-                            text: 'Berhasil Hapus Link',
+                            text: 'Berhasil Hapus Template',
                             timer: '900',
                         });
                     }
@@ -182,7 +182,7 @@
                 <span onclick="closeaddtemplate()" class="close">&times;</span>
             </div>
             <div class="modal-body-template">
-                <form id="formTambahKategori" method="POST" action="{{ route('tambah_template') }}" style="margin: 15px"enctype="multipart/form-data">
+                <form id="formTambahKategori" method="POST" action="{{ route('tambah_template') }}" style="margin: 15px"enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
                     <div class="collab" style="display:block">
                         <label for="" class="label-gambar">Nama Template</label>
@@ -258,6 +258,57 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function validateForm() {
+            var title = document.forms["formTambahKategori"]["title"].value;
+            var kategori = document.forms["formTambahKategori"]["id_kategori"].value;
+            var image = document.forms["formTambahKategori"]["image"].value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+
+            if (title == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "TItle kategori harus diisi",
+                });
+                return false;
+            }
+
+            if (kategori == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Kategori kategori harus diisi",
+                });
+                return false;
+            }
+
+            if (image == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Gambar harus diisi",
+                });
+                return false;
+            } else if (!allowedExtensions.exec(image)) {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Format file Gambar tidak sesuai (jpg, jpeg, png, svg)",
+                });
+                return false;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil Tambah Template "+title,
+                });
+            return true;
+        }
+    </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
 <script>
     var dropify = $('.dropify').dropify();

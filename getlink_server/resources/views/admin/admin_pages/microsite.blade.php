@@ -80,7 +80,7 @@ $(function() {
             {
                 data: 'link',
                 render: function(data, type, row) {
-                        return '<a href="/microsite/'+data+'" style="color:indigo"><i class="fas fa-link"></i></a>';
+                        return '<a href="/-'+data+'" style="color:indigo"><i class="fas fa-link"></i></a>';
                 }
             },
         ],
