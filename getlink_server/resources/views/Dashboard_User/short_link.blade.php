@@ -292,7 +292,7 @@
                         Buat tautan</button>
                     <div class="sl_tr">
                         <div class="sl_searchDiv">
-                            <input type="text" name="search" id="search" class="sl_search">
+                            <input type="text" name="search" placeholder="Search" id="cari" class="sl_search">
                             <i class="fa-solid fa-magnifying-glass sl_icon"></i>
                         </div>
                     </div>
@@ -318,12 +318,13 @@
                         <th>aksi</th>
 
                     </tr>
-                    <tr>
-                        <?php
-                        // Variabel untuk menyimpan nomor
-                        $nomor = 1;
-                        ?>
-                        @foreach($data as $row)
+                    <?php
+                    // Variabel untuk menyimpan nomor
+                    $nomor = 1;
+                    ?>
+                    @foreach($data as $index => $row)
+                    <tr class="search-shortlink" data-nama="{{ strtolower($row->link) }}" data-name="{{ strtolower(config('app.url').'/g'.$row->code) }}">
+                        
                         <td><?= $nomor++; ?></td>
                         <td class="teks">{{ $row->link }}</td>
                         <td class="teks" id="copy-text">{{ config('app.url').'/g'.$row->code }}</td>
@@ -339,7 +340,7 @@
                                     <i class="fa-solid fa-pen" style="color:#fff;"></i>
                                 </button>
 
-                                <button style="margin-right:5px;" class="katHap" data-id="" data-nama="" onclick="openDelModal()">
+                                <button style="margin-right:5px;" class="katHap" data-id="" data-nama="" onclick="openDelModal({{ $index }})">
                                     <i class="fa-solid fa-trash" style="color:#fff;"></i>
                                 </button>
                             </div>
@@ -347,6 +348,32 @@
                     </tr>
                     @endforeach
                 </table>
+
+                <script>
+                    // mendapatkan elemen input dan konten mikrosite
+                    const inputCari = document.getElementById('cari');
+                    const kontenshortlink = document.querySelectorAll('.search-shortlink');
+            
+                    // menambahkan event input pada elemen input
+                    inputCari.addEventListener('input', function() {
+                        const kataKunci = inputCari.value.trim().toLowerCase(); // mendapatkan kata kunci pencarian
+            
+                        // loop untuk memfilter konten mikrosite berdasarkan kata kunci
+                        kontenshortlink.forEach(function(el) {
+                            const namashortlink = el.getAttribute('data-nama');
+                            const namashortlink2 = el.getAttribute('data-name');
+                            const cocok = namashortlink.includes(kataKunci);
+                            const cocok2 = namashortlink2.includes(kataKunci);
+            
+                            if (cocok || cocok2) {
+                                el.style.display = '';
+                            } else {
+                                el.style.display = 'none';
+                            }
+                        });
+                    });
+                </script>
+
                 <form class="bottomtab" action="" id="sl_edit" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="botHead">
@@ -374,21 +401,23 @@
     </div>
 </main>
 
-<div id="DelComModal" class="del-com-modal navAni">
+@foreach ($data as $index => $item)
+<div id="DelComModal{{ $index }}" class="del-com-modal navAni">
     <div class="del-conmo">
-        <span class="del-close" onclick="closeDelModal()">&times;</span>
+        <span class="del-close" onclick="closeDelModal({{ $index }})">&times;</span>
         <p class="del-hapus-tulisan1">Konfirmasi Hapus</p>
         <p class="del-hapus-tulisan2">Apakah anda yakin ingin menghapus microsite ini</p>
         <div class="del-bungkus-hapusbutton">
             <button id="delbal" class="del-batal-button" onclick="closeDelModal()">Batal</button>
-            <form action="" method="post">
+            <form action="/shortlink_delete/{{ $item->id }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button id="btnTrash" class="del-hapus-button" onclick="deleteItem()" type="submit">Hapus</button>
+                <button id="btnTrash" class="del-hapus-button" onclick="deleteItem({{ $index }})" type="submit">Hapus</button>
             </form>
         </div>
     </div>
 </div>
+@endforeach
 
 <!-- Modal -->
 <div id="SlModal" class="modal">
@@ -465,7 +494,6 @@
     const closeBtn = document.getElementsByClassName("close")[0];
     closeBtn.addEventListener("click", () => {
         modalSl.style.display = "none";
-        location.reload();
     });
 
     function validateLink(link) {
@@ -492,6 +520,7 @@
 
                     $('#input_link').val("{{ env('APP_URL') }}" + "/g" + response.short_link);
                     showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1800);
+                    location.reload();
 
                     // Menampilkan tombol copy dan refresh
                     if (buttonImage.src.includes("Refresh.png")) {
@@ -579,13 +608,13 @@
     }
     // ==========================================================================================
     // modal hapus short link
-    function openDelModal() {
-        var delmodal = document.getElementById("DelComModal");
+    function openDelModal(index) {
+        var delmodal = document.getElementById("DelComModal"+index);
         delmodal.style.display = "block";
     }
 
-    function closeDelModal() {
-        var delmodal = document.getElementById("DelComModal");
+    function closeDelModal(index) {
+        var delmodal = document.getElementById("DelComModal"+index);
         delmodal.style.display = "none";
     }
 
