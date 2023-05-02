@@ -301,7 +301,7 @@
                     <div class="sl_bt">
                         <p class="sl_btP">Tautan Terakhir Dibuat</p>
                         <div class="sl_btBp">
-                            <p class="sl_jum">1/10</p>
+                            <p class="sl_jum">{{ $count }}/10</p>
                         </div>
                     </div>
 
@@ -465,6 +465,7 @@
     const closeBtn = document.getElementsByClassName("close")[0];
     closeBtn.addEventListener("click", () => {
         modalSl.style.display = "none";
+        location.reload();
     });
 
     function validateLink(link) {
@@ -491,6 +492,7 @@
 
                     $('#input_link').val("{{ env('APP_URL') }}" + "/g" + response.short_link);
                     showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1800);
+
                     // Menampilkan tombol copy dan refresh
                     if (buttonImage.src.includes("Refresh.png")) {
                         buttonImage.src = "{{ asset('assets_landing_page/img/Add-Link.png') }} ";

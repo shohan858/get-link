@@ -5,7 +5,7 @@
             <div class="profil-content hidden">
                 <div class="anim profil-content-isi">
                     <div class="profil_kanan">
-                        <h1 class="profil_h1">Edit profil</h1>
+                        <h1 class="profil_h1" style="color:#1A2474">Edit profil</h1>
                         <div class="gmbTamp">
                             @if (Auth::User()->img == null)
                             <img style="background-color: #1A2474
@@ -19,7 +19,7 @@
                         <button class="profil_hapusAkun" id="del" onclick="openDelModal()">Hapus akun</button>
                     </div>
                     <div class="profil_kiri">
-                        <form id="edit" action="/profile/update/{{ Auth::user()->id }}" enctype="multipart/form-data" method="POST" class="profil_form">
+                        <form id="edit" action="/profile/update/{{ Auth::user()->id }}" enctype="multipart/form-data" method="POST" class="profil_form" onsubmit="return validateForm()">
                             @method("put")
                             @csrf
                             <label class="profil_label" for= "username">Username</label>
@@ -42,6 +42,74 @@
             @include('layout.Dashboard_User.footer')
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function validateForm() {
+            var name = document.forms["edit"]["username"].value;
+            var email = document.forms["edit"]["email"].value;
+            var password = document.forms["edit"]["password"].value;
+            var conpassword = document.forms["edit"]["konfirm_password"].value;
+            var icon = document.forms["edit"]["gambar"].value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+
+            if (name == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Username harus diisi",
+                });
+                return false;
+            }
+
+            if (email == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Email harus diisi",
+                });
+                return false;
+            }
+
+            if (password !== "") {
+                if (password.length < 8) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Password harus 8 karakter',
+                    });
+                    return false;
+                }
+
+                if (conpassword !== password){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Konfirmasi Password harus Sama Dengan Password',
+                    });
+                    return false;
+                }
+            }
+
+
+            if (icon && !allowedExtensions.exec(icon)) {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Format file Foto tidak sesuai (jpg, jpeg, png, svg)",
+                });
+                return false;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil Edit Profile",
+                });
+            return true;
+        }
+
+    </script>
 
     <div id="DelComModal" class="del-com-modal navAni">
         <div class="del-conmo">
