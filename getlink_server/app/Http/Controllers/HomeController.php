@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\CollabModel;
 use App\Models\getlink;
 use App\Models\shortlink;
+use App\Models\User;
 use App\Models\visitorModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Str;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -29,12 +30,12 @@ class HomeController extends Controller
         $link = "landing_page";
 
         $visitor = visitorModel::where('id_microsite', $link)
-        ->where('ip_address', request()->ip())
-        ->where('date', now()->toDateString())
-        ->where('browser', $jenis_browser)
-        ->count();
+            ->where('ip_address', request()->ip())
+            ->where('date', now()->toDateString())
+            ->where('browser', $jenis_browser)
+            ->count();
 
-        if($visitor == 0){
+        if ($visitor == 0) {
             $test = new visitorModel();
             $test->id_microsite = $link;
             $test->ip_address = request()->ip();
@@ -42,69 +43,78 @@ class HomeController extends Controller
             $test->browser = $jenis_browser;
             $test->save();
             return view('Home.landing_page', compact('shortenLinks'))->with('data_getlink', $data)->with('no', $no)->with('data3', $data3);
-        }else{
+        } else {
             return view('Home.landing_page', compact('shortenLinks'))->with('data_getlink', $data)->with('no', $no)->with('data3', $data3);
         }
     }
     public function store(Request $request)
-    {
-        if($user = Auth::user()){
-            // Validasi inputan form
-        $request->validate([
-            'link' => 'required|url',
-            // 'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
-        ]);
+{
+    // Validasi inputan form
+    $request->validate([
+        'link' => 'required|url',
+    ]);
 
-        // Membuat data shortlink baru
-        $shortlink = new Shortlink();
-        $shortlink->link = $request->link;
-        $shortlink->code = Str::random(6);
+    // Membuat data shortlink baru
+    $shortlink = new Shortlink();
+    $shortlink->link = $request->link;
+    $shortlink->code = Str::random(6);
 
-        // Mengaitkan shortlink dengan ID pengguna yang sudah login
-        $shortlink->id_user = $user->id; // Set user_id sesuai dengan ID pengguna yang sudah login
-
-        // Menyimpan data shortlink
-        $shortlink->save();
-
-        $shortenLink = $shortlink->code;
-
-        // Mengembalikan response dengan shortlink yang sudah dibuat
-        return response()->json(['short_link' => $shortenLink]);
-        }
-        // Mendapatkan pengguna yang sudah login
-        // $user = Auth::user();
-        else{
-            // Validasi inputan form
-        $request->validate([
-            'link' => 'required|url',
-            // 'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
-        ]);
-
-        // Membuat data shortlink baru
-        $shortlink = new Shortlink();
-        $shortlink->link = $request->link;
-        $shortlink->code = Str::random(6);
-
-        // Mengaitkan shortlink dengan ID pengguna yang sudah login
-        // $shortlink->id_user = $user->id; // Set user_id sesuai dengan ID pengguna yang sudah login
-
-        // Menyimpan data shortlink
-        $shortlink->save();
-
-        $shortenLink = $shortlink->code;
-
-        // Mengembalikan response dengan shortlink yang sudah dibuat
-        return response()->json(['short_link' => $shortenLink]);
-        }
-        
-    }
+    // Jika pengguna belum berlangganan dan mencoba membuat link ke-11 atau lebih
+    $user = Auth::user();
     
+    // if ($user && decrypt($user->batas_microsite) < 3 ) {
+    //     $shortlink->status = 'off';
+    //     $shortlink->id_user = $user->id; // Set status link menjadi "off"
+    // }
+    
+    // Jika pengguna sudah login
+    if ($user) {
+        // Mengaitkan shortlink dengan ID pengguna yang sudah login
+        $shortlink->id_user = $user->id;
+        $user->shortlink_count++; 
+        $user->save();
+        if($user->shortlink_count > 10){
+            $shortlink->status = 'off';
+        }
+    }
+
+    // Menyimpan data shortlink
+    $shortlink->save();
+    
+    $shortenLink = $shortlink->code;
+
+    // Mengembalikan response dengan shortlink yang sudah dibuat
+    return response()->json(['short_link' => $shortenLink]);
+} 
+
     public function ShortenLink($code)
     {
         $shortLink = ShortLink::where('code', $code)->firstOrFail();
-        if($shortLink){
-            return redirect($shortLink->link);
-        }else{
+
+        if ($shortLink) {
+            // Pengecekan status link pendek
+            $status = $shortLink->status;
+            if ($status == 'off') {
+                return redirect('404 Not Found'); // redirect ke halaman 404 jika status link off
+            } else {
+                // Pengecekan status berlangganan pengguna
+                $isSubscribed = false;
+                if (Auth::check()) {
+                    $user = Auth::user();
+                    $batasMicrosite = decrypt($user->batas_microsite);
+                    $isSubscribed = $user->$batasMicrosite > 3;
+                }
+
+                // Mengubah status link menjadi off jika pengguna belum berlangganan dan mencoba mengakses link nomor 11 dan seterusnya
+                if (!$isSubscribed && (int) substr($code, -2) >= 11) {
+                    $shortLink->status = 'off';
+                    $shortLink->save();
+                    return redirect('404 Not Found');
+                } else {
+                    return redirect($shortLink->link);
+                }
+            }
+        } else {
             return redirect('404 Not Found');
         }
     }

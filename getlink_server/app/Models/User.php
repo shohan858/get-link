@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'shortlink_count',
     ];
     // Daftar atribut yang dihiraukan (guarded)
     protected $guarded = [
@@ -44,4 +45,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function shortlinks()
+    {
+        return $this->hasMany(shortlink::class,'link','code');
+    }
 }

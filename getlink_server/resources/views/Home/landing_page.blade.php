@@ -842,10 +842,9 @@
         img.id = "image_copy";
         onclick = "copy_clip()"
         img.src = "{{ asset('assets_landing_page/img/copy.png') }} ";
-
         newButton.appendChild(img);
         document.body.appendChild(newButton);
-
+        newButton.style.backgroundColor ="#00678B";  
         const copyButton = document.getElementById("button_copy");
 
         function validateLink(link) {
@@ -877,6 +876,7 @@
                             buttonImage.src = "{{ asset('assets_landing_page/img/Add-Link.png') }} ";
                             newButton.parentNode.removeChild(newButton);
                             submitButton.style.marginLeft = "10px";
+                            submitButton.style.backgroundColor ="#1A2474";
                             inputElement.value = "";
                             let timerInterval
                             Swal.fire({
@@ -901,6 +901,7 @@
                         } else {
                             buttonImage.src = "{{ asset('assets_landing_page/img/Refresh.png  ') }} ";
                             submitButton.style.marginLeft = "20px";
+                            submitButton.style.backgroundColor ="#00678B";
                             inputElement.parentNode.insertBefore(newButton, inputElement.nextSibling);
                         }
 
