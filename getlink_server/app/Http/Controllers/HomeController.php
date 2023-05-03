@@ -48,44 +48,54 @@ class HomeController extends Controller
         }
     }
     public function store(Request $request)
-{
-    // Validasi inputan form
-    $request->validate([
-        'link' => 'required|url',
-    ]);
+    {
+        // Validasi inputan form
+        $request->validate([
+            'link' => 'required|url',
+        ]);
 
-    // Membuat data shortlink baru
-    $shortlink = new Shortlink();
-    $shortlink->link = $request->link;
-    $shortlink->code = Str::random(6);
+        // Membuat data shortlink baru
+        $shortlink = new Shortlink();
+        $shortlink->link = $request->link;
+        $shortlink->code = Str::random(6);
 
-    // Jika pengguna belum berlangganan dan mencoba membuat link ke-11 atau lebih
-    $user = Auth::user();
-    
-    // if ($user && decrypt($user->batas_microsite) < 3 ) {
-    //     $shortlink->status = 'off';
-    //     $shortlink->id_user = $user->id; // Set status link menjadi "off"
-    // }
-    
-    // Jika pengguna sudah login
-    if ($user) {
-        // Mengaitkan shortlink dengan ID pengguna yang sudah login
-        $shortlink->id_user = $user->id;
-        $user->shortlink_count++; 
-        $user->save();
-        if($user->shortlink_count > 10){
-            $shortlink->status = 'off';
+        // Jika pengguna sudah login
+        $user = Auth::user();
+        if ($user) {
+            // Mengaitkan shortlink dengan ID pengguna yang sudah login
+            $shortlink->id_user = $user->id;
+            $user->shortlink_count++;
+            $user->save();
+
+            // Mengubah status menjadi "off" jika shortlink_count lebih besar dari 10
+            if ($user->shortlink_count >= 11) {
+                // Mencari link yang ke-11 atau lebih lama
+                $links = Shortlink::where('id_user', $user->id)
+                    ->orderBy('created_at')
+                    ->limit($user->shortlink_count - 10)
+                    ->get();
+
+                // Mengubah status pada link-link tersebut menjadi "off"
+                foreach ($links as $link) { 
+                    $link->status = 'off';
+                    $link->save();
+                }
+            }
+
+            // // Mengubah status pada shortlink yang baru dibuat
+            // if ($user->shortlink_count > 10) {
+            //     $shortlink->status = 'off';
+            // }
         }
+
+        // Menyimpan data shortlink
+        $shortlink->save();
+
+        $shortenLink = $shortlink->code;
+
+        // Mengembalikan response dengan shortlink yang sudah dibuat
+        return response()->json(['short_link' => $shortenLink]);
     }
-
-    // Menyimpan data shortlink
-    $shortlink->save();
-    
-    $shortenLink = $shortlink->code;
-
-    // Mengembalikan response dengan shortlink yang sudah dibuat
-    return response()->json(['short_link' => $shortenLink]);
-} 
 
     public function ShortenLink($code)
     {
