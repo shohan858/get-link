@@ -24,7 +24,7 @@
             <div class="adCard3">
                 <a href="{{ url('paket') }}" style="text-decoration: none">
                     <div class="cardKan">
-                        <p class="adTeCa">MICROSITE <br> SLOT</p>
+                        <p class="adTeCa">PAKET <br> MICROSITE</p>
                         <p class="adTeCu3">Paket</p>
                     </div>
                 </a>
@@ -63,7 +63,7 @@
 
                     <div class="tvchart">
                         <p class="tovi" id="totalVisitors">0</p>
-                        <p class="tovi">Total Visitor</p>
+                        <p class="tovi">Total pengunjung website</p>
                     </div>
                 </div>
             </div>

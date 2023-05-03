@@ -390,6 +390,73 @@
     </div>
 
     <script>
+        function validateForm() {
+            var name = document.forms["edit"]["username"].value;
+            var email = document.forms["edit"]["email"].value;
+            var password = document.forms["edit"]["password"].value;
+            var conpassword = document.forms["edit"]["konfirm_password"].value;
+            var icon = document.forms["edit"]["gambar"].value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+
+            if (name == "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Username harus diisi",
+                });
+                return false;
+            }
+
+            if (email == "") {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Email harus diisi",
+                });
+                return false;
+            }
+
+            if (password !== "") {
+                if (password.length < 8) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Password harus 8 karakter',
+                    });
+                    return false;
+                }
+
+                if (conpassword !== password){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Konfirmasi Password harus Sama Dengan Password',
+                    });
+                    return false;
+                }
+            }
+
+
+            if (icon && !allowedExtensions.exec(icon)) {
+                Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Format file Foto tidak sesuai (jpg, jpeg, png, svg)",
+                });
+                return false;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Berhasil Edit Profile",
+                });
+            return true;
+        }
+
+    </script>
+
+    <script>
         function openDelModal(index) {
             var delmodal = document.getElementById("DelComModal");
             delmodal.style.display = "block";
