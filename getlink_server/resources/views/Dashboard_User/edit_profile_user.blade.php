@@ -5,7 +5,7 @@
             <div class="profil-content hidden">
                 <div class="anim profil-content-isi">
                     <div class="profil_kanan">
-                        <h1 class="profil_h1" style="color:#1A2474">Edit profil</h1>
+                        <h1 class="profil_h1" style="color:#1A2474">Profil</h1>
                         <div class="gmbTamp">
                             @if (Auth::User()->img == null)
                             <img style="background-color: #1A2474
@@ -22,27 +22,83 @@
                         <form id="edit" action="/profile/update/{{ Auth::user()->id }}" enctype="multipart/form-data" method="POST" class="profil_form" onsubmit="return validateForm()">
                             @method("put")
                             @csrf
-                            <label class="profil_label" for= "username">Username</label>
-                            <input value="{{ $user->name }}" type="text" name="username" id="" class="profil_input">
+                            <label class="profil_label" for= "username" >Username</label>
+                            <input value="{{ $user->name }}" disabled type="text" name="username" id="username" class="profil_input" style="cursor: not-allowed">
                             <label class="profil_label" for="email">Email</label>
-                            <input  value="{{ $user->email }}" type="email" name="email" id="" class="profil_input">
-                            <label class="profil_label" for="password">Ubah Password</label>
-                            <input type="password" name="password" id="" class="profil_input">
-                            <label class="profil_label" for="password">Confirm Password</label>
-                            <input type="password" name="konfirm_password" id="" class="profil_input">
+                            <input  value="{{ $user->email }}" disabled type="email" style="cursor: not-allowed" name="email" id="email" class="profil_input">
+                            <div class="" id="pass" hidden>
+                                <label class="profil_label" id="passwordlam" for="passwordlam">Password Lama</label>
+                                <input type="password" name="passwordlam" id="" class="profil_input">
+                                <label class="profil_label" for="password">Ubah Password</label>
+                                <input type="password" name="password" id="" class="profil_input">
+                                <label class="profil_label" for="password">Confirm Password</label>
+                                <input type="password" name="konfirm_password" id="" class="profil_input">
+                            </div>
                             <input type="file" hidden name="gambar" id="gambar">
-                            <div class="form_bottom">
-                                <button class="profil_batal" type="reset">Batal</button>
-                                <button type="submit" class="profil_simpan">Simpan</button>
+                            <button class="profil_simpan" type="button" id="ed" onclick="enableInputs()">Edit</button>
+                            <div class="form_bottom" >
+                                <button class="profil_batal" id="bat" hidden type="reset" onclick="batInputs()">Batal</button>
+                                <button type="submit" id="sim" hidden class="profil_simpan">Simpan</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
+            @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Berhasil",
+            text: "{{ session('success') }}",
+        });
+    </script>
+@endif
+
+
+            @if($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ $errors->first() }}'
+                })
+            </script>
+@endif
+
+
             @include('layout.Dashboard_User.footer')
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function enableInputs() {
+            document.getElementById("username").removeAttribute("disabled");
+            document.getElementById("email").removeAttribute("disabled");
+            document.getElementById("username").removeAttribute("style");
+            document.getElementById("email").removeAttribute("style");
+            document.getElementById("pass").removeAttribute("hidden");
+            document.getElementById("bat").removeAttribute("hidden");
+            document.getElementById("sim").removeAttribute("hidden");
+            document.getElementById("ed").setAttribute("hidden", true);
+        }
+    </script>
+    <script>
+        function batInputs() {
+            document.getElementById("username").setAttribute("disabled", true);
+            document.getElementById("email").setAttribute("disabled", true);
+            document.getElementById("username").setAttribute("style", "cursor: not-allowed");
+            document.getElementById("email").setAttribute("style", "cursor: not-allowed");
+            document.getElementById("pass").setAttribute("hidden", true);
+            document.getElementById("bat").setAttribute("hidden", true);
+            document.getElementById("sim").setAttribute("hidden", true);
+            document.getElementById("ed").removeAttribute("hidden");
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
 
     <script>
         function validateForm() {
@@ -51,7 +107,11 @@
             var password = document.forms["edit"]["password"].value;
             var conpassword = document.forms["edit"]["konfirm_password"].value;
             var icon = document.forms["edit"]["gambar"].value;
+            var passwordLama = document.forms["edit"]["passwordlam"].value;
             var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+            
+            // var passwordLama = document.forms["edit"]["passwordlam"].value;
+
 
             if (name == "") {
                 Swal.fire({
@@ -71,21 +131,32 @@
                 return false;
             }
 
-            if (password !== "") {
-                if (password.length < 8) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Password harus 8 karakter',
-                    });
-                    return false;
-                }
+            if (passwordLama !== ""){
+                if (password !== "") {
+                    if (password.length < 8) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Password harus 8 karakter',
+                        });
+                        return false;
+                    }
 
-                if (conpassword !== password){
+                    if (conpassword !== password){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Konfirmasi Password harus Sama Dengan Password',
+                        });
+                        return false;
+                    }
+                }
+            }else{
+                if (password !== "" || conpassword !== ""){
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Konfirmasi Password harus Sama Dengan Password',
+                        icon: 'warning',
+                        title: 'Warning',
+                        text: 'Isikan Password Lama Terlebih Dahulu',
                     });
                     return false;
                 }
@@ -101,13 +172,9 @@
                 return false;
             }
 
-            Swal.fire({
-                icon: "success",
-                title: "Berhasil",
-                text: "Berhasil Edit Profile",
-                });
             return true;
         }
+
 
     </script>
 

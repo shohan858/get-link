@@ -33,29 +33,40 @@ class Edit_ProfileController extends Controller
         ]);
 
 
-        $user = User::findOrFail($id);
+        // $user = User::findOrFail($id);
+        $user = Auth::user();
         $user->name = $request->username;
         $file = $request->hasFile('gambar');
 
         if($request->hasFile('gambar')){
             $name_image = Carbon::now()->timestamp . '.' . $request->gambar->extension();
-        $request->gambar->move(public_path('gambar'), $name_image);
-        $user->img = $name_image;
-        }
+            $request->gambar->move(public_path('gambar'), $name_image);
+            $user->img = $name_image;
+        } 
         $user->email = $request->email;
 
+        $infologin = [
+            'email'=>$request->email,
+            'password'=>$request->passwordlam
+        ];
+
         if ($request->password != null) {
-            if ($request->password == $request->konfirm_password) {
-                // dd($request);
-                $user->password = Hash::make($request->password);
+            if (Auth::attempt($infologin)) {
+                if ($request->password == $request->konfirm_password) {
+                    $user->password = Hash::make($request->password);
+                } else {
+                    return redirect()->back();
+                }
             } else {
-                return redirect()->back();
+                // dd('hghgh');
+                return redirect()->back()->withErrors(['error' => 'Password lama salah.']);
             }
+            
         }
 
         $user->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil Edit Profile');
     }
     public function destroy()
     {

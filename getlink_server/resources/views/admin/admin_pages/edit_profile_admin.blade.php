@@ -11,15 +11,16 @@
         }
 
         /* .content {
-                                    height: 50vh;
-                            } */
+                                        height: 50vh;
+                                } */
 
         .profil-bung {
-            /* margin-left: 10px; */
-            overflow: auto;
+
             height: 70vh;
             width: 100%;
+            margin-top: -150px;
         }
+
 
         .profil-content {
 
@@ -28,11 +29,11 @@
         }
 
         /* .hidden {
-                                opacity: 0;
-                                filter: blur(5px);
-                                transform: translateX(100%);
-                                transition: all 0.7s;
-                            } */
+                                    opacity: 0;
+                                    filter: blur(5px);
+                                    transform: translateX(100%);
+                                    transition: all 0.7s;
+                                } */
         .profil_kanan {
             align-items: center;
             justify-content: center;
@@ -108,24 +109,24 @@
         }
 
         /* .profil_kiri {
-                                width: 55%;
-                                display: flex;
-                                height: 100vh;
-                                margin-top: 120px;
-                            } */
+                                    width: 55%;
+                                    display: flex;
+                                    height: 100vh;
+                                    margin-top: 120px;
+                                } */
         /* .profil_form {
-                                width: 100%;
-                                display: flex;
-                                flex-direction: column;
-                            } */
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                } */
         /* .profil_label {
-                                font-family: "Roboto", sans-serif;
-                                font-style: normal;
-                                font-weight: 400;
-                                font-size: 13px;
-                                line-height: 15px;
-                                color: #292929;
-                            }  */
+                                    font-family: "Roboto", sans-serif;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    font-size: 13px;
+                                    line-height: 15px;
+                                    color: #292929;
+                                }  */
         .profil_input {
             width: 95%;
             height: 42px;
@@ -224,11 +225,11 @@
         }
 
         /* .navAni {
-                                opacity: 0;
-                                filter: blur(5px);
-                                transform: translateY(-100%);
-                                transition: all 0.7s;
-                            } */
+                                    opacity: 0;
+                                    filter: blur(5px);
+                                    transform: translateY(-100%);
+                                    transition: all 0.7s;
+                                } */
         .del-conmo {
             background-color: #fefefe;
             margin: auto;
@@ -318,6 +319,10 @@
         }
 
         @media screen and (max-width: 600px) {
+            .profil-bung {
+                margin-top: -290px;
+            }
+
             .profil-content-isi {
                 flex-direction: column;
                 justify-content: center;
@@ -347,23 +352,30 @@
                     </div>
                     <div class="profil_kiri">
                         <form id="edit" action="/profile/update/{{ Auth::user()->id }}" enctype="multipart/form-data"
-                            method="POST" class="profil_form">
+                            method="POST" class="profil_form" onsubmit="return validateForm()">
                             @method('put')
                             @csrf
                             <label class="profil_label" for="username">Username</label>
-                            <input value="{{ $user->name }}" type="text" name="username" id=""
-                                class="profil_input">
+                            <input value="{{ $user->name }}" disabled type="text" name="username" id="username"
+                                class="profil_input" style="cursor: not-allowed">
                             <label class="profil_label" for="email">Email</label>
-                            <input value="{{ $user->email }}" type="email" name="email" id=""
-                                class="profil_input">
-                            <label class="profil_label" for="password">Ubah Password</label>
-                            <input type="password" name="password" id="" class="profil_input">
-                            <label class="profil_label" for="password">Confirm Password</label>
-                            <input type="password" name="konfirm_password" id="" class="profil_input">
+                            <input value="{{ $user->email }}" disabled type="email" name="email" id="email"
+                                class="profil_input" style="cursor: not-allowed">
+                            <div class="" id="pass" hidden>
+                                <label class="profil_label" id="passwordlam" for="passwordlam">Password Lama</label>
+                                <input type="password" name="passwordlam" id="" class="profil_input">
+                                <label class="profil_label" for="password">Ubah Password</label>
+                                <input type="password" name="password" id="" class="profil_input">
+                                <label class="profil_label" for="password">Confirm Password</label>
+                                <input type="password" name="konfirm_password" id="" class="profil_input">
+                            </div>
                             <input type="file" hidden name="gambar" id="gambar">
+                            <button class="profil_simpan" type="button" id="ed"
+                                onclick="enableInputs()">Edit</button>
                             <div class="form_bottom">
-                                <button class="profil_batal" type="reset">Batal</button>
-                                <button type="submit" class="profil_simpan">Simpan</button>
+                                <button class="profil_batal" hidden type="reset" onclick="batInputs()"
+                                    id="bat">Batal</button>
+                                <button type="submit" id="sim" hidden class="profil_simpan">Simpan</button>
                             </div>
                         </form>
                     </div>
@@ -371,6 +383,28 @@
             </div>
         </div>
     </main>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "{{ session('success') }}",
+            });
+        </script>
+    @endif
+
+
+    @if ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ $errors->first() }}'
+            })
+        </script>
+    @endif
+
 
     <div id="DelComModal" class="del-com-modal navAni">
         <div class="del-conmo">
@@ -390,12 +424,38 @@
     </div>
 
     <script>
+        function enableInputs() {
+            document.getElementById("username").removeAttribute("disabled");
+            document.getElementById("email").removeAttribute("disabled");
+            document.getElementById("username").removeAttribute("style");
+            document.getElementById("email").removeAttribute("style");
+            document.getElementById("pass").removeAttribute("hidden");
+            document.getElementById("bat").removeAttribute("hidden");
+            document.getElementById("sim").removeAttribute("hidden");
+            document.getElementById("ed").setAttribute("hidden", true);
+        }
+    </script>
+    <script>
+        function batInputs() {
+            document.getElementById("username").setAttribute("disabled", true);
+            document.getElementById("email").setAttribute("disabled", true);
+            document.getElementById("username").setAttribute("style", "cursor: not-allowed");
+            document.getElementById("email").setAttribute("style", "cursor: not-allowed");
+            document.getElementById("pass").setAttribute("hidden", true);
+            document.getElementById("bat").setAttribute("hidden", true);
+            document.getElementById("sim").setAttribute("hidden", true);
+            document.getElementById("ed").removeAttribute("hidden");
+        }
+    </script>
+
+    <script>
         function validateForm() {
             var name = document.forms["edit"]["username"].value;
             var email = document.forms["edit"]["email"].value;
             var password = document.forms["edit"]["password"].value;
             var conpassword = document.forms["edit"]["konfirm_password"].value;
             var icon = document.forms["edit"]["gambar"].value;
+            var passwordLama = document.forms["edit"]["passwordlam"].value;
             var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
 
             if (name == "") {
@@ -409,28 +469,39 @@
 
             if (email == "") {
                 Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Email harus diisi",
+                    icon: "error",
+                    title: "Error",
+                    text: "Email harus diisi",
                 });
                 return false;
             }
 
-            if (password !== "") {
-                if (password.length < 8) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Password harus 8 karakter',
-                    });
-                    return false;
-                }
+            if (passwordLama !== "") {
+                if (password !== "") {
+                    if (password.length < 8) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Password harus 8 karakter',
+                        });
+                        return false;
+                    }
 
-                if (conpassword !== password){
+                    if (conpassword !== password) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Konfirmasi Password harus Sama Dengan Password',
+                        });
+                        return false;
+                    }
+                }
+            } else {
+                if (password !== "" || conpassword !== "") {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Konfirmasi Password harus Sama Dengan Password',
+                        icon: 'warning',
+                        title: 'Warning',
+                        text: 'Isikan Password Lama Terlebih Dahulu',
                     });
                     return false;
                 }
@@ -439,21 +510,16 @@
 
             if (icon && !allowedExtensions.exec(icon)) {
                 Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Format file Foto tidak sesuai (jpg, jpeg, png, svg)",
+                    icon: "error",
+                    title: "Error",
+                    text: "Format file Foto tidak sesuai (jpg, jpeg, png, svg)",
                 });
                 return false;
             }
 
-            Swal.fire({
-                icon: "success",
-                title: "Berhasil",
-                text: "Berhasil Edit Profile",
-                });
+
             return true;
         }
-
     </script>
 
     <script>
