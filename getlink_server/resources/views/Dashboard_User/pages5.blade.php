@@ -844,7 +844,16 @@
                 // Tambahkan event listener ke button dengan fungsi event listener yang telah dibuat
                 acDiv.on("click", (function(div) {
                     return function() {
-                        div.toggleClass("div3Dotact");
+                        // Cek apakah elemen div saat ini sudah memiliki kelas 'div3Dotact'
+                        if (div.hasClass("div3Dotact")) {
+                            // Jika sudah, hilangkan kelas 'div3Dotact'
+                            div.removeClass("div3Dotact");
+                        } else {
+                            // Jika belum, hilangkan kelas 'div3Dotact' dari semua elemen div
+                            $('.div3Dotact').removeClass('div3Dotact');
+                            // dan tambahkan kelas 'div3Dotact' ke elemen div yang sesuai
+                            div.addClass("div3Dotact");
+                        }
                     };
                 })(divAc));
 
