@@ -314,7 +314,7 @@ class Dashboard_User_Controller extends Controller
         $template = microsite::findOrFail($lastSegment);
 
         $penentu = microsite_detail::where('id_microsite', $lastSegment)->where('id_komponen', 11)->get();
-        if ($penentu) {
+        if ($penentu->count() > 0) {
             $tambah_komponen = komponen::whereNotIn('id', [11, 12])->get();
         } else {
             $tambah_komponen = komponen::where('id', '<>', 12)->get();
@@ -350,7 +350,7 @@ class Dashboard_User_Controller extends Controller
                 $microkon = microsite_detail_konten::where('id_microsite', $lastSegment)->get();
                 foreach($microkon as $row1) {
                     $microkon_kode .= str_replace('class="component-input-style"', 'class="component-input-style" data-id_microkon="' . $row1->id . '"', $row1->code_input);
-                    $microkon_kode .= '<button class="hapusssss" data-id="'. $row1->id .'">Hapus</button>';
+                    $microkon_kode .= '<label>Hapus Komponen</label><br><button class="hapusssss" data-id="'. $row1->id .'">Hapus</button>';
                 }
                 $dragss[$key]['code_input'] = $microkon_kode;
             }
@@ -455,8 +455,8 @@ class Dashboard_User_Controller extends Controller
                 $microkon->value = 'https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4';
                 $microkon->image = 'okk.jpg';
                 $microkon->code = '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template"><img class="img-template" src="microsite/konten/okk.jpg" alt=""></a>';
-                $microkon->code_input = '<input class="component-input-style" value="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" name="linkkonten[]" type="text" /> <br>
-                <input class="component-input-style" name="imagekonten[]" type="file" /> <br>';
+                $microkon->code_input = '<label>Masukkan Tautan</label><br><input class="component-input-style" value="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" name="linkkonten[]" type="text" /> <br>
+                <label>Masukkan Gambar</label><br><input class="component-input-style" name="imagekonten[]" type="file" /> <br>';
                 $microkon->save();
     
                 $micros = microsite_detail::findOrFail($id_microdet->id);
