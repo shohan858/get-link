@@ -10,7 +10,7 @@
         justify-content: center;
     }
 
-    button {
+    button {`
         cursor: pointer;
     }
 
@@ -336,7 +336,7 @@
                                     <i class="fa-regular fa-copy" style="color:#fff;"></i>
                                 </button>
 
-                                <button onclick="openModaledit()" style="margin-right:5px; margin-bottom: 3px;" class="edit-btn">
+                                <button onclick="openModaledit({{ $index }}, {{$row->id}})" style="margin-right:5px; margin-bottom: 3px;" class="edit-btn">
                                     <i class="fa-solid fa-pen" style="color:#fff;"></i>
                                 </button>
 
@@ -418,6 +418,24 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div id="SlEditModal{{$index}}" class="modal" style="display: none">
+    <div class="modal-content">
+        <div class="slMtop">
+            <p class="mtopP">Buat tautan</p>
+            <span class="close-slEdit">&times;</span>
+        </div>
+
+        <form class="sl_form" id="update_shotlink">
+            {{-- <label class="sl_label" for="nama">Nama</label> --}}
+            <input class="sl_text" type="text" id="inputSL_edit" name="link_shortlink" placeholder="Tautan panjang">
+            <input type="hidden" value="{{$item->id}}" id="id_shortlink" name="id_shortlink">
+            <button id="SlEdit_kirim" data-id="{{$index}}" class="btn_msSL" type="submit">Submit</button>
+        </form>
+
+    </div>
+</div>
 @endforeach
 
 <!-- Modal -->
@@ -438,26 +456,44 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div id="SlEditModal" class="modal" style="display: none">
-    <div class="modal-content">
-        <div class="slMtop">
-            <p class="mtopP">Buat tautan</p>
-            <span class="close-slEdit">&times;</span>
-        </div>
 
-        <form class="sl_form">
-            {{-- <label class="sl_label" for="nama">Nama</label> --}}
-            <input class="sl_text" type="text" id="inputSL_edit" name="edit_sl" placeholder="Tautan panjang">
-            <button id="SlEdit_kirim" class="btn_msSL" type="submit">Submit</button>
-        </form>
-
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    $(document).on("click", "#SlEdit_kirim", function () {
+        var index = $(this).data("id");
+
+    // Menggunakan nilai index untuk mendapatkan elemen form yang sesuai
+    var formData = new FormData($("#SlEditModal" + index + " #update_shotlink")[0]);
+        console.log(formData);
+        $.ajax({
+            url: "{{ url('shortlinks_update') }}",
+            type: "post",
+            dataType: "json",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (response) {
+                swal.fire({
+                    icon: "success",
+                    title: "Berhasil Memberi Nilai",
+                });
+            },
+            error: function (xhr) {
+                swal.fire({
+                    icon: "error",
+                    title: "ada kesalahan sistem",
+                    text: "Silahkan coba lagi",
+                });
+                a;
+            },
+        });
+    });
+
     const jsonAPI = "Backend_Copy.postman_collection.json";
 
     fetch(jsonAPI)
@@ -468,8 +504,7 @@
             console.log(obj);
         })
         .catch(function(error) {
-            console.error('Someting went wrong');
-            console.error(error);
+            console.log(error);
         })
 
     const endPoint = "{{ asset('') }} assets_landing_page"
@@ -684,6 +719,7 @@
 
     // Close modal saat tombol close diklik
     const closeBtnedit = document.getElementsByClassName("close-slEdit")[0];
+    
     closeBtnedit.addEventListener("click", () => {
         modalSlEdit.style.display = "none";
     });
@@ -706,8 +742,10 @@
         modalSlEdit.style.display = "none";
     });
 
-    function openModaledit() {
-        modalSlEdit.style.display = "flex";
+    function openModaledit(index, id) {
+        const ok = document.getElementById("SlEditModal"+index);
+        ok.style.display = "flex";
+        $('#id_shortlink').val(id);
     }
 
     function copyText(text) {

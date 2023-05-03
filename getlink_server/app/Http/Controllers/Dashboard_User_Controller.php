@@ -686,11 +686,13 @@ class Dashboard_User_Controller extends Controller
         return view('Dashboard_User.shortlinks_edit')->with('data', $data);
     }
 
-    public function shortlinks_update(Request $requests ,$id) {
-        $data = shortlink::find($id);
-        $data->link = $requests->link;
+    public function shortlinks_update(Request $request) {
+        $data = shortlink::find($request->id_shortlink);
+        $data->link = $request->link_shortlink;
         $data->update();
-        return redirect()->back();
+        return response()->json([
+            'message' => 'success',
+        ], 200);
     }
 
     public function shortlinks_delete($id) {

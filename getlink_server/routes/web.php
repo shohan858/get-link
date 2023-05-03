@@ -100,7 +100,7 @@ Route::middleware(['authuser'])->group(function () {
     Route::get('/shortlink', [Dashboard_User_Controller::class, 'shortlinks']);
     Route::get('/shortlink/{id}', [Dashboard_User_Controller::class, 'shortlinks_edit']);
     ROute::get('/shortlink_create', [Dashboard_User_Controller::class, 'shortlinks_create']);
-    Route::put('/shortlinks_update/{id}', [Dashboard_User_Controller::class, 'shortlinks_update']);
+    Route::post('/shortlinks_update', [Dashboard_User_Controller::class, 'shortlinks_update']);
     Route::delete('/shortlink_delete/{id}', [Dashboard_User_Controller::class, 'shortlinks_delete']);
 });
 
