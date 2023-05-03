@@ -13,6 +13,7 @@
 
             @include("admin.layout.navbar")
             @yield('admin_konten')
+            @include('admin.layout.footer')
         </div>
     </div>
 

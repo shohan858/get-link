@@ -1,5 +1,5 @@
 <nav>
-    <div class="adKanav">
+    <div class="adKanav" data-aos="fade-right">
         <div class="tpNav">
             <button id="PorfAct" class="proNav">
                 <p class="navName">{{ Auth::User()->name }}</p>

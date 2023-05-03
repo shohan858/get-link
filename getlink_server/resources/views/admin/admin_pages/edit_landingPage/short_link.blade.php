@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ $item->title }}</td>
                 <td>{{ $item->subtitle }}</td>
-                <td><img src="{{ url('gambar').'/'.$item->image }}" width="15%" height="15%" alt="not found"></td>
+                <td><img src="{{ url('gambar').'/'.$item->image }}" width="50px" height="50px" alt="not found"></td>
                 <td>
                     <button id="sl_btn" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
                 </td>
@@ -53,7 +53,7 @@
 
     {{-- Modal --}}
     <div id="iframe" class="modal">
-        <div class="modal_preview" style="height: 80%"> 
+        <div class="modal_preview" style="height: 80%">
             <div class="modal-header">
                 <p class="headP">Preview</p>
                 <span onclick="close_preview()" class="close">&times;</span>
@@ -66,14 +66,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
     <script>
         var dropify = $('.dropify').dropify();
-    
+
     dropify.on('change', function() {
         var input = this;
         var parentID = $(this).closest('[data-id]').data('id');
         var formData = new FormData();
         formData.append('file', input.files[0]); // Ambil file yang dipilih
         formData.append('id', parentID);
-    
+
         updateImage(formData, $(this));
     });
     </script>
@@ -109,11 +109,11 @@
         });
     });
     </script>
-    
+
 
     <script>
 
-        
+
         var slBtn = document.getElementById("sl_btn");
         var slEdit = document.getElementById("sl_edit");
 

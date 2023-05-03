@@ -57,17 +57,17 @@
             border-radius: 10px;
             background-color: #fff !important;
             /* ubah warna latar belakang sesuai keinginan */
-            border: 1px solid #A5A5A5 !important;
+            border: 1px solid #cccccc !important;
             /* hilangkan garis pembatas jika tidak dibutuhkan */
         }
 
         .paginate_button.current {
-            background-color: #A5A5A5 !important;
+            background-color: #cccccc !important;
             color: #fff !important;
         }
 
         .pagination .active a {
-            background-color: #A5A5A5;
+            background-color: #cccccc;
             /* ubah warna latar belakang tombol aktif */
             color: #fff !important;
             /* ubah warna teks tombol aktif */
@@ -79,7 +79,7 @@
         }
 
         .paginate_button:hover {
-            background-color: #A5A5A5 !important;
+            background-color: #cccccc !important;
             /* ubah warna latar belakang tombol saat dihover */
             color: #fff !important;
             /* ubah warna teks tombol saat dihover */

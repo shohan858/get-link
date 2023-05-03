@@ -22,24 +22,6 @@
 
     <title>Login page</title>
     <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
-    <style>
-        .password-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .toggle-password {
-            position: absolute;
-            top: 50.5%;
-            right: 6%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        .toggle-password.hide-password::before {
-            content: "\f070";
-        }
-    </style>
 </head>
 
 <body>
@@ -59,10 +41,12 @@
                 <form id="login-form" action="/sesi/login" method="POST" style="width: 100%">
                     @csrf
                     <input class="formEM" type="email" name="email" id="fname" placeholder="Masukkan email">
-                    <input class="formPass" type="password" name="password" id="lname"
-                        placeholder="Masukkan password" onkeyup="checkPassword()">
-                    <i class="far fa-eye toggle-password" id="togglePassword"></i>
-                    <div id="password-error" style="color:red"></div>
+                    <div class="bungPass">
+                        <input class="formPass" type="password" name="password" id="lname"
+                            placeholder="Masukkan password" onkeyup="checkPassword()">
+                        <i class="far fa-eye toggle-password" id="togglePassword"></i>
+                        <div id="password-error" class="pwError" style="color:red"></div>
+                    </div>
                     <br>
                     <a href="{{ url('forgot_password') }}" class="fp" href="">Forgot password?</a>
                     <button class="btnLogin" type="submit" value="Submit">Login</button><br>
@@ -73,7 +57,8 @@
                             Sign in with google
                         </button>
                     </a>
-                    <p class="tegs">Anda belum mempunyai akun? <a class="regs" href="/register"><b>Register</b></a></p>
+                    <p class="tegs">Anda belum mempunyai akun? <a class="regs" href="/register"><b>Register</b></a>
+                    </p>
                 </form>
             </div>
         </div>

@@ -87,7 +87,7 @@ body {
 .profil_nav {
     border-radius: 25px;
     width: auto;
-    border: 2px solid transparent;
+    /* border: 2px solid transparent; */
     display: flex;
     align-items: center;
     height: fit-content;
@@ -95,10 +95,10 @@ body {
     justify-content: center;
 }
 
-.profil_nav:hover,
+/* .profil_nav:hover,
 .profte {
     border: 2px solid #fff;
-}
+} */
 
 .prof_dropdown {
     width: 127px;
@@ -141,7 +141,7 @@ body {
 .nama_nav {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    margin-right: 10px;
+    margin-right: 5px;
     line-height: 18px;
     color: #FFFFFF;
     font-weight: 500;
@@ -204,7 +204,7 @@ a {
 .aside-button:hover {
     background-color: #524799;
     color: #ffffff;
-    border: 2px solid #524799;
+    /* border: 2px solid #524799; */
 }
 
 .aside-drop {
@@ -258,6 +258,30 @@ a {
     width: 100%;
     margin-top: 30px;
     margin-bottom: 0px;
+}
+
+.bungTam {
+    align-items: center;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.tamSlot {
+    border-radius: 10px;
+    border: 3px solid #6b75e6;
+    width: 130px;
+    display: flex;
+    background-color: #fff;
+    color: #6b75e6;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+}
+
+.tamSlot:hover {
+    color: #fff;
+    background-color: #6b75e6;
 }
 
 .st {
@@ -423,7 +447,7 @@ a {
 .navbar-upgrade:hover,
 .navbar-upgrade:hover .navbar-thumb-up path {
     background-color: #524799;
-    border: 2px solid #524799;
+    /* border: 2px solid #524799; */
     fill: #ffffff;
 }
 
@@ -453,6 +477,7 @@ a {
     font-size: 15px;
     line-height: 23px;
     text-decoration: none;
+    text-align: center;
     color: #6b75e6;
 }
 
@@ -1472,13 +1497,19 @@ background-color: #ffffff;
     justify-content: center;
 }
 
+.boxImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
 .img-inside {
     width: auto;
     height: inherit;
 }
 
 .box-text {
-    width: 240px;
+    width: 150px;
     height: 77px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1528,7 +1559,7 @@ background-color: #ffffff;
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -1537,6 +1568,10 @@ background-color: #ffffff;
     cursor: pointer;
     text-decoration: none;
     color: #ffffff;
+}
+
+.iconEdit {
+    font-size: 13px;
 }
 
 /* End pages 1 */
@@ -3136,6 +3171,7 @@ background-color: #ffffff;
 }
 
 .pages5-preview {
+    text-overflow: ellipsis;
     width: 45%;
     height: 45px;
     margin-top: 40px;
@@ -3145,6 +3181,7 @@ background-color: #ffffff;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .pages5-preview:hover {
@@ -3440,8 +3477,8 @@ flex-direction: column; */
     width: 70%;
     display: flex;
     height: auto;
-    min-width: 160px;
-    padding: 10px;
+    /* min-width: 160px;
+    padding: 10px; */
 }
 
 .div3Dot-drop .div3Dot-isi:hover {
@@ -3924,7 +3961,7 @@ flex-direction: column; */
     .content-kanan {
         width: 18%;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
     }
 
     .content-crud {
@@ -4327,6 +4364,29 @@ flex-direction: column; */
 }
 
 @media screen and (max-width: 600px) {
+
+    .img_nav {
+        width: 25px;
+        height: 25px;
+        margin: 0;
+    }
+
+    .prof_dropdown {
+        left: -10px;
+        width: 107px;
+    }
+
+    .drop-is {
+        width: 107px;
+    }
+
+    .nama_nav {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 5ch;
+    }
+
     .sl_tl {
         width: 80px;
         font-size: 13px;
@@ -4353,9 +4413,9 @@ flex-direction: column; */
         font-size: 22px;
     }
 
-    .profil_nav {
+    /* .profil_nav {
         margin-right: 10px;
-    }
+    } */
 
     .sl_searchDiv {
         width: 105px;
@@ -4398,9 +4458,9 @@ flex-direction: column; */
         grid-template-columns: repeat(2, 1fr);
     } */
 
-    .content-box {
+    /* .content-box {
         display: none;
-    }
+    } */
 
     .aside {
         width: 50%;
@@ -4470,8 +4530,8 @@ flex-direction: column; */
     }
 
     .content-kanan {
-        width: 30%;
-        align-items: center;
+        width: 8%;
+        /* align-items: center; */
     }
 
     /* .content-crud {
@@ -5284,6 +5344,14 @@ button {
 
     .modal-atas {
         height: 12%;
+    }
+
+    .content-crud {
+        width: 30px;
+    }
+
+    .editName {
+        display: none;
     }
 
     /* .modal-bawah {

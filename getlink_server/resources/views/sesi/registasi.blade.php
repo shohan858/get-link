@@ -22,36 +22,6 @@
 
     <title>Register</title>
     <link rel="icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
-    <style>
-        .password-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .toggle-password {
-            position: absolute;
-            top: 56%;
-            right: 7%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        .toggle-password2 {
-            position: absolute;
-            top: 50%;
-            right: 7%;
-            transform: translateY(610%);
-            cursor: pointer;
-        }
-
-        .toggle-password.hide-password::before {
-            content: "\f070";
-        }
-
-        .toggle-password2.hide-password::before {
-            content: "\f070";
-        }
-    </style>
 
 </head>
 
@@ -73,10 +43,12 @@
                     @csrf
                     <input class="formTe" type="text" id="fname" name="name" placeholder="Masukan Nama" />
                     <input class="formEM" type="email" id="femail" name="email" placeholder="Masukkan email">
-                    <input class="formPass" type="password" name="password" id="lname"
-                        placeholder="Masukkan password" onkeyup="checkPassword()">
-                    <i class="far fa-eye toggle-password" id="togglePassword"></i>
-                    <div id="password-error" style="color:red"></div>
+                    <div class="bungPass-reg">
+                        <input class="formPass" type="password" name="password" id="lname"
+                            placeholder="Masukkan password" onkeyup="checkPassword()">
+                        <i class="far fa-eye toggle-password-reg" id="togglePassword"></i>
+                        <div id="password-error" class="pwError" style="color:red"></div>
+                    </div>
                     <input class="formCP" id="fcon" type="password" id="lname2" name="confirmpassword"
                         placeholder="Masukan Password Confirmation" />
                     {{-- <i class="far fa-eye toggle-password2" id="toggleConfirmPassword"></i> --}}

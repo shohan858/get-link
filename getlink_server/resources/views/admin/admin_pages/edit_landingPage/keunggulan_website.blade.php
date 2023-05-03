@@ -32,15 +32,15 @@
                             <td>1</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50%"
-                                    height="50%" alt="not found"></td>
+                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50px"
+                                    height="50px" alt="not found"></td>
                             <td>
                                 <button id="kw_btn1" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <form onsubmit="return validateForm()" style="margin-top: -5%" class="bottomtab" id="kw_edit1" method="POST"
+                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit1" method="POST"
                                     action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="botHead">
@@ -75,15 +75,15 @@
                             <td>2</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50%"
-                                    height="50%" alt="not found"></td>
+                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50px"
+                                    height="50px" alt="not found"></td>
                             <td>
                                 <button id="kw_btn2" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <form onsubmit="return validateForm()" style="margin-top: -5%" class="bottomtab" id="kw_edit2" method="POST"
+                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit2" method="POST"
                                     action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="botHead">
@@ -118,15 +118,15 @@
                             <td>3</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50%"
-                                    height="50%" alt="not found"></td>
+                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50px"
+                                    height="50px" alt="not found"></td>
                             <td>
                                 <button id="kw_btn3" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <form onsubmit="return validateForm()" style="margin-top: -5%" class="bottomtab" id="kw_edit3" method="POST"
+                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit3" method="POST"
                                     action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="botHead">
@@ -162,14 +162,14 @@
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->subtitle }}</td>
                             <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
-                                    width="50%" height="50%" alt="not found"></td>
+                                    width="50px" height="50px" alt="not found"></td>
                             <td>
                                 <button id="kw_btn4" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <form onsubmit="return validateForm()" style="margin-top: -5%" class="bottomtab" id="kw_edit4" method="POST"
+                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit4" method="POST"
                                     action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="botHead">
@@ -205,14 +205,14 @@
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->subtitle }}</td>
                             <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
-                                    width="50%" height="50%" alt="not found"></td>
+                                    width="50px" height="50px" alt="not found"></td>
                             <td>
                                 <button id="kw_btn5" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <form onsubmit="return validateForm()" style="margin-top: -5%" class="bottomtab" id="kw_edit5" method="POST"
+                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit5" method="POST"
                                     action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="botHead">
@@ -248,14 +248,14 @@
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->subtitle }}</td>
                             <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
-                                    width="50%" height="50%" alt="not found"></td>
+                                    width="50px" height="50px" alt="not found"></td>
                             <td>
                                 <button id="kw_btn6" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <form onsubmit="return validateForm()" style="margin-top: -5%" class="bottomtab" id="kw_edit6" method="POST"
+                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit6" method="POST"
                                     action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data"
                                     style="margin-top: 0%">
                                     @csrf

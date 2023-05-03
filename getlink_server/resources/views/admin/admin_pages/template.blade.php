@@ -1,39 +1,39 @@
 @extends('admin.layout.base')
 
 @section('admin_konten')
-<style type="text/css">
-    .paginate_button {
-        border-radius: 10px;
-        background-color: #fff !important;
-        /* ubah warna latar belakang sesuai keinginan */
-        border: 1px solid #A5A5A5 !important;
-        /* hilangkan garis pembatas jika tidak dibutuhkan */
-    }
+    <style type="text/css">
+        .paginate_button {
+            border-radius: 10px;
+            background-color: #fff !important;
+            /* ubah warna latar belakang sesuai keinginan */
+            border: 1px solid #cccccc !important;
+            /* hilangkan garis pembatas jika tidak dibutuhkan */
+        }
 
-    .paginate_button.current {
-        background-color: #A5A5A5 !important;
-        color: #fff !important;
-    }
+        .paginate_button.current {
+            background-color: #cccccc !important;
+            color: #fff !important;
+        }
 
-    .pagination .active a {
-        background-color: #A5A5A5;
-        /* ubah warna latar belakang tombol aktif */
-        color: #fff !important;
-        /* ubah warna teks tombol aktif */
-    }
+        .pagination .active a {
+            background-color: #cccccc;
+            /* ubah warna latar belakang tombol aktif */
+            color: #fff !important;
+            /* ubah warna teks tombol aktif */
+        }
 
-    .pagination a {
-        color: #007bff;
-        /* ubah warna teks tombol */
-    }
+        .pagination a {
+            color: #007bff;
+            /* ubah warna teks tombol */
+        }
 
-    .paginate_button:hover {
-        background-color: #A5A5A5 !important;
-        /* ubah warna latar belakang tombol saat dihover */
-        color: #fff !important;
-        /* ubah warna teks tombol saat dihover */
-    }
-</style>
+        .paginate_button:hover {
+            background-color: #cccccc !important;
+            /* ubah warna latar belakang tombol saat dihover */
+            color: #fff !important;
+            /* ubah warna teks tombol saat dihover */
+        }
+    </style>
     <div class="button-kanan">
         <button class="button1" onclick="add_template()" id="add_template" style="cursor: pointer;margin:1% 1% 3% 2.5%"><i
                 class="fa-solid fa-plus"></i> Tambah Template</button>
@@ -57,15 +57,14 @@
             </thead>
         </table>
     </div>
-    <script src="{{asset('DataTables/datatables.min.js')}}"></script>
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('DataTables/datatables.js') }}"></script>
     <script>
         $(function() {
             $('#users-table').DataTable({
-             
-                ajax:  "{{ route('getdata_template') }}",
-                columns: [
-                    {
+
+                ajax: "{{ route('getdata_template') }}",
+                columns: [{
                         data: 'id',
                         orderable: false, // Menonaktifkan pengurutan untuk kolom ini
                         render: function(data, type, row, meta) {
@@ -82,7 +81,8 @@
                     {
                         data: 'image',
                         render: function(data, type, full, meta) {
-                            return '<img src="/microsite/template_image/' + data + '" width="100" height="100">';
+                            return '<img src="/microsite/template_image/' + data +
+                                '" width="100" height="100">';
                         }
                     },
                     {
@@ -106,30 +106,32 @@
                     },
                     {
                         data: 'type_background',
-                    },   
+                    },
                     {
                         data: 'status',
                         render: function(data, type, full, meta) {
-                        if (data === "pending") {
-                            return '<button class="pending-btn">' + data + '</button>';
-                        } else if (data === "on") {
-                            return '<button class="on-btn">' + data + '</button>';
-                        } else {
-                            return data;
-                        }
+                            if (data === "pending") {
+                                return '<button class="pending-btn">' + data + '</button>';
+                            } else if (data === "on") {
+                                return '<button class="on-btn">' + data + '</button>';
+                            } else {
+                                return data;
+                            }
                         }
                     },
                     {
                         data: 'id',
                         title: 'Aksi',
                         render: function(data, type, full, meta) {
-                            return '<div class="aksi-wrapper">' + 
-                            '<button style="margin-right:5px" class="katHap" data-id="' + data +
-                            '" data-nama="' + full.title +
-                            '" onclick="deleteKategori(this)"><i class="fa-solid fa-trash" style="color:#fff;cursor: pointer;"></i></button>' +
-                            '<a style="margin-right:5px" href="/edit_template/'+data+'"><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></a>' +
-                            '<a href="/admin/preview_template/'+data+'"><button class="detail-btn"><i class="fa-solid fa-eye"></i></button></a>' +
-                            '</div>';
+                            return '<div class="aksi-wrapper">' +
+                                '<button style="margin-right:5px" class="katHap" data-id="' + data +
+                                '" data-nama="' + full.title +
+                                '" onclick="deleteKategori(this)"><i class="fa-solid fa-trash" style="color:#fff;cursor: pointer;"></i></button>' +
+                                '<a style="margin-right:5px" href="/template/edit/' + data +
+                                '"><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></a>' +
+                                '<a href="/template/lihat/' + data +
+                                '"><button class="detail-btn"><i class="fa-solid fa-eye"></i></button></a>' +
+                                '</div>';
                         }
                     },
                 ]
@@ -168,10 +170,9 @@
         }
 
         $(document).ready(function() {
-  $('.paginate_button.current').css('background-color', '#007bff');
-  $('.paginate_button.current').css('color', '#fff');
-});
-
+            $('.paginate_button.current').css('background-color', '#007bff');
+            $('.paginate_button.current').css('color', '#fff');
+        });
     </script>
 
     {{-- Modal template --}}
@@ -182,11 +183,13 @@
                 <span onclick="closeaddtemplate()" class="close">&times;</span>
             </div>
             <div class="modal-body-template">
-                <form id="formTambahKategori" method="POST" action="{{ route('tambah_template') }}" style="margin: 15px"enctype="multipart/form-data" onsubmit="return validateForm()">
+                <form id="formTambahKategori" method="POST" action="{{ route('tambah_template') }}"
+                    style="margin: 15px"enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
                     <div class="collab" style="display:block">
                         <label for="" class="label-gambar">Nama Template</label>
-                        <input type="text" name="title" required class="botImg" style="margin-top: 0%;margin-bottom: 3%;outline:none;width: 100%">
+                        <input type="text" name="title" required class="botImg"
+                            style="margin-top: 0%;margin-bottom: 3%;outline:none;width: 100%">
                     </div>
                     <div class="form-group">
                         <label for="exampleSelect1" class="label-gambar">Kategori</label>
@@ -200,8 +203,8 @@
                     <div class="collab" style="display:block;margin-top:3%;width:97%">
                         <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label>
                         {{-- <div class="botImg" style="margin-top: 0%;margin-bottom: 3%;width: 100%"> --}}
-                            {{-- <input type="file" hidden="hidden" class="dropify" name="image" required id="sl_file"> --}}
-                            {{-- <span id="sl_custmMsg" class="customMsg" style="margin-left: 3px">Tidak ada file yang
+                        {{-- <input type="file" hidden="hidden" class="dropify" name="image" required id="sl_file"> --}}
+                        {{-- <span id="sl_custmMsg" class="customMsg" style="margin-left: 3px">Tidak ada file yang
                                 dipilih</span>
                             <button style="cursor: pointer" type="button" id="sl_upBtn" class="btn-gam">Pilih
                                 file</button> --}}
@@ -225,7 +228,7 @@
                         <div class="collab" id="colorInput" style="display:none;margin-top:3%">
                             <label for="color" class="label-gambar">Background Color</label><br>
                             <input type="color" name="background" id="color" class="botImg"
-                                style="margin-top: 0%;margin-bottom: 3%;width: 100%" >
+                                style="margin-top: 0%;margin-bottom: 3%;width: 100%">
                         </div>
                         <div class="collab" id="imageInput" style="display:none;margin-top:3%">
                             <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label>
@@ -268,34 +271,34 @@
 
             if (title == "") {
                 Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "TItle kategori harus diisi",
+                    icon: "error",
+                    title: "Error",
+                    text: "TItle kategori harus diisi",
                 });
                 return false;
             }
 
             if (kategori == "") {
                 Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Kategori kategori harus diisi",
+                    icon: "error",
+                    title: "Error",
+                    text: "Kategori kategori harus diisi",
                 });
                 return false;
             }
 
             if (image == "") {
                 Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Gambar harus diisi",
+                    icon: "error",
+                    title: "Error",
+                    text: "Gambar harus diisi",
                 });
                 return false;
             } else if (!allowedExtensions.exec(image)) {
                 Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Format file Gambar tidak sesuai (jpg, jpeg, png, svg)",
+                    icon: "error",
+                    title: "Error",
+                    text: "Format file Gambar tidak sesuai (jpg, jpeg, png, svg)",
                 });
                 return false;
             }
@@ -303,39 +306,39 @@
             Swal.fire({
                 icon: "success",
                 title: "Berhasil",
-                text: "Berhasil Tambah Template "+title,
-                });
+                text: "Berhasil Tambah Template " + title,
+            });
             return true;
         }
     </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
-<script>
-    var dropify = $('.dropify').dropify();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script>
+        var dropify = $('.dropify').dropify();
 
-dropify.on('change', function() {
-    var input = this;
-    var parentID = $(this).closest('[data-id]').data('id');
-    var formData = new FormData();
-    formData.append('file', input.files[0]); // Ambil file yang dipilih
-    formData.append('id', parentID);
+        dropify.on('change', function() {
+            var input = this;
+            var parentID = $(this).closest('[data-id]').data('id');
+            var formData = new FormData();
+            formData.append('file', input.files[0]); // Ambil file yang dipilih
+            formData.append('id', parentID);
 
-    updateImage(formData, $(this));
-});
+            updateImage(formData, $(this));
+        });
 
 
-    var dropify2 = $('.dropify2').dropify();
+        var dropify2 = $('.dropify2').dropify();
 
-dropify2.on('change', function() {
-    var input2 = this;
-    var parentID2 = $(this).closest('[data-id]').data('id');
-    var formData2 = new FormData();
-    formData2.append('file', input2.files[0]); // Ambil file yang dipilih
-    formData2.append('id', parentID2);
+        dropify2.on('change', function() {
+            var input2 = this;
+            var parentID2 = $(this).closest('[data-id]').data('id');
+            var formData2 = new FormData();
+            formData2.append('file', input2.files[0]); // Ambil file yang dipilih
+            formData2.append('id', parentID2);
 
-    updateImage(formData2, $(this));
-});
-</script>
+            updateImage(formData2, $(this));
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('.botImg-temp').select2();

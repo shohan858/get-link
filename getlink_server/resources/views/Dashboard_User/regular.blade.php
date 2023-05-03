@@ -24,8 +24,8 @@
                             <p class="st">{{ $count_microsite }}/{{ $limit_microsite }}</p>
                         </div>
                         @if ($count_microsite === $limit_microsite)
-                            <div class="" style="margin-left: 5px">
-                                <a href="/langganan" class="gt" style=""><i class="fas fa-plus"></i>
+                            <div class="bungTam">
+                                <a href="/langganan" class="tamSlot"><i class="fas fa-plus"></i>
                                     Tambah Slot</a>
                             </div>
                         @endif
@@ -35,39 +35,48 @@
                 {{-- Tampilan kosong --}}
 
                 @if ($count_microsite <= 0)
-                <div class="empty">
-                    <img src="{{ asset('assets/img/Education.png') }}" alt="" class="emptyImg">
-                    <p class="emptyP">Anda belum membuat microsite</p>
-                </div>
+                    <div class="empty">
+                        <img src="{{ asset('assets/img/Education.png') }}" alt="" class="emptyImg">
+                        <p class="emptyP">Anda belum membuat microsite</p>
+                    </div>
                 @else
-                @foreach ($my_microsite as $index => $item)
-                    <div class="anim content-isi-regu search-microsite" data-nama="{{ strtolower($item->name) }}">
-                        <div class="content-kiri-regu">
-                            <div class="content-box"><img src="{{ url('microsite/cover/' . $item->cover) }}" alt=""></div>
-                            <div class="box-text">
-                                <p class="nama-microsite">{{ $item->name }}</p>
-                                <a class="link-microsite">{{ env('APP_URL') }}/-{{ $item->link }}</a>
-                                <p class="pb-microsite"></p>
+                    @foreach ($my_microsite as $index => $item)
+                        <div class="anim content-isi-regu search-microsite" data-nama="{{ strtolower($item->name) }}">
+                            <div class="content-kiri-regu">
+                                <div class="content-box"><img class="boxImg"
+                                        src="{{ url('microsite/cover/' . $item->cover) }}" alt=""></div>
+                                <div class="box-text">
+                                    <p class="nama-microsite">{{ $item->name }}</p>
+                                    <a class="link-microsite">{{ env('APP_URL') }}/-{{ $item->link }}</a>
+                                    <p class="pb-microsite"></p>
+                                </div>
+                            </div>
+                            <div class="content-kanan">
+                                <button class="content-crud" onclick="copyToClipboard('{{ $item->link }}')">
+                                    <i class="fas fa-copy iconEdit"></i>
+                                    <p class="editName">
+                                        Salin
+                                    </p>
+                                </button>
+                                <a href="rubah_microsite/{{ $item->id_kategori }}/{{ $item->id_template }}/{{ $item->id }}"
+                                    class="content-crud">
+                                    {{-- <img src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" /> --}}
+                                    <i class="fa-regular fa-pen-to-square iconEdit"></i>
+                                    <p class="editName">
+                                        Edit
+                                    </p>
+                                </a>
+                                <button id="del{{ $index }}" class="content-crud"
+                                    onclick="openDelModal({{ $index }})">
+                                    {{-- <img src="{{ asset('assets/img/Vector (2).svg') }}" alt="" /> --}}
+                                    <i class="fa-solid fa-trash iconEdit"></i>
+                                    <p class="editName">
+                                        Hapus
+                                    </p>
+                                </button>
                             </div>
                         </div>
-                        <div class="content-kanan">
-                            <button class="content-crud" onclick="copyToClipboard('{{ $item->link }}')">
-                                <i class="fas fa-copy"></i>
-                                Salin
-                            </button>
-                            <a href="rubah_microsite/{{ $item->id_kategori }}/{{ $item->id_template }}/{{ $item->id }}"
-                                class="content-crud">
-                                <img src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" />
-                                Edit
-                            </a>
-                            <button id="del{{ $index }}" class="content-crud"
-                                onclick="openDelModal({{ $index }})">
-                                <img src="{{ asset('assets/img/Vector (2).svg') }}" alt="" />
-                                Hapus
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
                 @endif
 
                 {{ $my_microsite->links('pagination::bootstrap-4') }}

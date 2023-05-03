@@ -324,7 +324,7 @@
                     ?>
                     @foreach($data as $index => $row)
                     <tr class="search-shortlink" data-nama="{{ strtolower($row->link) }}" data-name="{{ strtolower(config('app.url').'/g'.$row->code) }}">
-                        
+
                         <td><?= $nomor++; ?></td>
                         <td class="teks">{{ $row->link }}</td>
                         <td class="teks" id="copy-text">{{ config('app.url').'/g'.$row->code }}</td>
@@ -353,18 +353,18 @@
                     // mendapatkan elemen input dan konten mikrosite
                     const inputCari = document.getElementById('cari');
                     const kontenshortlink = document.querySelectorAll('.search-shortlink');
-            
+
                     // menambahkan event input pada elemen input
                     inputCari.addEventListener('input', function() {
                         const kataKunci = inputCari.value.trim().toLowerCase(); // mendapatkan kata kunci pencarian
-            
+
                         // loop untuk memfilter konten mikrosite berdasarkan kata kunci
                         kontenshortlink.forEach(function(el) {
                             const namashortlink = el.getAttribute('data-nama');
                             const namashortlink2 = el.getAttribute('data-name');
                             const cocok = namashortlink.includes(kataKunci);
                             const cocok2 = namashortlink2.includes(kataKunci);
-            
+
                             if (cocok || cocok2) {
                                 el.style.display = '';
                             } else {
@@ -398,6 +398,7 @@
             </div>
         </div>
     </div>
+    @include('layout.Dashboard_User.footer')
     </div>
 </main>
 
@@ -724,7 +725,7 @@
     // Hapus elemen textarea
     document.body.removeChild(textarea);
 
-    // Berikan pesan bahwa teks telah disalin       
+    // Berikan pesan bahwa teks telah disalin
     showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
   }
 </script>

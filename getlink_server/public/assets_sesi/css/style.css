@@ -207,6 +207,29 @@ button {
     text-align: center;
 }
 
+.bungPass {
+    height: 70px;
+}
+
+.password-container {
+    position: relative;
+    display: inline-block;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.toggle-password.hide-password::before {
+    content: "\f070";
+}
+
+/* End Login */
+
 /* Registrasi */
 
 .formTe {
@@ -228,7 +251,29 @@ button {
     margin-top: 10px;
 }
 
+.bungPass-reg {
+    height: 70px;
+}
+
+.toggle-password-reg {
+    position: absolute;
+    top: 55.9vh;
+    right: 7%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.toggle-password-reg.hide-password::before {
+    content: "\f070";
+}
+
 /* End Registrasi */
+
+.pwError {
+    font-size: 15px;
+    color: red;
+    margin-left: 5px;
+}
 
 @media screen and (max-width: 600px) {
     .logKanan {
@@ -237,5 +282,43 @@ button {
 
     .logKiri {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 301px) {
+    .toggle-password {
+        top: 48%;
+    }
+}
+
+@media screen and (max-width: 284px) {
+    .toggle-password {
+        top: 49.5%;
+    }
+
+    .toggle-password-reg {
+        top: 57.5vh;
+    }
+}
+
+@media screen and (max-width: 279px) {
+    .toggle-password-reg {
+        top: 55.9vh;
+    }
+
+    .pwError {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 242px) {
+    .toggle-password-reg {
+        top: 58.9vh;
+    }
+}
+
+@media screen and (max-width: 240px) {
+    .toggle-password {
+        top: 52.5%;
     }
 }
