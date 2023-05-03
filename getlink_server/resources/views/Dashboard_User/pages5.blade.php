@@ -246,8 +246,27 @@
                         },
                         success: function(response) {
                             console.log(response);
-                            $('#pgKr').load(window.location.href + ' #pgKr');
-                            $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                            $('#pgKr').load(window.location.href + ' #pgKr', function() {
+                                var parentDiv = $('#pgKr');
+                                var childDiv = parentDiv.children();
+                                var parentClass = parentDiv.attr('class');
+                                var parentStyle = parentDiv.attr('style');
+
+                                childDiv.addClass(parentClass);
+                                childDiv.attr('style', parentStyle);
+                                parentDiv.replaceWith(childDiv);
+                                addComponentFunctionality();
+                            });
+                            $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus', function() {
+                                var parentDiv = $('#kanan-bungkus');
+                                var childDiv = parentDiv.children();
+                                var parentClass = parentDiv.attr('class');
+                                var parentStyle = parentDiv.attr('style');
+
+                                childDiv.addClass(parentClass);
+                                childDiv.attr('style', parentStyle);
+                                parentDiv.replaceWith(childDiv);
+                            });
                         }
                     })
                 } else {
@@ -336,6 +355,17 @@
                     data: formData,
                     success: function(response) {
                         $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                        $('#pgKr').load(window.location.href + ' #pgKr', function() {
+                            var parentDiv = $('#pgKr');
+                            var childDiv = parentDiv.children();
+                            var parentClass = parentDiv.attr('class');
+                            var parentStyle = parentDiv.attr('style');
+
+                            childDiv.addClass(parentClass);
+                            childDiv.attr('style', parentStyle);
+                            parentDiv.replaceWith(childDiv);
+                            addComponentFunctionality();
+                        });
                     },
                     error: function(xhr, status, error) {
                         console.log(error);
@@ -545,8 +575,18 @@
                                 childDiv.addClass(parentClass);
                                 childDiv.attr('style', parentStyle);
                                 parentDiv.replaceWith(childDiv);
+                                addComponentFunctionality();
                             });
-                            $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                            $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus', function() {
+                                var parentDiv = $('#kanan-bungkus');
+                                var childDiv = parentDiv.children();
+                                var parentClass = parentDiv.attr('class');
+                                var parentStyle = parentDiv.attr('style');
+
+                                childDiv.addClass(parentClass);
+                                childDiv.attr('style', parentStyle);
+                                parentDiv.replaceWith(childDiv);
+                            });
                         },
                         error: function(xhr, status, error) {
                             console.error(xhr.statusText);
@@ -889,8 +929,7 @@
                                 console.log(response);
                                 delmodal.hide();
                                 // $("#pgKr").contents().unwrap();
-                                $('#pgKr').load(window.location.href + ' #pgKr',
-                            function() {
+                                $('#pgKr').load(window.location.href + ' #pgKr', function() {
                                     var parentDiv = $('#pgKr');
                                     var childDiv = parentDiv.children();
                                     var parentClass = parentDiv.attr('class');
@@ -899,9 +938,18 @@
                                     childDiv.addClass(parentClass);
                                     childDiv.attr('style', parentStyle);
                                     parentDiv.replaceWith(childDiv);
+                                    addComponentFunctionality();
                                 });
-                                $('#kanan-bungkus').load(window.location.href +
-                                    ' #kanan-bungkus');
+                                $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus', function() {
+                                    var parentDiv = $('#kanan-bungkus');
+                                    var childDiv = parentDiv.children();
+                                    var parentClass = parentDiv.attr('class');
+                                    var parentStyle = parentDiv.attr('style');
+
+                                    childDiv.addClass(parentClass);
+                                    childDiv.attr('style', parentStyle);
+                                    parentDiv.replaceWith(childDiv);
+                                });
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr.statusText);
@@ -912,5 +960,645 @@
             }
 
         });
+    </script>
+
+    <script>
+        function addComponentFunctionality() {
+            $('.dropify').dropify();
+
+            $(document).ready(function() {
+                $('.summernote').each(function() {
+                    $(this).summernote('code', $(this).attr('data-value'));
+
+                    $(this).prev('textarea').data('value', $(this).summernote('code'));
+                });
+            });
+
+            var id = $('#loop').val();
+            for (var i = 0; i < id; i++) {
+                // Ubah ID setiap elemen HTML dengan menambahkan nomor iterasi
+                var dropdownBtn = $("#dropdown-btn-" + i);
+                var dropdownContent = $("#dropdown-content-" + i);
+                var iit = $("#it" + i);
+
+                // Lakukan sesuatu dengan elemen yang telah dimodifikasi
+                // contoh: tambahkan event listener untuk dropdown button
+                function createDropdownToggleListener(dropdownContent, iit) {
+                    return function() {
+                        dropdownContent.toggleClass("drop-tampil-1");
+                        if (iit.hasClass("fa-chevron-down")) {
+                            iit.removeClass("fa-chevron-down").addClass("fa-chevron-up");
+                        } else {
+                            iit.removeClass("fa-chevron-up").addClass("fa-chevron-down");
+                        }
+                    }
+                }
+
+                // Menambahkan event listener dengan fungsi closure
+                dropdownBtn.on("click", createDropdownToggleListener(dropdownContent, iit));
+
+
+                const btnSwitch = $("#btnSwitch" + i);
+                const comp = $("#pages5Kom" + i);
+                const icon = $("#icon" + i);
+
+                function sendStatus(status) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{route('update_status_microsite')}}",
+                        data: {
+                            id: comp.attr("data-id"),
+                            status: status,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus, errorThrown);
+                        }
+                    });
+                }
+
+                // Definisikan fungsi event listener untuk button
+                function createToggleListener(comp, icon) {
+                    return function() {
+                        if (comp.css("opacity") === "0.5") {
+                            comp.css("opacity", "1");
+                            icon.removeClass("fa-eye-slash");
+                            icon.addClass("fa-eye");
+                            icon.css("color", "");
+                            sendStatus(comp.attr("data-status") === "on" ? "off" : "on");
+                            comp.attr("data-status", "on");
+                        } else {
+                            comp.css("opacity", "0.5");
+                            icon.removeClass("fa-eye");
+                            icon.addClass("fa-eye-slash");
+                            icon.css("color", "#c80000");
+                            sendStatus(comp.attr("data-status") === "on" ? "off" : "on");
+                            comp.attr("data-status", "off");
+                        }
+                    };
+                }
+
+                // Tambahkan event listener ke button dengan fungsi event listener yang telah dibuat
+                btnSwitch.on("click", createToggleListener(comp, icon));
+
+
+                const divAc = $("#div3Dot" + i);
+                const acDiv = $("#btnDrop3Dot" + i);
+
+                // Tambahkan event listener ke button dengan fungsi event listener yang telah dibuat
+                acDiv.on("click", (function(div) {
+                    return function() {
+                        // Cek apakah elemen div saat ini sudah memiliki kelas 'div3Dotact'
+                        if (div.hasClass("div3Dotact")) {
+                            // Jika sudah, hilangkan kelas 'div3Dotact'
+                            div.removeClass("div3Dotact");
+                        } else {
+                            // Jika belum, hilangkan kelas 'div3Dotact' dari semua elemen div
+                            $('.div3Dotact').removeClass('div3Dotact');
+                            // dan tambahkan kelas 'div3Dotact' ke elemen div yang sesuai
+                            div.addClass("div3Dotact");
+                        }
+                    };
+                })(divAc));
+
+                (function(index) {
+                    var delmodal = $("#DelComModal" + index);
+                    var delbtn1 = $("#del" + index);
+                    var delspan = $(".del-close");
+                    var delBal = $("#delbal" + index);
+
+                    delbtn1.click(function() {
+                        delmodal.show();
+                    });
+
+                    delspan.click(function() {
+                        delmodal.hide();
+                    });
+
+                    delBal.click(function() {
+                        delmodal.hide();
+                    });
+
+                    var delBtn = $("#btnTrash" + index);
+                    delBtn.click(function() {
+                        var idKomponen = delmodal.data("id_komponen");
+                        $.ajax({
+                            url: "{{ route('hapus_komponen_microsite') }}",
+                            type: "POST",
+                            data: {
+                                id: idKomponen,
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                delmodal.hide();
+                                // $("#pgKr").contents().unwrap();
+                                $('#pgKr').load(window.location.href + ' #pgKr', function() {
+                                    var parentDiv = $('#pgKr');
+                                    var childDiv = parentDiv.children();
+                                    var parentClass = parentDiv.attr('class');
+                                    var parentStyle = parentDiv.attr('style');
+
+                                    childDiv.addClass(parentClass);
+                                    childDiv.attr('style', parentStyle);
+                                    parentDiv.replaceWith(childDiv);
+                                    addComponentFunctionality();
+                                });
+                                $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus', function() {
+                                    var parentDiv = $('#kanan-bungkus');
+                                    var childDiv = parentDiv.children();
+                                    var parentClass = parentDiv.attr('class');
+                                    var parentStyle = parentDiv.attr('style');
+
+                                    childDiv.addClass(parentClass);
+                                    childDiv.attr('style', parentStyle);
+                                    parentDiv.replaceWith(childDiv);
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.statusText);
+                            }
+                        });
+                    });
+                })(i);
+            }
+
+
+            const buttonPrew = document.querySelector(".pages5-tambah-prew");
+            const prew1 = document.getElementById("prew1");
+            const prew2 = document.getElementById("prew2");
+
+            buttonPrew.addEventListener("click", function() {
+                prew1.classList.toggle("pages5kirPrew");
+                prew2.classList.toggle("pages5Prew");
+                buttonPrew.classList.add("preew");
+            });
+
+            window.onclick = function(event) {
+                if (event.target == buttonPrew) {
+                    buttonPrew.classList.remove("preew");
+                }
+            };
+
+            const elements = document.querySelectorAll(".pages5-komponen-2");
+
+            let currentElement = null;
+
+            elements.forEach((element) => {
+                element.addEventListener("dragstart", () => {
+                    currentElement = element;
+                });
+
+                element.addEventListener("dragover", (event) => {
+                    event.preventDefault();
+                });
+
+                element.addEventListener("drop", () => {
+                    const dropZone = event.target.closest(".pages5-komponen-2");
+
+                    if (dropZone && dropZone !== currentElement) {
+                        const parent = currentElement.parentNode;
+                        const indexCurrentElement = Array.prototype.indexOf.call(
+                            parent.children,
+                            currentElement
+                        );
+                        const indexDropZone = Array.prototype.indexOf.call(
+                            parent.children,
+                            dropZone
+                        );
+
+                        if (indexCurrentElement < indexDropZone) {
+                            parent.insertBefore(currentElement, dropZone.nextSibling);
+                        } else {
+                            parent.insertBefore(currentElement, dropZone);
+                        }
+
+                        sendData();
+                    }
+
+                    currentElement = null;
+                });
+            });
+
+
+            var Commodal = document.getElementById("CompoModal");
+
+            // Get the button that opens the modal
+            var Combtn = document.getElementById("CCOpmBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("comp-x")[0];
+
+            // When the user clicks the button, open the modal
+            Combtn.onclick = function() {
+                Commodal.style.display = "flex";
+            };
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                Commodal.style.display = "none";
+            };
+
+            const parent = document.getElementById("pgKr");
+            const children = document.querySelectorAll(".pages5-komponen-2");
+
+            let draggingChild = null;
+
+            children.forEach((child) => {
+                const grandchild = child.querySelector(".div3Dot-drop");
+                if (grandchild) {
+                    const upButton = grandchild.querySelector(".up");
+                    const downButton = grandchild.querySelector(".down");
+
+                    upButton.addEventListener("click", () => {
+                        const prevSibling = child.previousElementSibling;
+                        console.log(prevSibling);
+                        if (prevSibling) {
+                            parent.insertBefore(child, prevSibling);
+                        }
+                        sendData()
+                    });
+
+                    downButton.addEventListener("click", () => {
+                        const nextSibling = child.nextElementSibling;
+                        console.log(nextSibling);
+                        if (nextSibling) {
+                            parent.insertBefore(nextSibling, child);
+                        } else {
+                            parent.appendChild(child);
+                        }
+                        sendData()
+                    });
+
+                    grandchild.addEventListener("dragstart", () => {
+                        draggingChild = child;
+                        sendData();
+                    });
+
+                    grandchild.addEventListener("dragend", () => {
+                        draggingChild = null;
+                        sendData();
+                    });
+
+                    grandchild.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        const target = e.target.closest(".pages5-komponen-2");
+                        if (target && target !== draggingChild) {
+                            const rect = target.getBoundingClientRect();
+                            const y = e.clientY - rect.top;
+                            if (y < rect.height / 2) {
+                                parent.insertBefore(draggingChild, target);
+                            } else {
+                                parent.insertBefore(draggingChild, target.nextElementSibling);
+                            }
+                            sendData();
+                        }
+                    });
+                }
+            });
+
+            function sendData() {
+                var url = window.location.href;
+                var parameterTerakhir = url.substring(url.lastIndexOf('/') + 1);
+
+                var order = [];
+                var komponen = [];
+                var microdet = [];
+
+                // Mengambil order dari setiap elemen
+                $(".pages5-komponen-2").each(function() {
+                    order.push($(this).data("order"));
+                });
+                $(".pages5-komponen-2").each(function() {
+                    komponen.push($(this).data("komponen"));
+                });
+                $(".pages5-komponen-2").each(function() {
+                    microdet.push($(this).data("id"));
+                });
+
+
+                // Mengirim data-order ke server
+                $.ajax({
+                    url: "{{ url('update_microsite/:id_microsite') }}".replace(':id_microsite', parameterTerakhir),
+                    method: "POST",
+                    data: {
+                        order: order,
+                        komponen: komponen,
+                        microdet: microdet,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        console.log("Data-order berhasil dikirim ke server");
+                        $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Terjadi kesalahan: " + error);
+                    }
+                });
+            }
+
+            $('input[name^="icon"], input[name^="descripsi"], input[name^="instagram"], input[name^="link"], input[name^="twitter"], input[name^="tiktok"], input[name^="youtube"], input[name^="facebook"]').on('keyup', handleInputChange);
+
+            $('.note-editable').on('input', handleInputChange);
+
+            $('.summernote').summernote({
+                callbacks: {
+                    onChange: function(contents, $editable) {
+                        var index = $('.summernote').index($(this));
+                        handleInputChange.call($('.summernote')[index]);
+                    }
+                }
+            });
+
+            var delayTimer;
+
+            function handleInputChange() {
+                if ($(this).hasClass('summernote')) {
+                    var inputValue = $(this).summernote('code');
+                    var parentID = $(this).parent().data('id');
+                } else if ($(this).hasClass('note-editable')) {
+                    var $noteEditable = $(this).closest('.note-editable');
+                    var inputValue = $noteEditable.text();
+                    var parentID = $(this).parent().parent().parent().data('id');
+                } else {
+                    var inputValue = $(this).val();
+                    var parentID = $(this).parent().data('id');
+                }
+                var inputName = $(this).attr('name')
+                clearTimeout(delayTimer);
+                delayTimer = setTimeout(function() {
+                    $.ajax({
+                        url: "{{route('update_value_microsite')}}",
+                        method: 'POST',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            value: inputValue,
+                            id: parentID,
+                            name: inputName
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error(errorThrown);
+                        }
+                    });
+                }, 1000);
+            }
+
+            var dropify = $('.dropify').dropify();
+
+            dropify.on('change', function() {
+                var input = this;
+                var parentID = $(this).closest('[data-id]').data('id');
+                var formData = new FormData();
+                formData.append('file', input.files[0]); // Ambil file yang dipilih
+                formData.append('id', parentID);
+
+                updateImage(formData, $(this));
+            });
+
+            function updateImage(formData, dropifyElement) {
+                $.ajax({
+                    url: "{{ route('update_image_microsite') }}",
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log(response);
+                        $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error(errorThrown);
+                    }
+                });
+            }
+
+            var typecolor = document.getElementById("typecolor");
+            var typeimage = document.getElementById("typeimage");
+            var backgroundcolor = document.getElementById("backgroundcolor");
+            var backgroundimage = document.getElementById("backgroundimage");
+
+            if ({{$background->type_background == 'color' ? 'true' : 'false'}}) {
+                typecolor.checked = true;
+                backgroundcolor.style.display = "block";
+                backgroundimage.style.display = "none";
+            } else {
+                typeimage.checked = true;
+                backgroundcolor.style.display = "none";
+                backgroundimage.style.display = "block";
+            }
+
+            typecolor.addEventListener("change", function() {
+                backgroundcolor.style.display = "block";
+                backgroundimage.style.display = "none";
+            });
+
+            typeimage.addEventListener("change", function() {
+                backgroundcolor.style.display = "none";
+                backgroundimage.style.display = "block";
+            });
+
+            $(document).ready(function() {
+                $('#backgroundcolor, #backgroundimage').on('change', function() {
+
+                    var backgroundPreview = '';
+
+                    if ($('#backgroundimage').val() != '') {
+                        var background = $('#backgroundimage')[0].files[0];
+
+                        backgroundPreview = 'url(' + URL.createObjectURL($('#backgroundimage')[0].files[0]) + ')';
+
+                        $('#backgroundcolor').val('');
+
+                        $('.bungkus').css('background-image', backgroundPreview);
+                    } else if ($('#backgroundcolor').val() != '') {
+                        var background = $('#backgroundcolor').val();
+
+                        backgroundPreview = $('#backgroundcolor').val();
+
+                        $('#backgroundimage').val('');
+
+                        $('.bungkus').css('background', backgroundPreview);
+
+                    }
+
+                    var url = window.location.href;
+                    var lastParam = url.split('/').pop();
+                    var formData = new FormData();
+                    formData.append('background', background);
+                    formData.append('id', lastParam);
+                    // Kirim data menggunakan ajax
+                    $.ajax({
+                        url: "{{ route('update_background_microsite') }}",
+                        method: 'POST',
+                        processData: false, // Hindari pengolahan data otomatis oleh jQuery
+                        contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: formData,
+                        success: function(response) {
+                            console.log(response);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+
+            $("input[name='linkkonten[]'], input[name='imagekonten[]']").on('change', function() {
+                var konten = '';
+                var lastParam = $(this).closest('.pages5-input-file').data('id');
+                var id_microkon = $(this).data('id_microkon');
+                var formData = new FormData();
+
+                // Cek apakah input background color tidak kosong
+                if ($(this).attr('name') == 'imagekonten[]' && $(this).get(0).files[0]) {
+                    konten = $(this).get(0).files[0];
+                    // Jika background color tidak kosong, kosongkan input background image
+                    $(this).closest('.pages5-input-file').find('input[name="linkkonten[]"]').val('');
+                } else if ($(this).attr('name') == 'linkkonten[]' && $(this).val()) {
+                    konten = $(this).val();
+                    // Jika background image tidak kosong, kosongkan input background color
+                    $(this).closest('.pages5-input-file').find('input[name="imagekonten[]"]').val('');
+                }
+
+                formData.append('konten', konten);
+                formData.append('id', lastParam);
+                formData.append('id_microkon', id_microkon);
+
+                // Kirim data menggunakan ajax
+                $.ajax({
+                    url: "{{ route('update_konten_microsite') }}",
+                    method: 'POST',
+                    processData: false, // Hindari pengolahan data otomatis oleh jQuery
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: formData,
+                    success: function(response) {
+                        $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                        $('#pgKr').load(window.location.href + ' #pgKr', function() {
+                            var parentDiv = $('#pgKr');
+                            var childDiv = parentDiv.children();
+                            var parentClass = parentDiv.attr('class');
+                            var parentStyle = parentDiv.attr('style');
+
+                            childDiv.addClass(parentClass);
+                            childDiv.attr('style', parentStyle);
+                            parentDiv.replaceWith(childDiv);
+                            addComponentFunctionality();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            $(document).on('click', '#btnSudah', function() {
+
+                var element = document.getElementById("pages3-kanan-bung");
+                html2canvas(element, {
+                    width: 500,
+                    height: 500
+                }).then(function(canvas) {
+                    canvas.toBlob(function(blob) {
+                        var url = window.location.href;
+                        var url_parts = url.split('/');
+                        var last_part = url_parts[url_parts.length - 1];
+                        var form_data = new FormData();
+                        form_data.append('screenshot', blob); // ubah data URI menjadi blob
+                        form_data.append('id', last_part);
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "{{route('microsite_screenshot_cover')}}",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data: form_data,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                console.log(response);
+                                window.location.href = "{{ route('regular') }}";
+                            },
+                            error: function(xhr) {
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+
+            });
+
+            $(document).on('click', '.hapusssss', function() {
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Apakah Anda Yakin Menghapus Konten Ini??',
+                    showDenyButton: true,
+                    confirmButtonText: 'Iya',
+                    denyButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{route('hapus_konten_anak_microsite')}}",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                "_token": "{{csrf_token()}}",
+                                "id_microkon": $(this).data('id')
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                $('#pgKr').load(window.location.href + ' #pgKr', function() {
+                                    var parentDiv = $('#pgKr');
+                                    var childDiv = parentDiv.children();
+                                    var parentClass = parentDiv.attr('class');
+                                    var parentStyle = parentDiv.attr('style');
+
+                                    childDiv.addClass(parentClass);
+                                    childDiv.attr('style', parentStyle);
+                                    parentDiv.replaceWith(childDiv);
+                                    addComponentFunctionality();
+                                });
+                                $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus', function() {
+                                    var parentDiv = $('#kanan-bungkus');
+                                    var childDiv = parentDiv.children();
+                                    var parentClass = parentDiv.attr('class');
+                                    var parentStyle = parentDiv.attr('style');
+
+                                    childDiv.addClass(parentClass);
+                                    childDiv.attr('style', parentStyle);
+                                    parentDiv.replaceWith(childDiv);
+                                });
+                                // $('#pgKr').load(window.location.href + ' #pgKr');
+                                // $('#kanan-bungkus').load(window.location.href + ' #kanan-bungkus');
+                            }
+                        })
+                    } else {
+                        swal.fire({
+                            icon: 'info',
+                            title: 'Aksi dibatalkan',
+                            timer: 800,
+                        });
+                    }
+                });
+            });
+        };
     </script>
 @endsection

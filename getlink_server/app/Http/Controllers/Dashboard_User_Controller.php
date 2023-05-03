@@ -491,6 +491,20 @@ class Dashboard_User_Controller extends Controller
             $new_microdet->value = '';
             $new_microdet->code = $komponen->code;
             $new_microdet->save();
+
+            $microkon = new microsite_detail_konten();
+            $microkon->id_microsite = $microsite->id;
+            $microkon->id_microsite_detail = $new_microdet->id;
+            $microkon->value = 'https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4';
+            $microkon->image = 'okk.jpg';
+            $microkon->code = '<a href="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" class="konten-template"><img class="img-template" src="microsite/konten/okk.jpg" alt=""></a>';
+            $microkon->code_input = '<input class="component-input-style" value="https://www.youtube.com/watch?v=utxbrAGXhPQ&list=PLc8sZNVA7ZMmP22T-8ILKIwVulDtYlmux&index=4" name="linkkonten[]" type="text" /> <br>
+            <input class="component-input-style" name="imagekonten[]" type="file" /> <br>';
+            $microkon->save();
+
+            $newnew = microsite_detail::findOrFail($new_microdet->id);
+            $newnew->value = $newnew->value . $microkon->id . ',';
+            $newnew->save();
         }
 
         return response()->json([
@@ -812,7 +826,7 @@ class Dashboard_User_Controller extends Controller
 
         $id = strval($microkon->id) . ',';
         $microdet = microsite_detail::findOrFail($microkon->id_microsite_detail);
-        $microdet->name = str_replace($id, "", $microdet->value);
+        $microdet->value = str_replace($id, "", $microdet->value);
         $microdet->save();
 
         return response()->json([
