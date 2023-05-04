@@ -236,9 +236,32 @@
         color: #FFFFFF;
     }
 
+    .bat {
+        cursor: pointer;
+        margin-top: 15px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: White;
+        width: 104px;
+        height: 41px;
+        margin-right: 3px;
+        background: rgb(164, 158, 158);
+        border-radius: 20px;
+    }
+
+    .bat:hover {
+        background-color: rgb(212, 204, 204);
+        color: rgb(164, 158, 158);
+        border: 2px solid rgb(164, 158, 158);
+    }
+
     .sl_Abtn {
         background: transparent;
     }
+
 
     .emptyImg {
         width: 627px;
@@ -423,15 +446,18 @@
 <div id="SlEditModal{{$index}}" class="modal" style="display: none">
     <div class="modal-content">
         <div class="slMtop">
-            <p class="mtopP">Buat tautan</p>
-            <span class="close-slEdit">&times;</span>
+            <p class="mtopP">Edit tautan</p>
+            <span onclick="close_modaledit({{ $index }})" class="close">&times;</span>
         </div>
 
         <form class="sl_form" id="update_shotlink">
             {{-- <label class="sl_label" for="nama">Nama</label> --}}
-            <input class="sl_text" type="text" id="inputSL_edit" name="link_shortlink" placeholder="Tautan panjang">
+            <input class="sl_text" type="text" id="inputSL_edit" value="{{ $item->link }}" name="link_shortlink" placeholder="Tautan panjang">
             <input type="hidden" value="{{$item->id}}" id="id_shortlink" name="id_shortlink">
+            <div class="" style="display: flex">
+                <button id="" onclick="close_modaledit({{ $index }})" class="bat" type="reset">Batal</button>
             <button id="SlEdit_kirim" data-id="{{$index}}" class="btn_msSL" type="submit">Submit</button>
+            </div>
         </form>
 
     </div>
@@ -443,14 +469,17 @@
     <div class="modal-content">
         <div class="slMtop">
             <p class="mtopP">Buat tautan</p>
-            <span class="close">&times;</span>
+            <span onclick="close_modal()" class="close">&times;</span>
         </div>
 
         <form id="form_link" method="POST" action="{{ route('generate.shorten.link.post') }}" class="sl_form">
             @csrf
             {{-- <label class="sl_label" for="nama">Nama</label> --}}
             <input class="sl_text" type="text" id="input_link" name="sl" placeholder="Tautan panjang">
-            <button id="button_link" class="btn_msSL" type="submit">Submit</button>
+            <div class="" style="display: flex">
+                <button id="" onclick="close_modal()" class="bat" type="reset">Batal</button>
+                <button id="button_link" class="btn_msSL" type="submit">Submit</button>
+            </div>
         </form>
 
     </div>
@@ -699,6 +728,10 @@
         modalSl.style.display = "flex";
     }
 
+    function close_modal() {
+        modalSl.style.display = "none";
+    }
+
 
     // Edit data short link
     const modalSlEdit = document.getElementById("SlEditModal");
@@ -743,9 +776,23 @@
     });
 
     function openModaledit(index, id) {
+            const ok = document.getElementById("SlEditModal"+index);
+            ok.style.display = "flex";
+            $('#id_shortlink').val(id);
+            window.addEventListener('click', function(event) {
+            // Ambil elemen modal
+            const modaledit = document.getElementById("SlEditModal"+index);
+
+            // Tutup modal jika terjadi klik di luar area modal
+            if (event.target == modaledit) {
+                ok.style.display = 'none';
+            }
+        });
+    }
+
+    function close_modaledit(index) {
         const ok = document.getElementById("SlEditModal"+index);
-        ok.style.display = "flex";
-        $('#id_shortlink').val(id);
+        ok.style.display = "none";
     }
 
     function copyText(text) {
@@ -766,5 +813,17 @@
     // Berikan pesan bahwa teks telah disalin
     showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
   }
+</script>
+
+<script>
+    window.addEventListener('click', function(event) {
+    // Ambil elemen modal
+    const modal = document.getElementById('SlModal');
+
+    // Tutup modal jika terjadi klik di luar area modal
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+});
 </script>
 @endsection
