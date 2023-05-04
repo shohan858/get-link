@@ -253,12 +253,13 @@ button {
 
 .bungPass-reg {
     height: 70px;
+    position: relative;
 }
 
 .toggle-password-reg {
     position: absolute;
-    top: 54.5vh;
-    right: 7%;
+    top: 30px;
+    right: 2%;
     transform: translateY(-50%);
     cursor: pointer;
 }
@@ -296,15 +297,15 @@ button {
         top: 49.5%;
     }
 
-    .toggle-password-reg {
-        top: 57.5vh;
-    }
+    /* .toggle-password-reg {
+        top: 30px;
+    } */
 }
 
 @media screen and (max-width: 279px) {
-    .toggle-password-reg {
+    /* .toggle-password-reg {
         top: 55.9vh;
-    }
+    } */
 
     .pwError {
         font-size: 12px;
@@ -312,9 +313,9 @@ button {
 }
 
 @media screen and (max-width: 242px) {
-    .toggle-password-reg {
+    /* .toggle-password-reg {
         top: 58.9vh;
-    }
+    } */
 }
 
 @media screen and (max-width: 240px) {
