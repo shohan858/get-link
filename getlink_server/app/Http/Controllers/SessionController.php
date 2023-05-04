@@ -77,7 +77,7 @@ class SessionController extends Controller
     
     function logout(){
         Auth::logout();
-        return redirect('/')->with('success','Berhasil Logout');
+        return redirect('/')->with('success','Berhasil Logout'); 
     }
 
     function forgot() {

@@ -132,7 +132,7 @@
                 'November', 'Desember'
             ],
             datasets: [{
-                label: 'Total pengunjung',
+                label: 'Total pengunjung website',
                 data: pengunjung_tahun_kemarin,
                 backgroundColor: '#FF0000',
                 borderColor: '#FF0000',
