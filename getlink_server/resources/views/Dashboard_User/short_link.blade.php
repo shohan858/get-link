@@ -776,9 +776,18 @@
     });
 
     function openModaledit(index, id) {
-        const ok = document.getElementById("SlEditModal"+index);
-        ok.style.display = "flex";
-        $('#id_shortlink').val(id);
+            const ok = document.getElementById("SlEditModal"+index);
+            ok.style.display = "flex";
+            $('#id_shortlink').val(id);
+            window.addEventListener('click', function(event) {
+            // Ambil elemen modal
+            const modaledit = document.getElementById("SlEditModal"+index);
+
+            // Tutup modal jika terjadi klik di luar area modal
+            if (event.target == modaledit) {
+                ok.style.display = 'none';
+            }
+        });
     }
 
     function close_modaledit(index) {
@@ -804,5 +813,17 @@
     // Berikan pesan bahwa teks telah disalin
     showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
   }
+</script>
+
+<script>
+    window.addEventListener('click', function(event) {
+    // Ambil elemen modal
+    const modal = document.getElementById('SlModal');
+
+    // Tutup modal jika terjadi klik di luar area modal
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+});
 </script>
 @endsection
