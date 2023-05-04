@@ -2,6 +2,12 @@
 @section('konten')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <style>
+        .warning-message {
+    color: red;
+}
+
+    </style>
     <main>
         <div class="content">
             <div class="lang-content hidden">

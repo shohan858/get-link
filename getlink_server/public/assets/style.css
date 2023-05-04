@@ -957,6 +957,7 @@ background-color: #ffffff;
     width: 80%;
     height: fit-content;
     display: flex;
+    margin-bottom: 5px ;
 }
 
 .profil_img {

@@ -11,8 +11,8 @@
         }
 
         /* .content {
-                                        height: 50vh;
-                                } */
+                                            height: 50vh;
+                                    } */
 
         .profil-bung {
 
@@ -29,11 +29,11 @@
         }
 
         /* .hidden {
-                                    opacity: 0;
-                                    filter: blur(5px);
-                                    transform: translateX(100%);
-                                    transition: all 0.7s;
-                                } */
+                                        opacity: 0;
+                                        filter: blur(5px);
+                                        transform: translateX(100%);
+                                        transition: all 0.7s;
+                                    } */
         .profil_kanan {
             align-items: center;
             justify-content: center;
@@ -56,6 +56,7 @@
             width: 80%;
             height: fit-content;
             display: flex;
+            margin-bottom: 5px;
         }
 
         .profil_img {
@@ -109,26 +110,26 @@
         }
 
         /* .profil_kiri {
-                                    width: 55%;
-                                    display: flex;
-                                    height: 100vh;
-                                    margin-top: 120px;
-                                } */
+                                        width: 55%;
+                                        display: flex;
+                                        height: 100vh;
+                                        margin-top: 120px;
+                                    } */
         /* .profil_form {
-                                    width: 100%;
-                                    display: flex;
-                                    flex-direction: column;
-                                } */
+                                        width: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                    } */
         /* .profil_label {
-                                    font-family: "Roboto", sans-serif;
-                                    font-style: normal;
-                                    font-weight: 400;
-                                    font-size: 13px;
-                                    line-height: 15px;
-                                    color: #292929;
-                                }  */
+                                        font-family: "Roboto", sans-serif;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        font-size: 13px;
+                                        line-height: 15px;
+                                        color: #292929;
+                                    }  */
         .profil_input {
-            width: 95%;
+            width: 400px;
             height: 42px;
             background: #fafafa;
             border: 1px solid #e1e1e1;
@@ -225,11 +226,11 @@
         }
 
         /* .navAni {
-                                    opacity: 0;
-                                    filter: blur(5px);
-                                    transform: translateY(-100%);
-                                    transition: all 0.7s;
-                                } */
+                                        opacity: 0;
+                                        filter: blur(5px);
+                                        transform: translateY(-100%);
+                                        transition: all 0.7s;
+                                    } */
         .del-conmo {
             background-color: #fefefe;
             margin: auto;
@@ -318,15 +319,46 @@
             border-color: #524799;
         }
 
+        .ndelik {
+            widows: inherit;
+        }
+
+        @media screen and (max-width: 830px) {
+            .profil_input {
+                width: 300px
+            }
+        }
+
         @media screen and (max-width: 600px) {
             .profil-bung {
-                margin-top: -290px;
+                height: 95vh;
+                margin-top: -60px;
+                overflow: auto;
+            }
+
+            .profil-content {
+                margin-top: 10px;
             }
 
             .profil-content-isi {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+            }
+
+            .profil_kiri {
+                margin-top: 10px;
+                width: 100%;
+            }
+
+            .profil_input {
+                width: 200px
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .profil-content {
+                margin-top: 40xp
             }
         }
     </style>
@@ -335,7 +367,7 @@
             <div class="profil-content hidden">
                 <div class="anim profil-content-isi">
                     <div class="profil_kanan">
-                        <h1 class="profil_h1">Edit profil</h1>
+                        {{-- <h1 class="profil_h1">Edit profil</h1> --}}
                         <div class="gmbTamp">
                             @if (Auth::User()->img == null)
                                 <img style="background-color: #1A2474
@@ -346,7 +378,7 @@
                                     id="imgPreview">
                             @endif
                         </div>
-                        <button class="profil_addGmb" id="uploadBtn" onclick="showUploadDialog()">Masukkan foto
+                        <button hidden class="profil_addGmb" id="uploadBtn" onclick="showUploadDialog()">Masukkan foto
                             profil</button>
                         <button class="profil_hapusAkun" id="del" onclick="openDelModal()">Hapus akun</button>
                     </div>
@@ -355,19 +387,19 @@
                             method="POST" class="profil_form" onsubmit="return validateForm()">
                             @method('put')
                             @csrf
-                            <label class="profil_label" for="username">Username</label>
+                            <label class="profil_label" for="username">Username</label><br>
                             <input value="{{ $user->name }}" disabled type="text" name="username" id="username"
-                                class="profil_input" style="cursor: not-allowed">
-                            <label class="profil_label" for="email">Email</label>
+                                class="profil_input" style="cursor: not-allowed"><br>
+                            <label class="profil_label" for="email">Email</label><br>
                             <input value="{{ $user->email }}" disabled type="email" name="email" id="email"
-                                class="profil_input" style="cursor: not-allowed">
-                            <div class="" id="pass" hidden>
-                                <label class="profil_label" id="passwordlam" for="passwordlam">Password Lama</label>
-                                <input type="password" name="passwordlam" id="" class="profil_input">
-                                <label class="profil_label" for="password">Ubah Password</label>
-                                <input type="password" name="password" id="" class="profil_input">
-                                <label class="profil_label" for="password">Confirm Password</label>
-                                <input type="password" name="konfirm_password" id="" class="profil_input">
+                                class="profil_input" style="cursor: not-allowed"><br>
+                            <div class="ndelik" id="pass" hidden>
+                                <label class="profil_label" id="passwordlam" for="passwordlam">Password Lama</label><br>
+                                <input type="password" name="passwordlam" id="" class="profil_input"><br>
+                                <label class="profil_label" for="password">Ubah Password</label><br>
+                                <input type="password" name="password" id="" class="profil_input"><br>
+                                <label class="profil_label" for="password">Confirm Password</label><br>
+                                <input type="password" name="konfirm_password" id="" class="profil_input"><br>
                             </div>
                             <input type="file" hidden name="gambar" id="gambar">
                             <button class="profil_simpan" type="button" id="ed"
@@ -432,6 +464,7 @@
             document.getElementById("pass").removeAttribute("hidden");
             document.getElementById("bat").removeAttribute("hidden");
             document.getElementById("sim").removeAttribute("hidden");
+            document.getElementById("uploadBtn").removeAttribute("hidden");
             document.getElementById("ed").setAttribute("hidden", true);
         }
     </script>
@@ -444,6 +477,7 @@
             document.getElementById("pass").setAttribute("hidden", true);
             document.getElementById("bat").setAttribute("hidden", true);
             document.getElementById("sim").setAttribute("hidden", true);
+            document.getElementById("uploadBtn").setAttribute("hidden", true);
             document.getElementById("ed").removeAttribute("hidden");
         }
     </script>

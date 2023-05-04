@@ -14,7 +14,7 @@
                             <img src="{{ asset('gambar') . '/' . $user->img }}" alt="image" class="profil_img" id="imgPreview">
                             @endif
                         </div>
-                        <button class="profil_addGmb" id="uploadBtn" onclick="showUploadDialog()">Masukkan foto
+                        <button hidden class="profil_addGmb" id="uploadBtn" onclick="showUploadDialog()">Masukkan foto
                             profil</button>
                         <button class="profil_hapusAkun" id="del" onclick="openDelModal()">Hapus akun</button>
                     </div>
@@ -81,6 +81,7 @@
             document.getElementById("pass").removeAttribute("hidden");
             document.getElementById("bat").removeAttribute("hidden");
             document.getElementById("sim").removeAttribute("hidden");
+            document.getElementById("uploadBtn").removeAttribute("hidden");
             document.getElementById("ed").setAttribute("hidden", true);
         }
     </script>
@@ -93,6 +94,7 @@
             document.getElementById("pass").setAttribute("hidden", true);
             document.getElementById("bat").setAttribute("hidden", true);
             document.getElementById("sim").setAttribute("hidden", true);
+            document.getElementById("uploadBtn").setAttribute("hidden", true);
             document.getElementById("ed").removeAttribute("hidden");
         }
     </script>
