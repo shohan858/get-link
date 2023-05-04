@@ -47,10 +47,15 @@
             
 
         </div>
-        <div class="hero_kanan">
+        <div class="hero_kanan" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500"
+            data-aos-duration="500">
             <img class="__hero_lingkaran" src="{{ asset('assets_landing_page/img/Ellipse 1.png') }} " alt="eclipse">
-            <img class="__hero_image" src="{{ asset('assets_landing_page/img/firl2.png') }} " />
-        </div>
+            {{-- <img class="__hero_image" src="{{ asset('assets_landing_page/img/firl2.png') }} " /> --}}
+            @foreach ($data_getlink as $item)
+            @if ($item->id == 1)
+                <img class="__hero_image" src="{{ asset('gambar/' . $item->image) }}" />
+            @endif
+        @endforeach
     </div>
 
     @elseif(request()->is('preview/sponsor'))

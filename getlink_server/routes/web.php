@@ -30,7 +30,6 @@ use Illuminate\Support\Facades\Route;
 // Landing Page GetLink
 Route::get('testing', [Dashboard_User_Controller::class, 'testing']);
 
-Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 Route::group(['prefix' => 'getlink.id'], function () {
     Route::get('{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 });
@@ -165,3 +164,4 @@ Route::middleware(['authadmin'])->group(function () {
     Route::get('paket/{id}', [AdminController::class, 'show_paket']);
     Route::put('paket/edit/{id}', [AdminController::class, 'updatepaket']);
 });
+Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');

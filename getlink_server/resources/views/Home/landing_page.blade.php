@@ -91,7 +91,11 @@
                 {{ __('Log Out') }}
         </x-dropdown-link>
     </form> --}}
-                <a href="/logout" class="btn btn-outline-primary rounded-pill" style="width: 100px">logout</a>
+    @if (Auth::User()->role == 'user')
+    <a href="/dashboard_user" class="btn btn-outline-primary rounded-pill" style="width: 100px">Dashboard</a>
+    @else
+    <a href="/admin_get" class="btn btn-outline-primary rounded-pill" style="width: 100px">Dashboard</a>
+    @endif
             @else
                 <a href="/sesi" class="btn btn-outline-primary rounded-pill" type="button"
                     style="width: 100px">Login</a>
@@ -150,16 +154,16 @@
                     </div>
                 </div>
             </form>
-
-            @if (request()->is('/getlink'))
-                Admin / <b>dashboard</b>
-            @endif
-            {{-- dadas --}}
         </div>
         <div class="hero_kanan" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500"
             data-aos-duration="500">
             <img class="__hero_lingkaran" src="{{ asset('assets_landing_page/img/Ellipse 1.png') }} " alt="eclipse">
-            <img class="__hero_image" src="{{ asset('assets_landing_page/img/firl2.png') }} " />
+            {{-- <img class="__hero_image" src="{{ asset('assets_landing_page/img/firl2.png') }} " /> --}}
+            @foreach ($data_getlink as $item)
+            @if ($item->id == 1)
+                <img class="__hero_image" src="{{ asset('gambar/' . $item->image) }}" />
+            @endif
+        @endforeach
         </div>
     </div>
 
@@ -322,9 +326,9 @@
             <h1 class="banner_h1">AYO SEGERA BERGABUNG!</h1>
             <h3 class="banner_h3">Daftar Sekarang Gratis!</h3>
             <p class="banner_p-1">Dapatkan akses seluruh fitur sengan bergabung dengan Getlink.</p>
-            <button class="banner_button">
+            <a href="/sesi" class="banner_button">
                 Daftar Sekarang
-            </button>
+            </a>
             <p class="banner_small">Gratis tanpa biaya</p>
         </div>
 
