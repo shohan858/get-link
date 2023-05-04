@@ -72,7 +72,17 @@ class SessionController extends Controller
 
         User::create($data);
 
-        return response()->json(['success' => true, 'redirect' => '/sesi' , 'message' => 'Berhasil Registasi']);
+        Auth::login(User::where('email', $request->email)->first());
+
+        if (Auth::check()) {
+            if (Auth::user()->role === 'admin') {
+                return response()->json(['success' => true, 'redirect' => '/admin_get']);
+            } elseif (Auth::user()->role === 'user') {
+                return response()->json(['success' => true, 'redirect' => '/dashboard_user', 'message' => 'Berhasil Login']);
+            }
+        } else {
+            return response()->json(['success' => false, 'message' => 'Terjadi Kesalahan saat Login']);
+        }
     }
     
     function logout(){
