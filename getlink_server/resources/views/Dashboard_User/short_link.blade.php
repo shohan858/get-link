@@ -280,6 +280,10 @@
     }
 
 
+    .pag{
+        margin-top:1%;
+        margin-left:80%
+    }
 
     @media screen and (max-width: 600px) {
         .empty {
@@ -294,6 +298,16 @@
         .emptyP {
             font-size: 22px;
         }
+
+        .pag{
+            margin-top:1%;
+            margin-left:70%
+        }
+
+          .pag{
+            margin-top:1%;
+            margin-left:45%
+        }
     }
 
     @media (min-width: 300px) {
@@ -303,7 +317,18 @@
             text-overflow: clip;
             /* menampilkan teks penuh tanpa elipsis */
         }
+
+      
     }
+    
+    @media (min-width: 600px){
+          .pag{
+            margin-top:1%;
+            margin-left:70%
+        }
+    }
+    
+    
 </style>
 <main>
     <div class="content">
@@ -371,6 +396,9 @@
                     </tr>
                     @endforeach
                 </table>
+                <div class="pag">
+                    {{ $data->links('pagination::bootstrap-4') }}
+                </div>
 
                 <script>
                     // mendapatkan elemen input dan konten mikrosite

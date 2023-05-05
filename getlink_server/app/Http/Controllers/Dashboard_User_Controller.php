@@ -664,7 +664,7 @@ class Dashboard_User_Controller extends Controller
             $userId = $user->id;
     
             // Mengambil shortlink milik pengguna tersebut berdasarkan ID pengguna
-            $data = Shortlink::where('id_user', $userId)->latest()->take(10)->get();
+            $data = Shortlink::where('id_user', $userId)->latest()->take(10)->paginate(10);
             $count = shortlink::where('id_user', $userId)->count();
     
             return view('Dashboard_User.short_link')->with([
