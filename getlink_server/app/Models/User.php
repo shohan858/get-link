@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'shortlink_count',
+        'batas_microsite',
     ];
     // Daftar atribut yang dihiraukan (guarded)
     protected $guarded = [

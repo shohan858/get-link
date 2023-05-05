@@ -698,6 +698,17 @@ class Dashboard_User_Controller extends Controller
     public function shortlinks_delete($id) {
         $data = shortlink::find($id);
         $data->delete();
+        $user=Auth::user();
+        $links = Shortlink::where('id_user', $user->id)
+                    ->orderBy('created_at')
+                    ->limit($user->shortlink_count - 10)
+                    ->get();
+
+                // Mengubah status pada link-link tersebut menjadi "off"
+                foreach ($links as $link) { 
+                    $link->status = 'on';
+                    $link->save();
+                }
         return redirect()->back();
     }
 

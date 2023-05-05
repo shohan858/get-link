@@ -12,7 +12,7 @@ class shortlink extends Model
     protected $fillable = ['code','link','id_user','status'];
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user','id','shortlink_count');
+        return $this->belongsTo(User::class, 'id_user','id','shortlink_count','batas_microsite');
     }
 
 }

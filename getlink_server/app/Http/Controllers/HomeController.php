@@ -81,11 +81,15 @@ class HomeController extends Controller
                     $link->save();
                 }
             }
+            // $berlangganan=($user->batas_microsite<3);
+            // if (!$berlangganan) {
+            //     $shortlink->status = 'off';
+            // }
+
 
             // // Mengubah status pada shortlink yang baru dibuat
             // if ($user->shortlink_count > 10) {
-            //     $shortlink->status = 'off';
-            // }
+            //     $shortlink->status = 'off';            // }
         }
 
         // Menyimpan data shortlink
