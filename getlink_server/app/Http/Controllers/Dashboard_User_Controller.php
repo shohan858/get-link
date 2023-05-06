@@ -341,6 +341,7 @@ class Dashboard_User_Controller extends Controller
 
         foreach ($drag as $key => $row) {
             $dragss[$key]['status'] = $row->status;
+            $dragss[$key]['icon'] = $row->icon;
             $dragss[$key]['id'] = $row->id;
             $dragss[$key]['order'] = $row->order;
             $dragss[$key]['id_komponen'] = $row->id_komponen;

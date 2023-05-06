@@ -45,7 +45,7 @@
                                             <img class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}"
                                                 alt="" />
                                         </button>
-                                        <i class="fa-regular fa-user" style="margin-left: 10px"></i>
+                                        <i class="fa-solid {{$item['icon']}}" style="margin-left: 10px"></i>
                                         <p class="pages5-isi">{{ $item['title'] }}</p>
                                     </div>
                                     <div class="pages5-komponen-text-kanan">
