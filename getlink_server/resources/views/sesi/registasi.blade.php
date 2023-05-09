@@ -46,7 +46,7 @@
                     <div class="bungPass-reg">
                         <input class="formPass" type="password" name="password" id="lname"
                             placeholder="Masukkan password" onkeyup="checkPassword()">
-                        <i class="far fa-eye toggle-password-reg" id="togglePassword"></i>
+                    {{-- <i class="far fa-eye toggle-password2" id="toggleConfirmPassword"></i> --}}
                         <div id="password-error" class="pwError" style="color:red"></div>
                     </div>
                     <input class="formCP" id="fcon" type="password" id="lname2" name="confirmpassword"
