@@ -884,7 +884,7 @@
                             inputElement.value = "";
                             let timerInterval
                             Swal.fire({
-                                timer: 2000,
+                                timer: 1000,
                                 timerProgressBar: true,
                                 didOpen: () => {
                                     Swal.showLoading()
@@ -921,11 +921,11 @@
                             inputElement.select();
                             document.execCommand("copy");
                             // alert("berhasil copy!");
-                            showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
+                            showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1000);
                         });
                     },
                     error: function() {
-                        showAlert('error', 'Ooops!', 'Terjadi Kesalahan Saat Memperpendek Link', 1800);
+                        showAlert('error', 'Ooops!', 'Terjadi Kesalahan Saat Memperpendek Link', 1000);
                     }
                 });
             } else {
