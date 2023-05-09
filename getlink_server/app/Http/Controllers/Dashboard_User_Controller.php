@@ -663,9 +663,15 @@ class Dashboard_User_Controller extends Controller
         if ($user) {
             // Mendapatkan ID pengguna yang sudah login
             $userId = $user->id;
-    
+            $berlangganan=(date('Y-m-d') < "2023-05-07");
+            if ($berlangganan){
+                $data = Shortlink::where('id_user', $userId)->latest()->get();
+            }
+            else{
+                $data = Shortlink::where('id_user', $userId)->latest()->take(10)->get();
+            }
             // Mengambil shortlink milik pengguna tersebut berdasarkan ID pengguna
-            $data = Shortlink::where('id_user', $userId)->latest()->take(10)->paginate(10);
+            
             $count = shortlink::where('id_user', $userId)->count();
     
             return view('Dashboard_User.short_link')->with([
