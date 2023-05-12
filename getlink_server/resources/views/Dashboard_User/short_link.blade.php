@@ -10,8 +10,8 @@
         justify-content: center;
     }
 
-    button {`
-        cursor: pointer;
+    button {
+        ` cursor: pointer;
     }
 
     .data {
@@ -155,7 +155,7 @@
         /* width: 80%; */
         /* max-width: 600px; */
         width: 80%;
-        height: 199px;
+        height: 275px;
         background: #FFFFFF;
         border-radius: 10px;
         display: flex;
@@ -204,7 +204,9 @@
     .sl_form {
         width: 90%;
         display: flex;
+        height: 175px;
         flex-direction: column;
+        justify-content: space-between;
     }
 
     .btn_msSL {
@@ -280,9 +282,82 @@
     }
 
 
-    .pag{
-        margin-top:1%;
-        margin-left:80%
+    .pag {
+        margin-top: 1%;
+        margin-left: 80%
+    }
+
+    .custom-Link {
+        align-items: flex-start;
+        flex-direction: column;
+        width: fit-content;
+        margin-top: 5px;
+        display: flex;
+    }
+
+    .custom-Link-2 {
+        align-items: flex-start;
+        flex-direction: column;
+        width: fit-content;
+        margin-top: 5px;
+        display: flex;
+    }
+
+    .custom-hide {
+        justify-content: center;
+        align-items: center;
+        margin-right: 50px;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .custom-hide-2 {
+        justify-content: center;
+        align-items: center;
+        margin-right: 50px;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    .text-custom {
+        font-family: "Roboto";
+        font-style: normal;
+        line-height: 23px;
+        font-weight: 300;
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .input-hide {
+        border: 2px solid black;
+        box-sizing: border-box;
+        border-radius: 10px;
+        text-indent: 5px;
+        margin-left: 5px;
+        height: 33px;
+        width: 100px;
+    }
+
+    .custom-show {
+        justify-content: center;
+        font-family: "Roboto";
+        align-items: center;
+        margin-bottom: 20px;
+        font-style: normal;
+        line-height: 23px;
+        font-weight: 300;
+        font-size: 15px;
+        display: flex;
+        float: right;
+        margin: 0;
+    }
+
+    .custom-tampil {
+        justify-content: space-between;
+    }
+
+    .btn-custom {
+        margin-left: 5px;
     }
 
     @media screen and (max-width: 600px) {
@@ -299,14 +374,14 @@
             font-size: 22px;
         }
 
-        .pag{
-            margin-top:1%;
-            margin-left:70%
+        .pag {
+            margin-top: 1%;
+            margin-left: 70%
         }
 
-          .pag{
-            margin-top:1%;
-            margin-left:45%
+        .pag {
+            margin-top: 1%;
+            margin-left: 45%
         }
     }
 
@@ -318,17 +393,15 @@
             /* menampilkan teks penuh tanpa elipsis */
         }
 
-      
+
     }
-    
-    @media (min-width: 600px){
-          .pag{
-            margin-top:1%;
-            margin-left:70%
+
+    @media (min-width: 600px) {
+        .pag {
+            margin-top: 1%;
+            margin-left: 70%
         }
     }
-    
-    
 </style>
 <main>
     <div class="content">
@@ -375,12 +448,12 @@
 
                         <td><?= $nomor++; ?></td>
                         <td class="teks">{{ $row->link }}</td>
-                        <td class="teks" id="copy-text">{{ config('app.url').'/g'.$row->code }}</td>
+                        <td class="teks" id="copy-text">{{ config('app.url').'/'.$row->code }}</td>
                         <td>
 
                             <div class="aksi-wrapper">
 
-                                <button onclick="copyText('{{ config('app.url').'/g'.$row->code }}')" style="margin-right:5px; margin-bottom: 3px;" class="copy-btn">
+                                <button onclick="copyText('{{ config('app.url').'/'.$row->code }}')" style="margin-right:5px; margin-bottom: 3px;" class="copy-btn">
                                     <i class="fa-regular fa-copy" style="color:#fff;"></i>
                                 </button>
 
@@ -479,15 +552,32 @@
         </div>
 
         <form class="sl_form" id="update_shotlink">
-            {{-- <label class="sl_label" for="nama">Nama</label> --}}
-            <input class="sl_text" type="text" id="inputSL_edit" value="{{ $item->link }}" name="link_shortlink" placeholder="Tautan panjang">
+            <div class="bungkus-hide">
+                <input class="sl_text" type="text" id="inputSL_edit" value="{{ $item->link }}" name="link_shortlink" placeholder="Tautan panjang">
+                <input type="hidden" value="{{ $item->id }}" id="id_shortlink" name="id_shortlink">
+                <div id="custom-link{{ $index }}" class="custom-Link">
+                    <div id="custom-hide{{ $index }}" class="custom-hide" style="display: none">
+                        <p class="text-custom">GetLink.id/ </p>
+                        <input type="text" name="editsh" id="sleditcustom" class="input-hide" placeholder="custom-link">
+                    </div>
+                    <div id="custom_link{{$index}}" class="custom-show">
+                        Atau gunakan
+                        <a id="btn-custom" onclick="customHide({{$index}})" class="btn-custom" href="#"> custom link</a>
+                        .
+                    </div>
+                    <div style="display: none;" id="default_link{{$index}}" class="custom-show">
+                        Atau gunakan
+                        <a id="btn-custom" onclick="defaultHide({{$index}})" class="btn-custom" href="#"> Default link</a>
+                        .
+                    </div>
+                </div>
+            </div>
             <input type="hidden" value="{{$item->id}}" id="id_shortlink" name="id_shortlink">
             <div class="" style="display: flex">
                 <button id="" onclick="close_modaledit({{ $index }})" class="bat" type="reset">Batal</button>
-            <button id="SlEdit_kirim" data-id="{{$index}}" class="btn_msSL" type="submit">Submit</button>
+                <button id="SlEdit_kirim" data-id="{{$index}}" class="btn_msSL" type="submit">Submit</button>
             </div>
         </form>
-
     </div>
 </div>
 @endforeach
@@ -502,8 +592,20 @@
 
         <form id="form_link" method="POST" action="{{ route('generate.shorten.link.post') }}" class="sl_form">
             @csrf
-            {{-- <label class="sl_label" for="nama">Nama</label> --}}
-            <input class="sl_text" type="text" id="input_link" name="sl" placeholder="Tautan panjang">
+            <div class="bungkus-hide">
+                <input class="sl_text" type="text" id="input_link" name="sl" placeholder="Tautan panjang">
+                <div class="custom-Link-2">
+                    <div class="custom-hide-2" style="display: none">
+                        <p class="text-custom">GetLink.id/ </p>
+                        <input type="text" name="buat" id="value_custom" class="input-hide" placeholder="custom-link">
+                    </div>
+                    <div class="custom-show">
+                        Atau gunakan
+                        <a id="btn-custom-2" class="btn-custom" href="#"> custom link</a>
+                        .
+                    </div>
+                </div>
+            </div>
             <div class="" style="display: flex">
                 <button id="" onclick="close_modal()" class="bat" type="reset">Batal</button>
                 <button id="button_link" class="btn_msSL" type="submit">Submit</button>
@@ -513,17 +615,85 @@
     </div>
 </div>
 
+<script>
+    function customHide(index) {
+        var customShow = document.getElementById('custom-Link' + index);
+        var btnCustom = document.getElementById("btn-custom" + index);
+        var customHide = document.getElementById("custom-hide" + index);
+        var defaut_link = document.getElementById("default_link" + index);
+        var custom_link = document.getElementById("custom_link" + index);
 
+        customHide.style.display = '';
+        defaut_link.style.display = 'flex';
+        custom_link.style.display = 'none';
+        // if (customHide.style.display === "none") {
+        //         customShow.classList.add('custom-tampil');
+        //         btnCustom.textContent = "default link";
+        //         customHide.style.display = "flex";
+        //     } else {
+        //         customShow.classList.remove('custom-tampil');
+        //         btnCustom.textContent = "custom link";
+        //         customHide.style.display = "none";
+        //     }
+
+        // btnCustom.addEventListener("click", function(event) {
+        //     event.preventDefault(); 
+
+        //     if (customHide.style.display === "none") {
+        //         customShow.classList.add('custom-tampil');
+        //         btnCustom.textContent = "default link";
+        //         customHide.style.display = "flex";
+        //     } else {
+        //         customShow.classList.remove('custom-tampil');
+        //         btnCustom.textContent = "custom link";
+        //         customHide.style.display = "none";
+        //     }
+        // });
+    }
+
+
+    function defaultHide(index) {
+        var customShow = document.getElementById('custom-Link' + index);
+        var btnCustom = document.getElementById("btn-custom" + index);
+        var customHide = document.getElementById("custom-hide" + index);
+        var defaut_link = document.getElementById("default_link" + index);
+        var custom_link = document.getElementById("custom_link" + index);
+
+        customHide.style.display = 'none';
+        defaut_link.style.display = 'none';
+        custom_link.style.display = '';
+    }
+    var customShow_2 = document.querySelector('.custom-Link-2');
+    var btnCustom_2 = document.getElementById("btn-custom-2");
+    var customHide_2 = document.querySelector(".custom-hide-2");
+
+    btnCustom_2.addEventListener("click", function(event) {
+        event.preventDefault(); // Mencegah perubahan URL saat mengklik tautan
+
+        if (customHide_2.style.display === "none") {
+            customShow_2.classList.add('custom-tampil');
+            btnCustom_2.textContent = "default link";
+            customHide_2.style.display = "flex";
+        } else {
+            customShow_2.classList.remove('custom-tampil');
+            btnCustom_2.textContent = "custom link";
+            customHide_2.style.display = "none";
+        }
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    $(document).on("click", "#SlEdit_kirim", function () {
+    $(document).on("click", "#SlEdit_kirim", function(e) {
+        e.preventDefault();
         var index = $(this).data("id");
-
-    // Menggunakan nilai index untuk mendapatkan elemen form yang sesuai
-    var formData = new FormData($("#SlEditModal" + index + " #update_shotlink")[0]);
+        // Menggunakan nilai index untuk mendapatkan elemen form yang sesuai
+        var formData = new FormData($("#SlEditModal" + index + " #update_shotlink")[0]);
         console.log(formData);
+        const inputElementsledit = document.getElementById("sleditcustom");
+        const sleditcustom = inputElementsledit.value.trim();
+        formData.append('sleditcustom', sleditcustom);
         $.ajax({
             url: "{{ url('shortlinks_update') }}",
             type: "post",
@@ -534,19 +704,29 @@
             processData: false,
             contentType: false,
             data: formData,
-            success: function (response) {
-                swal.fire({
-                    icon: "success",
-                    title: "Berhasil Memberi Nilai",
-                });
+            success: function(response) {
+                $('#sleditcustom').val("");
+                location.reload();
+                if (sleditcustom != null && sleditcustom.trim() != "") {
+                    swal.fire({
+                        icon: "success",
+                        title: "Link Berhasil Dicustom",
+                        timer: 1800,
+                    });
+                } else {
+                    swal.fire({
+                        icon: "success",
+                        title: "Link Berhasil Diedit",
+                        timer: 1800,
+                    });
+                }
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 swal.fire({
                     icon: "error",
                     title: "ada kesalahan sistem",
                     text: "Silahkan coba lagi",
                 });
-                a;
             },
         });
     });
@@ -598,6 +778,8 @@
         e.preventDefault();
         const inputElement = document.getElementById("input_link");
         const link = inputElement.value.trim();
+        const inputElementcustom = document.getElementById("value_custom");
+        const linkcustom = inputElementcustom.value.trim();
 
         if (validateLink(link)) {
             // Mengirimkan data ke server menggunakan AJAX
@@ -608,13 +790,12 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                     link: link,
+                    linkcustom: linkcustom,
                 },
                 success: function(response) {
-
-                    $('#input_link').val("{{ env('APP_URL') }}" + "/g" + response.short_link);
+                    $('#input_link').val("{{ env('APP_URL') }}" + "/" + response.short_link);
                     showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1800);
                     location.reload();
-
                     // Menampilkan tombol copy dan refresh
                     if (buttonImage.src.includes("Refresh.png")) {
                         buttonImage.src = "{{ asset('assets_landing_page/img/Add-Link.png') }} ";
@@ -646,19 +827,10 @@
                         submitButton.style.marginLeft = "20px";
                         inputElement.parentNode.insertBefore(newButton, inputElement.nextSibling);
                     }
-
-                    // Mengubah nilai atribut href dan text dari tombol copy
-                    // copyButton.href = $('#input_link').val();
-                    // copyButton.textContent = $('#input_link').val();
-
-                    // Menambahkan event listener pada tombol copy
                     copyButton.addEventListener("click", function() {
-                        // document.getElementById("input_link").val().select();
-                        // document.execCommand("copy");
                         const inputElement = document.getElementById("input_link");
                         inputElement.select();
                         document.execCommand("copy");
-                        // alert("berhasil copy!");
                         showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
                     });
                 },
@@ -702,12 +874,12 @@
     // ==========================================================================================
     // modal hapus short link
     function openDelModal(index) {
-        var delmodal = document.getElementById("DelComModal"+index);
+        var delmodal = document.getElementById("DelComModal" + index);
         delmodal.style.display = "block";
     }
 
     function closeDelModal(index) {
-        var delmodal = document.getElementById("DelComModal"+index);
+        var delmodal = document.getElementById("DelComModal" + index);
         delmodal.style.display = "none";
     }
 
@@ -780,7 +952,7 @@
 
     // Close modal saat tombol close diklik
     const closeBtnedit = document.getElementsByClassName("close-slEdit")[0];
-    
+
     closeBtnedit.addEventListener("click", () => {
         modalSlEdit.style.display = "none";
     });
@@ -804,12 +976,12 @@
     });
 
     function openModaledit(index, id) {
-            const ok = document.getElementById("SlEditModal"+index);
-            ok.style.display = "flex";
-            $('#id_shortlink').val(id);
-            window.addEventListener('click', function(event) {
+        const ok = document.getElementById("SlEditModal" + index);
+        ok.style.display = "flex";
+        $('#id_shortlink').val(id);
+        window.addEventListener('click', function(event) {
             // Ambil elemen modal
-            const modaledit = document.getElementById("SlEditModal"+index);
+            const modaledit = document.getElementById("SlEditModal" + index);
 
             // Tutup modal jika terjadi klik di luar area modal
             if (event.target == modaledit) {
@@ -818,40 +990,41 @@
         });
     }
 
+
     function close_modaledit(index) {
-        const ok = document.getElementById("SlEditModal"+index);
+        const ok = document.getElementById("SlEditModal" + index);
         ok.style.display = "none";
     }
 
     function copyText(text) {
-    // Buat elemen textarea baru untuk menampung teks yang akan disalin
-    var textarea = document.createElement("textarea");
-    textarea.value = text;
-    document.body.appendChild(textarea);
+        // Buat elemen textarea baru untuk menampung teks yang akan disalin
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
 
-    // Pilih teks dalam elemen textarea
-    textarea.select();
+        // Pilih teks dalam elemen textarea
+        textarea.select();
 
-    // Salin teks yang telah dipilih ke clipboard
-    document.execCommand("copy");
+        // Salin teks yang telah dipilih ke clipboard
+        document.execCommand("copy");
 
-    // Hapus elemen textarea
-    document.body.removeChild(textarea);
+        // Hapus elemen textarea
+        document.body.removeChild(textarea);
 
-    // Berikan pesan bahwa teks telah disalin
-    showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
-  }
+        // Berikan pesan bahwa teks telah disalin
+        showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1800);
+    }
 </script>
 
 <script>
     window.addEventListener('click', function(event) {
-    // Ambil elemen modal
-    const modal = document.getElementById('SlModal');
+        // Ambil elemen modal
+        const modal = document.getElementById('SlModal');
 
-    // Tutup modal jika terjadi klik di luar area modal
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-});
+        // Tutup modal jika terjadi klik di luar area modal
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
 </script>
 @endsection

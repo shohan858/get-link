@@ -665,10 +665,10 @@ class Dashboard_User_Controller extends Controller
             $userId = $user->id;
             $berlangganan=(date('Y-m-d') < "2023-05-07");
             if ($berlangganan){
-                $data = Shortlink::where('id_user', $userId)->latest()->get();
+                $data = Shortlink::where('id_user', $userId)->latest()->paginate(10);
             }
             else{
-                $data = Shortlink::where('id_user', $userId)->latest()->take(10)->get();
+                $data = Shortlink::where('id_user', $userId)->latest()->take(10)->paginate(10);
             }
             // Mengambil shortlink milik pengguna tersebut berdasarkan ID pengguna
             
@@ -696,10 +696,17 @@ class Dashboard_User_Controller extends Controller
     public function shortlinks_update(Request $request) {
         $data = shortlink::find($request->id_shortlink);
         $data->link = $request->link_shortlink;
+        $update_link = $request->editsh;
+        if ($update_link != "") {
+            $data->code = $update_link;
+        } else {
+            $data->code = Str::random(6);
+        }
         $data->update();
+        $result_link = $data->code;
         return response()->json([
-            'message' => 'success',
-        ], 200);
+            'result_link' => $result_link,
+        ]);
     }
 
     public function shortlinks_delete($id) {

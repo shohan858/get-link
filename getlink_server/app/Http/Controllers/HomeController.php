@@ -48,16 +48,10 @@ class HomeController extends Controller
         }
     }
     public function store(Request $request)
-    {
-        // Validasi inputan form
-        $request->validate([
-            'link' => 'required|url',
-        ]);
-
+    {   
         // Membuat data shortlink baru
         $shortlink = new Shortlink();
         $shortlink->link = $request->link;
-        $shortlink->code = Str::random(6);
 
         // Jika pengguna sudah login
         $user = Auth::user();
@@ -76,31 +70,29 @@ class HomeController extends Controller
                     ->get();
 
                 // Mengubah status pada link-link tersebut menjadi "off"
-                foreach ($links as $link) { 
+                foreach ($links as $link) {
                     $link->status = 'off';
                     $link->save();
                 }
             }
-            // $berlangganan=($user->batas_microsite<3);
-            // if (!$berlangganan) {
-            //     $shortlink->status = 'off';
-            // }
-
-
-            // // Mengubah status pada shortlink yang baru dibuat
-            // if ($user->shortlink_count > 10) {
-            //     $shortlink->status = 'off';            // }
         }
-
+        $linkcustom=$request->linkcustom;
+        if($linkcustom!=null&&$linkcustom!=""){
+            $shortlink->code=$linkcustom;
+        }else{
+            $shortlink->code = Str::random(6);
+        }
+        // Memeriksa apakah custom link sudah digunakan atau belum
         // Menyimpan data shortlink
         $shortlink->save();
-
         $shortenLink = $shortlink->code;
 
         // Mengembalikan response dengan shortlink yang sudah dibuat
         return response()->json(['short_link' => $shortenLink]);
     }
 
+    
+    
     public function ShortenLink($code)
     {
         $shortLink = ShortLink::where('code', $code)->firstOrFail();

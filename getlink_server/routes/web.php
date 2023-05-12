@@ -50,6 +50,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/-{link}', [MicrositeController::class, 'index'])->name('microsite');
 
 Route::post('generate-shorten-link', [HomeController::class, 'store'])->name('generate.shorten.link.post');
+Route::post('custom-shorten-link', [HomeController::class, 'customlink'])->name('custom.shorten.link.post');
 // Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
 Route::group(['prefix' => 'getlink.id'], function () {
     Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
@@ -164,4 +165,5 @@ Route::middleware(['authadmin'])->group(function () {
     Route::get('paket/{id}', [AdminController::class, 'show_paket']);
     Route::put('paket/edit/{id}', [AdminController::class, 'updatepaket']);
 });
-Route::get('/g{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
+
+Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');

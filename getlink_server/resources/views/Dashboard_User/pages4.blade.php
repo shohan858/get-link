@@ -151,7 +151,7 @@ $(document).ready(function() {
                         });
                         }
                     });
-                } else {
+                }else {
                     // Link sudah ada di database, tampilkan pesan error
                     Swal.fire({
                         icon: 'error',

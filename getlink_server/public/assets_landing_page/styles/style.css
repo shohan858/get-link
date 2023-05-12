@@ -665,6 +665,63 @@ body {
   }
 } */
 
+.custom-Link {
+    align-items: flex-start;
+    flex-direction: column;
+    width: fit-content;
+    margin-top: 5px;
+    display: flex;
+}
+
+.custom-hide {
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.text-custom {
+    font-family: "Roboto";
+    font-style: normal;
+    line-height: 23px;
+    font-weight: 300;
+    font-size: 15px;
+    margin: 0;
+}
+
+.input-hide {
+    border: 2px solid black;
+    box-sizing: border-box;
+    border-radius: 10px;
+    text-indent: 5px;
+    margin-left: 5px;
+    height: 33px;
+    width: 100px;
+}
+
+.custom-show {
+    justify-content: center;
+    font-family: "Roboto";
+    align-items: center;
+    margin-bottom: 20px;
+    font-style: normal;
+    line-height: 23px;
+    font-weight: 300;
+    font-size: 15px;
+    display: flex;
+    float: right;
+    margin: 0;
+}
+
+.custom-tampil {
+    justify-content: space-between;
+}
+
+.btn-custom {
+    margin-left: 5px;
+}
+
 /* End Hero style */
 
 .spotify {
