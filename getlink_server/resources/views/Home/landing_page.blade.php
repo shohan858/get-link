@@ -138,7 +138,7 @@
       <form id="form_link" method="POST" action="">
         @csrf
         <label id="tampil_link">
-          <input name="input_link" id="input_link" class="__hero_input" type="text" placeholder="Masukkan Link Asli" />
+          <input name="input_link" style="margin-bottom: 10px;" id="input_link" class="__hero_input" type="text" placeholder="Masukkan Link Asli" />
         </label>
         <button id="button_link" class="__hero_button" type="submit">
           <img id="image_link" src="{{ asset('assets_landing_page/img/Add-Link.png') }} " />
@@ -149,12 +149,12 @@
         </div>
         <div class="custom-Link">
           <div class="custom-hide" style="display: none">
-            <p class="text-custom"><B>GetLink.id/ </B></p>
+            <p class="text-custom"><B style="color: #1a2474;">GetLink.id/ </B></p>
             <input type="text" name="value_custom" id="value_custom" class="input-hide" placeholder="Custom link">
           </div>
           <div class="custom-show"><B>
               Atau gunakan</B>
-            <a id="btn-custom" class="btn-custom" href="#"> custom link</a>
+            <a id="btn-custom" class="btn-custom" style="color: #1a2474;" href="" > custom link</a> 
             .
           </div>
         </div>

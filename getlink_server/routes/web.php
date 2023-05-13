@@ -161,9 +161,8 @@ Route::middleware(['authadmin'])->group(function () {
     Route::post('admin/update_status_template_edit/{id}', [AdminController::class, 'update_status_template_edit'])->name('update_status_template_edit');
 
     Route::get('/preview/{halaman}', [AdminController::class, 'preview'])->name('preview');
-
-    Route::get('paket/{id}', [AdminController::class, 'show_paket']);
+       Route::get('paket/{id}', [AdminController::class, 'show_paket']);
     Route::put('paket/edit/{id}', [AdminController::class, 'updatepaket']);
-});
+}); 
 
 Route::get('/{code}', [HomeController::class, 'shortenLink'])->name('shorten.link');
