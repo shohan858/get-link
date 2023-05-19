@@ -30,8 +30,8 @@
                             @foreach ($template as $item)
                                 <button id="btn-{{ $item->id }}" data-id="{{ $item->id }}" value="1"
                                     class="pages3-card1 btn-template">
-                                    <img class="card-img" src="{{ asset('microsite/template_image/' . $item->image) }}"
-                                        alt="gambar {{ $item->title }}" />
+                                    <img  class="card-img" loading="lazy" src="{{ asset('microsite/template_image/' . $item->image) }}"
+                                        alt="gambar {{ $item->title }}"/>
                                     <div class="pages3-container">
                                         <h4 class="pages3-tulis">{{ $item->title }}</h4>
                                     </div>
@@ -57,8 +57,8 @@
                 </div>
                 <div id="prew2" class="pages3-kanan">
                     <div class="pages3-kanan-bung anim hidden">
-                        <div class="kanan-bungkus" id="kanan-bungkus">
-
+                    <div class="kanan-bungkus lazy" loading="lazy" id="kanan-bungkus" data-background-image=" url('http://getlink.id/microsite/background/bg_gaming.jpg')">
+                        
                         </div>
                     </div>
                     <div class="pages3-lamnjut-prew">
@@ -106,9 +106,11 @@
     }
 </script>
 <script>
+    
     $(document).ready(function() {
         $('.btn-template').click(function() {
             var id = $(this).data('id');
+            $(".bungkus-kanan").find('img').attr('loading','lazy');
             $.ajax({
                 url: "{{ route('preview_template') }}",
                 type: 'POST',

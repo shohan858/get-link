@@ -60,7 +60,7 @@
                                 </button>
                                 <a href="rubah_microsite/{{ $item->id_kategori }}/{{ $item->id_template }}/{{ $item->id }}"
                                     class="content-crud">
-                                    {{-- <img src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" /> --}}
+                                    {{-- <img loading="lazy" src="{{ asset('assets/img/🦆 icon _edit_.png') }}" alt="" /> --}}
                                     <i class="fa-regular fa-pen-to-square iconEdit"></i>
                                     <p class="editName">
                                         Edit
@@ -68,7 +68,7 @@
                                 </a>
                                 <button id="del{{ $index }}" class="content-crud"
                                     onclick="openDelModal({{ $index }})">
-                                    {{-- <img src="{{ asset('assets/img/Vector (2).svg') }}" alt="" /> --}}
+                                    {{-- <img loading="lazy" src="{{ asset('assets/img/Vector (2).svg') }}" alt="" /> --}}
                                     <i class="fa-solid fa-trash iconEdit"></i>
                                     <p class="editName">
                                         Hapus
