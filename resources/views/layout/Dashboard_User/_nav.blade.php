@@ -71,7 +71,7 @@
     const dropProf = document.getElementById("prof_drop")
 
     btnProf.addEventListener("click", function() {
-        // btnProf.classList.toggle("profte");
+        btnProf.classList.toggle("profte");
         dropProf.classList.toggle("prof_tampil");
         if (drown.classList.contains("fa-chevron-down")) {
             drown.classList.remove("fa-chevron-down");

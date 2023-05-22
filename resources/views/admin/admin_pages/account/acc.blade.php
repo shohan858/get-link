@@ -455,7 +455,7 @@
 
     <div class="adMicro">
         <table id="users-table" class="table table-striped table-bordered" style="width: 100%;">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
                     <th style="border-radius: 10px 0 0 0">Id</th>
                     <th>Name</th>
@@ -594,7 +594,7 @@
 
     <div class="adMicro">
         <table id="users-table-user" class="table table-striped table-bordered" style="width: 100%;">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
                     <th style="border-radius: 10px 0 0 0">Id</th>
                     <th>Name</th>

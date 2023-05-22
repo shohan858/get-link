@@ -36,7 +36,7 @@
 </style>
     <div class="adMicro">
         <table id="users-table" class="table table-striped table-bordered" style="width: 100%;">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
                     <th style="border-radius: 10px 0 0 0">No</th>
                     <th>User</th>

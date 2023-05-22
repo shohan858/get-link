@@ -37,16 +37,16 @@
 
     <div class="adtemp">
         <table id="users-table" class="table table-striped table-bordered" style=" width: 100%;">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
-                    <th>No</th>
+                    <th style="border-radius: 10px 0 0 0;">No</th>
                     <th>User</th>
                     <th>Status</th>
                     <th>Payment Gateway</th>
                     <th>Jumlah</th>
                     <th>Referensi</th>
                     <th>Status Penyelesaian</th>
-                    <th>Tanggal dibuat</th>
+                    <th style="border-radius: 0 10px 0 0;">Tanggal dibuat</th>
                 </tr>
             </thead>
         </table>

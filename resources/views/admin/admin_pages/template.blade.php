@@ -33,6 +33,26 @@
             color: #fff !important;
             /* ubah warna teks tombol saat dihover */
         }
+
+        .dropify-wrapper {
+            display: block;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            width: 90% !important;
+            max-width: 100%;
+            height: 100px !important;
+            padding: 5px 10px;
+            font-size: 14px;
+            line-height: 22px;
+            color: #777;
+            background-color: #E5E5E5;
+            background-image: none;
+            text-align: center;
+            border: 2px solid #E5E5E5;
+            -webkit-transition: border-color .15s linear;
+            transition: border-color .15s linear;
+        }
     </style>
     <div class="button-kanan">
         <button class="button1" onclick="add_template()" id="add_template" style="cursor: pointer;margin:1% 1% 3% 2.5%"><i
@@ -42,9 +62,9 @@
 
     <div class="adtemp custom-pagination">
         <table id="users-table" class="table table-striped table-bordered" style=" width: 100%;">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
-                    <th>Id</th>
+                    <th style="border-radius: 10px 0 0 0">Id</th>
                     <th>Kategori</th>
                     <th>Komponen</th>
                     <th>Image</th>
@@ -52,7 +72,7 @@
                     <th>Background</th>
                     <th>Type background</th>
                     <th>Status</th>
-                    <th>Aksi</th>
+                    <th style="border-radius: 0 10px 0 0;">Aksi</th>
                 </tr>
             </thead>
         </table>
@@ -178,31 +198,31 @@
     {{-- Modal template --}}
     <div id="add_modal_template" class="modal">
         <div class="modal-content-template" style="">
-            <div class="modal-header">
+            <div class="modal-header-template">
                 <p class="headP">Tambah Template</p>
                 <span onclick="closeaddtemplate()" class="close">&times;</span>
             </div>
             <div class="modal-body-template">
                 <form id="formTambahKategori" method="POST" action="{{ route('tambah_template') }}"
-                    style="margin: 15px"enctype="multipart/form-data" onsubmit="return validateForm()">
+                    style="margin: 10px"enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
-                    <div class="collab" style="display:block">
+                    <div class="collab-template" style="display:block">
                         <label for="" class="label-gambar">Nama Template</label>
-                        <input type="text" name="title" required class="botImg"
-                            style="margin-top: 0%;margin-bottom: 3%;outline:none;width: 100%">
+                        <input type="text" name="title" required class="botImg-temp"
+                            style="margin-top: 0%;outline:none;width: 94%">
                     </div>
                     <div class="form-group">
                         <label for="exampleSelect1" class="label-gambar">Kategori</label>
                         <select class="botImg-temp" id="exampleSelect1"
-                            style="margin-top: 0%;margin-bottom: 3%;outline:none;width: 100%;" name="id_kategori" required>
+                            style="margin-top: 0%;margin-bottom: 1%;outline:none;width: 95%;" name="id_kategori" required>
                             @foreach ($kategori as $kategoris)
                                 <option value="{{ $kategoris->id }}">{{ $kategoris->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="collab" style="display:block;margin-top:3%;width:97%">
-                        <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label>
-                        {{-- <div class="botImg" style="margin-top: 0%;margin-bottom: 3%;width: 100%"> --}}
+                    <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label>
+                    <div class="bot-upImg">
+                        {{-- <div class="botImg-temp" style="margin-top: 0%;margin-bottom: 3%;width: 100%"> --}}
                         {{-- <input type="file" hidden="hidden" class="dropify" name="image" required id="sl_file"> --}}
                         {{-- <span id="sl_custmMsg" class="customMsg" style="margin-left: 3px">Tidak ada file yang
                                 dipilih</span>
@@ -211,7 +231,7 @@
                         {{-- </div> --}}
                         <input type="file" name="image" class="dropify" data-height="200" style="width: 300px;" />
                     </div>
-                    <div class="collab" style="display:block">
+                    <div class="collab-template" style="display:block">
                         <label for="" class="label-gambar">Tipe Background</label><br>
                         <input class="form-check-input" type="radio" name="type_background" id="exampleRadios1"
                             value="color" onclick="showColorInput()">
@@ -224,15 +244,15 @@
                             Image
                         </label>
                     </div>
-                    <div class="collab" style="display:block">
-                        <div class="collab" id="colorInput" style="display:none;margin-top:3%">
+                    <div class="collab-template" style="display:block">
+                        <div class="collab-template" id="colorInput" style="display:none;margin-top:3%">
                             <label for="color" class="label-gambar">Background Color</label><br>
-                            <input type="color" name="background" id="color" class="botImg"
+                            <input type="color" name="background" id="color" class="botImg-temp"
                                 style="margin-top: 0%;margin-bottom: 3%;width: 100%">
                         </div>
-                        <div class="collab" id="imageInput" style="display:none;margin-top:3%">
+                        <div class="collab-template" id="imageInput" style="display:none;margin-top:3%">
                             <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label>
-                            <div class="" style="width: 97%">
+                            <div class="bot-upImg" style="width: 97%">
                                 <input type="file" class="dropify2" name="background" id="sl_file2">
                                 {{-- <div class="divSpan">
 
@@ -249,7 +269,7 @@
                         </div>
                     </div>
                     <div class="submit" id="submit">
-                        <div class="btn-batal" style="margin-right:5%">
+                        <div class="btn-batal">
                             <button type="button" onclick="closeaddtemplate()"
                                 class="button_close btn-close">Batal</button>
                         </div>

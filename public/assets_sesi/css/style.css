@@ -3,13 +3,10 @@ body {
 }
 
 input[type="email"],
-input[type="password"] {
-    outline: none;
-    text-indent: 10px;
-}
-
+input[type="password"],
 input[type="text"] {
     text-indent: 10px;
+    /* outline: none; */
 }
 
 a {
@@ -55,7 +52,7 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
+    /* position: relative; */
 }
 
 .kemLg {
@@ -209,6 +206,7 @@ button {
 
 .bungPass {
     height: 70px;
+    position: relative;
 }
 
 .password-container {
@@ -218,9 +216,8 @@ button {
 
 .toggle-password {
     position: absolute;
-    top: 50%;
-    right: 6%;
-    transform: translateY(-50%);
+    top: 21px;
+    right: 5px;
     cursor: pointer;
 }
 
@@ -258,9 +255,8 @@ button {
 
 .toggle-password-reg {
     position: absolute;
-    top: 30px;
-    right: 2%;
-    transform: translateY(-50%);
+    top: 21px;
+    right: 5px;
     cursor: pointer;
 }
 
@@ -287,15 +283,15 @@ button {
 }
 
 @media screen and (max-width: 301px) {
-    .toggle-password {
+    /* .toggle-password {
         top: 48%;
-    }
+    } */
 }
 
 @media screen and (max-width: 284px) {
-    .toggle-password {
+    /* .toggle-password {
         top: 49.5%;
-    }
+    } */
 
     /* .toggle-password-reg {
         top: 30px;
@@ -319,7 +315,7 @@ button {
 }
 
 @media screen and (max-width: 240px) {
-    .toggle-password {
+    /* .toggle-password {
         top: 52.5%;
-    }
+    } */
 }

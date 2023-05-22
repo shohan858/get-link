@@ -113,7 +113,7 @@
                         </div>
                         @endforeach
                         <div class="pages5-komponen-text">
-                            <div class="pages5-komponen-text-kiri" style="margin-left: 10px;">
+                            <div class="pages5-komponen-text-kiri" style="margin-left: 10px; overflow: auto">
                                 <p class="pages5-isi">Pilih background</p>
                                 <div class="milih">
                                     <div class="plh_wrn">

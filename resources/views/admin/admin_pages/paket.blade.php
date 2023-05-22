@@ -48,15 +48,15 @@
     </div>
     <div class="adMicro">
         <table id="users-table" class="table table-striped table-bordered" style=" width: 100%;">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
-                    <th>No</th>
+                    <th style="border-radius: 10px 0 0 0;">No</th>
                     <th>Name</th>
                     <th>Tipe</th>
                     <th>Harga</th>
                     <th>Slot</th>
                     <th>Waktu Shortlink</th>
-                    <th>Aksi</th>
+                    <th style="border-radius: 0 10px 0 0;">Aksi</th>
                 </tr>
             </thead>
         </table>
@@ -407,12 +407,12 @@
                 text: "Berhasil Edit Paket "+name,
                 });
             return true;
-            
+
         }
     </script>
 
 <script>
-    function editPaket(id) {  
+    function editPaket(id) {
       // Ambil data kategori berdasarkan id dari server
       $.ajax({
         url: "{{ url('paket') }}/" + id,
@@ -429,7 +429,7 @@
           $('#edit-paket-tipe').val(result.type);
           $('#edit-paket-harga').val(result.harga);
           $('#edit-paket-jumlah').val(result.slot);
-          
+
           if (result.type === 'microsite') {
             // alert(id)
             $('#tipe-microsite').prop('checked', true);
@@ -437,7 +437,7 @@
             $('#tipe-cms').prop('checked', true);
         }else if (result.type === 'shortlink') {
             $('#tipe-shortlink').prop('checked', true);
-        } 
+        }
           $('#edit-paket-modal').css('display', 'flex');
         // Validasi form
         $('#formEditPaket').submit(function(event) {
@@ -446,10 +446,10 @@
       this.submit();
     }
   });
-       
+
         },
 
-        
+
         error: function(xhr, status, error) {
           console.log(error);
         }

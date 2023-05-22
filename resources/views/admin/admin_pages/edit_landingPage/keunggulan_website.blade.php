@@ -16,274 +16,286 @@
         </div>
 
         <div class="overf">
-            <table class="data">
-                <tr>
-                    <th>No</th>
-                    <th>judul</th>
-                    <th>sub judul</th>
-                    <th>image</th>
-                    <th>aksi</th>
+            <table class="data overf">
+                <thead style="position: sticky; top: 0; z-index: 1; border-radius: 10px 10px 0 0;">
+                    <tr>
+                        <th style="border-radius: 10px 0 0 0">No</th>
+                        <th>judul</th>
+                        <th>sub judul</th>
+                        <th>image</th>
+                        <th style="border-radius: 0 10px 0 0">aksi</th>
+                    </tr>
+                </thead>
 
-                </tr>
+                <tbody>
+                    @foreach ($data_getlink as $item)
+                        @if ($item->id == 9)
+                            <tr>
+                                <td>1</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->subtitle }}</td>
+                                <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
+                                        width="50px" height="50px" alt="not found"></td>
+                                <td>
+                                    <button id="kw_btn1" class="buttonA"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit1" method="POST"
+                                        action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="botHead">
+                                            <h1 class="both1">Edit Data</h1>
+                                        </div>
+                                        <div class="botJud">
+                                            <input type="text" name="title" value="{{ $item->title }}" id=""
+                                                class="inputJud" placeholder="Masukkan judul">
+                                        </div>
+                                        <div class="botSj">
+                                            <input type="text" name="subtitle" value="{{ $item->subtitle }}"
+                                                id="" class="SjSubjudu" placeholder="Masukkan sub judul">
+                                        </div>
+                                        <div class="botSj bot-upImg">
+                                            <label for="" class="SjSubjudu"
+                                                style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
+                                                Gambar</label>
+                                            <input type="file" name="image_landing" class="dropify" id="sl_file">
+                                        </div>
+                                        <div class="botbtn">
+                                            <button type="submit" class="btnSj">Update</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
 
-                @foreach ($data_getlink as $item)
-                    @if ($item->id == 9)
-                        <tr>
-                            <td>1</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50px"
-                                    height="50px" alt="not found"></td>
-                            <td>
-                                <button id="kw_btn1" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit1" method="POST"
-                                    action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="botHead">
-                                        <h1 class="both1">Edit Data</h1>
-                                    </div>
-                                    <div class="botJud">
-                                        <input type="text" name="title" value="{{ $item->title }}" id=""
-                                            class="inputJud" placeholder="Masukkan judul">
-                                    </div>
-                                    <div class="botSj">
-                                        <input type="text" name="subtitle" value="{{ $item->subtitle }}" id=""
-                                            class="SjSubjudu" placeholder="Masukkan sub judul">
-                                    </div>
-                                    <div class="botSj" style="width:93%;padding-right:3%">
-                                        <label for="" class="SjSubjudu"
-                                            style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
-                                            Gambar</label>
-                                        <input type="file" name="image_landing" class="dropify" id="sl_file">
-                                    </div>
-                                    <div class="botbtn">
-                                        <button type="submit" class="btnSj">Update</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
+                    @foreach ($data_getlink as $item)
+                        @if ($item->id == 10)
+                            <tr>
+                                <td>2</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->subtitle }}</td>
+                                <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
+                                        width="50px" height="50px" alt="not found"></td>
+                                <td>
+                                    <button id="kw_btn2" class="buttonA"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit2" method="POST"
+                                        action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="botHead">
+                                            <h1 class="both1">Edit Data</h1>
+                                        </div>
+                                        <div class="botJud">
+                                            <input type="text" name="title" value="{{ $item->title }}" id=""
+                                                class="inputJud" placeholder="Masukkan judul">
+                                        </div>
+                                        <div class="botSj">
+                                            <input type="text" name="subtitle" value="{{ $item->subtitle }}"
+                                                id="" class="SjSubjudu" placeholder="Masukkan sub judul">
+                                        </div>
+                                        <div class="botSj bot-upImg">
+                                            <label for="" class="SjSubjudu"
+                                                style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
+                                                Gambar</label>
+                                            <input type="file" name="image_landing" class="dropify" id="sl_file">
+                                        </div>
+                                        <div class="botbtn">
+                                            <button type="submit" class="btnSj">Update</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
 
-                @foreach ($data_getlink as $item)
-                    @if ($item->id == 10)
-                        <tr>
-                            <td>2</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50px"
-                                    height="50px" alt="not found"></td>
-                            <td>
-                                <button id="kw_btn2" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit2" method="POST"
-                                    action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="botHead">
-                                        <h1 class="both1">Edit Data</h1>
-                                    </div>
-                                    <div class="botJud">
-                                        <input type="text" name="title" value="{{ $item->title }}" id=""
-                                            class="inputJud" placeholder="Masukkan judul">
-                                    </div>
-                                    <div class="botSj">
-                                        <input type="text" name="subtitle" value="{{ $item->subtitle }}" id=""
-                                            class="SjSubjudu" placeholder="Masukkan sub judul">
-                                    </div>
-                                    <div class="botSj" style="width:93%;padding-right:3%">
-                                        <label for="" class="SjSubjudu"
-                                            style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
-                                            Gambar</label>
-                                        <input type="file" name="image_landing" class="dropify" id="sl_file">
-                                    </div>
-                                    <div class="botbtn">
-                                        <button type="submit" class="btnSj">Update</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
+                    @foreach ($data_getlink as $item)
+                        @if ($item->id == 11)
+                            <tr>
+                                <td>3</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->subtitle }}</td>
+                                <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
+                                        width="50px" height="50px" alt="not found"></td>
+                                <td>
+                                    <button id="kw_btn3" class="buttonA"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit3"
+                                        method="POST" action="update_landing_page/{{ $item->id }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="botHead">
+                                            <h1 class="both1">Edit Data</h1>
+                                        </div>
+                                        <div class="botJud">
+                                            <input type="text" name="title" value="{{ $item->title }}"
+                                                id="" class="inputJud" placeholder="Masukkan judul">
+                                        </div>
+                                        <div class="botSj">
+                                            <input type="text" name="subtitle" value="{{ $item->subtitle }}"
+                                                id="" class="SjSubjudu" placeholder="Masukkan sub judul">
+                                        </div>
+                                        <div class="botSj bot-upImg">
+                                            <label for="" class="SjSubjudu"
+                                                style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
+                                                Gambar</label>
+                                            <input type="file" name="image_landing" class="dropify" id="sl_file">
+                                        </div>
+                                        <div class="botbtn">
+                                            <button type="submit" class="btnSj">Update</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
 
-                @foreach ($data_getlink as $item)
-                    @if ($item->id == 11)
-                        <tr>
-                            <td>3</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}" width="50px"
-                                    height="50px" alt="not found"></td>
-                            <td>
-                                <button id="kw_btn3" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit3" method="POST"
-                                    action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="botHead">
-                                        <h1 class="both1">Edit Data</h1>
-                                    </div>
-                                    <div class="botJud">
-                                        <input type="text" name="title" value="{{ $item->title }}" id=""
-                                            class="inputJud" placeholder="Masukkan judul">
-                                    </div>
-                                    <div class="botSj">
-                                        <input type="text" name="subtitle" value="{{ $item->subtitle }}"
-                                            id="" class="SjSubjudu" placeholder="Masukkan sub judul">
-                                    </div>
-                                    <div class="botSj" style="width:93%;padding-right:3%">
-                                        <label for="" class="SjSubjudu"
-                                            style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
-                                            Gambar</label>
-                                        <input type="file" name="image_landing" class="dropify" id="sl_file">
-                                    </div>
-                                    <div class="botbtn">
-                                        <button type="submit" class="btnSj">Update</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
+                    @foreach ($data_getlink as $item)
+                        @if ($item->id == 12)
+                            <tr>
+                                <td>4</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->subtitle }}</td>
+                                <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
+                                        width="50px" height="50px" alt="not found"></td>
+                                <td>
+                                    <button id="kw_btn4" class="buttonA"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit4"
+                                        method="POST" action="update_landing_page/{{ $item->id }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="botHead">
+                                            <h1 class="both1">Edit Data</h1>
+                                        </div>
+                                        <div class="botJud">
+                                            <input type="text" name="title" value="{{ $item->title }}"
+                                                id="" class="inputJud" placeholder="Masukkan judul">
+                                        </div>
+                                        <div class="botSj">
+                                            <input type="text" name="subtitle" value="{{ $item->subtitle }}"
+                                                id="" class="SjSubjudu" placeholder="Masukkan sub judul">
+                                        </div>
+                                        <div class="botSj bot-upImg">
+                                            <label for="" class="SjSubjudu"
+                                                style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
+                                                Gambar</label>
+                                            <input type="file" name="image_landing" class="dropify" id="sl_file">
+                                        </div>
+                                        <div class="botbtn">
+                                            <button type="submit" class="btnSj">Update</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
 
-                @foreach ($data_getlink as $item)
-                    @if ($item->id == 12)
-                        <tr>
-                            <td>4</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
-                                    width="50px" height="50px" alt="not found"></td>
-                            <td>
-                                <button id="kw_btn4" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit4" method="POST"
-                                    action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="botHead">
-                                        <h1 class="both1">Edit Data</h1>
-                                    </div>
-                                    <div class="botJud">
-                                        <input type="text" name="title" value="{{ $item->title }}" id=""
-                                            class="inputJud" placeholder="Masukkan judul">
-                                    </div>
-                                    <div class="botSj">
-                                        <input type="text" name="subtitle" value="{{ $item->subtitle }}"
-                                            id="" class="SjSubjudu" placeholder="Masukkan sub judul">
-                                    </div>
-                                    <div class="botSj" style="width:93%;padding-right:3%">
-                                        <label for="" class="SjSubjudu"
-                                            style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
-                                            Gambar</label>
-                                        <input type="file" name="image_landing" class="dropify" id="sl_file">
-                                    </div>
-                                    <div class="botbtn">
-                                        <button type="submit" class="btnSj">Update</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
+                    @foreach ($data_getlink as $item)
+                        @if ($item->id == 13)
+                            <tr>
+                                <td>5</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->subtitle }}</td>
+                                <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
+                                        width="50px" height="50px" alt="not found"></td>
+                                <td>
+                                    <button id="kw_btn5" class="buttonA"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit5"
+                                        method="POST" action="update_landing_page/{{ $item->id }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="botHead">
+                                            <h1 class="both1">Edit Data</h1>
+                                        </div>
+                                        <div class="botJud">
+                                            <input type="text" name="title" value="{{ $item->title }}"
+                                                id="" class="inputJud" placeholder="Masukkan judul">
+                                        </div>
+                                        <div class="botSj">
+                                            <input type="text" name="subtitle" value="{{ $item->subtitle }}"
+                                                id="" class="SjSubjudu" placeholder="Masukkan sub judul">
+                                        </div>
+                                        <div class="botSj bot-upImg">
+                                            <label for="" class="SjSubjudu"
+                                                style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
+                                                Gambar</label>
+                                            <input type="file" name="image_landing" class="dropify" id="sl_file">
+                                        </div>
+                                        <div class="botbtn">
+                                            <button type="submit" class="btnSj">Update</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
 
-                @foreach ($data_getlink as $item)
-                    @if ($item->id == 13)
-                        <tr>
-                            <td>5</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
-                                    width="50px" height="50px" alt="not found"></td>
-                            <td>
-                                <button id="kw_btn5" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit5" method="POST"
-                                    action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="botHead">
-                                        <h1 class="both1">Edit Data</h1>
-                                    </div>
-                                    <div class="botJud">
-                                        <input type="text" name="title" value="{{ $item->title }}" id=""
-                                            class="inputJud" placeholder="Masukkan judul">
-                                    </div>
-                                    <div class="botSj">
-                                        <input type="text" name="subtitle" value="{{ $item->subtitle }}"
-                                            id="" class="SjSubjudu" placeholder="Masukkan sub judul">
-                                    </div>
-                                    <div class="botSj" style="width:93%;padding-right:3%">
-                                        <label for="" class="SjSubjudu"
-                                            style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
-                                            Gambar</label>
-                                        <input type="file" name="image_landing" class="dropify" id="sl_file">
-                                    </div>
-                                    <div class="botbtn">
-                                        <button type="submit" class="btnSj">Update</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
-
-                @foreach ($data_getlink as $item)
-                    @if ($item->id == 14)
-                        <tr>
-                            <td>6</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->subtitle }}</td>
-                            <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
-                                    width="50px" height="50px" alt="not found"></td>
-                            <td>
-                                <button id="kw_btn6" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit6" method="POST"
-                                    action="update_landing_page/{{ $item->id }}" enctype="multipart/form-data"
-                                    style="margin-top: 0%">
-                                    @csrf
-                                    <div class="botHead">
-                                        <h1 class="both1">Edit Data</h1>
-                                    </div>
-                                    <div class="botJud">
-                                        <input type="text" name="title" value="{{ $item->title }}" id=""
-                                            class="inputJud" placeholder="Masukkan judul">
-                                    </div>
-                                    <div class="botSj">
-                                        <input type="text" name="subtitle" value="{{ $item->subtitle }}"
-                                            id="" class="SjSubjudu" placeholder="Masukkan sub judul">
-                                    </div>
-                                    <div class="botSj" style="width:93%;padding-right:3%">
-                                        <label for="" class="SjSubjudu"
-                                            style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
-                                            Gambar</label>
-                                        <input type="file" name="image_landing" class="dropify" id="sl_file">
-                                    </div>
-                                    <div class="botbtn">
-                                        <button type="submit" class="btnSj">Update</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
+                    @foreach ($data_getlink as $item)
+                        @if ($item->id == 14)
+                            <tr>
+                                <td>6</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->subtitle }}</td>
+                                <td><img style="background: #1a2474" src="{{ url('gambar') . '/' . $item->image }}"
+                                        width="50px" height="50px" alt="not found"></td>
+                                <td>
+                                    <button id="kw_btn6" class="buttonA"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <form onsubmit="return validateForm()" class="bottomtab" id="kw_edit6"
+                                        method="POST" action="update_landing_page/{{ $item->id }}"
+                                        enctype="multipart/form-data" style="margin-top: 0%">
+                                        @csrf
+                                        <div class="botHead">
+                                            <h1 class="both1">Edit Data</h1>
+                                        </div>
+                                        <div class="botJud">
+                                            <input type="text" name="title" value="{{ $item->title }}"
+                                                id="" class="inputJud" placeholder="Masukkan judul">
+                                        </div>
+                                        <div class="botSj">
+                                            <input type="text" name="subtitle" value="{{ $item->subtitle }}"
+                                                id="" class="SjSubjudu" placeholder="Masukkan sub judul">
+                                        </div>
+                                        <div class="botSj bot-upImg">
+                                            <label for="" class="SjSubjudu"
+                                                style="background: none;text-align:left;float:left;margin-bottom:-2%">Masukkan
+                                                Gambar</label>
+                                            <input type="file" name="image_landing" class="dropify" id="sl_file">
+                                        </div>
+                                        <div class="botbtn">
+                                            <button type="submit" class="btnSj">Update</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>
@@ -295,7 +307,7 @@
                 <p class="headP">Preview</p>
                 <span onclick="close_preview()" class="close">&times;</span>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-preview">
                 <iframe src="/preview/keunggulan" height="200%" width="100%" frameborder="0"></iframe>
             </div>
         </div>
@@ -311,9 +323,9 @@
             for (var i = 0; i < inputs.length; i++) {
                 if (inputs[i].value == "") {
                     Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Isikan Semua Inputan',
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Isikan Semua Inputan',
                     });
                     return false;
                 }
@@ -321,9 +333,9 @@
             for (var i = 0; i < inputs_gambar.length; i++) {
                 if (image_landing[i] && !allowedExtensions.exec(inputs_gambar[i])) {
                     Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Foto Harus Berextensi JPG,JPEG,PNG,SVG',
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Foto Harus Berextensi JPG,JPEG,PNG,SVG',
                     });
                     return false;
                 }
