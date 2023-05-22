@@ -23,12 +23,12 @@
                         <div id="pgKr" class="komponen-kkiri">
                             @foreach ($drag as $key => $item)
                                 @if ($item['status'] === 'off')
-                                    <div id="pages5Kom{{ $key }}" draggable="true" data-id="{{ $item['id'] }}"
+                                    <div loading="lazy" id="pages5Kom{{ $key }}" draggable="true" data-id="{{ $item['id'] }}"
                                         data-status="{{ $item['status'] }}" data-order="{{ $item['order'] }}"
                                         data-komponen="{{ $item['id_komponen'] }}" class="pages5-komponen-2"
                                         style="opacity: 0.5">
                                     @else
-                                        <div id="pages5Kom{{ $key }}" draggable="true"
+                                        <div loading="lazy" id="pages5Kom{{ $key }}" draggable="true"
                                             data-id="{{ $item['id'] }}" data-status="{{ $item['status'] }}"
                                             data-order="{{ $item['order'] }}" data-komponen="{{ $item['id_komponen'] }}"
                                             class="pages5-komponen-2">
@@ -36,7 +36,7 @@
                                 <div class="pages5-komponen-text">
                                     <div class="pages5-komponen-text-kiri">
                                         <button class="btn-drag">
-                                            <img class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}"
+                                            <img loading="lazy" class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}"
                                                 alt="" />
                                         </button>
                                         <i class="fa-solid {{ $item['icon'] }}" style="margin-left: 10px"></i>
@@ -44,36 +44,38 @@
                                     </div>
                                     <div class="pages5-komponen-text-kanan">
                                         <button id="btnSwitch{{ $key }}" class="btn-switch">
-                                            {{-- <img class="pages5-isi" src="{{ asset('assets/img/Group 68 (1).png') }}"
+                                            {{-- <img loading="lazy" class="pages5-isi" src="{{ asset('assets/img/Group 68 (1).png') }}"
                                             alt="" /> --}}
                                             @if ($item['status'] === 'off')
-                                                <i id="icon{{ $key }}" class="fa-solid fa-eye-slash"
+                                                <i loading="lazy" id="icon{{ $key }}" class="fa-solid fa-eye-slash"
                                                     style="color: red"></i>
                                             @else
-                                                <i id="icon{{ $key }}" class="fa-solid fa-eye"></i>
+                                                <i loading="lazy" id="icon{{ $key }}" class="fa-solid fa-eye"></i>
                                             @endif
                                         </button>
                                         <button id="del{{ $key }}" class="btn-trash">
-                                            <i id=trash{{ $key }} class="fa-solid fa-trash"></i>
+                                            <i loading="lazy" id=trash{{ $key }} class="fa-solid fa-trash"></i>
                                         </button>
                                         <div class="drop-3dot">
                                             <button id="btnDrop3Dot{{ $key }}" class="btn-3dot">
-                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                <i loading="lazy" class="fa-solid fa-ellipsis-vertical"></i>
                                             </button>
                                             <div id="div3Dot{{ $key }}" class="div3Dot-drop">
                                                 <button class="up div3Dot-isi">
-                                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                                    <svg loading-="lazy" width="17" height="17" viewBox="0 0 17 17" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
+                                                            loading="lazy"
                                                             d="M0.166342 8.49996L8.49967 0.166626L16.833 8.49996L15.3747 9.98433L9.54134 4.151L9.54134 16.8333L7.45801 16.8333L7.45801 4.151L1.62467 9.98433L0.166342 8.49996Z"
                                                             fill="#A5A5A5" />
                                                     </svg>
                                                     Pindah ke atas
                                                 </button>
                                                 <button class="down div3Dot-isi">
-                                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                                    <svg loading="lazy" width="17" height="17" viewBox="0 0 17 17" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
+                                                            loading="lazy"
                                                             d="M16.8337 8.50004L8.50033 16.8334L0.166992 8.50004L1.62533 7.01567L7.45866 12.849L7.45866 0.166708L9.54199 0.166708L9.54199 12.849L15.3753 7.01567L16.8337 8.50004Z"
                                                             fill="#A5A5A5" />
                                                     </svg>
@@ -82,12 +84,12 @@
                                             </div>
                                         </div>
                                         <button id="dropdown-btn-{{ $key }}" class="btn-drop">
-                                            <i id="it{{ $key }}" class="fa-solid fa-chevron-up"></i>
+                                            <i loading="lazy" id="it{{ $key }}" class="fa-solid fa-chevron-up"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <div id="dropdown-content-{{ $key }}" class="pages5-komponen-inside-text1">
-                                    <div class="pages5-input-file" data-id="{{ $item['id'] }}">
+                                    <div class="pages5-input-file" data-id="{{ $item['id'] }}" loading="lazy">
 
                                         {!! $item['code_input'] !!}
 
@@ -144,9 +146,10 @@
                             <button data-url="{{ route('microsite', ['link' => $background->link]) }}" id="btnSudah"
                                 class="pages5-lanjutkan">
                                 Selesai
-                                <svg class="finish" width="19" height="15" viewBox="0 0 19 15" fill="none"
+                                <svg loading="lazy" class="finish" width="19" height="15" viewBox="0 0 19 15" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
+                                        loading="lazy"
                                         d="M18.875 2.29169L6.37499 14.7917L0.645828 9.06252L2.11458 7.59377L6.37499 11.8438L17.4062 0.822937L18.875 2.29169Z"
                                         fill="#524799" />
                                 </svg>
@@ -157,15 +160,15 @@
                 </div>
                 <div id="prew2" class="anim pages5-kanan hidden">
                     <a href="{{ env('APP_URL') }}/-{{ $background->link }}"
-                        class="pages5-preview">{{ env('APP_URL') }}/{{ $background->link }}</a><br />
+                        class="pages5-preview" loading="lazy">{{ env('APP_URL') }}/{{ $background->link }}</a><br />
                     <div class="pages3-kanan-bung" id="pages3-kanan-bung">
-                        <div id="kanan-bungkus" style="background-color: transparent" class="kanan-bungkus">
+                        <div id="kanan-bungkus" loading="lazy" style="background-color: transparent" class="kanan-bungkus">
 
                             @if ($background->type_background == 'color')
-                                <div class="bungkus" style='background: {{ $background->background }}'>
+                                 <div class="bungkus lazyload" loading="lazy" data-bg='background: {{ $background->background }}'>
                                 @else
-                                    <div class="bungkus"
-                                        style="background-image: url('{{ asset('microsite/background/' . $background->background) }}')">
+                                <div class="bungkus lazyload"
+                                   loading="lazy" data-bg="{{ asset('microsite/background/' . $background->background) }}">
                             @endif
                             <?php $non_bungkus = ''; ?>
                             @foreach ($data as $d)
@@ -199,7 +202,7 @@
                 @foreach ($tambah_komponen as $key => $tk)
                     <button class="comp-card btnKomponen sudahPilih" data-id="{{ $tk->id }}"
                         id="btnkomponen{{ $key + 1 }}">
-                        <i class="fa-solid {{ $tk->icon }}" style="color: #524799;"></i>
+                        <i loading="lazy" class="fa-solid {{ $tk->icon }}" style="color: #524799;"></i>
                         <div class="comp-teks">
                             <p class="head-name">
                                 {{ $tk->name }}
@@ -214,7 +217,41 @@
             <input type="hidden" id="komponenLoop" value="{{ $tambah_komponen->count() }}">
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" 
+        integrity="sha384-Q4zScV7ovPvQxmq3A7lWYcVQAVz75awLfc6pBn9Zo95+6tsq6zp/G7MjcHdL6P6E" 
+        crossorigin="anonymous"></script>
+<script>
+    
+        document.querySelectorAll("img").forEach((img) => img.addEventListener("load", () => {
+            img.classList.add("loaded");
+        }));
+    document.addEventListener("DOMContentLoaded", function() {
+        var lazyBackgrounds = [].slice.call(document.querySelectorAll(".lazyload"));
 
+        if ("IntersectionObserver" in window) {
+            var lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var lazyBackground = entry.target;
+                        lazyBackground.style.backgroundImage = "url(" + lazyBackground.dataset.bg + ")";
+                        lazyBackground.classList.remove("lazyload");
+                        lazyBackgroundObserver.unobserve(lazyBackground);
+                    }
+                });
+            });
+
+            lazyBackgrounds.forEach(function(lazyBackground) {
+                lazyBackgroundObserver.observe(lazyBackground);
+            });
+        } else {
+            // Fallback
+            lazyBackgrounds.forEach(function(lazyBackground) {
+                lazyBackground.style.backgroundImage = "url(" + lazyBackground.dataset.bg + ")";
+                lazyBackground.classList.remove("lazyload");
+            });
+        }
+    });
+</script>
     <script>
         $(document).ready(function() {
             $('.summernote').each(function() {
