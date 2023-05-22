@@ -67,12 +67,7 @@
         </div>
     </div>
 </nav>
-<script>
-    let lazyLoadElems = document.querySelectorAll('.lazy');
-    lazyLoadElems.forEach(function(lazyLoadElem) {
-    lazyLoadObserver.observe(lazyLoadElem);
-});
-</script>
+
 <script>
     const btnProf = document.getElementById("prov_btn");
     const drown = document.getElementById("drwon");

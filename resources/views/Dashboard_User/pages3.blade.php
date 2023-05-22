@@ -57,7 +57,7 @@
                 </div>
                 <div id="prew2" class="pages3-kanan">
                     <div class="pages3-kanan-bung anim hidden">
-                    <div class="kanan-bungkus lazy" loading="lazy" id="kanan-bungkus" data-background-image=" url('http://getlink.id/microsite/background/bg_gaming.jpg')">
+                    <div class="kanan-bungkus" id="kanan-bungkus">
                         
                         </div>
                     </div>
@@ -82,9 +82,9 @@
     function buatHTML(data, background) {
         var html = '';
         if (background.type_background === 'color') {
-            html += '<div class="bungkus" style="background: ' + background.background + ';">';
+            html += '<div class="bungkus" loading="lazy" style="background: ' + background.background + ';">';
         } else {
-            html += '<div class="bungkus" style="background-image: url(\'http://getlink.id/microsite/background/' + background.background + '\');">';
+            html += '<div class="bungkus" loading="lazy" style="background-image: url(\'http://getlink.id/microsite/background/' + background.background + '\');">';
         }
         var non_bungkus = '';
         var kolom2 = '';
@@ -110,7 +110,7 @@
     $(document).ready(function() {
         $('.btn-template').click(function() {
             var id = $(this).data('id');
-            $(".bungkus-kanan").find('img').attr('loading','lazy');
+            
             $.ajax({
                 url: "{{ route('preview_template') }}",
                 type: 'POST',
@@ -127,6 +127,7 @@
                     console.log(error);
                 }
             });
+           
         });
     });
 </script>

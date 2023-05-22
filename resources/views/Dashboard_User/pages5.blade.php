@@ -165,10 +165,9 @@
                         <div id="kanan-bungkus" loading="lazy" style="background-color: transparent" class="kanan-bungkus">
 
                             @if ($background->type_background == 'color')
-                                 <div class="bungkus lazyload" loading="lazy" data-bg='background: {{ $background->background }}'>
+                            <div class="bungkus" style='background: {{ $background->background }}'>
                                 @else
-                                <div class="bungkus lazyload"
-                                   loading="lazy" data-bg="{{ asset('microsite/background/' . $background->background) }}">
+                                <div class="bungkus" style="background-image: url('{{ asset('microsite/background/' . $background->background) }}')">
                             @endif
                             <?php $non_bungkus = ''; ?>
                             @foreach ($data as $d)
@@ -450,8 +449,8 @@
                         ')';
 
                     $('#backgroundcolor').val('');
-
-                    $('.bungkus').css('background-image', backgroundPreview);
+        
+                    $('.bungkus').css('background-image', backgroundPreview).attr('loading','lazy');
                 } else if ($('#backgroundcolor').val() != '') {
                     var background = $('#backgroundcolor').val();
 

@@ -198,9 +198,9 @@ window.location.href = url;
         // Melakukan iterasi pada data menggunakan forEach
         var html = '';
         if (background.type_background === 'color') {
-            html += '<div class="bungkus" style="background: ' + background.background + ';">';
+            html += '<div class="bungkus" loading="lazy" style="background: ' + background.background + ';">';
         } else {
-            html += '<div class="bungkus" style="background-image: url(\'http://getlink.id/microsite/background/' + background.background + '\');">';
+            html += '<div class="bungkus" loading="lazy" style="background-image: url(\'http://getlink.id/microsite/background/' + background.background + '\');">';
         }
         var non_bungkus = '';
         var kolom2 = '';
