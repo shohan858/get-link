@@ -165,9 +165,9 @@
                         <div id="kanan-bungkus" loading="lazy" style="background-color: transparent" class="kanan-bungkus">
 
                             @if ($background->type_background == 'color')
-                            <div class="bungkus" style='background: {{ $background->background }}'>
+                            <div class="bungkus"  style='background: {{ $background->background }}'>
                                 @else
-                                <div class="bungkus" style="background-image: url('{{ asset('microsite/background/' . $background->background) }}')">
+                                <div class="bungkus lazyload" loading="lazyload" style="background-image: url('{{ asset('microsite/background/' . $background->background) }}')">
                             @endif
                             <?php $non_bungkus = ''; ?>
                             @foreach ($data as $d)
@@ -216,41 +216,7 @@
             <input type="hidden" id="komponenLoop" value="{{ $tambah_komponen->count() }}">
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" 
-        integrity="sha384-Q4zScV7ovPvQxmq3A7lWYcVQAVz75awLfc6pBn9Zo95+6tsq6zp/G7MjcHdL6P6E" 
-        crossorigin="anonymous"></script>
-<script>
-    
-        document.querySelectorAll("img").forEach((img) => img.addEventListener("load", () => {
-            img.classList.add("loaded");
-        }));
-    document.addEventListener("DOMContentLoaded", function() {
-        var lazyBackgrounds = [].slice.call(document.querySelectorAll(".lazyload"));
 
-        if ("IntersectionObserver" in window) {
-            var lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        var lazyBackground = entry.target;
-                        lazyBackground.style.backgroundImage = "url(" + lazyBackground.dataset.bg + ")";
-                        lazyBackground.classList.remove("lazyload");
-                        lazyBackgroundObserver.unobserve(lazyBackground);
-                    }
-                });
-            });
-
-            lazyBackgrounds.forEach(function(lazyBackground) {
-                lazyBackgroundObserver.observe(lazyBackground);
-            });
-        } else {
-            // Fallback
-            lazyBackgrounds.forEach(function(lazyBackground) {
-                lazyBackground.style.backgroundImage = "url(" + lazyBackground.dataset.bg + ")";
-                lazyBackground.classList.remove("lazyload");
-            });
-        }
-    });
-</script>
     <script>
         $(document).ready(function() {
             $('.summernote').each(function() {
@@ -260,7 +226,7 @@
             });
         });
     </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         $(document).on('click', '.hapusssss', function() {
