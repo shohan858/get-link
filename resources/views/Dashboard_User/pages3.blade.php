@@ -30,7 +30,7 @@
                             @foreach ($template as $item)
                                 <button id="btn-{{ $item->id }}" data-id="{{ $item->id }}" value="1"
                                     class="pages3-card1 btn-template">
-                                    <img  class="card-img" loading="lazy" src="{{ asset('microsite/template_image/' . $item->image) }}"
+                                    <img  class="card-img lazyload" loading="lazy" src="{{ asset('microsite/template_image/' . $item->image) }}"
                                         alt="gambar {{ $item->title }}"/>
                                     <div class="pages3-container">
                                         <h4 class="pages3-tulis">{{ $item->title }}</h4>
@@ -78,13 +78,14 @@
         @include('layout.Dashboard_User.footer')
     </div>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
 <script>
     function buatHTML(data, background) {
         var html = '';
         if (background.type_background === 'color') {
-            html += '<div class="bungkus" loading="lazy" style="background: ' + background.background + ';">';
+            html += '<div class="bungkus lazyload" loading="lazy" style="background: ' + background.background + ';">';
         } else {
-            html += '<div class="bungkus" loading="lazy" style="background-image: url(\'http://getlink.id/microsite/background/' + background.background + '\');">';
+            html += '<div class="bungkus lazyload" loading="lazy" style="background-image: url(\'http://getlink.id/microsite/background/' + background.background + '\');">';
         }
         var non_bungkus = '';
         var kolom2 = '';

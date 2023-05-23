@@ -36,14 +36,14 @@
 
                 @if ($count_microsite <= 0)
                     <div class="empty">
-                        <img src="{{ asset('assets/img/Education.png') }}" alt="" class="emptyImg">
+                        <img src="{{ asset('assets/img/Education.png') }}" loading="lazy" alt="" class="emptyImg lazyload">
                         <p class="emptyP">Anda belum membuat microsite</p>
                     </div>
                 @else
                     @foreach ($my_microsite as $index => $item)
                         <div class="anim content-isi-regu search-microsite" data-nama="{{ strtolower($item->name) }}">
                             <div class="content-kiri-regu">
-                                <div class="content-box"><img class="boxImg"
+                                <div class="content-box"><img class="boxImg lazyload" loading="lazy"
                                         src="{{ url('microsite/cover/' . $item->cover) }}" alt=""></div>
                                 <div class="box-text">
                                     <p class="nama-microsite">{{ $item->name }}</p>
@@ -107,7 +107,7 @@
         </div>
     @endforeach
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script>
         // mendapatkan elemen input dan konten mikrosite
         const inputCari = document.getElementById('cari');
