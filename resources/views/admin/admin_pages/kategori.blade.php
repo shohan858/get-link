@@ -91,7 +91,7 @@
     </div>
     <div class="adMicro">
         <table id="users-table" class="table table-striped table-bordered" style="width: 100%;">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
                     <th style="border-radius: 10px 0 0 0">Id</th>
                     <th>Name</th>
@@ -291,11 +291,11 @@
                             class="botImg"style="margin-top: 0%;margin-bottom: 3%;width:10%">
                     </div>
                     <div class="collab">
-                        <label for="sl_custmMsg" class="label-gambar">Masukkan Icon</label>
-                        <div class="botImg" style="margin-top:10%;border:none">
+                        {{-- <label for="sl_custmMsg" class="label-gambar">Masukkan Icon</label> --}}
+                        {{-- <div class="botImg" style="margin-top:10%;border:none"> --}}
+                            {{-- </div> --}}
                             <input type="file" id="edit-kategori-icon" name="icon" class="dropify" data-height="200"
-                                style="width: 300px;" />
-                        </div>
+                            style="width: 300px;" />
                     </div>
                     <div class="submit" style="margin-top:20%">
                         <div class="btn-batal">
@@ -358,8 +358,8 @@
                             class="botImg"style="margin-top: 0%;margin-bottom: 3%;width:10%">
                     </div>
                     <div class="collab">
-                        <label for="sl_custmMsg" class="label-gambar">Masukkan Icon</label>
-                        <div class="botImg" style="margin-top:10%;border:none">
+                        {{-- <label for="sl_custmMsg" class="label-gambar">Masukkan Icon</label> --}}
+                        {{-- <div class="botImg" style="margin-top:10%;border:none"> --}}
                             {{-- <input type="file" hidden="hidden" name="icon" required id="sl_file" accept="image/*">
                             <span id="sl_custmMsg" class="customMsg" style="margin-left: 3px">Tidak ada file yang
                                 dipilih</span>
@@ -368,7 +368,7 @@
                             <input type="file" name="icon" class="dropify" data-height="200"
                                 style="width: 300px;" />
 
-                        </div>
+                        {{-- </div> --}}
                         {{-- <div class="form-group">
                             <label for="iconKategori">Icon Kategori</label>
                             <input type="file" class="form-control-file" id="iconKategori" name="icon"
@@ -376,7 +376,7 @@
                         </div> --}}
 
                     </div>
-                    <div class="submit" style="margin-top:20%">
+                    <div class="submit">
                         <div class="btn-batal">
                             <button type="button" onclick="closeaddkategori()"
                                 class="button_close btn-close">Batal</button>

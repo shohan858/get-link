@@ -1,40 +1,33 @@
 @extends('admin.layout.base')
 
 @section('admin_konten')
-    <style>
-        .dropify-wrapper {
-            height: 100px;
-        }
-
-        .dropify-infos-message {
-            font-size: 12px;
-        }
-    </style>
     <div class="adSpon">
         <div class="button-kanan">
             <button id="" onclick="add_sponsor()" class="button1"><i class="fa-solid fa-plus"></i> Tambah
                 Collaboration</button>
             <button id="myBtn" onclick="preview()" class="button2"><i class="fa-regular fa-eye"></i> Preview</button>
         </div>
-        <table class="data">
-            <tr>
-                <th>no</th>
-                <th>image</th>
-                <th>aksi</th>
-            </tr>
-            @foreach ($data3 as $index => $item)
+        <div class="gl_bawah">
+            <table class="data">
                 <tr>
-                    <td>{{ $no++ }}</td>
-                    <td><img src="{{ url('gambar') . '/' . $item->image }}" alt="not found" width="10%" height="10%"></td>
-                    <td>
-                        <button class="buttonA" onclick="edit_sponsor({{ $index }})" id="spon_btn"><i
-                                class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="buttonB" onclick="del_sponsor({{ $index }})" type="submit" id="btn-hapus"><i
-                                class="fa-solid fa-trash"></i></button>
-                    </td>
+                    <th>no</th>
+                    <th>image</th>
+                    <th>aksi</th>
                 </tr>
-            @endforeach
-            {{-- <tr>
+                @foreach ($data3 as $index => $item)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td><img src="{{ url('gambar') . '/' . $item->image }}" alt="not found" width="10%"
+                                height="10%"></td>
+                        <td>
+                            <button class="buttonA" onclick="edit_sponsor({{ $index }})" id="spon_btn"><i
+                                    class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="buttonB" onclick="del_sponsor({{ $index }})" type="submit"
+                                id="btn-hapus"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                @endforeach
+                {{-- <tr>
                 <td colspan="3">
                     <form action="" class="spon_bottomtab" id="spon_edit">
                         <div class="botHead">
@@ -52,7 +45,8 @@
                     </form>
                 </td>
             </tr> --}}
-        </table>
+            </table>
+        </div>
     </div>
 
     {{-- Modal --}}
@@ -63,7 +57,7 @@
                 <p class="headP">Preview</p>
                 <span onclick="close_preview()" class="close">&times;</span>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-preview">
                 <iframe src="/preview/sponsor" height="200%" width="100%" frameborder="0"></iframe>
             </div>
         </div>
@@ -76,20 +70,20 @@
                 <p class="headP">Tambah Collaboration</p>
                 <span onclick="closeaddsponsor()" class="close">&times;</span>
             </div>
-            <div class="modal-body">
-                <form action="collab" id="tambah_col" style="margin: 15px" method="POST" enctype="multipart/form-data">
+
+                <form action="collab" id="tambah_col" class="modal-body" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="collab">
-                        <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label>
-                        <div class="botImg-spon" style="margin-top: 7%;margin-bottom:5%">
+                    {{-- <div class="collab"> --}}
+                        {{-- <label for="sl_custmMsg" class="label-gambar">Masukkan Gambar</label> --}}
+                        {{-- <div class="botImg-spon" style="margin-top: 7%;margin-bottom:5%"> --}}
                             <input type="file" name="foto" class="dropify" id="sl_file">
                             {{-- <input type="file" hidden="hidden" name="foto" id="sl_file"> --}}
                             {{-- <span id="sl_custmMsg" class="customMsg" style="margin-left: 3px">Tidak ada file yang
                                 dipilih</span>
                             <button style="cursor: pointer" type="button" id="sl_upBtn" class="btn-gam">Pilih
                                 file</button> --}}
-                        </div>
-                    </div>
+                        {{-- </div> --}}
+                    {{-- </div> --}}
                     <div class="submit">
                         <div class="btn-batal" style="">
                             <button type="button" class="button_close btn-close" onclick="closeaddsponsor()">Batal</button>
@@ -99,23 +93,23 @@
                         </div>
                     </div>
                 </form>
-            </div>
+
         </div>
     </div>
 
     @foreach ($data3 as $index => $item)
         {{-- Modal Hapus --}}
         <div id="hapus{{ $index }}" class="modal">
-            <div class="modal-content" style="">
+            <div class="modal-content-hapus" style="">
                 <div class="modal-header">
                     <p class="headP">Konfirmasi Hapus</p>
                     <span class="close" onclick="closedelsponsor({{ $index }})">&times;</span>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ '/collab/' . $item->id }}" method="POST" style="margin: 15px">
+
+                    <form action="{{ '/collab/' . $item->id }}" method="POST" class="modal-body-hapus">
                         @csrf
                         @method('DELETE')
-                        <div class="p">
+                        <div class="p-bungkus">
                             <p class="confirm-hapus">Apakah Anda Yakin Ingin Menghapus Collaboration Ini ?</p>
                         </div>
                         <div class="submit" style="">
@@ -128,7 +122,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+
             </div>
         </div>
     @endforeach
@@ -140,21 +134,21 @@
                     <p class="headP">Edit Data</p>
                     <span class="close" onclick="closeeditsponsor({{ $index }})">&times;</span>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ '/collab/' . $item->id }}" method="POST" id="spon_edit" style="margin: 15px"
+
+                    <form action="{{ '/collab/' . $item->id }}" method="POST" id="spon_edit" class="modal-body"
                         enctype="multipart/form-data" onsubmit="return validateForm()">
                         @csrf
                         @method('PUT')
-                        <label for="" class="label-gambar">Masukkan Gambar</label>
-                        <div class="botImg" style="margin-top:0;border:none">
+                        {{-- <label for="" class="label-gambar">Masukkan Gambar</label> --}}
+                        {{-- <div class="botImg" style="margin-top:0;border:none"> --}}
                             {{-- <input type="file" hidden="hidden" name="foto" id="spon_file{{ $index }}">
                         <span id="spon_custmMsg{{ $index }}" class="customMsg">No file chosen, yet.</span>
                         <button style="cursor: pointer" type="button" onclick="add_image()" id="spon_upBtn{{ $index }}" class="btn-gam">Select your
                             file</button> --}}
                             {{-- <input type="file" name="foto" id=""> --}}
-                            <input type="file" name="foto" class="dropify" id="sl_file" required>
-                        </div>
-                        <div class="submit" style="margin-top:10%">
+                        {{-- </div> --}}
+                        <input type="file" name="foto" class="dropify" id="sl_file" required>
+                        <div class="submit">
                             <div class="btn-batal">
                                 <button type="button" onclick="closeeditsponsor({{ $index }})"
                                     class="button_close btn-close">Batal</button>
@@ -164,7 +158,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+
             </div>
         </div>
     @endforeach
@@ -183,7 +177,7 @@
             updateImage(formData, $(this));
         });
     </script>
-    
+
 
     <script>
         $(document).ready(function() {
@@ -215,7 +209,7 @@
         });
     </script>
 
-{{-- <script>
+    {{-- <script>
     function validateForm() {
     var fileInput = document.getElementById('sl_file');
     var filePath = fileInput.value;
@@ -250,40 +244,39 @@
 
 
     <script>
-        $('#spon_edit').submit(function (event) {
-    event.preventDefault();
+        $('#spon_edit').submit(function(event) {
+            event.preventDefault();
 
-    $.ajax({
-        url: $(this).attr('action'),
-        type: 'POST',
-        data: new FormData(this),
-        processData: false,
-        contentType: false,
-        success: function (data) {
-            if (data.success) {
-                // Tutup modal
-                $('#edit').modal('hide');
-                // Refresh halaman
-                swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Berhasil Edit Data',
-                });
-                location.reload();
-            } else {
-                swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: data.errors.foto[0],
-                });
-            }
-        },
-        error: function (xhr, status, error) {
-           
-        }
-    });
-});
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.success) {
+                        // Tutup modal
+                        $('#edit').modal('hide');
+                        // Refresh halaman
+                        swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Berhasil Edit Data',
+                        });
+                        location.reload();
+                    } else {
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: data.errors.foto[0],
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
 
+                }
+            });
+        });
     </script>
 
     <script>

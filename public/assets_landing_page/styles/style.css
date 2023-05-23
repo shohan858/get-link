@@ -161,6 +161,10 @@ section {
     justify-content: center;
 }
 
+.carousel-kecil {
+    display: none;
+}
+
 .section-title h2::after {
     content: "";
     position: absolute;
@@ -473,15 +477,22 @@ body {
 /* Hero style */
 
 .hero_container {
+    height: 666px;
+    display: flex;
     width: 100%;
-    height: 100vh;
+}
+
+.isi_hero_kanan {
+    margin-left: 40px;
+    margin-top: 150px;
 }
 
 .hero_kiri {
-    position: absolute;
+    /* position: absolute; */
+    /* height: 777px; */
     width: 60%;
-    left: 66px;
-    top: 200px;
+    /* left: 66px; */
+    /* top: 200px; */
 }
 
 .__hero_h1 {
@@ -529,7 +540,8 @@ body {
 }
 
 .hero_kanan {
-    position: absolute;
+    /* position: absolute; */
+    /* height: 777px; */
     width: 40%;
     right: 0px;
 }
@@ -666,18 +678,17 @@ body {
 } */
 
 .custom-Link {
-    align-items: flex-start;
-    flex-direction: column;
-    width: fit-content;
+    justify-content: flex-end;
+    align-items: center;
     margin-top: 5px;
     display: flex;
+    width: 400px;
 }
 
 .custom-hide {
     justify-content: center;
     align-items: center;
     margin-right: 50px;
-    margin-bottom: 5px;
     display: flex;
 }
 
@@ -775,6 +786,7 @@ body {
 /* Style the footer */
 .footer {
     background-color: #f1f1f1;
+    position: absolute;
     padding: 10px;
     text-align: center;
 }
@@ -944,23 +956,21 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 
 .banner_gambar-kiri {
-    /* position: inherit; */
-    height: auto;
-    width: 80%;
-    /* top: 58px; */
-    margin-top: 34vh;
+    bottom: -50px;
+    position: absolute;
+    height: 55%;
+    width: auto;
 }
 
 .banner_eclippse {
-    /* position: inherit; */
-    width: 60%;
-    height: 32px;
-    /* top: 465px; */
-    right: 1px;
-    margin-top: -30px;
+    position: absolute;
+    width: 50%;
+    height: 30px;
+    bottom: -60px;
     background: #0c0c0c;
     filter: blur(39.5px);
 }
@@ -972,6 +982,7 @@ body {
     background: rgba(255, 255, 255, 0);
     mix-blend-mode: normal;
     right: 3px;
+    z-index: -1;
     display: block;
 }
 
@@ -1268,8 +1279,9 @@ body {
 }
 
 .almost_footer {
+    position: absolute;
     width: 100%;
-    height: 512px;
+    height: fit-content;
     background: #524799;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     margin-bottom: 0;
@@ -1390,14 +1402,17 @@ body {
     display: flex;
     width: 100%;
     /* background-color: #000000; */
-    margin-top: 30px;
+    margin-top: 76px;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     border-top: 3px solid #ffffff;
 }
 
 .foot_copyright {
-    /* margin-top: -40%; */
+    height: 40px;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 10px;
     display: flex;
 }
 
@@ -1413,12 +1428,15 @@ body {
 }
 
 .social_box {
+    border: none;
     width: 40px;
     height: 40px;
     padding: 8px;
     background: #ffffff;
     border-radius: 10px;
     margin: 10px;
+    outline: none;
+    cursor: pointer;
 }
 
 .list_text {
@@ -1428,7 +1446,7 @@ body {
 
 /* Responsive */
 
-@media screen and (max-width: 1280px) {
+/* @media screen and (max-width: 1280px) {
     .__hero_image {
         width: 60%;
     }
@@ -1445,6 +1463,22 @@ body {
 
     .__hero_lingkaran {
         width: 65%;
+    }
+} */
+
+@media screen and (min-width: 1500px) {
+    .hero_container {
+        height: 666px;
+    }
+
+    .__hero_lingkaran {
+        width: 320px;
+        height: 622px;
+    }
+
+    .__hero_image {
+        width: 356px;
+        height: 473px;
     }
 }
 
@@ -1475,14 +1509,14 @@ body {
         line-height: 40px;
     }
 
-    .banner_gambar-kiri {
+    /* .banner_gambar-kiri {
         margin-top: 45vh;
-    }
+    } */
 
-    .hero_container {
+    /* .hero_container {
         width: 100%;
         height: 100vh;
-    }
+    } */
 
     .hero_kiri {
         width: 60%;
@@ -1518,9 +1552,9 @@ body {
         width: 50%;
     }
 
-    .__hero_image {
+    /* .__hero_image {
         width: 60%;
-    }
+    } */
 
     .__hero_lingkaran {
         width: 60%;
@@ -1538,11 +1572,11 @@ body {
         top: 308rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         left: 10vh;
         top: 310rem;
         display: flex;
-    }
+    } */
 }
 
 @media screen and (max-width: 1304px) {
@@ -1552,11 +1586,11 @@ body {
         top: 310rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         left: 10vh;
         top: 312rem;
         display: flex;
-    }
+    } */
 }
 
 @media screen and (max-width: 1260px) {
@@ -1591,11 +1625,11 @@ body {
         top: 338rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         left: 10vh;
         top: 340rem;
         display: flex;
-    }
+    } */
 }
 
 @media screen and (max-width: 1186px) {
@@ -1609,11 +1643,11 @@ body {
         top: 347rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         left: 10vh;
         top: 348rem;
         display: flex;
-    }
+    } */
 
     .social_media {
         display: flex;
@@ -1627,9 +1661,9 @@ body {
         top: 350rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 352rem;
-    }
+    } */
 
     .social_media {
         left: 700px;
@@ -1641,9 +1675,9 @@ body {
         top: 352rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 354rem;
-    }
+    } */
 
     .social_media {
         left: 700px;
@@ -1655,9 +1689,9 @@ body {
         top: 356rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 357rem;
-    }
+    } */
 
     .social_media {
         left: 600px;
@@ -1669,9 +1703,9 @@ body {
         top: 357rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 358rem;
-    }
+    } */
 
     .social_media {
         left: 600px;
@@ -1693,9 +1727,9 @@ body {
         top: 398rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 399rem;
-    }
+    } */
 
     .social_media {
         left: 600px;
@@ -1752,9 +1786,9 @@ body {
         top: 400rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 402rem;
-    }
+    } */
 
     .social_media {
         left: 600px;
@@ -1774,9 +1808,9 @@ body {
         top: 403rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 404rem;
-    }
+    } */
 
     .social_media {
         left: 600px;
@@ -1803,9 +1837,9 @@ body {
         top: 412rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 414rem;
-    }
+    } */
 
     .social_media {
         left: 500px;
@@ -1830,10 +1864,10 @@ body {
         width: 50%;
     }
 
-    .__hero_image {
+    /* .__hero_image {
         top: 30vh;
         width: 60%;
-    }
+    } */
 
     .__hero_lingkaran {
         width: 65%;
@@ -1872,9 +1906,9 @@ body {
         top: 428rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 430rem;
-    }
+    } */
 
     .social_media {
         left: 400px;
@@ -1883,25 +1917,31 @@ body {
 
 @media screen and (max-width: 837px) {
     .hero_kiri {
-        position: absolute;
-        width: 80%;
+        /* position: absolute; */
+        width: 90%;
         left: 30px;
+    }
+
+    .isi_hero_kanan {
+        margin-left: 25px;
+        margin-top: 160px;
     }
 
     .__hero_image {
         display: none;
     }
 
-    .__hero_lingkaran {
-        width: 200px;
-        height: 600px;
-    }
-
-    .box_4 {
+    .hero_kanan {
         display: none;
     }
 
-    .__hero_lingkaran {
+    /* .__hero_lingkaran {
+        height: 600px;
+        width: 200px;
+        z-index: -1;
+    } */
+
+    .box_4 {
         display: none;
     }
 
@@ -1921,9 +1961,9 @@ body {
 }
 
 @media screen and (max-width: 830px) {
-    .banner_gambar-kiri {
+    /* .banner_gambar-kiri {
         margin-top: 55vh;
-    }
+    } */
 
     .list_h4 {
         font-size: 22px;
@@ -1944,6 +1984,10 @@ body {
         margin-left: 20px;
     }
 
+    .foot_arrow {
+        display: none;
+    }
+
     /* .box_foot_ndelik {
         display: flex;
         align-items: center;
@@ -1952,9 +1996,9 @@ body {
         height: 100%;
     } */
 
-    .almost_footer {
+    /* .almost_footer {
         height: 115vh;
-    }
+    } */
 
     .box_foot_kanan {
         top: 405rem;
@@ -1964,9 +2008,9 @@ body {
         top: 432rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 433rem;
-    }
+    } */
 
     .social_media {
         left: 300px;
@@ -1986,9 +2030,9 @@ body {
         top: 438rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 439rem;
-    }
+    } */
 
     .social_media {
         left: 300px;
@@ -2039,9 +2083,9 @@ body {
         top: 436rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 439rem;
-    }
+    } */
 
     .social_media {
         left: 300px;
@@ -2049,6 +2093,27 @@ body {
 }
 
 /* Mobile */
+
+@media screen and (max-width: 600px) {
+    .carousel-kecil {
+        display: block;
+    }
+
+    .carousel-besar {
+        display: none;
+    }
+
+    .custom-Link {
+        align-items: flex-start;
+        flex-direction: column;
+        width: fit-content;
+    }
+
+    .custom-hide {
+        margin-bottom: 5px;
+    }
+}
+
 @media screen and (max-width: 620px) {
     .list_container {
         display: flex;
@@ -2152,9 +2217,9 @@ body {
         top: 485rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 486rem;
-    }
+    } */
 
     .social_media {
         left: 300px;
@@ -2182,9 +2247,9 @@ body {
         top: 489rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 490rem;
-    }
+    } */
 
     .social_media {
         display: none;
@@ -2221,9 +2286,9 @@ body {
         top: 495rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 492rem;
-    }
+    } */
 
     .social_media {
         top: 10vh;
@@ -2242,9 +2307,9 @@ body {
         text-align: center;
     }
 
-    .almost_footer {
+    /* .almost_footer {
         height: 150vh;
-    }
+    } */
 
     .foot_lokasu_img {
         width: 80%;
@@ -2263,16 +2328,16 @@ body {
         top: 499rem;
     }
 
-    .foot_footer {
+    /* .foot_footer {
         top: 500rem;
-    }
+    } */
 
     .social_media {
         left: 100px;
     }
 
     .hero_kiri {
-        top: 220px;
+        /* top: 220px; */
         left: 30px;
     }
 
@@ -2284,9 +2349,9 @@ body {
         margin: 20px;
     }
 
-    .banner_gambar-kiri {
+    /* .banner_gambar-kiri {
         display: none;
-    }
+    } */
 
     .__hero_input {
         width: 231px;
@@ -2332,6 +2397,18 @@ body {
     .box_foot_ndelik {
         flex-direction: row;
         margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .__hero_input {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 310px) {
+    .__hero_input {
+        width: 150px;
     }
 }
 

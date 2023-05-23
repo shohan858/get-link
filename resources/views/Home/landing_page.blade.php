@@ -58,63 +58,63 @@
         #myBtn:hover {
             background-color: #0015ff;
         }
-      
-      .custom-Link {
-    align-items: flex-start;
-    flex-direction: column;
-    width: fit-content;
-    margin-top: 5px;
-    display: flex;
-}
 
-.custom-hide {
-    justify-content: center;
-    align-items: center;
-    margin-right: 50px;
-    margin-bottom: 5px;
-    display: flex;
-}
+        .custom-Link {
+            align-items: flex-start;
+            flex-direction: column;
+            width: fit-content;
+            margin-top: 5px;
+            display: flex;
+        }
 
-.text-custom {
-    font-family: "Roboto";
-    font-style: normal;
-    line-height: 23px;
-    font-weight: 300;
-    font-size: 15px;
-    margin: 0;
-}
+        .custom-hide {
+            justify-content: center;
+            align-items: center;
+            margin-right: 50px;
+            margin-bottom: 5px;
+            display: flex;
+        }
 
-.input-hide {
-    border: 2px solid black;
-    box-sizing: border-box;
-    border-radius: 10px;
-    text-indent: 5px;
-    margin-left: 5px;
-    height: 33px;
-    width: 100px;
-}
+        .text-custom {
+            font-family: "Roboto";
+            font-style: normal;
+            line-height: 23px;
+            font-weight: 300;
+            font-size: 15px;
+            margin: 0;
+        }
 
-.custom-show {
-    justify-content: center;
-    font-family: "Roboto";
-    align-items: center;
-    margin-bottom: 20px;
-    font-style: normal;
-    line-height: 23px;
-    font-weight: 300;
-    font-size: 15px;
-    display: flex;
-    float: right;
-    margin: 0;
-}
+        .input-hide {
+            border: 2px solid black;
+            box-sizing: border-box;
+            border-radius: 10px;
+            text-indent: 5px;
+            margin-left: 5px;
+            height: 33px;
+            width: 100px;
+        }
 
-.custom-tampil {
-    justify-content: space-between;
-}
+        .custom-show {
+            justify-content: center;
+            font-family: "Roboto";
+            align-items: center;
+            margin-bottom: 20px;
+            font-style: normal;
+            line-height: 23px;
+            font-weight: 300;
+            font-size: 15px;
+            display: flex;
+            float: right;
+            margin: 0;
+        }
 
-.btn-custom {
-    margin-left: 5px;
-}
+        .custom-tampil {
+            justify-content: space-between;
+        }
+
+        .btn-custom {
+            margin-left: 5px;
+        }
 
         @media (max-width: 768px) {
             .carousel-buttons-container {
@@ -132,31 +132,30 @@
 
     <!-- NavBar -->
 
-    <nav class="navbar bg-body-tertiary shadow">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('assets_landing_page/img/logo-text2.png') }} " alt="Logo" width="120"
-                    class="d-inline-block align-text-top ms-5">
-            </a>
-            @if (Auth::check())
-                {{-- <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <x-dropdown-link :href="route('logout')"
-                onclick="event.preventDefault();
-                this.closest('form').submit();" class="btn btn-outline-primary ms-auto rounded-pill me-5">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                {{ __('Log Out') }}
-        </x-dropdown-link>
-    </form> --}}
-    @if (Auth::User()->role == 'user')
-    <a href="/dashboard_user" class="btn btn-outline-primary rounded-pill" style="width: 100px">Dashboard</a>
-    @else
-    <a href="/admin_get" class="btn btn-outline-primary rounded-pill" style="width: 100px">Dashboard</a>
-    @endif
-            @else
-                <a href="/sesi" class="btn btn-outline-primary rounded-pill" type="button"
-                    style="width: 100px">Login</a>
-            @endif
+    <nav class="container-fluid py-3 fixed-top bg-light shadow">
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-between">
+                <div class="col">
+                    <a class="navbar-brand" href="#">
+                        <img src="{{ asset('assets_landing_page/img/logo-text2.png') }} " alt="Logo" width="120"
+                            class="img-fluid align-text-top m-0">
+                    </a>
+                </div>
+                <div class="col">
+                    @if (Auth::check())
+                        @if (Auth::User()->role == 'user')
+                            <a href="/dashboard_user" class="btn btn-outline-primary rounded-pill float-end"
+                                style="width: 100px">Dashboard</a>
+                        @else
+                            <a href="/admin_get" class="btn btn-outline-primary rounded-pill float-end"
+                                style="width: 100px">Dashboard</a>
+                        @endif
+                    @else
+                        <a href="/sesi" class="btn btn-outline-primary rounded-pill float-end" type="button"
+                            style="width: 100px">Login</a>
+                    @endif
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -187,50 +186,56 @@
 
     <div class="hero_container">
         <div class="hero_kiri" data-aos="fade-right">
+            <div class="isi_hero_kanan">
+                @foreach ($data_getlink as $item)
+                    @if ($item->id == 1)
+                        <h1 class="__hero_h1">
+                            {{ $item->title }}
+                        </h1>
+                        <p class="__hero_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    @endif
+                @endforeach
+                <form id="form_link" method="POST" action="">
+                    @csrf
+                    <label id="tampil_link">
+                        <input name="input_link" id="input_link" class="__hero_input" type="text"
+                            placeholder="Masukkan Link Asli" />
+                    </label>
+                    <button id="button_link" class="__hero_button" type="submit">
+                        <img id="image_link" src="{{ asset('assets_landing_page/img/Add-Link.png') }} " />
+                    </button>
+                    <div id="cakecap" class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}"
+                        style="display: none">
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                    <div class="custom-Link">
+                        <div class="custom-hide" style="display: none">
+                            <p class="text-custom"><B>GetLink.id/ </B></p>
+                            <input type="text" name="value_custom" id="value_custom" class="input-hide"
+                                placeholder="Custom link">
+                        </div>
+                        <div class="custom-show"><B>
+                                Atau gunakan</B>
+                            <a id="btn-custom" class="btn-custom" href="#"> custom link</a>
+                            .
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="hero_kanan" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500"
+            data-aos-duration="500">
+            <img class="__hero_lingkaran" src="{{ asset('assets_landing_page/img/Ellipse 1.png') }} " alt="eclipse">
+            {{-- <img class="__hero_image" src="{{ asset('assets_landing_page/img/firl2.png') }} " /> --}}
             @foreach ($data_getlink as $item)
                 @if ($item->id == 1)
-                    <h1 class="__hero_h1">
-                        {{ $item->title }}
-                    </h1>
-                    <p class="__hero_p">
-                        {{ $item->subtitle }}
-                    </p>
+                    <img class="__hero_image" src="{{ asset('gambar/' . $item->image) }}" />
                 @endif
             @endforeach
-            <form id="form_link" method="POST" action="">
-                  @csrf
-                  <label id="tampil_link">
-                    <input name="input_link" id="input_link" class="__hero_input" type="text" placeholder="Masukkan Link Asli" />
-                  </label>
-                  <button id="button_link" class="__hero_button" type="submit">
-                    <img id="image_link" src="{{ asset('assets_landing_page/img/Add-Link.png') }} " />
-                  </button>
-                  <div id="cakecap" class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}" style="display: none">
-                    <div class="col-md-6">
-                    </div>
-                  </div>
-                  <div class="custom-Link">
-                    <div class="custom-hide" style="display: none">
-                      <p class="text-custom"><B>GetLink.id/ </B></p>
-                      <input type="text" name="value_custom" id="value_custom" class="input-hide" placeholder="Custom link">
-                    </div>
-                      <div class="custom-show"><B>
-                          Atau gunakan</B>
-                        <a id="btn-custom" class="btn-custom" href="#"> custom link</a>
-                        .
-                      </div>
-                  </div>
-            </form>
         </div>
-      <div class="hero_kanan" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500" data-aos-duration="500">
-      <img class="__hero_lingkaran" src="{{ asset('assets_landing_page/img/Ellipse 1.png') }} " alt="eclipse">
-      {{-- <img class="__hero_image" src="{{ asset('assets_landing_page/img/firl2.png') }} " /> --}}
-      @foreach ($data_getlink as $item)
-      @if ($item->id == 1)
-      <img class="__hero_image" src="{{ asset('gambar/' . $item->image) }}" />
-      @endif
-      @endforeach
-    </div>
     </div>
 
     <!-- End Hero -->
@@ -239,27 +244,56 @@
 
     <section class="cacac" data-aos="fade-up">
         <div class="container-fluid">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div id="carouselExampleControls" class="carousel slide carousel-besar" data-bs-ride="carousel"
+                data-bs-interval="5000">
                 <div class="carousel-inner">
                     @foreach ($data3->chunk(3) as $chunk)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="row justify-content-evenly">
                                 @foreach ($chunk as $item)
-                                    <div class="col-4 col-sm-3 col-md-2">
-                                        <img class="img-fluid mx-auto d-block"
-                                            src="{{ asset('gambar/' . $item->image) }}" alt="">
+                                    <div class="col-4 col-sm-3 col-2">
+                                        <img class="img-fluid align-items-center mx-auto d-block"
+                                            src="{{ asset('gambar/' . $item->image) }}" width="100"
+                                            alt="sponsor">
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="prev">
+                <button class="carousel-control-prev pe-5 me-5" type="button"
+                    data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                <button class="carousel-control-next ps-5 ms-5" type="button"
+                    data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div id="carouselExampleControls_kecil" class="carousel slide carousel-kecil" data-bs-ride="carousel"
+                data-bs-interval="5000">
+                <div class="carousel-inner">
+                    @foreach ($data3->chunk(2) as $chunk)
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                            <div class="row justify-content-evenly">
+                                @foreach ($chunk as $item)
+                                    <div class="col-4 col-sm-3 col-2">
+                                        <img class="img-fluid d-flex m-0 align-items-center" src="{{ asset('gambar/' . $item->image) }}"
+                                            width="100" alt="sponsor">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev pe-5 me-5" type="button"
+                    data-bs-target="#carouselExampleControls_kecil" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next ps-5 ms-5" type="button" data-bs-target="#carouselExampleControls_kecil"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -392,7 +426,7 @@
             <h1 class="banner_h1">AYO SEGERA BERGABUNG!</h1>
             <h3 class="banner_h3">Daftar Sekarang Gratis!</h3>
             <p class="banner_p-1">Dapatkan akses seluruh fitur sengan bergabung dengan Getlink.</p>
-            <a href="/sesi" class="banner_button">
+            <a href="/register" class="banner_button">
                 Daftar Sekarang
             </a>
             <p class="banner_small">Gratis tanpa biaya</p>
@@ -758,28 +792,28 @@
         {{-- <img class="garis_foot" src="{{ asset('assets_landing_page/img/Line 1.png') }}" alt=""> --}}
         <div class="foot_footer">
             <div class="social_media_hidden">
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
+                {{-- <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
                         alt=""></div>
                 <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (3).png') }}"
                         alt=""></div>
                 <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (4).png') }}"
-                        alt=""></div>
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
-                        alt=""></div>
+                        alt=""></div> --}}
+                {{-- <a href="#" class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
+                        alt=""></a> --}}
             </div>
             <div class="foot_copyright">
                 <p class="text-white">© 2023 Copyright : </p>
-                <a class="text-white" href="https://mdbootstrap.com/"><b>Get Aplikasi Indonesia</b></a>
+                <a class="text-white" href="https://getaplikasi.id" target="blank_"><b>PT. Get Aplikasi Indonesia</b></a>
             </div>
             <div class="social_media">
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
+                {{-- <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
                         alt=""></div>
                 <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (3).png') }}"
                         alt=""></div>
                 <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (4).png') }}"
-                        alt=""></div>
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
-                        alt=""></div>
+                        alt=""></div> --}}
+                {{-- <a href="#" class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
+                        alt=""></a> --}}
             </div>
         </div>
     </div>
@@ -914,7 +948,7 @@
         img.src = "{{ asset('assets_landing_page/img/copy.png') }} ";
         newButton.appendChild(img);
         document.body.appendChild(newButton);
-        newButton.style.backgroundColor ="#00678B";  
+        newButton.style.backgroundColor = "#00678B";
         const copyButton = document.getElementById("button_copy");
 
         function validateLink(link) {
@@ -923,82 +957,83 @@
         }
 
         submitButton.addEventListener("click", function(e) {
-      e.preventDefault();
-      const inputElement = document.getElementById("input_link");
-      const link = inputElement.value.trim();
-      const inputElementcustom = document.getElementById("value_custom");
-      const linkcustom = inputElementcustom.value.trim();
-      
-      if (validateLink(link)) {
-          // Mengirimkan data ke server menggunakan AJAX
-          var url_shortener = "{{ route('generate.shorten.link.post') }}";
-          $.ajax({
-            type: 'POST',
-            url: url_shortener,
-            data: {
-              _token: '{{ csrf_token() }}',
-              link: link,
-              linkcustom: linkcustom,
-            },
-            success: function(response) {
-              $('#input_link').val("{{ env('APP_URL') }}" + "/" + response.short_link);
-              $('#value_custom').val("");
-              showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1000);
-              // Menampilkan tombol copy dan refresh
-              if (buttonImage.src.includes("Refresh.png")) {
-                buttonImage.src = "{{ asset('assets_landing_page/img/Add-Link.png') }} ";
-                newButton.parentNode.removeChild(newButton);
-                submitButton.style.marginLeft = "10px";
-                submitButton.style.backgroundColor = "#1A2474";
-                inputElement.value = "";
-                inputElementcustom.value="";
-                let timerInterval
-                Swal.fire({
-                  timer: 1000,
-                  timerProgressBar: true,
-                  didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                      b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                  },
-                  willClose: () => {
-                    clearInterval(timerInterval)
-                  }
-                }).then((result) => {
-                  /* Read more about handling dismissals below */
-                  if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
-                  }
-                })
-                } else {
-                buttonImage.src = "{{ asset('assets_landing_page/img/Refresh.png  ') }} ";
-                submitButton.style.marginLeft = "20px";
-                submitButton.style.backgroundColor = "#00678B";
-                inputElement.parentNode.insertBefore(newButton, inputElement.nextSibling);
-              }
-              // Menambahkan event listener pada tombol copy
-              copyButton.addEventListener("click", function() {
-                const inputElement = document.getElementById("input_link");
-                inputElement.select();
-                document.execCommand("copy");
-                // alert("berhasil copy!");
-                showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1000);
-              });
-            },
+            e.preventDefault();
+            const inputElement = document.getElementById("input_link");
+            const link = inputElement.value.trim();
+            const inputElementcustom = document.getElementById("value_custom");
+            const linkcustom = inputElementcustom.value.trim();
 
-            error: function() {
-              showAlert('error', 'Link Yang Anda Masukkan Sudah Terdaftar', 'Silahkan Masukkan Link Yang Lain', 2500);
+            if (validateLink(link)) {
+                // Mengirimkan data ke server menggunakan AJAX
+                var url_shortener = "{{ route('generate.shorten.link.post') }}";
+                $.ajax({
+                    type: 'POST',
+                    url: url_shortener,
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        link: link,
+                        linkcustom: linkcustom,
+                    },
+                    success: function(response) {
+                        $('#input_link').val("{{ env('APP_URL') }}" + "/" + response.short_link);
+                        $('#value_custom').val("");
+                        showAlert('success', 'Berhasil', 'Tautan Berhasil Dipendekan', 1000);
+                        // Menampilkan tombol copy dan refresh
+                        if (buttonImage.src.includes("Refresh.png")) {
+                            buttonImage.src = "{{ asset('assets_landing_page/img/Add-Link.png') }} ";
+                            newButton.parentNode.removeChild(newButton);
+                            submitButton.style.marginLeft = "10px";
+                            submitButton.style.backgroundColor = "#1A2474";
+                            inputElement.value = "";
+                            inputElementcustom.value = "";
+                            let timerInterval
+                            Swal.fire({
+                                timer: 1000,
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                    const b = Swal.getHtmlContainer().querySelector('b')
+                                    timerInterval = setInterval(() => {
+                                        b.textContent = Swal.getTimerLeft()
+                                    }, 100)
+                                },
+                                willClose: () => {
+                                    clearInterval(timerInterval)
+                                }
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    console.log('I was closed by the timer')
+                                }
+                            })
+                        } else {
+                            buttonImage.src = "{{ asset('assets_landing_page/img/Refresh.png  ') }} ";
+                            submitButton.style.marginLeft = "20px";
+                            submitButton.style.backgroundColor = "#00678B";
+                            inputElement.parentNode.insertBefore(newButton, inputElement.nextSibling);
+                        }
+                        // Menambahkan event listener pada tombol copy
+                        copyButton.addEventListener("click", function() {
+                            const inputElement = document.getElementById("input_link");
+                            inputElement.select();
+                            document.execCommand("copy");
+                            // alert("berhasil copy!");
+                            showAlert('success', 'Berhasil', 'Tautan Berhasil Dicopy', 1000);
+                        });
+                    },
+
+                    error: function() {
+                        showAlert('error', 'Link Yang Anda Masukkan Sudah Terdaftar',
+                            'Silahkan Masukkan Link Yang Lain', 2500);
+                    }
+                });
+
+            } else {
+                showAlert('error', 'Ooops!', 'Link Tidak Valid!', 1000);
+                return;
             }
-          });
-        
-      } else {
-        showAlert('error', 'Ooops!', 'Link Tidak Valid!', 1000);
-        return;
-      }
 
-    });
+        });
 
         function showAlert(icon, title, text, timer) {
             swal.fire({
@@ -1027,8 +1062,8 @@
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
-      
-      var customShow = document.querySelector('.custom-Link');
+
+        var customShow = document.querySelector('.custom-Link');
         var btnCustom = document.getElementById("btn-custom");
         var customHide = document.querySelector(".custom-hide");
 

@@ -3,203 +3,207 @@
 @section('admin_konten')
 
 @section('admin_konten')
-@foreach ($data_getlink as $item)
+    @foreach ($data_getlink as $item)
         @if ($item->id == 5)
-    <div class="adkw">
-        <div class="button-kanan">
-            <button onclick="preview()" id="myBtn" class="button2"><i class="fa-regular fa-eye"></i> Preview</button>
-        </div>
+            <div class="adkw">
+                <div class="button-kanan">
+                    <button onclick="preview()" id="myBtn" class="button2"><i class="fa-regular fa-eye"></i>
+                        Preview</button>
+                </div>
 
-        <table class="data">
-            <tr>
-                <th>judul</th>
-                <th>sub judul</th>
-                <th>aksi</th>
+                <div class="gl_bawah">
+                    <table class="data">
+                        <tr>
+                            <th>judul</th>
+                            <th>sub judul</th>
+                            <th>aksi</th>
 
-            </tr>
-            <tr>
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->subtitle }}</td>
-                <td>
-                    <button id="cms_btn" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
-                </td>
-            </tr>
-        </table>
+                        </tr>
+                        <tr>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->subtitle }}</td>
+                            <td>
+                                <button id="cms_btn" class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button>
+                            </td>
+                        </tr>
+                    </table>
 
-        <form action="update_landing_page/{{ $item->id }}" method="POST"
-            enctype="multipart/form-data" class="bottomtab-cms" id="cms_edit" data-aos="fade-down">
-            @csrf
-            <div class="botHead">
-                <h1 class="both1">Edit Data</h1>
-            </div>
-            <div class="botJud">
-                <input type="text" name="title"
-                value="{{ $item->title }}" id="" class="inputJud" placeholder="Masukkan judul">
-            </div>
-            <div class="botSj">
-                <input type="text" name="subtitle"
-                value="{{ $item->subtitle }}"  id="" class="SjSubjudu" placeholder="Masukkan sub judul">
-            </div>
-            {{-- <div class="botImg">
+                    <form action="update_landing_page/{{ $item->id }}" method="POST" enctype="multipart/form-data"
+                        class="bottomtab-cms" id="cms_edit" data-aos="fade-down">
+                        @csrf
+                        <div class="botHead">
+                            <h1 class="both1">Edit Data</h1>
+                        </div>
+                        <div class="botJud">
+                            <input type="text" name="title" value="{{ $item->title }}" id="" class="inputJud"
+                                placeholder="Masukkan judul">
+                        </div>
+                        <div class="botSj">
+                            <input type="text" name="subtitle" value="{{ $item->subtitle }}" id=""
+                                class="SjSubjudu" placeholder="Masukkan sub judul">
+                        </div>
+                        {{-- <div class="botImg">
                 <input type="file" hidden="hidden" name="" id="cms_file">
                 <span id="cms_custmMsg" class="customMsg">No file chosen, yet.</span>
                 <button style="cursor: pointer" type="button" id="cms_upBtn" class="btn-gam">Select your file</button>
             </div> --}}
-            <div class="botbtn">
-                <button type="submit" class="btnSj">Update</button>
-            </div>
-        </form>
+                        <div class="botbtn">
+                            <button type="submit" class="btnSj">Update</button>
+                        </div>
+                    </form>
 
-        <table class="data">
-            @php
-                $no = 1;
-            @endphp
-            <tr>
-                <th>No</th>
-                <th>Keunggulan</th>
-                <th>Edit</th>
-            </tr>
-            @foreach ($data_getlink as $index => $item)
-            @if ($item->id == 6 || $item->id == 7 || $item->id == 8)
-            <tr>
-                <td>{{ $no++ }}</td>
-                <td>{{ $item->title }}</td>
-                <td>
-                    {{-- <button class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button> --}}
-                    <div class="editkeung">
-                        <form action="update_landing_page/{{ $item->id }}" method="POST"
-                            enctype="multipart/form-data" id="edit_keung" class="editkeung">
-                            @csrf
-                            <input type="text" name="title"
-                            value="{{ $item->title }}" id="judul" class="inputKeung" placeholder="{{ $item->title }}">
-                            <button type="submit" style="cursor: pointer" class="ref"><i class="fa-solid fa-rotate"></i></button>
-                        </form>
+                    <table class="data">
+                        @php
+                            $no = 1;
+                        @endphp
+                        <tr>
+                            <th>No</th>
+                            <th>Keunggulan</th>
+                            <th>Edit</th>
+                        </tr>
+                        @foreach ($data_getlink as $index => $item)
+                            @if ($item->id == 6 || $item->id == 7 || $item->id == 8)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>
+                                        {{-- <button class="buttonA"><i class="fa-solid fa-pen-to-square"></i></button> --}}
+                                        <div class="editkeung">
+                                            <form action="update_landing_page/{{ $item->id }}" method="POST"
+                                                enctype="multipart/form-data" id="edit_keung" class="editkeung">
+                                                @csrf
+                                                <input type="text" name="title" value="{{ $item->title }}"
+                                                    id="judul" class="inputKeung" placeholder="{{ $item->title }}">
+                                                <button type="submit" style="cursor: pointer" class="ref"><i
+                                                        class="fa-solid fa-rotate"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+
+            {{-- Modal --}}
+            <div id="iframe" class="modal">
+                <div class="modal_preview" style="height: 80%">
+                    <div class="modal-header">
+                        <p class="headP">Preview</p>
+                        <span onclick="close_preview()" class="close">&times;</span>
                     </div>
-                </td>
-            </tr>
-            @endif
-            @endforeach
-        </table>
-    </div>
-
-     {{-- Modal --}}
-     <div id="iframe" class="modal">
-        <div class="modal_preview" style="height: 80%"> 
-            <div class="modal-header">
-                <p class="headP">Preview</p>
-                <span onclick="close_preview()" class="close">&times;</span>
+                    <div class="modal-body-preview">
+                        <iframe src="/preview/cms" height="200%" width="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body" >
-                <iframe src="/preview/cms" height="200%" width="100%" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        $(document).ready(function(){
-            $("#cms_edit").submit(function(e){
-                var title = $("input[name='title']").val();
-                var subtitle = $("input[name='subtitle']").val();
-                var image_landing = $("input[name='image_landing']").val();
-                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
-                if(title == "" || subtitle == "") {
-                    e.preventDefault();
-                    Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Title dan Sub Title Harus Diisi',
+            <script>
+                $(document).ready(function() {
+                    $("#cms_edit").submit(function(e) {
+                        var title = $("input[name='title']").val();
+                        var subtitle = $("input[name='subtitle']").val();
+                        var image_landing = $("input[name='image_landing']").val();
+                        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+                        if (title == "" || subtitle == "") {
+                            e.preventDefault();
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Title dan Sub Title Harus Diisi',
+                            });
+                        } else if (image_landing && !allowedExtensions.exec(image_landing)) {
+                            e.preventDefault();
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Foto Harus Berextensi JPG,JPEG,PNG,SVG',
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: 'Berhasil Edit Data',
+                            });
+                        }
                     });
-                } else if (image_landing && !allowedExtensions.exec(image_landing)) {
-                    e.preventDefault();
-                    Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Foto Harus Berextensi JPG,JPEG,PNG,SVG',
-                    });
-                }else {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: 'Berhasil Edit Data',
-                    });
-                }
-            });
-        });
-        </script>
+                });
+            </script>
 
 
-    <script>
-        var cmsBtn = document.getElementById("cms_btn");
-        var cmsEdit = document.getElementById("cms_edit");
+            <script>
+                var cmsBtn = document.getElementById("cms_btn");
+                var cmsEdit = document.getElementById("cms_edit");
 
-        cmsBtn.addEventListener("click", function() {
-            cmsEdit.classList.toggle("bottomtab_show");
-        });
+                cmsBtn.addEventListener("click", function() {
+                    cmsEdit.classList.toggle("bottomtab_show");
+                });
 
-        // var modal = document.getElementById("myModal");
-        // var btn = document.getElementById("myBtn");
-        // var modal2 = document.getElementById("add_modal_collab");
-        // var btn2 = document.getElementById("add_collab");
-        // var modal_hapus = document.getElementById("hapus");
-        // var btn_hapus = document.getElementById("btn-hapus");
-        // var span1 = document.getElementsByClassName("close")[0];
-        // var span = document.getElementsByClassName("close")[1];
-        // var span_hapus = document.getElementsByClassName("close")[2];
-        // var btn_close = document.getElementsByClassName("btn-close")[0];
-        // var btn_close2 = document.getElementsByClassName("btn-close")[1];
+                // var modal = document.getElementById("myModal");
+                // var btn = document.getElementById("myBtn");
+                // var modal2 = document.getElementById("add_modal_collab");
+                // var btn2 = document.getElementById("add_collab");
+                // var modal_hapus = document.getElementById("hapus");
+                // var btn_hapus = document.getElementById("btn-hapus");
+                // var span1 = document.getElementsByClassName("close")[0];
+                // var span = document.getElementsByClassName("close")[1];
+                // var span_hapus = document.getElementsByClassName("close")[2];
+                // var btn_close = document.getElementsByClassName("btn-close")[0];
+                // var btn_close2 = document.getElementsByClassName("btn-close")[1];
 
-        // btn.onclick = function() {
-        //     modal.style.display = "flex";
-        // }
+                // btn.onclick = function() {
+                //     modal.style.display = "flex";
+                // }
 
-        // span1.onclick = function() {
-        //     modal.style.display = "none";
-        // }
+                // span1.onclick = function() {
+                //     modal.style.display = "none";
+                // }
 
-        // window.onclick = function(event) {
-        //     if (event.target == modal) {
-        //         modal.style.display = "none";
-        //     }
-        // }
+                // window.onclick = function(event) {
+                //     if (event.target == modal) {
+                //         modal.style.display = "none";
+                //     }
+                // }
 
-        // btn2.onclick = function() {
-        //     modal2.style.display = "flex";
-        // }
+                // btn2.onclick = function() {
+                //     modal2.style.display = "flex";
+                // }
 
-        // span.onclick = function() {
-        //     modal2.style.display = "none";
-        // }
+                // span.onclick = function() {
+                //     modal2.style.display = "none";
+                // }
 
-        // btn_close.onclick = function() {
-        //     modal2.style.display = "none";
-        // }
+                // btn_close.onclick = function() {
+                //     modal2.style.display = "none";
+                // }
 
-        // btn_hapus.onclick = function() {
-        //     modal_hapus.style.display = "flex";
-        // }
+                // btn_hapus.onclick = function() {
+                //     modal_hapus.style.display = "flex";
+                // }
 
-        // span_hapus.onclick = function() {
-        //     modal_hapus.style.display = "none";
-        // }
+                // span_hapus.onclick = function() {
+                //     modal_hapus.style.display = "none";
+                // }
 
-        // btn_close.onclick = function() {
-        //     modal2.style.display = "none";
-        // }
+                // btn_close.onclick = function() {
+                //     modal2.style.display = "none";
+                // }
 
-        // btn_close2.onclick = function() {
-        //     modal_hapus.style.display = "none";
-        // }
+                // btn_close2.onclick = function() {
+                //     modal_hapus.style.display = "none";
+                // }
 
-        // window.onclick = function(event) {
-        //     if (event.target == modal) {
-        //         modal.style.display = "none";
-        //     } else if (event.target == modal2) {
-        //         modal2.style.display = "none";
-        //     } else if (event.target == modal_hapus) {
-        //         modal_hapus.style.display = "none";
-        //     }
-        // }
-    </script>
-    @endif
-@endforeach
+                // window.onclick = function(event) {
+                //     if (event.target == modal) {
+                //         modal.style.display = "none";
+                //     } else if (event.target == modal2) {
+                //         modal2.style.display = "none";
+                //     } else if (event.target == modal_hapus) {
+                //         modal_hapus.style.display = "none";
+                //     }
+                // }
+            </script>
+        @endif
+    @endforeach
 @endsection
