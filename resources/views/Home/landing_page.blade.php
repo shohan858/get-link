@@ -7,11 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GET LINK</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets_landing_page/styles/style.css') }} ">
 
     <script src="https://www.google.com/recaptcha/api.js?render=6LcqOt4lAAAAAGmReS3IC49cgOe8PJeYN9vn_weP"></script>
@@ -137,22 +135,18 @@
             <div class="row d-flex align-items-center justify-content-between">
                 <div class="col">
                     <a class="navbar-brand" href="#">
-                        <img src="{{ asset('assets_landing_page/img/logo-text2.png') }} " alt="Logo" width="120"
-                            class="img-fluid align-text-top m-0">
+                        <img src="{{ asset('assets_landing_page/img/logo-text2.png') }} " alt="Logo" width="120" class="img-fluid align-text-top m-0">
                     </a>
                 </div>
                 <div class="col">
                     @if (Auth::check())
-                        @if (Auth::User()->role == 'user')
-                            <a href="/dashboard_user" class="btn btn-outline-primary rounded-pill float-end"
-                                style="width: 100px">Dashboard</a>
-                        @else
-                            <a href="/admin_get" class="btn btn-outline-primary rounded-pill float-end"
-                                style="width: 100px">Dashboard</a>
-                        @endif
+                    @if (Auth::User()->role == 'user')
+                    <a href="/dashboard_user" class="btn btn-outline-primary rounded-pill float-end" style="width: 100px">Dashboard</a>
                     @else
-                        <a href="/sesi" class="btn btn-outline-primary rounded-pill float-end" type="button"
-                            style="width: 100px">Login</a>
+                    <a href="/admin_get" class="btn btn-outline-primary rounded-pill float-end" style="width: 100px">Dashboard</a>
+                    @endif
+                    @else
+                    <a href="/sesi" class="btn btn-outline-primary rounded-pill float-end" type="button" style="width: 100px">Login</a>
                     @endif
                 </div>
             </div>
@@ -188,52 +182,48 @@
         <div class="hero_kiri" data-aos="fade-right">
             <div class="isi_hero_kanan">
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 1)
-                        <h1 class="__hero_h1">
-                            {{ $item->title }}
-                        </h1>
-                        <p class="__hero_p">
-                            {{ $item->subtitle }}
-                        </p>
-                    @endif
+                @if ($item->id == 1)
+                <h1 class="__hero_h1">
+                    {{ $item->title }}
+                </h1>
+                <p class="__hero_p">
+                    {{ $item->subtitle }}
+                </p>
+                @endif
                 @endforeach
                 <form id="form_link" method="POST" action="">
                     @csrf
                     <label id="tampil_link">
-                        <input name="input_link" id="input_link" class="__hero_input" type="text"
-                            placeholder="Masukkan Link Asli" />
+                        <input name="input_link" style="margin-bottom: 8px;" id="input_link" class="__hero_input" type="text" placeholder="Masukkan Link Asli" />
                     </label>
                     <button id="button_link" class="__hero_button" type="submit">
                         <img id="image_link" src="{{ asset('assets_landing_page/img/Add-Link.png') }} " />
                     </button>
-                    <div id="cakecap" class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}"
-                        style="display: none">
+                    <div id="cakecap" class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}" style="display: none">
                         <div class="col-md-6">
                         </div>
                     </div>
                     <div class="custom-Link">
                         <div class="custom-hide" style="display: none">
-                            <p class="text-custom"><B>GetLink.id/ </B></p>
-                            <input type="text" name="value_custom" id="value_custom" class="input-hide"
-                                placeholder="Custom link">
+                            <p class="text-custom"><B style="color: #1a2474;">GetLink.id/ </B></p>
+                            <input type="text" name="value_custom" id="value_custom" class="input-hide" placeholder="Custom link">
                         </div>
                         <div class="custom-show"><B>
-                                Atau gunakan</B>
-                            <a id="btn-custom" class="btn-custom" href="#"> custom link</a>
+                                Atau gunakan
+                                <a id="btn-custom" class="btn-custom" style="color: #1a2474;" href=""> custom link</a> </B>
                             .
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="hero_kanan" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500"
-            data-aos-duration="500">
+        <div class="hero_kanan" data-aos="fade-left" data-aos-anchor="#example-anchor" data-aos-offset="500" data-aos-duration="500">
             <img class="__hero_lingkaran" src="{{ asset('assets_landing_page/img/Ellipse 1.png') }} " alt="eclipse">
             {{-- <img class="__hero_image" src="{{ asset('assets_landing_page/img/firl2.png') }} " /> --}}
             @foreach ($data_getlink as $item)
-                @if ($item->id == 1)
-                    <img class="__hero_image" src="{{ asset('gambar/' . $item->image) }}" />
-                @endif
+            @if ($item->id == 1)
+            <img class="__hero_image" src="{{ asset('gambar/' . $item->image) }}" />
+            @endif
             @endforeach
         </div>
     </div>
@@ -244,57 +234,48 @@
 
     <section class="cacac" data-aos="fade-up">
         <div class="container-fluid">
-            <div id="carouselExampleControls" class="carousel slide carousel-besar" data-bs-ride="carousel"
-                data-bs-interval="5000">
+            <div id="carouselExampleControls" class="carousel slide carousel-besar" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
                     @foreach ($data3->chunk(3) as $chunk)
-                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <div class="row justify-content-evenly">
-                                @foreach ($chunk as $item)
-                                    <div class="col-4 col-sm-3 col-2">
-                                        <img class="img-fluid align-items-center mx-auto d-block"
-                                            src="{{ asset('gambar/' . $item->image) }}" width="100"
-                                            alt="sponsor">
-                                    </div>
-                                @endforeach
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        <div class="row justify-content-evenly">
+                            @foreach ($chunk as $item)
+                            <div class="col-4 col-sm-3 col-2">
+                                <img class="img-fluid align-items-center mx-auto d-block" src="{{ asset('gambar/' . $item->image) }}" width="100" alt="sponsor">
                             </div>
+                            @endforeach
                         </div>
+                    </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev pe-5 me-5" type="button"
-                    data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <button class="carousel-control-prev pe-5 me-5" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next ps-5 ms-5" type="button"
-                    data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <button class="carousel-control-next ps-5 ms-5" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <div id="carouselExampleControls_kecil" class="carousel slide carousel-kecil" data-bs-ride="carousel"
-                data-bs-interval="5000">
+            <div id="carouselExampleControls_kecil" class="carousel slide carousel-kecil" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
                     @foreach ($data3->chunk(2) as $chunk)
-                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <div class="row justify-content-evenly">
-                                @foreach ($chunk as $item)
-                                    <div class="col-4 col-sm-3 col-2">
-                                        <img class="img-fluid d-flex m-0 align-items-center" src="{{ asset('gambar/' . $item->image) }}"
-                                            width="100" alt="sponsor">
-                                    </div>
-                                @endforeach
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        <div class="row justify-content-evenly">
+                            @foreach ($chunk as $item)
+                            <div class="col-4 col-sm-3 col-2">
+                                <img class="img-fluid d-flex m-0 align-items-center" src="{{ asset('gambar/' . $item->image) }}" width="100" alt="sponsor">
                             </div>
+                            @endforeach
                         </div>
+                    </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev pe-5 me-5" type="button"
-                    data-bs-target="#carouselExampleControls_kecil" data-bs-slide="prev">
+                <button class="carousel-control-prev pe-5 me-5" type="button" data-bs-target="#carouselExampleControls_kecil" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next ps-5 ms-5" type="button" data-bs-target="#carouselExampleControls_kecil"
-                    data-bs-slide="next">
+                <button class="carousel-control-next ps-5 ms-5" type="button" data-bs-target="#carouselExampleControls_kecil" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -309,21 +290,21 @@
     <section>
         <div class="short_link">
             @foreach ($data_getlink as $item)
-                @if ($item->id == 2)
-                    <div class="sl_kanan" data-aos="fade-up-right">
-                        <img src="{{ asset('gambar/' . $item->image) }} " class="img-fluid sl_img" alt="" />
-                    </div>
-                @endif
+            @if ($item->id == 2)
+            <div class="sl_kanan" data-aos="fade-up-right">
+                <img src="{{ asset('gambar/' . $item->image) }} " class="img-fluid sl_img" alt="" />
+            </div>
+            @endif
             @endforeach
 
             <div class="sl_kiri" data-aos="fade-up-left">
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 2)
-                        <h1 class="heading-1">{{ $item->title }}</h1>
-                        <p class="para">
-                            {{ $item->subtitle }}
-                        </p>
-                    @endif
+                @if ($item->id == 2)
+                <h1 class="heading-1">{{ $item->title }}</h1>
+                <p class="para">
+                    {{ $item->subtitle }}
+                </p>
+                @endif
                 @endforeach
             </div>
         </div>
@@ -344,36 +325,33 @@
                 <h1 class="microsite_h1" data-aos="flip-left">Microsite</h1>
                 <div class="gear" data-aos="flip-right">
                     @foreach ($data_getlink as $item)
-                        @if ($item->id == 3)
-                            <img class="img-fluid" src="{{ asset('gambar/' . $item->image) }} " alt=""
-                                style="margin-left: 10px" />
-                            <div class="microsite_text">
-                                <h3 class="microsite_h3"><b>{{ $item->title }}</b></h3>
-                                <p class="microsite_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        @endif
+                    @if ($item->id == 3)
+                    <img class="img-fluid" src="{{ asset('gambar/' . $item->image) }} " alt="" style="margin-left: 10px" />
+                    <div class="microsite_text">
+                        <h3 class="microsite_h3"><b>{{ $item->title }}</b></h3>
+                        <p class="microsite_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                    @endif
                     @endforeach
                 </div>
                 <div class="people" data-aos="flip-left">
                     @foreach ($data_getlink as $item)
-                        @if ($item->id == 4)
-                            <img class="img-fluid" src="{{ asset('gambar/' . $item->image) }} " alt=""
-                                style="margin-left: 10px" />
-                            <div class="microsite_text">
-                                <h3 class="microsite_h3"><b>{{ $item->title }}</b></h3>
-                                <p class="microsite_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        @endif
+                    @if ($item->id == 4)
+                    <img class="img-fluid" src="{{ asset('gambar/' . $item->image) }} " alt="" style="margin-left: 10px" />
+                    <div class="microsite_text">
+                        <h3 class="microsite_h3"><b>{{ $item->title }}</b></h3>
+                        <p class="microsite_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                    @endif
                     @endforeach
                 </div>
             </div>
             <div class="microsite_kanan" data-aos="flip-up">
-                <img class="img-fluid incroGam" src="{{ asset('assets_landing_page/img/2 2.png') }} "
-                    alt="" />
+                <img class="img-fluid incroGam" src="{{ asset('assets_landing_page/img/2 2.png') }} " alt="" />
             </div>
         </div>
     </section>
@@ -433,8 +411,7 @@
         </div>
 
         <div class="banner_kiri">
-            <img class="banner_gambar-kiri"
-                src="{{ asset('assets_landing_page/img/woman in online meetings.png') }} " alt="">
+            <img class="banner_gambar-kiri" src="{{ asset('assets_landing_page/img/woman in online meetings.png') }} " alt="">
             <img class="banner_eclippse" src="{{ asset('assets_landing_page/img/Ellipse 33.png') }} ">
         </div>
     </div>
@@ -455,39 +432,36 @@
             </div>
             <div class="CMS_kanan" data-aos="zoom-in-down">
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 5)
-                        <h1 class="CMS_h1">{{ $item->title }}</h1>
-                        <p class="CMS_p">{{ $item->subtitle }}</p>
-                    @endif
+                @if ($item->id == 5)
+                <h1 class="CMS_h1">{{ $item->title }}</h1>
+                <p class="CMS_p">{{ $item->subtitle }}</p>
+                @endif
                 @endforeach
 
 
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 6)
-                        <div class="CMS_li">
-                            <img class="CMS_img" src="{{ asset('assets_landing_page/img/Vector (1).png') }} "
-                                alt="">
-                            <p class="CMS_li_p">{{ $item->title }}</p>
-                        </div>
-                    @endif
+                @if ($item->id == 6)
+                <div class="CMS_li">
+                    <img class="CMS_img" src="{{ asset('assets_landing_page/img/Vector (1).png') }} " alt="">
+                    <p class="CMS_li_p">{{ $item->title }}</p>
+                </div>
+                @endif
                 @endforeach
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 7)
-                        <div class="CMS_li">
-                            <img class="CMS_img" src="{{ asset('assets_landing_page/img/Vector (1).png') }} "
-                                alt="">
-                            <p class="CMS_li_p">{{ $item->title }}</p>
-                        </div>
-                    @endif
+                @if ($item->id == 7)
+                <div class="CMS_li">
+                    <img class="CMS_img" src="{{ asset('assets_landing_page/img/Vector (1).png') }} " alt="">
+                    <p class="CMS_li_p">{{ $item->title }}</p>
+                </div>
+                @endif
                 @endforeach
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 8)
-                        <div class="CMS_li">
-                            <img class="CMS_img" src="{{ asset('assets_landing_page/img/Vector (1).png') }} "
-                                alt="">
-                            <p class="CMS_li_p">{{ $item->title }}</p>
-                        </div>
-                    @endif
+                @if ($item->id == 8)
+                <div class="CMS_li">
+                    <img class="CMS_img" src="{{ asset('assets_landing_page/img/Vector (1).png') }} " alt="">
+                    <p class="CMS_li_p">{{ $item->title }}</p>
+                </div>
+                @endif
                 @endforeach
             </div>
         </div>
@@ -527,106 +501,100 @@
         <div class="list_container">
             <div class="list_kanan">
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 9)
-                        <div class="list-row" data-aos="zoom-out-right">
-                            <div class="list_gmb">
-                                <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo"
-                                    class="d-inline-block align-text-top">
-                            </div>
-                            <div class="list_text">
-                                <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
-                                <p class="list_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        </div>
-                    @endif
+                @if ($item->id == 9)
+                <div class="list-row" data-aos="zoom-out-right">
+                    <div class="list_gmb">
+                        <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="list_text">
+                        <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
+                        <p class="list_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                </div>
+                @endif
                 @endforeach
 
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 11)
-                        <div class="list-row" data-aos="zoom-out-left">
-                            <div class="list_gmb">
-                                <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo"
-                                    class="d-inline-block align-text-top">
-                            </div>
-                            <div class="list_text" data-aos="zoom-out-right">
-                                <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
-                                <p class="list_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        </div>
-                    @endif
+                @if ($item->id == 11)
+                <div class="list-row" data-aos="zoom-out-left">
+                    <div class="list_gmb">
+                        <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="list_text" data-aos="zoom-out-right">
+                        <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
+                        <p class="list_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                </div>
+                @endif
                 @endforeach
 
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 13)
-                        <div class="list-row" data-aos="zoom-out-left">
-                            <div class="list_gmb">
-                                <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo"
-                                    class="d-inline-block align-text-top">
-                            </div>
-                            <div class="list_text">
-                                <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
-                                <p class="list_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        </div>
-                    @endif
+                @if ($item->id == 13)
+                <div class="list-row" data-aos="zoom-out-left">
+                    <div class="list_gmb">
+                        <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="list_text">
+                        <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
+                        <p class="list_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                </div>
+                @endif
                 @endforeach
             </div>
             <div class="list_kiri">
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 10)
-                        <div class="list-row" data-aos="fade-up-left">
-                            <div class="list_gmb">
-                                <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo"
-                                    class="d-inline-block align-text-top">
-                            </div>
-                            <div class="list_text">
-                                <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
-                                <p class="list_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        </div>
-                    @endif
+                @if ($item->id == 10)
+                <div class="list-row" data-aos="fade-up-left">
+                    <div class="list_gmb">
+                        <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="list_text">
+                        <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
+                        <p class="list_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                </div>
+                @endif
                 @endforeach
 
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 12)
-                        <div class="list-row" data-aos="fade-up-right">
-                            <div class="list_gmb">
-                                <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo"
-                                    class="d-inline-block align-text-top">
-                            </div>
-                            <div class="list_text">
-                                <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
-                                <p class="list_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        </div>
-                    @endif
+                @if ($item->id == 12)
+                <div class="list-row" data-aos="fade-up-right">
+                    <div class="list_gmb">
+                        <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="list_text">
+                        <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
+                        <p class="list_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                </div>
+                @endif
                 @endforeach
 
                 @foreach ($data_getlink as $item)
-                    @if ($item->id == 14)
-                        <div class="list-row" data-aos="fade-up-left">
-                            <div class="list_gmb">
-                                <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo"
-                                    class="d-inline-block align-text-top">
-                            </div>
-                            <div class="list_text">
-                                <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
-                                <p class="list_p">
-                                    {{ $item->subtitle }}
-                                </p>
-                            </div>
-                        </div>
-                    @endif
+                @if ($item->id == 14)
+                <div class="list-row" data-aos="fade-up-left">
+                    <div class="list_gmb">
+                        <img src="{{ asset('gambar/' . $item->image) }} " alt="Logo" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="list_text">
+                        <h4 class="list_h4"><b>{{ $item->title }}</b></h4>
+                        <p class="list_p">
+                            {{ $item->subtitle }}
+                        </p>
+                    </div>
+                </div>
+                @endif
                 @endforeach
             </div>
         </div>
@@ -742,22 +710,19 @@
                 <div class="info">
                     <div class="satu">
                         <div class="image_footer me-2">
-                            <img src="{{ asset('assets_landing_page/img/dunia.png') }}" alt="Logo"
-                                class="bg-white rounded-circle">
+                            <img src="{{ asset('assets_landing_page/img/dunia.png') }}" alt="Logo" class="bg-white rounded-circle">
                         </div>
                         <p>Jl.Anggrek No.200 Cepokomulyo <br> Kepanjen, Malang</p>
                     </div>
                     <div class="dua">
                         <div class="image_footer me-2">
-                            <img src="{{ asset('assets_landing_page/img/telpon2.png') }}" alt="Logo"
-                                class="bg-white rounded-circle">
+                            <img src="{{ asset('assets_landing_page/img/telpon2.png') }}" alt="Logo" class="bg-white rounded-circle">
                         </div>
                         <p>+62 851-7332-1203</p>
                     </div>
                     <div class="tiga">
                         <div class="image_footer me-2">
-                            <img src="{{ asset('assets_landing_page/img/pesan.png') }}" alt="Logo"
-                                class="bg-white rounded-circle">
+                            <img src="{{ asset('assets_landing_page/img/pesan.png') }}" alt="Logo" class="bg-white rounded-circle">
                         </div>
                         <p>getaplikasi@gmail.com</p>
                     </div>
@@ -771,51 +736,48 @@
             <div class="box_foot_kanan">
                 <p class="foot_lokasi">Lokasi</p>
                 <a href="https://goo.gl/maps/qTAXqypjJpA9Jxxo9" target="_blank">
-                    <img class="foot_lokasu_img" src="{{ asset('assets_landing_page/img/map2.png') }}"
-                        alt="" style="border-radius: 5px;"></a>
+                    <img class="foot_lokasu_img" src="{{ asset('assets_landing_page/img/map2.png') }}" alt="" style="border-radius: 5px;"></a>
             </div>
             {{-- <div class="box_foot_ndelik">
                 <div class="social_box">
                     <img src="{{ asset('assets_landing_page/img/Vector (2).png') }}" alt="">
-                </div>
-                <div class="social_box">
-                    <img src="{{ asset('assets_landing_page/img/Vector (3).png') }}" alt="">
-                </div>
-                <div class="social_box">
-                    <img src="{{ asset('assets_landing_page/img/Vector (4).png') }}" alt="">
-                </div>
-                <div class="social_box">
-                    <img src="{{ asset('assets_landing_page/img/Vector (5).png') }}" alt="">
-                </div>
-            </div> --}}
         </div>
-        {{-- <img class="garis_foot" src="{{ asset('assets_landing_page/img/Line 1.png') }}" alt=""> --}}
-        <div class="foot_footer">
-            <div class="social_media_hidden">
-                {{-- <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
-                        alt=""></div>
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (3).png') }}"
-                        alt=""></div>
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (4).png') }}"
-                        alt=""></div> --}}
-                {{-- <a href="#" class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
-                        alt=""></a> --}}
-            </div>
-            <div class="foot_copyright">
-                <p class="text-white">© 2023 Copyright : </p>
-                <a class="text-white" href="https://getaplikasi.id" target="blank_"><b>PT. Get Aplikasi Indonesia</b></a>
-            </div>
-            <div class="social_media">
-                {{-- <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
-                        alt=""></div>
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (3).png') }}"
-                        alt=""></div>
-                <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (4).png') }}"
-                        alt=""></div> --}}
-                {{-- <a href="#" class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
-                        alt=""></a> --}}
-            </div>
+        <div class="social_box">
+            <img src="{{ asset('assets_landing_page/img/Vector (3).png') }}" alt="">
         </div>
+        <div class="social_box">
+            <img src="{{ asset('assets_landing_page/img/Vector (4).png') }}" alt="">
+        </div>
+        <div class="social_box">
+            <img src="{{ asset('assets_landing_page/img/Vector (5).png') }}" alt="">
+        </div>
+    </div> --}}
+    </div>
+    {{-- <img class="garis_foot" src="{{ asset('assets_landing_page/img/Line 1.png') }}" alt=""> --}}
+    <div class="foot_footer">
+        <div class="social_media_hidden">
+            {{-- <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
+            alt="">
+        </div>
+        <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (3).png') }}" alt=""></div>
+        <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (4).png') }}" alt=""></div> --}}
+        {{-- <a href="#" class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
+        alt=""></a> --}}
+    </div>
+    <div class="foot_copyright">
+        <p class="text-white">© 2023 Copyright : </p>
+        <a class="text-white" href="https://getaplikasi.id" target="blank_"><b>PT. Get Aplikasi Indonesia</b></a>
+    </div>
+    <div class="social_media">
+        {{-- <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (2).png') }}"
+        alt="">
+    </div>
+    <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (3).png') }}" alt=""></div>
+    <div class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (4).png') }}" alt=""></div> --}}
+    {{-- <a href="#" class="social_box"><img src="{{ asset('assets_landing_page/img/Vector (5).png') }}"
+    alt=""></a> --}}
+    </div>
+    </div>
     </div>
 
 
@@ -1081,10 +1043,8 @@
             }
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
