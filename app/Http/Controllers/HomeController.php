@@ -48,7 +48,7 @@ class HomeController extends Controller
         }
     }
     public function store(Request $request)
-    {   
+    {
         // Membuat data shortlink baru
         $shortlink = new Shortlink();
         $shortlink->link = $request->link;
@@ -76,19 +76,26 @@ class HomeController extends Controller
                 }
             }
         }
-        $linkcustom=$request->linkcustom;
-        if($linkcustom!=null&&$linkcustom!=""){
-            $shortlink->code=$linkcustom;
-        }else{
+
+        $linkcustom = $request->linkcustom;
+        if ($linkcustom != null && $linkcustom != "") {
+            // Validasi: Tidak boleh ada spasi pada link custom
+            if (strpos($linkcustom, ' ') !== false) {
+                return response()->json(['error' => 'Form custom tidak boleh mengandung spasi atau link yang anda masukan sudah terdaftar'], 400);
+            }
+
+            $shortlink->code = $linkcustom;
+        } else {
             $shortlink->code = Str::random(6);
         }
+
         // Memeriksa apakah custom link sudah digunakan atau belum
         // Menyimpan data shortlink
         $shortlink->save();
         $shortenLink = $shortlink->code;
 
         // Mengembalikan response dengan shortlink yang sudah dibuat
-        return response()->json(['short_link' => $shortenLink]);
+        return response()->json(['short_link' => $shortenLink, 'message' => 'Validasi berhasil'], 200);
     }
 
     public function ShortenLink($code)

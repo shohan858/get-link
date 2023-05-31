@@ -743,6 +743,9 @@ class Dashboard_User_Controller extends Controller
     }
 
     public function shortlinks_update(Request $request) {
+        $validatedData = $request->validate([
+            'editsh' => ['regex:/^\S*$/','nullable'],
+        ]);
         $data = shortlink::find($request->id_shortlink);
         $data->link = $request->link_shortlink;
         $update_link = $request->editsh;
@@ -755,6 +758,7 @@ class Dashboard_User_Controller extends Controller
         $result_link = $data->code;
         return response()->json([
             'result_link' => $result_link,
+            'message' => 'Validasi berhasil',
         ]);
     }
 

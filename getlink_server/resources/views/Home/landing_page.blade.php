@@ -150,10 +150,7 @@
             <p class="text-custom"><B style="color: #1a2474;">GetLink.id/ </B></p>
             <input type="text" name="value_custom" id="value_custom" class="input-hide" placeholder="Custom link">
           </div>
-          <div class="custom-show"><B>
-              Atau gunakan
-            <a id="btn-custom" class="btn-custom" style="color: #1a2474;" href="" > custom link</a> </B>
-            .
+          <div class="custom-show">
           </div>
         </div>
       </form>

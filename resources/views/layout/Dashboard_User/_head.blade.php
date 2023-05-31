@@ -5,7 +5,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon/favicon.ico') }}" />
     <title>Microsite</title>
     <link loading="lazy" rel="stylesheet" href="{{ asset('assets/style.css') }}" />
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="{{ asset('assets/main.js') }}"></script>
     <script src="{{ asset('assets/jquery.min.js') }}"></script>
