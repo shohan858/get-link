@@ -166,6 +166,7 @@
         }
 
         .drop-3dot {
+            margin-right: 10px;
             display: inline-block;
             position: relative;
         }
@@ -176,7 +177,7 @@
             z-index: 10;
             min-width: 160px;
             padding: 10px;
-            left: -50px;
+            right: -80px;
         }
 
         .div3Dot-drop .div3Dot-isi {
@@ -193,6 +194,11 @@
 
         .div3Dot-drop .div3Dot-isi:hover {
             background-color: #bfc0c0;
+            z-index: 10;
+        }
+
+        .div3Dotact {
+            display: block;
             z-index: 10;
         }
 
@@ -448,9 +454,9 @@
 
         .modal-bawah {
             /* display: grid;
-                                                                grid-template-columns: repeat(2, 1fr);
-                                                                grid-gap: 20px;
-                                                                margin: 0 10px 10px 10px; */
+                                                                                                        grid-template-columns: repeat(2, 1fr);
+                                                                                                        grid-gap: 20px;
+                                                                                                        margin: 0 10px 10px 10px; */
 
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -514,10 +520,10 @@
             padding: 2% 2% 2% 2%;
             box-sizing: border-box;
             /* position: fixed;
-                                                   top: -200px;
-                                                   left: 0;
-                                                   right: 0;
-                                                   bottom: 0; */
+                                                                                           top: -200px;
+                                                                                           left: 0;
+                                                                                           right: 0;
+                                                                                           bottom: 0; */
             overflow: auto;
         }
 
@@ -526,8 +532,8 @@
         }
 
         /* .bungkus .bungkus-anak:last-child {
-                                                   margin-bottom: 60px;
-                                                } */
+                                                                                           margin-bottom: 60px;
+                                                                                        } */
 
         .bungkus-anak-gmb {
             display: grid;
@@ -693,10 +699,15 @@
             }
 
             .pages5-kanan {
+                top: 165px;
                 position: absolute;
-                width: 100%;
+                width: 80%;
                 left: -200%;
                 transition: left 0.5s ease-in-out;
+            }
+
+            .pages5-kanan.pages5Prew {
+                left: 100px;
             }
         }
 
@@ -707,7 +718,7 @@
             }
 
             .pages5-kanan {
-                width: 100%;
+                width: 75%;
                 /* height: auto; */
             }
 
@@ -727,6 +738,11 @@
             .konten-template {
                 width: 25%;
                 margin: 10px;
+            }
+
+            .del-conmo {
+                width: 80%;
+                height: 30vh;
             }
         }
 
@@ -760,6 +776,22 @@
             .ba_iframe {
                 width: 350px;
                 height: 155px;
+            }
+
+            .pages5-kanan {
+                width: 50%;
+                /* height: auto; */
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .pages5-kanan {
+                width: 30%;
+                /* height: auto; */
+            }
+
+            .pages5-kanan.pages5Prew {
+                left: 188px;
             }
         }
 
@@ -1318,7 +1350,7 @@
 
         // When the user clicks the button, open the modal
         Combtn.onclick = function() {
-            Commodal.style.display = "block";
+            Commodal.style.display = "flex";
         };
 
         // When the user clicks on <span> (x), close the modal
@@ -1410,11 +1442,15 @@
                 const acDiv = $("#btnDrop3Dot" + i);
 
                 // Tambahkan event listener ke button dengan fungsi event listener yang telah dibuat
-                acDiv.on("click", (function(div) {
-                    return function() {
-                        div.toggleClass("div3Dotact");
-                    };
-                })(divAc));
+                acDiv.on("click", function() {
+                    // Cari dan tutup button-button lain dengan kelas "div3Dotact"
+                    $(".div3Dotact").not(divAc).removeClass("div3Dotact");
+
+                    // Berikan toggle kelas "div3Dotact" pada button saat ini
+                    divAc.toggleClass("div3Dotact");
+                });
+
+
 
                 (function(index) {
                     var delmodal = $("#DelComModal" + index);
