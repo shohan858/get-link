@@ -44,6 +44,7 @@
         }
 
         .pages5-bagi {
+            position: relative;
             display: flex;
             justify-content: flex-start;
             width: 100%;
@@ -454,9 +455,9 @@
 
         .modal-bawah {
             /* display: grid;
-                                                                                                        grid-template-columns: repeat(2, 1fr);
-                                                                                                        grid-gap: 20px;
-                                                                                                        margin: 0 10px 10px 10px; */
+                                                                                                                                grid-template-columns: repeat(2, 1fr);
+                                                                                                                                grid-gap: 20px;
+                                                                                                                                margin: 0 10px 10px 10px; */
 
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -520,10 +521,10 @@
             padding: 2% 2% 2% 2%;
             box-sizing: border-box;
             /* position: fixed;
-                                                                                           top: -200px;
-                                                                                           left: 0;
-                                                                                           right: 0;
-                                                                                           bottom: 0; */
+                                                                                                                   top: -200px;
+                                                                                                                   left: 0;
+                                                                                                                   right: 0;
+                                                                                                                   bottom: 0; */
             overflow: auto;
         }
 
@@ -532,8 +533,8 @@
         }
 
         /* .bungkus .bungkus-anak:last-child {
-                                                                                           margin-bottom: 60px;
-                                                                                        } */
+                                                                                                                   margin-bottom: 60px;
+                                                                                                                } */
 
         .bungkus-anak-gmb {
             display: grid;
@@ -699,7 +700,7 @@
             }
 
             .pages5-kanan {
-                top: 165px;
+                top: -80px;
                 position: absolute;
                 width: 80%;
                 left: -200%;
@@ -707,7 +708,7 @@
             }
 
             .pages5-kanan.pages5Prew {
-                left: 100px;
+                left: 64px;
             }
         }
 
@@ -715,11 +716,6 @@
             .lang-content {
                 margin-top: 10px;
                 margin-left: 2px;
-            }
-
-            .pages5-kanan {
-                width: 75%;
-                /* height: auto; */
             }
 
             .modal-compo-barua {
@@ -778,20 +774,22 @@
                 height: 155px;
             }
 
-            .pages5-kanan {
-                width: 50%;
-                /* height: auto; */
+            .pages5-kanan.pages5Prew {
+                left: 45px;
             }
         }
 
-        @media screen and (max-width: 500px) {
+        @media screen and (max-width: 460px) {
             .pages5-kanan {
-                width: 30%;
-                /* height: auto; */
+                top: -45px;
+                position: absolute;
+                width: 70%;
+                left: -200%;
+                transition: left 0.5s ease-in-out;
             }
 
-            .pages5-kanan.pages5Prew {
-                left: 188px;
+            .bungkus {
+                width: 80%;
             }
         }
 
@@ -842,160 +840,162 @@
                                     data-status="{{ $item['status'] }}" data-order="{{ $item['order'] }}"
                                     data-komponen="{{ $item['id_komponen'] }}" class="pages5-komponen-2"
                                     style="opacity: 0.5">
-                            @else
-                                <div id="pages5Kom{{ $key }}" draggable="true" data-id="{{ $item['id'] }}"
-                                    data-status="{{ $item['status'] }}" data-order="{{ $item['order'] }}"
-                                    data-komponen="{{ $item['id_komponen'] }}" class="pages5-komponen-2">
+                                @else
+                                    <div id="pages5Kom{{ $key }}" draggable="true" data-id="{{ $item['id'] }}"
+                                        data-status="{{ $item['status'] }}" data-order="{{ $item['order'] }}"
+                                        data-komponen="{{ $item['id_komponen'] }}" class="pages5-komponen-2">
                             @endif
-                                <div class="pages5-komponen-text">
-                                    <div class="pages5-komponen-text-kiri">
-                                        <button class="btn-drag">
-                                            <img class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}"
-                                                alt="" />
+                            <div class="pages5-komponen-text">
+                                <div class="pages5-komponen-text-kiri">
+                                    <button class="btn-drag">
+                                        <img class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}"
+                                            alt="" />
+                                    </button>
+                                    <i class="fa-regular fa-user" style="margin-left: 10px"></i>
+                                    <p class="pages5-isi">{{ $item['title'] }}</p>
+                                </div>
+                                <div class="pages5-komponen-text-kanan">
+                                    <button id="btnSwitch{{ $key }}" class="btn-switch">
+                                        @if ($item['status'] === 'off')
+                                            <i id="icon{{ $key }}" class="fa-solid fa-eye-slash"
+                                                style="color: red"></i>
+                                        @else
+                                            <i id="icon{{ $key }}" class="fa-solid fa-eye"></i>
+                                        @endif
+                                    </button>
+                                    <button id="del{{ $key }}" class="btn-trash">
+                                        <i id=trash{{ $key }} class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <div class="drop-3dot">
+                                        <button id="btnDrop3Dot{{ $key }}" class="btn-3dot">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
                                         </button>
-                                        <i class="fa-regular fa-user" style="margin-left: 10px"></i>
-                                        <p class="pages5-isi">{{ $item['title'] }}</p>
-                                    </div>
-                                    <div class="pages5-komponen-text-kanan">
-                                        <button id="btnSwitch{{ $key }}" class="btn-switch">
-                                            @if ($item['status'] === 'off')
-                                                <i id="icon{{ $key }}" class="fa-solid fa-eye-slash"
-                                                    style="color: red"></i>
-                                            @else
-                                                <i id="icon{{ $key }}" class="fa-solid fa-eye"></i>
-                                            @endif
-                                        </button>
-                                        <button id="del{{ $key }}" class="btn-trash">
-                                            <i id=trash{{ $key }} class="fa-solid fa-trash"></i>
-                                        </button>
-                                        <div class="drop-3dot">
-                                            <button id="btnDrop3Dot{{ $key }}" class="btn-3dot">
-                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        <div id="div3Dot{{ $key }}" class="div3Dot-drop">
+                                            <button class="up div3Dot-isi">
+                                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M0.166342 8.49996L8.49967 0.166626L16.833 8.49996L15.3747 9.98433L9.54134 4.151L9.54134 16.8333L7.45801 16.8333L7.45801 4.151L1.62467 9.98433L0.166342 8.49996Z"
+                                                        fill="#A5A5A5" />
+                                                </svg>
+                                                Pindah ke atas
                                             </button>
-                                            <div id="div3Dot{{ $key }}" class="div3Dot-drop">
-                                                <button class="up div3Dot-isi">
-                                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M0.166342 8.49996L8.49967 0.166626L16.833 8.49996L15.3747 9.98433L9.54134 4.151L9.54134 16.8333L7.45801 16.8333L7.45801 4.151L1.62467 9.98433L0.166342 8.49996Z"
-                                                            fill="#A5A5A5" />
-                                                    </svg>
-                                                    Pindah ke atas
-                                                </button>
-                                                <button class="down div3Dot-isi">
-                                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M16.8337 8.50004L8.50033 16.8334L0.166992 8.50004L1.62533 7.01567L7.45866 12.849L7.45866 0.166708L9.54199 0.166708L9.54199 12.849L15.3753 7.01567L16.8337 8.50004Z"
-                                                            fill="#A5A5A5" />
-                                                    </svg>
-                                                    Pindah ke bawah
-                                                </button>
-                                            </div>
+                                            <button class="down div3Dot-isi">
+                                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M16.8337 8.50004L8.50033 16.8334L0.166992 8.50004L1.62533 7.01567L7.45866 12.849L7.45866 0.166708L9.54199 0.166708L9.54199 12.849L15.3753 7.01567L16.8337 8.50004Z"
+                                                        fill="#A5A5A5" />
+                                                </svg>
+                                                Pindah ke bawah
+                                            </button>
                                         </div>
                                     </div>
-                                    <div id="DelComModal{{ $key }}" data-id_komponen="{{ $item['id'] }}" class="del-com-modal">
-                                        <!-- Modal content -->
-                                        <div class="del-conmo">
-                                            <span class="del-close">&times;</span>
-                                            <p class="del-hapus-tulisan1">Konfirmasi Hapus</p>
-                                            <p class="del-hapus-tulisan2">
-                                                Apakah anda yakin ingin menghapus komponen ini
-                                            </p>
-                                            <div class="del-bungkus-hapusbutton">
-                                                <button id="delbal{{ $key }}" class="del-batal-button">Batal</button>
-                                                <button id="btnTrash{{ $key }}" class="del-hapus-button">Hapus</button>
-                                            </div>
+                                </div>
+                                <div id="DelComModal{{ $key }}" data-id_komponen="{{ $item['id'] }}"
+                                    class="del-com-modal">
+                                    <!-- Modal content -->
+                                    <div class="del-conmo">
+                                        <span class="del-close">&times;</span>
+                                        <p class="del-hapus-tulisan1">Konfirmasi Hapus</p>
+                                        <p class="del-hapus-tulisan2">
+                                            Apakah anda yakin ingin menghapus komponen ini
+                                        </p>
+                                        <div class="del-bungkus-hapusbutton">
+                                            <button id="delbal{{ $key }}" class="del-batal-button">Batal</button>
+                                            <button id="btnTrash{{ $key }}"
+                                                class="del-hapus-button">Hapus</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
                     </div>
-                    <div id="pages5Kom" draggable="true" class="pages5-komponen-2">
-                        <div class="pages5-komponen-text">
-                            <div class="pages5-komponen-text-kiri" style="margin-left: 30px">
-                                <p class="pages5-isi">fjdvfdegvb</p>
-                                <label for="typecolor">color</label>
-                                <input type="radio" name="type" value="color" id="typecolor">
-                                <label for="typeimage">image</label>
-                                <input type="radio" name="type" value="image" id="typeimage">
-                                <input type="color" style="display: none" name="backgroundcolor" id="backgroundcolor">
-                                <input type="file" style="display: none" name="backgroundimage" id="backgroundimage">
-                            </div>
-                        </div>
-                    </div>
-
-                    <input type="hidden" id="loop" value="{{ count($drag) }}">
-
-                    <div class="pages5-bungkusjajan">
-                        <div class="pages5-lamnjut">
-                            <button id="btnSudah" class="pages5-lanjutkan">
-                                Selesai
-                                <svg class="finish" width="19" height="15" viewBox="0 0 19 15" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M18.875 2.29169L6.37499 14.7917L0.645828 9.06252L2.11458 7.59377L6.37499 11.8438L17.4062 0.822937L18.875 2.29169Z"
-                                        fill="#524799" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="prew2" class="pages5-kanan">
-                    <a href="{{ route('admin.preview_template', ['id' => $background->id]) }}"
-                        class="pages5-preview">Preview Template</a><br />
-                    <div id="kanan-bungkus" style="background-color: transparent" class="kanan-bungkus">
-
-                        @if ($background->type_background == 'color')
-                            <div class="bungkus" style='background: {{ $background->background }}'>
-                            @else
-                                <div class="bungkus"
-                                    style="background-image: url('{{ asset('microsite/background/' . $background->background) }}')">
-                        @endif
-                        <?php $non_bungkus = ''; ?>
-                        @foreach ($data as $d)
-                            <?php
-                            // mengganti string "src=" pada folder "microsite/konten/"
-                            $html = str_replace('src="microsite/konten', 'src="' . asset('microsite/konten/'), $d['code']);
-                            // mengganti string "src=" pada folder "microsite/medsos/"
-                            $html = str_replace('src="microsite/medsos', 'src="' . asset('microsite/medsos/'), $html);
-                            $non_bungkus .= $html;
-                            ?>
-                        @endforeach
-                        {!! $non_bungkus !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div id="CompoModal" class="modal-compoas" style="display: none;">
-            <div class="modal-compo-barua">
-                <div class="modal-atas">
-                    <h1 class="comp-text">Tambah komponen baru</h1>
-                    <span class="comp-x">&times;</span>
-                </div>
-                <div class="modal-bawah">
-                    @foreach ($tambah_komponen as $key => $tk)
-                        <button class="comp-card btnKomponen sudahPilih" data-id="{{ $tk->id }}"
-                            id="btnkomponen{{ $key + 1 }}">
-                            <i class="fa-solid {{ $tk->icon }}" style="color: #524799;"></i>
-                            <div class="comp-teks">
-                                <p class="head-name">
-                                    {{ $tk->name }}
-                                </p>
-                                <p class="comp-penjes">
-                                    {{ $tk->desc }}
-                                </p>
-                            </div>
-                        </button>
                     @endforeach
                 </div>
-                <input type="hidden" id="komponenLoop" value="{{ $tambah_komponen->count() }}">
+                <div id="pages5Kom" draggable="true" class="pages5-komponen-2">
+                    <div class="pages5-komponen-text">
+                        <div class="pages5-komponen-text-kiri" style="margin-left: 30px">
+                            <p class="pages5-isi">fjdvfdegvb</p>
+                            <label for="typecolor">color</label>
+                            <input type="radio" name="type" value="color" id="typecolor">
+                            <label for="typeimage">image</label>
+                            <input type="radio" name="type" value="image" id="typeimage">
+                            <input type="color" style="display: none" name="backgroundcolor" id="backgroundcolor">
+                            <input type="file" style="display: none" name="backgroundimage" id="backgroundimage">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="loop" value="{{ count($drag) }}">
+
+                <div class="pages5-bungkusjajan">
+                    <div class="pages5-lamnjut">
+                        <button id="btnSudah" class="pages5-lanjutkan">
+                            Selesai
+                            <svg class="finish" width="19" height="15" viewBox="0 0 19 15" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M18.875 2.29169L6.37499 14.7917L0.645828 9.06252L2.11458 7.59377L6.37499 11.8438L17.4062 0.822937L18.875 2.29169Z"
+                                    fill="#524799" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="prew2" class="pages5-kanan">
+                <a href="{{ route('admin.preview_template', ['id' => $background->id]) }}" class="pages5-preview">Preview
+                    Template</a><br />
+                <div id="kanan-bungkus" style="background-color: transparent" class="kanan-bungkus">
+
+                    @if ($background->type_background == 'color')
+                        <div class="bungkus" style='background: {{ $background->background }}'>
+                        @else
+                            <div class="bungkus"
+                                style="background-image: url('{{ asset('microsite/background/' . $background->background) }}')">
+                    @endif
+                    <?php $non_bungkus = ''; ?>
+                    @foreach ($data as $d)
+                        <?php
+                        // mengganti string "src=" pada folder "microsite/konten/"
+                        $html = str_replace('src="microsite/konten', 'src="' . asset('microsite/konten/'), $d['code']);
+                        // mengganti string "src=" pada folder "microsite/medsos/"
+                        $html = str_replace('src="microsite/medsos', 'src="' . asset('microsite/medsos/'), $html);
+                        $non_bungkus .= $html;
+                        ?>
+                    @endforeach
+                    {!! $non_bungkus !!}
+                </div>
             </div>
         </div>
+    </div>
+
+
+    <div id="CompoModal" class="modal-compoas" style="display: none;">
+        <div class="modal-compo-barua">
+            <div class="modal-atas">
+                <h1 class="comp-text">Tambah komponen baru</h1>
+                <span class="comp-x">&times;</span>
+            </div>
+            <div class="modal-bawah">
+                @foreach ($tambah_komponen as $key => $tk)
+                    <button class="comp-card btnKomponen sudahPilih" data-id="{{ $tk->id }}"
+                        id="btnkomponen{{ $key + 1 }}">
+                        <i class="fa-solid {{ $tk->icon }}" style="color: #524799;"></i>
+                        <div class="comp-teks">
+                            <p class="head-name">
+                                {{ $tk->name }}
+                            </p>
+                            <p class="comp-penjes">
+                                {{ $tk->desc }}
+                            </p>
+                        </div>
+                    </button>
+                @endforeach
+            </div>
+            <input type="hidden" id="komponenLoop" value="{{ $tambah_komponen->count() }}">
+        </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -1094,7 +1094,8 @@
                 if ($('#backgroundimage').val() != '') {
                     var background = $('#backgroundimage')[0].files[0];
 
-                    backgroundPreview = 'url(' + URL.createObjectURL($('#backgroundimage')[0].files[0]) + ')';
+                    backgroundPreview = 'url(' + URL.createObjectURL($('#backgroundimage')[0].files[0]) +
+                        ')';
 
                     $('#backgroundcolor').val('');
 
