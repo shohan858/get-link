@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,13 +13,9 @@
     <link rel="stylesheet" href="{{ asset('assets_sesi/css/style.css') }}" />
 
     <!-- Fonts Google -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet" />
@@ -30,9 +27,9 @@
         cursor: pointer;
       }
     </style> --}}
-  </head>
+</head>
 
-  <body>
+<body>
 
     <div class="login_pages">
         <div class="logKanan">
@@ -41,7 +38,7 @@
         </div>
         <div class="logKiri">
             <div class="logtopKir">
-                <img class="logSimKir" src="{{asset('assets_sesi/images/logos.png')}}" alt="">
+                <img class="logSimKir" src="{{ asset('assets_sesi/images/logos.png') }}" alt="">
                 <h3 class="logGreetKir">Reset Password</h3>
                 <p class="logTextKir">Silahkan reset email dan password anda</p>
             </div>
@@ -49,27 +46,32 @@
                 <form action="{{ route('password.update') }}" method="POST" style="width: 100%">
                     @csrf
                     @error('email')
-                    <span role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
+                        <span role="alert" class="pwError" style="margin: 0">
+                            <strong>{{ $message }}</strong>
+                        </span>
                     @enderror
                     <input type="hidden" name="token" value="{{ $token }}">
-
-                    @error('email')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                    @enderror
-                    <input class="formEM" type="email" value="{{ $email ?? old('email') }}" @error('email') is-invalid @enderror" name="email" id="fname" placeholder="Masukkan email" required autocomplete="email" autofocus>
+                    
+                    <input class="formEM" type="email" value="{{ $email ?? old('email') }}"
+                        @error('email') is-invalid @enderror" name="email" id="fname" placeholder="Masukkan email"
+                        required autocomplete="email" autofocus>
                     @error('password')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
+                        <span class="invalid-feedback pwError" style="margin: 0" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                     @enderror
-                    <input class="formPass" type="password" name="password" id="lname" placeholder="Masukkan password"><br>
-                    <input class="formPass" type="password" name="password_confirmation" id="lname" placeholder="Masukkan password"><br>
+                    <div class="bungPass-reg">
+                        <input class="formPass" type="password" name="password" id="passwordInput"
+                            placeholder="Masukkan password" style="margin-bottom: 15px;">
+                        <i class="far fa-eye toggle-password-reg" id="togglePassword"></i>
+                    </div>
+                    <div class="bungPass-reg">
+                        <input class="formPass" type="password" name="password_confirmation" id="confirmPasswordInput"
+                            placeholder="Masukkan konfirmasi password">
+                        <i class="far fa-eye toggle-password-reg" id="togglePassword2"></i>
+                    </div>
                     <button class="btnLogin" type="submit" value="Submit">
-                      {{ __('Reset Password') }} 
+                        {{ __('Reset Password') }}
                     </button><br>
                 </form>
             </div>
@@ -130,14 +132,46 @@
     <script src="js/popper.min.js"></script>
 
     <script>
-      // Mengambil elemen checkbox dan teks "Ingat Sandi"
-      const checkbox = document.getElementById("remember");
-      const rememberText = document.querySelector(".form-check-label");
+        // // Mengambil elemen checkbox dan teks "Ingat Sandi"
+        // const checkbox = document.getElementById("remember");
+        // const rememberText = document.querySelector(".form-check-label");
 
-      // Menambahkan event listener pada teks "Ingat Sandi"
-      rememberText.addEventListener("click", () => {
-        checkbox.checked = !checkbox.checked; // Membalikkan nilai status checkbox
-      });
+        // // Menambahkan event listener pada teks "Ingat Sandi"
+        // rememberText.addEventListener("click", () => {
+        //     checkbox.checked = !checkbox.checked; // Membalikkan nilai status checkbox
+        // });
+
+        const togglePassword = document.querySelector('#togglePassword');
+        const togglePassword2 = document.querySelector('#togglePassword2');
+        const passwordInput = document.querySelector('#passwordInput');
+        const confirmPasswordInput = document.querySelector('#confirmPasswordInput');
+
+        togglePassword.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            // Toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+            if (type === 'password') {
+                this.classList.remove('hide-password');
+            } else {
+                this.classList.add('hide-password');
+            }
+        });
+
+        togglePassword2.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            // Toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+            if (type === 'password') {
+                this.classList.remove('hide-password');
+            } else {
+                this.classList.add('hide-password');
+            }
+        });
     </script>
-  </body>
+</body>
+
 </html>

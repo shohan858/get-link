@@ -16,12 +16,18 @@ class ForgotPasswordController extends Controller
     {
         $request->validate(['email' => 'required|email']);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        try {
+            $status = Password::sendResetLink(
+                $request->only('email')
+            );
 
-        return $status === Password::RESET_LINK_SENT
-                    ? back()->with(['status' => __($status)])
-                    : back()->withErrors(['email' => __($status)]);
+            if ($status === Password::RESET_LINK_SENT) {
+                return back()->with(['status' => 'Email sudah berhasil terkirim. Silakan periksa email Anda.']);
+            } else {
+                return back()->withErrors(['email' => __($status)]);
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['email' => 'Terjadi masalah dengan koneksi internet. Silakan coba lagi nanti.']);
+        }
     }
 }

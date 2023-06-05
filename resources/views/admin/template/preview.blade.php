@@ -76,7 +76,8 @@
         }
 
         .konten-template {
-            width: 20%;
+                width: 100px;
+    height: 100px;
             margin: 10px;
         }
 
@@ -119,7 +120,6 @@
 
         @media screen and (max-width: 600px) {
             .konten-template {
-                width: 25%;
                 margin: 10px;
             }
         }
