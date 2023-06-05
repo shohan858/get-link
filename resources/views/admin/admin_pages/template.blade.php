@@ -147,9 +147,9 @@
                                 '<button style="margin-right:5px" class="katHap" data-id="' + data +
                                 '" data-nama="' + full.title +
                                 '" onclick="deleteKategori(this)"><i class="fa-solid fa-trash" style="color:#fff;cursor: pointer;"></i></button>' +
-                                '<a style="margin-right:5px" href="/template/edit/' + data +
+                                '<a style="margin-right:5px" href="/edit_template/' + data +
                                 '"><button class="edit-btn"><i class="fa-solid fa-pen"></i></button></a>' +
-                                '<a href="/template/lihat/' + data +
+                                '<a href="/admin/preview_template/' + data +
                                 '"><button class="detail-btn"><i class="fa-solid fa-eye"></i></button></a>' +
                                 '</div>';
                         }

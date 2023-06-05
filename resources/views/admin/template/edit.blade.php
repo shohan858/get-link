@@ -842,73 +842,71 @@
                                     data-status="{{ $item['status'] }}" data-order="{{ $item['order'] }}"
                                     data-komponen="{{ $item['id_komponen'] }}" class="pages5-komponen-2"
                                     style="opacity: 0.5">
-                                </div>
                             @else
                                 <div id="pages5Kom{{ $key }}" draggable="true" data-id="{{ $item['id'] }}"
                                     data-status="{{ $item['status'] }}" data-order="{{ $item['order'] }}"
                                     data-komponen="{{ $item['id_komponen'] }}" class="pages5-komponen-2">
-                                </div>
                             @endif
-                            <div class="pages5-komponen-text">
-                                <div class="pages5-komponen-text-kiri">
-                                    <button class="btn-drag">
-                                        <img class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}"
-                                            alt="" />
-                                    </button>
-                                    <i class="fa-regular fa-user" style="margin-left: 10px"></i>
-                                    <p class="pages5-isi">{{ $item['title'] }}</p>
-                                </div>
-                                <div class="pages5-komponen-text-kanan">
-                                    <button id="btnSwitch{{ $key }}" class="btn-switch">
-                                        @if ($item['status'] === 'off')
-                                            <i id="icon{{ $key }}" class="fa-solid fa-eye-slash"
-                                                style="color: red"></i>
-                                        @else
-                                            <i id="icon{{ $key }}" class="fa-solid fa-eye"></i>
-                                        @endif
-                                    </button>
-                                    <button id="del{{ $key }}" class="btn-trash">
-                                        <i id=trash{{ $key }} class="fa-solid fa-trash"></i>
-                                    </button>
-                                    <div class="drop-3dot">
-                                        <button id="btnDrop3Dot{{ $key }}" class="btn-3dot">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <div class="pages5-komponen-text">
+                                    <div class="pages5-komponen-text-kiri">
+                                        <button class="btn-drag">
+                                            <img class="pages5-isi" src="{{ asset('assets/img/Group 71.png') }}"
+                                                alt="" />
                                         </button>
-                                        <div id="div3Dot{{ $key }}" class="div3Dot-drop">
-                                            <button class="up div3Dot-isi">
-                                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M0.166342 8.49996L8.49967 0.166626L16.833 8.49996L15.3747 9.98433L9.54134 4.151L9.54134 16.8333L7.45801 16.8333L7.45801 4.151L1.62467 9.98433L0.166342 8.49996Z"
-                                                        fill="#A5A5A5" />
-                                                </svg>
-                                                Pindah ke atas
+                                        <i class="fa-regular fa-user" style="margin-left: 10px"></i>
+                                        <p class="pages5-isi">{{ $item['title'] }}</p>
+                                    </div>
+                                    <div class="pages5-komponen-text-kanan">
+                                        <button id="btnSwitch{{ $key }}" class="btn-switch">
+                                            @if ($item['status'] === 'off')
+                                                <i id="icon{{ $key }}" class="fa-solid fa-eye-slash"
+                                                    style="color: red"></i>
+                                            @else
+                                                <i id="icon{{ $key }}" class="fa-solid fa-eye"></i>
+                                            @endif
+                                        </button>
+                                        <button id="del{{ $key }}" class="btn-trash">
+                                            <i id=trash{{ $key }} class="fa-solid fa-trash"></i>
+                                        </button>
+                                        <div class="drop-3dot">
+                                            <button id="btnDrop3Dot{{ $key }}" class="btn-3dot">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
                                             </button>
-                                            <button class="down div3Dot-isi">
-                                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M16.8337 8.50004L8.50033 16.8334L0.166992 8.50004L1.62533 7.01567L7.45866 12.849L7.45866 0.166708L9.54199 0.166708L9.54199 12.849L15.3753 7.01567L16.8337 8.50004Z"
-                                                        fill="#A5A5A5" />
-                                                </svg>
-                                                Pindah ke bawah
-                                            </button>
+                                            <div id="div3Dot{{ $key }}" class="div3Dot-drop">
+                                                <button class="up div3Dot-isi">
+                                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M0.166342 8.49996L8.49967 0.166626L16.833 8.49996L15.3747 9.98433L9.54134 4.151L9.54134 16.8333L7.45801 16.8333L7.45801 4.151L1.62467 9.98433L0.166342 8.49996Z"
+                                                            fill="#A5A5A5" />
+                                                    </svg>
+                                                    Pindah ke atas
+                                                </button>
+                                                <button class="down div3Dot-isi">
+                                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M16.8337 8.50004L8.50033 16.8334L0.166992 8.50004L1.62533 7.01567L7.45866 12.849L7.45866 0.166708L9.54199 0.166708L9.54199 12.849L15.3753 7.01567L16.8337 8.50004Z"
+                                                            fill="#A5A5A5" />
+                                                    </svg>
+                                                    Pindah ke bawah
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div id="DelComModal{{ $key }}" data-id_komponen="{{ $item['id'] }}"
-                                class="del-com-modal">
-                                <!-- Modal content -->
-                                <div class="del-conmo">
-                                    <span class="del-close">&times;</span>
-                                    <p class="del-hapus-tulisan1">Konfirmasi Hapus</p>
-                                    <p class="del-hapus-tulisan2">
-                                        Apakah anda yakin ingin menghapus komponen ini
-                                    </p>
-                                    <div class="del-bungkus-hapusbutton">
-                                        <button id="delbal{{ $key }}" class="del-batal-button">Batal</button>
-                                        <button id="btnTrash{{ $key }}" class="del-hapus-button">Hapus</button>
+                                    <div id="DelComModal{{ $key }}" data-id_komponen="{{ $item['id'] }}" class="del-com-modal">
+                                        <!-- Modal content -->
+                                        <div class="del-conmo">
+                                            <span class="del-close">&times;</span>
+                                            <p class="del-hapus-tulisan1">Konfirmasi Hapus</p>
+                                            <p class="del-hapus-tulisan2">
+                                                Apakah anda yakin ingin menghapus komponen ini
+                                            </p>
+                                            <div class="del-bungkus-hapusbutton">
+                                                <button id="delbal{{ $key }}" class="del-batal-button">Batal</button>
+                                                <button id="btnTrash{{ $key }}" class="del-hapus-button">Hapus</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1093,7 +1091,15 @@
 
                 var backgroundPreview = '';
 
-                if ($('#backgroundcolor').val() != '') {
+                if ($('#backgroundimage').val() != '') {
+                    var background = $('#backgroundimage')[0].files[0];
+
+                    backgroundPreview = 'url(' + URL.createObjectURL($('#backgroundimage')[0].files[0]) + ')';
+
+                    $('#backgroundcolor').val('');
+
+                    $('.bungkus').css('background-image', backgroundPreview);
+                } else if ($('#backgroundcolor').val() != '') {
                     var background = $('#backgroundcolor').val();
 
                     backgroundPreview = $('#backgroundcolor').val();
@@ -1102,15 +1108,6 @@
 
                     $('.bungkus').css('background', backgroundPreview);
 
-                } else if ($('#backgroundimage').val() != '') {
-                    var background = $('#backgroundimage')[0].files[0];
-
-                    backgroundPreview = 'url(' + URL.createObjectURL($('#backgroundimage')[0].files[0]) +
-                        ')';
-
-                    $('#backgroundcolor').val('');
-
-                    $('.bungkus').css('background-image', backgroundPreview);
                 }
 
                 var url = window.location.href;
@@ -1137,6 +1134,7 @@
                     }
                 });
             });
+
         });
     </script>
 
@@ -1242,6 +1240,7 @@
                             parent.insertBefore(child, prevSibling);
                         }
                         sendData()
+                        console.log("Tombol Pindah ke atas diklik!");
                     });
 
                     downButton.addEventListener("click", () => {
@@ -1252,16 +1251,19 @@
                             parent.appendChild(child);
                         }
                         sendData()
+                        console.log("Tombol Pindah ke atas diklik!");
                     });
 
                     grandchild.addEventListener("dragstart", () => {
                         draggingChild = child;
                         sendData();
+                        console.log("Tombol Pindah ke atas diklik!");
                     });
 
                     grandchild.addEventListener("dragend", () => {
                         draggingChild = null;
                         sendData();
+                        console.log("Tombol Pindah ke atas diklik!");
                     });
 
                     grandchild.addEventListener("dragover", (e) => {
@@ -1485,6 +1487,7 @@
                                 _token: "{{ csrf_token() }}"
                             },
                             success: function(response) {
+                                location.reload();
                                 console.log(response);
                                 delmodal.hide();
                                 oQuickReply.swap('pgKr');
