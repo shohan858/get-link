@@ -515,7 +515,7 @@
                         <thead style="position: sticky; top: 0;">
                             <tr>
                                 <th style="border-radius: 10px 0 0 0;">No</th>
-                                <th>Real Link</th>
+                                <th>Real Linkk</th>
                                 <th>Short Link</th>
                                 <th style="border-radius: 0 10px 0 0;">aksi</th>
                             </tr>
